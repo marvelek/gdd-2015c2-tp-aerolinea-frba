@@ -30,10 +30,11 @@ CREATE PROCEDURE MILANESA.sp_migracion_rutas AS
 BEGIN
 	SET NOCOUNT ON;
 
-	INSERT INTO Rutas (rut_codigo, rut_precio_base_pasaje, ciudad_origen_id, ciudad_destino_id, tipo_servicio_id )
+	INSERT INTO Rutas (rut_codigo, rut_precio_base_pasaje, rut_precio_base_kg, ciudad_origen_id, ciudad_destino_id, tipo_servicio_id )
 	SELECT DISTINCT 
 		Ruta_Codigo, 
 		Ruta_Precio_BasePasaje,
+		0,
 		(SELECT ciu_id
 		 FROM MILANESA.Ciudades
 		 WHERE Ruta_Ciudad_Origen = ciu_descripcion),
@@ -52,7 +53,7 @@ BEGIN
 	FROM
 		Rutas R, gd_esquema.Maestra M
 	WHERE
-		r.rut_precio_base_kg IS NULL AND
+		r.rut_precio_base_kg = 0 AND
 		m.Ruta_Precio_BaseKG > 0 AND
 		m.Ruta_Codigo = r.rut_codigo AND
 		m.Ruta_Ciudad_Origen = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = r.ciudad_origen_id) AND
