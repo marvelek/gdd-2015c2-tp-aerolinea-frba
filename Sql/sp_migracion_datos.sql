@@ -1,8 +1,6 @@
 USE [GD2C2015]
 GO
 
-DROP PROCEDURE MILANESA.sp_migracion_clientes
-GO
 CREATE PROCEDURE MILANESA.sp_migracion_clientes AS
 BEGIN
 	SET NOCOUNT ON;
@@ -14,8 +12,6 @@ BEGIN
 END
 GO
 
-DROP PROCEDURE MILANESA.sp_migracion_ciudades
-GO
 CREATE PROCEDURE MILANESA.sp_migracion_ciudades AS
 BEGIN
 	SET NOCOUNT ON;
@@ -30,8 +26,6 @@ BEGIN
 END
 GO
 
-DROP PROCEDURE MILANESA.sp_migracion_rutas
-GO
 CREATE PROCEDURE MILANESA.sp_migracion_rutas AS
 BEGIN
 	SET NOCOUNT ON;
@@ -68,8 +62,6 @@ BEGIN
 END
 GO
 
-DROP PROCEDURE MILANESA.sp_migracion_tipos_servicio
-GO
 CREATE PROCEDURE MILANESA.sp_migracion_tipos_servicio AS
 BEGIN
 	SET NOCOUNT ON;
@@ -80,8 +72,6 @@ BEGIN
 END
 GO
 
-DROP PROCEDURE MILANESA.sp_migracion_aeronaves
-GO
 CREATE PROCEDURE MILANESA.sp_migracion_aeronaves AS
 BEGIN
 	SET NOCOUNT ON;
@@ -99,8 +89,6 @@ BEGIN
 END
 GO
 
-DROP PROCEDURE MILANESA.sp_migracion_butacas
-GO
 CREATE PROCEDURE MILANESA.sp_migracion_butacas AS
 BEGIN
 	SET NOCOUNT ON;
@@ -117,8 +105,6 @@ BEGIN
 END
 GO
 
-DROP PROCEDURE MILANESA.sp_migracion_vuelos
-GO
 CREATE PROCEDURE MILANESA.sp_migracion_vuelos AS
 BEGIN
 	SET NOCOUNT ON;
@@ -142,17 +128,13 @@ BEGIN
 END
 GO
 
-DROP PROCEDURE MILANESA.sp_migracion_pasajes
-GO
-CREATE PROCEDURE MILANESA.sp_migracion_pasajes AS
+CREATE PROCEDURE MILANESA.sp_migracion_ventas AS
 BEGIN
 	SET NOCOUNT ON;
 
-	INSERT INTO Pasajes(pas_codigo, pas_fecha_compra, pas_precio, cliente_id, vuelo_id)
-	SELECT DISTINCT 
-			M.Pasaje_Codigo,
+	INSERT INTO Ventas(ven_fecha, comprador_id, vuelo_id)
+	SELECT DISTINCT
 			M.Pasaje_FechaCompra, 
-			M.Pasaje_Precio,
 			C.cli_id,
 			V.vue_id
 		FROM
@@ -176,31 +158,94 @@ BEGIN
 			AND V.vue_fecha_salida = M.FechaSalida
 			AND V.vue_fecha_llegada_estimada = M.Fecha_LLegada_Estimada
 			AND V.vue_fecha_llegada = M.FechaLLegada
+	UNION
+	SELECT DISTINCT
+			M.Paquete_FechaCompra, 
+			C.cli_id,
+			V.vue_id
+		FROM
+			gd_esquema.Maestra M, MILANESA.Clientes C, MILANESA.Vuelos V
+		WHERE
+			M.Paquete_Codigo != 0 AND
+			C.cli_nombre = M.Cli_Nombre AND
+			C.cli_apellido = M.Cli_Apellido AND
+			C.cli_dni = M.Cli_Dni AND 
+			C.cli_fecha_nacimiento = M.Cli_Fecha_Nac AND
+			V.ruta_id = (SELECT R.rut_id 
+								FROM MILANESA.Rutas R
+								WHERE
+								R.rut_codigo = M.Ruta_Codigo AND
+								M.Ruta_Ciudad_Origen = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_origen_id) AND
+								M.Ruta_Ciudad_Destino = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_destino_id) AND
+								M.Tipo_Servicio = (SELECT tip_descripcion FROM MILANESA.Tipos_Servicio WHERE tip_id = R.tipo_servicio_id))
+			AND V.aeronave_id = (SELECT aer_id
+									 FROM MILANESA.Aeronaves A
+									 WHERE M.Aeronave_Matricula = A.aer_matricula)
+			AND V.vue_fecha_salida = M.FechaSalida
+			AND V.vue_fecha_llegada_estimada = M.Fecha_LLegada_Estimada
+			AND V.vue_fecha_llegada = M.FechaLLegada
+
 END
 GO
 
-DROP PROCEDURE MILANESA.sp_migracion_paquetes
+CREATE PROCEDURE MILANESA.sp_migracion_pasajes AS
+BEGIN
+	SET NOCOUNT ON;
+
+	INSERT INTO Pasajes(pas_codigo, pas_precio, pasajero_id, venta_id)
+	SELECT DISTINCT 
+			M.Pasaje_Codigo, 
+			M.Pasaje_Precio,
+			C.cli_id,
+			Ven.ven_id
+		FROM
+			gd_esquema.Maestra M, MILANESA.Clientes C, MILANESA.Vuelos V, MILANESA.Ventas Ven
+		WHERE
+			M.Pasaje_Codigo != 0 AND
+			C.cli_nombre = M.Cli_Nombre AND
+			C.cli_apellido = M.Cli_Apellido AND
+			C.cli_dni = M.Cli_Dni AND 
+			C.cli_fecha_nacimiento = M.Cli_Fecha_Nac AND
+			Ven.ven_fecha = M.Pasaje_FechaCompra AND
+			Ven.comprador_id = C.cli_id AND
+			Ven.vuelo_id = V.vue_id AND
+			V.ruta_id = (SELECT R.rut_id 
+								FROM MILANESA.Rutas R
+								WHERE
+								R.rut_codigo = M.Ruta_Codigo AND
+								M.Ruta_Ciudad_Origen = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_origen_id) AND
+								M.Ruta_Ciudad_Destino = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_destino_id) AND
+								M.Tipo_Servicio = (SELECT tip_descripcion FROM MILANESA.Tipos_Servicio WHERE tip_id = R.tipo_servicio_id))
+			AND V.aeronave_id = (SELECT aer_id
+									 FROM MILANESA.Aeronaves A
+									 WHERE M.Aeronave_Matricula = A.aer_matricula)
+			AND V.vue_fecha_salida = M.FechaSalida
+			AND V.vue_fecha_llegada_estimada = M.Fecha_LLegada_Estimada
+			AND V.vue_fecha_llegada = M.FechaLLegada
+END
 GO
+
 CREATE PROCEDURE MILANESA.sp_migracion_paquetes AS
 BEGIN
 	SET NOCOUNT ON;
 
-	INSERT INTO Paquetes(paq_codigo, paq_fecha_compra, paq_precio, paq_kg, cliente_id, vuelo_id)
+	INSERT INTO Paquetes(paq_codigo, paq_precio, paq_kg, venta_id)
 	SELECT DISTINCT 
-		M.Paquete_Codigo,
-		M.Paquete_FechaCompra, 
+		M.Paquete_Codigo, 
 		M.Paquete_Precio,
 		M.Paquete_Kg,
-		C.cli_id,
-		V.vue_id
+		Ven.ven_id
 	FROM
-		gd_esquema.Maestra M, MILANESA.Clientes C, MILANESA.Vuelos V
+		gd_esquema.Maestra M, MILANESA.Vuelos V, MILANESA.Clientes C, MILANESA.Ventas Ven
 	WHERE
 		M.Paquete_Codigo != 0 AND
+		Ven.vuelo_id = V.vue_id AND
 		C.cli_nombre = M.Cli_Nombre AND
 		C.cli_apellido = M.Cli_Apellido AND
 		C.cli_dni = M.Cli_Dni AND 
 		C.cli_fecha_nacimiento = M.Cli_Fecha_Nac AND
+		Ven.ven_fecha = M.Paquete_FechaCompra AND
+		Ven.comprador_id = C.cli_id AND
 		V.ruta_id = (SELECT R.rut_id 
 							FROM MILANESA.Rutas R
 							WHERE
@@ -217,8 +262,6 @@ BEGIN
 END
 GO
 
-DROP PROCEDURE MILANESA.sp_migracion_datos
-GO
 CREATE PROCEDURE MILANESA.sp_migracion_datos AS
 BEGIN
 	SET NOCOUNT ON;
@@ -230,6 +273,7 @@ BEGIN
 	EXEC MILANESA.sp_migracion_butacas
 	EXEC MILANESA.sp_migracion_rutas
 	EXEC MILANESA.sp_migracion_vuelos
+	EXEC MILANESA.sp_migracion_ventas
 	EXEC MILANESA.sp_migracion_pasajes
 	EXEC MILANESA.sp_migracion_paquetes
 

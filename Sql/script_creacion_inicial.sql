@@ -10,7 +10,8 @@ END
 IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Roles' AND xtype='U')
 	CREATE TABLE MILANESA.Roles (
 		rol_id int identity(1,1) Primary Key,
-		rol_descripcion nvarchar(255)	NOT NULL
+		rol_descripcion nvarchar(255)	NOT NULL,
+		rol_activo bit DEFAULT 1
 	)
 GO
 
@@ -18,7 +19,8 @@ GO
 IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Funciones' AND xtype='U')
 	CREATE TABLE MILANESA.Funciones (
 		fun_id int identity(1,1) Primary Key,
-		fun_descripcion nvarchar(255)	NOT NULL
+		fun_descripcion nvarchar(255)	NOT NULL,
+		fun_activo bit DEFAULT 1
 	)
 GO
 
@@ -31,14 +33,15 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Funciones_Roles' AND xtype='
 	)
 GO
 
-/*Usuario*/
+/*Usuarios*/
 IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Usuarios' AND xtype='U')
 	CREATE TABLE MILANESA.Usuarios (
 		usu_id int identity(1,1) Primary Key,
 		usu_nombre nvarchar(255) NOT NULL,
 		usu_password nvarchar(4000) NOT NULL,
 		rol_id int REFERENCES MILANESA.Roles,	
-		usu_intentos_logueo_fallidos int NOT NULL DEFAULT 0		
+		usu_intentos_logueo_fallidos int NOT NULL DEFAULT 0,
+		usu_activo bit DEFAULT 1
 	)
 GO
 
@@ -57,7 +60,8 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Productos' AND xtype='U')
 		pro_id int identity(1,1) Primary Key,
 		canje_id int REFERENCES MILANESA.Canjes,
 		pro_descripcion nvarchar(255) NOT NULL,
-		pro_cantidad_millas numeric(18,0) NOT NULL
+		pro_cantidad_millas numeric(18,0) NOT NULL,
+		pro_activo bit DEFAULT 1
 	)
 GO
 
@@ -71,7 +75,8 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Clientes' AND xtype='U')
 		cli_direccion nvarchar(255) NOT NULL,
 		cli_telefono int,
 		cli_mail nvarchar(255) NOT NULL,
-		cli_fecha_nacimiento datetime
+		cli_fecha_nacimiento datetime,
+		cli_activo bit DEFAULT 1
 	)
 GO
 
@@ -98,7 +103,8 @@ GO
 IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Ciudades' AND xtype='U')
 	CREATE TABLE MILANESA.Ciudades (
 		ciu_id int identity(1,1) Primary Key,
-		ciu_descripcion nvarchar(255)
+		ciu_descripcion nvarchar(255),
+		ciu_activo bit DEFAULT 1
 	)
 GO
 
@@ -106,7 +112,8 @@ GO
 IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Tipos_Servicio' AND xtype='U')
 	CREATE TABLE MILANESA.Tipos_Servicio (
 		tip_id int identity(1,1) Primary Key,
-		tip_descripcion nvarchar(255)
+		tip_descripcion nvarchar(255),
+		tip_activo bit DEFAULT 1
 	)
 GO
 
@@ -119,7 +126,8 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Rutas' AND xtype='U')
 		tipo_servicio_id int REFERENCES MILANESA.Tipos_Servicio,
 		rut_codigo numeric(18,0),
 		rut_precio_base_kg numeric(18,2),
-		rut_precio_base_pasaje numeric(18,2)
+		rut_precio_base_pasaje numeric(18,2),
+		rut_activo bit DEFAULT 1
 	)
 GO
 
@@ -134,7 +142,8 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Aeronaves' AND xtype='U')
 		aer_fabricante nvarchar(255),
 		aer_fecha_fuera_servicio datetime,
 		aer_fecha_reinicio_servicio datetime,
-		aer_fecha_baja_definitiva datetime
+		aer_fecha_baja_definitiva datetime,
+		aer_activo bit DEFAULT 1
 	)
 GO
 
@@ -146,7 +155,18 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Vuelos' AND xtype='U')
 		aeronave_id int REFERENCES MILANESA.Aeronaves,
 		vue_fecha_salida datetime,
 		vue_fecha_llegada_estimada datetime,
-		vue_fecha_llegada datetime,
+		vue_fecha_llegada datetime
+	)
+GO
+
+/*Ventas*/
+IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Ventas' AND xtype='U')
+	CREATE TABLE MILANESA.Ventas (
+		ven_id int identity(1,1) Primary Key,
+		comprador_id int REFERENCES MILANESA.Clientes NOT NULL,
+		vuelo_id int REFERENCES MILANESA.Vuelos,
+		vendedor_id int REFERENCES MILANESA.Usuarios,
+		ven_fecha datetime,
 	)
 GO
 
@@ -154,12 +174,11 @@ GO
 IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Pasajes' AND xtype='U')
 	CREATE TABLE MILANESA.Pasajes (
 		pas_id int identity(1,1) Primary Key,
-		cliente_id int REFERENCES MILANESA.Clientes NOT NULL,
+		pasajero_id int REFERENCES MILANESA.Clientes NOT NULL,
 		devolucion_id int REFERENCES MILANESA.Devoluciones,
-		vuelo_id int REFERENCES MILANESA.Vuelos,
+		venta_id int REFERENCES MILANESA.Ventas,
 		pas_codigo numeric(18,0) NOT NULL,
-		pas_precio numeric(18,2),
-		pas_fecha_compra datetime
+		pas_precio numeric(18,2)
 	)
 GO
 
@@ -167,13 +186,11 @@ GO
 IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Paquetes' AND xtype='U')
 	CREATE TABLE MILANESA.Paquetes (
 		paq_id int identity(1,1) Primary Key,
-		cliente_id int REFERENCES MILANESA.Clientes NOT NULL,
 		devolucion_id int REFERENCES MILANESA.Devoluciones,
-		vuelo_id int REFERENCES MILANESA.Vuelos,
+		venta_id int REFERENCES MILANESA.Ventas,
 		paq_codigo numeric(18,0) NOT NULL,
 		paq_precio numeric(18,2),
-		paq_kg numeric(18,0),
-		paq_fecha_compra datetime,
+		paq_kg numeric(18,0)
 	)
 GO
 	
@@ -195,7 +212,8 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Butacas' AND xtype='U')
 		aeronave_id int REFERENCES MILANESA.Aeronaves,
 		but_numero numeric(18,0),
 		but_tipo nvarchar(255),
-		but_piso numeric(18,0)
+		but_piso numeric(18,0),
+		but_activo bit DEFAULT 1
 	)
 GO
 
