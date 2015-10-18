@@ -1,7 +1,7 @@
 USE [GD2C2015]
 GO
 
-IF NOT EXISTS (SELECT  schema_name FROM information_schema.schemata WHERE schema_name = 'MILANESA') 
+IF NOT EXISTS (SELECT 1 FROM information_schema.schemata WHERE schema_name = 'MILANESA') 
 BEGIN
 	EXEC ('CREATE SCHEMA MILANESA')
 END
@@ -102,23 +102,24 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Ciudades' AND xtype='U')
 	)
 GO
 
+/*Tipos_Servicio*/
+IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Tipos_Servicio' AND xtype='U')
+	CREATE TABLE MILANESA.Tipos_Servicio (
+		tip_id int identity(1,1) Primary Key,
+		tip_descripcion nvarchar(255)
+	)
+GO
+
 /*Rutas*/
 IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Rutas' AND xtype='U')
 	CREATE TABLE MILANESA.Rutas (
 		rut_id int identity(1,1) Primary Key,
 		ciudad_origen_id int REFERENCES MILANESA.Ciudades,
 		ciudad_destino_id int REFERENCES MILANESA.Ciudades,
+		tipo_servicio_id int REFERENCES MILANESA.Tipos_Servicio,
 		rut_codigo numeric(18,0),
 		rut_precio_base_kg numeric(18,2),
 		rut_precio_base_pasaje numeric(18,2)
-	)
-GO
-
-/*Tipos_Servicio*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Tipos_Servicio' AND xtype='U')
-	CREATE TABLE MILANESA.Tipos_Servicio (
-		tip_id int identity(1,1) Primary Key,
-		tip_descripcion nvarchar(255)
 	)
 GO
 
@@ -168,6 +169,7 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Paquetes' AND xtype='U')
 		paq_id int identity(1,1) Primary Key,
 		cliente_id int REFERENCES MILANESA.Clientes NOT NULL,
 		devolucion_id int REFERENCES MILANESA.Devoluciones,
+		vuelo_id int REFERENCES MILANESA.Vuelos,
 		paq_codigo numeric(18,0) NOT NULL,
 		paq_precio numeric(18,2),
 		paq_kg numeric(18,0),

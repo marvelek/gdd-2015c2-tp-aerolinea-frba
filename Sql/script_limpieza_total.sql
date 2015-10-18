@@ -26,9 +26,18 @@ BEGIN
 END
 
 /*Drop Stored Procedures*/
-/*BEGIN
-
-END*/
+BEGIN
+	DROP PROCEDURE MILANESA.sp_migracion_datos
+	DROP PROCEDURE MILANESA.sp_migracion_clientes
+	DROP PROCEDURE MILANESA.sp_migracion_ciudades
+	DROP PROCEDURE MILANESA.sp_migracion_tipos_servicio
+	DROP PROCEDURE MILANESA.sp_migracion_aeronaves
+	DROP PROCEDURE MILANESA.sp_migracion_butacas
+	DROP PROCEDURE MILANESA.sp_migracion_rutas
+	DROP PROCEDURE MILANESA.sp_migracion_vuelos
+	DROP PROCEDURE MILANESA.sp_migracion_pasajes
+	DROP PROCEDURE MILANESA.sp_migracion_paquetes
+END
 
 /* Drop Schema*/
 BEGIN
