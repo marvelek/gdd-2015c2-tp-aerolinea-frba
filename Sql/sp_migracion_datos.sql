@@ -150,30 +150,32 @@ BEGIN
 
 	INSERT INTO Pasajes(pas_codigo, pas_fecha_compra, pas_precio, cliente_id, vuelo_id)
 	SELECT DISTINCT 
-		Pasaje_Codigo, 
-		Pasaje_FechaCompra, 
-		Pasaje_Precio, 
-		(SELECT cli_id
-		 FROM MILANESA.Clientes C
-		 WHERE 
-			cli_nombre = M.Cli_Nombre AND
-			cli_apellido = M.Cli_Apellido AND
-			cli_dni = M.Cli_Dni AND 
-			cli_fecha_nacimiento = M.Cli_Fecha_Nac),
-		(SELECT TOP 1 vue_id 
-		 FROM MILANESA.Vuelos V
-		 WHERE V.ruta_id = (SELECT R.rut_id 
-							FROM MILANESA.Rutas R
-							WHERE
-							rut_codigo = M.Ruta_Codigo AND
-							M.Ruta_Ciudad_Origen = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_origen_id) AND
-							M.Ruta_Ciudad_Destino = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_destino_id) AND
-							M.Tipo_Servicio = (SELECT tip_descripcion FROM MILANESA.Tipos_Servicio WHERE tip_id = R.tipo_servicio_id))
+			M.Pasaje_Codigo,
+			M.Pasaje_FechaCompra, 
+			M.Pasaje_Precio,
+			C.cli_id,
+			V.vue_id
+		FROM
+			gd_esquema.Maestra M, MILANESA.Clientes C, MILANESA.Vuelos V
+		WHERE
+			M.Pasaje_Codigo != 0 AND
+			C.cli_nombre = M.Cli_Nombre AND
+			C.cli_apellido = M.Cli_Apellido AND
+			C.cli_dni = M.Cli_Dni AND 
+			C.cli_fecha_nacimiento = M.Cli_Fecha_Nac AND
+			V.ruta_id = (SELECT R.rut_id 
+								FROM MILANESA.Rutas R
+								WHERE
+								R.rut_codigo = M.Ruta_Codigo AND
+								M.Ruta_Ciudad_Origen = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_origen_id) AND
+								M.Ruta_Ciudad_Destino = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_destino_id) AND
+								M.Tipo_Servicio = (SELECT tip_descripcion FROM MILANESA.Tipos_Servicio WHERE tip_id = R.tipo_servicio_id))
 			AND V.aeronave_id = (SELECT aer_id
-								 FROM MILANESA.Aeronaves A
-								 WHERE M.Aeronave_Matricula = A.aer_matricula))
-	FROM gd_esquema.Maestra M
-	WHERE M.Pasaje_Codigo != 0
+									 FROM MILANESA.Aeronaves A
+									 WHERE M.Aeronave_Matricula = A.aer_matricula)
+			AND V.vue_fecha_salida = M.FechaSalida
+			AND V.vue_fecha_llegada_estimada = M.Fecha_LLegada_Estimada
+			AND V.vue_fecha_llegada = M.FechaLLegada
 END
 GO
 
