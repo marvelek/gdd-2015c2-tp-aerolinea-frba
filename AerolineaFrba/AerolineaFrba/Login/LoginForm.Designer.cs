@@ -77,6 +77,7 @@
             this.entrar.TabIndex = 4;
             this.entrar.Text = "Entrar";
             this.entrar.UseVisualStyleBackColor = true;
+            this.entrar.Click += new System.EventHandler(this.entrar_Click);
             // 
             // alta_usuario
             // 
@@ -86,6 +87,7 @@
             this.alta_usuario.TabIndex = 5;
             this.alta_usuario.Text = "Alta usuario";
             this.alta_usuario.UseVisualStyleBackColor = true;
+            this.alta_usuario.Click += new System.EventHandler(this.alta_usuario_Click);
             // 
             // cambiar_password
             // 

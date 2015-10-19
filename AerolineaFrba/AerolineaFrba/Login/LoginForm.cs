@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba.Registro_de_Usuario;
+using AerolineaFrba.Content;
 
 namespace AerolineaFrba.Login
 {
@@ -15,6 +17,77 @@ namespace AerolineaFrba.Login
         public LoginForm()
         {
             InitializeComponent();
+        }
+
+        private void entrar_Click(object sender, EventArgs e)
+        {
+            // 1 es Verdadero
+            // 0 es falso
+            if (this.password.Text == "")
+            {
+                MessageBox.Show("Tenes que ingresar una password");
+                return;
+            }
+
+            if (this.usuario.Text == "")
+            {
+                MessageBox.Show("Debe ingresar un usuario");
+                return;
+            }
+
+            Usuario usr = null;
+            usr = usr.buscar(this.usuario.Text);
+
+            if (usr != null)
+            {
+                if (usr.Habilitado == 0)
+                {
+                    MessageBox.Show("Usted es un usuario inhabilitado");
+                    return;
+                }
+
+                byte[] data = Utiles.encriptar(this.password.Text);
+
+                if (!(usr.Password.SequenceEqual(data)))
+                {
+                    MessageBox.Show("Clave Incorrecta");
+                    usr.IntentosFallidos = usr.IntentosFallidos + 1;
+
+                    if (usr.IntentosFallidos >= 3)
+                        usr.Habilitado = 1;
+
+                    usr.update();
+
+                    if (usr.IntentosFallidos > 3)
+                    {
+                        MessageBox.Show("Supero la cantidad de intentos. Su usuario fue inhabilitado. Comunicate con el administrador");
+                        return;
+                    }
+                    return;
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Usuario no encontrado");
+                return;
+            }
+
+            usr.IntentosFallidos = 0;
+            usr.update();
+
+            MenuForm menu = new MenuForm();
+            // menu.cargaDatosUsuario(usr);
+            menu.ShowDialog();
+
+            this.Close();
+
+        }
+
+        private void alta_usuario_Click(object sender, EventArgs e)
+        {
+            AltaUsuarioForm form = new AltaUsuarioForm();
+            form.ShowDialog();
         }
     }
 }

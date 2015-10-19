@@ -38,7 +38,7 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Usuarios' AND xtype='U')
 	CREATE TABLE MILANESA.Usuarios (
 		usu_id int identity(1,1) Primary Key,
 		usu_nombre nvarchar(255) NOT NULL,
-		usu_password nvarchar(4000) NOT NULL,
+		usu_password varbinary(1024) NOT NULL,
 		rol_id int REFERENCES MILANESA.Roles,	
 		usu_intentos_logueo_fallidos int NOT NULL DEFAULT 0,
 		usu_activo bit NOT NULL DEFAULT 1
