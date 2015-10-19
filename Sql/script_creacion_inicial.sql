@@ -170,6 +170,18 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Ventas' AND xtype='U')
 	)
 GO
 
+/*Butacas*/
+IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Butacas' AND xtype='U')
+	CREATE TABLE MILANESA.Butacas (
+		but_id int identity(1,1) Primary Key,
+		aeronave_id int REFERENCES MILANESA.Aeronaves NOT NULL,
+		but_numero numeric(18,0) NOT NULL,
+		but_tipo nvarchar(255) NOT NULL,
+		but_piso numeric(18,0) NOT NULL,
+		but_activo bit NOT NULL DEFAULT 1
+	)
+GO
+
 /*Pasajes*/
 IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Pasajes' AND xtype='U')
 	CREATE TABLE MILANESA.Pasajes (
@@ -177,6 +189,7 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Pasajes' AND xtype='U')
 		pasajero_id int REFERENCES MILANESA.Clientes NOT NULL,
 		devolucion_id int REFERENCES MILANESA.Devoluciones,
 		venta_id int REFERENCES MILANESA.Ventas NOT NULL,
+		butaca_id int REFERENCES MILANESA.Butacas,
 		pas_codigo numeric(18,0) NOT NULL,
 		pas_precio numeric(18,2) NOT NULL
 	)
@@ -202,18 +215,6 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Periodos_Fuera_Servicio' AND
 		pfs_motivo nvarchar(255) NOT NULL,
 		pfs_fecha_inicio datetime NOT NULL,
 		pfs_fecha_fin datetime
-	)
-GO
-
-/*Butacas*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Butacas' AND xtype='U')
-	CREATE TABLE MILANESA.Butacas (
-		but_id int identity(1,1) Primary Key,
-		aeronave_id int REFERENCES MILANESA.Aeronaves NOT NULL,
-		but_numero numeric(18,0) NOT NULL,
-		but_tipo nvarchar(255) NOT NULL,
-		but_piso numeric(18,0) NOT NULL,
-		but_activo bit NOT NULL DEFAULT 1
 	)
 GO
 
