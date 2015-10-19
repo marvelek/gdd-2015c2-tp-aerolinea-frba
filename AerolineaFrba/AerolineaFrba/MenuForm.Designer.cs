@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba
 {
-    partial class Form1
+    partial class MenuForm
     {
         /// <summary>
         /// Variable del diseñador requerida.
