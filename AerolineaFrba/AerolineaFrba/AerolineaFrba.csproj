@@ -104,12 +104,17 @@
     <Compile Include="Consulta Millas\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Contenido\Rol.cs" />
     <Compile Include="Contenido\Usuario.cs" />
     <Compile Include="Devolucion\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Devolucion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GD2C2015DataSet.cs">
+      <DependentUpon>GD2C2015DataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="MenuForm.cs">
       <SubType>Form</SubType>
@@ -168,9 +173,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Registro de Usuario\AltaUsuarioForm.resx">
-      <DependentUpon>AltaUsuarioForm.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="GD2C2015DataSet.xsc">
       <DependentUpon>GD2C2015DataSet.xsd</DependentUpon>
     </None>

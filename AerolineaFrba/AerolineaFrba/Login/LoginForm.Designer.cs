@@ -33,7 +33,7 @@
             this.usuario = new System.Windows.Forms.TextBox();
             this.password = new System.Windows.Forms.TextBox();
             this.entrar = new System.Windows.Forms.Button();
-            this.alta_usuario = new System.Windows.Forms.Button();
+            this.registar_usuario = new System.Windows.Forms.Button();
             this.cambiar_password = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
@@ -79,15 +79,15 @@
             this.entrar.UseVisualStyleBackColor = true;
             this.entrar.Click += new System.EventHandler(this.entrar_Click);
             // 
-            // alta_usuario
+            // registar_usuario
             // 
-            this.alta_usuario.Location = new System.Drawing.Point(39, 206);
-            this.alta_usuario.Name = "alta_usuario";
-            this.alta_usuario.Size = new System.Drawing.Size(75, 23);
-            this.alta_usuario.TabIndex = 5;
-            this.alta_usuario.Text = "Alta usuario";
-            this.alta_usuario.UseVisualStyleBackColor = true;
-            this.alta_usuario.Click += new System.EventHandler(this.alta_usuario_Click);
+            this.registar_usuario.Location = new System.Drawing.Point(12, 206);
+            this.registar_usuario.Name = "registar_usuario";
+            this.registar_usuario.Size = new System.Drawing.Size(105, 23);
+            this.registar_usuario.TabIndex = 5;
+            this.registar_usuario.Text = "Registrar usuario";
+            this.registar_usuario.UseVisualStyleBackColor = true;
+            this.registar_usuario.Click += new System.EventHandler(this.alta_usuario_Click);
             // 
             // cambiar_password
             // 
@@ -105,7 +105,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Controls.Add(this.cambiar_password);
-            this.Controls.Add(this.alta_usuario);
+            this.Controls.Add(this.registar_usuario);
             this.Controls.Add(this.entrar);
             this.Controls.Add(this.password);
             this.Controls.Add(this.usuario);
@@ -125,7 +125,7 @@
         private System.Windows.Forms.TextBox usuario;
         private System.Windows.Forms.TextBox password;
         private System.Windows.Forms.Button entrar;
-        private System.Windows.Forms.Button alta_usuario;
+        private System.Windows.Forms.Button registar_usuario;
         private System.Windows.Forms.CheckBox cambiar_password;
     }
 }

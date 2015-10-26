@@ -35,14 +35,14 @@ namespace AerolineaFrba.Login
                 return;
             }
 
-            Usuario usr = null;
+            Usuario usr = new Usuario();
             usr = usr.buscar(this.usuario.Text);
 
             if (usr != null)
             {
-                if (usr.Habilitado == 0)
+                if (usr.IntentosFallidos >= 3)
                 {
-                    MessageBox.Show("Usted es un usuario inhabilitado");
+                    MessageBox.Show("Su usuario fue inhabilitado. Comunicate con el administrador");
                     return;
                 }
 
@@ -52,10 +52,6 @@ namespace AerolineaFrba.Login
                 {
                     MessageBox.Show("Clave Incorrecta");
                     usr.IntentosFallidos = usr.IntentosFallidos + 1;
-
-                    if (usr.IntentosFallidos >= 3)
-                        usr.Habilitado = 1;
-
                     usr.update();
 
                     if (usr.IntentosFallidos > 3)

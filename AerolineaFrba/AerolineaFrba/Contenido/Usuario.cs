@@ -98,21 +98,6 @@ namespace AerolineaFrba.Content
             }
         }
 
-        private int habilitado;
-        public int Habilitado
-        {
-            get
-            {
-                return habilitado;
-            }
-
-            set
-            {
-                habilitado = value;
-            }
-        }
-
-
         public Usuario buscar(String nombre)
         {
             Usuario usr;
@@ -128,11 +113,10 @@ namespace AerolineaFrba.Content
                 //    //Es el administrador!
                 //    u = new Usuario();
                 //}
-
                 usr.Id = usuarioRow.usu_id;
-                usr.Activo = usuarioRow.activo;
+                usr.Activo = usuarioRow.usu_activo;
                 usr.IntentosFallidos = usuarioRow.usu_intentos_logueo_fallidos;
-                //usr.Password = usuarioRow.usu_password;
+                usr.Password = usuarioRow.usu_password;
                 usr.Nombre = usuarioRow.usu_nombre;
                 //usr.Rol = buscarRol(usuarioRow.rol_id);
                 
@@ -152,7 +136,7 @@ namespace AerolineaFrba.Content
             row.usu_password = this.Password;
             row.rol_id = this.Rol;
             row.usu_intentos_logueo_fallidos = this.IntentosFallidos;
-            row.activo = this.Activo;
+            row.usu_activo = this.Activo;
 
             usuariosTableAdapter.Update(row);
         }

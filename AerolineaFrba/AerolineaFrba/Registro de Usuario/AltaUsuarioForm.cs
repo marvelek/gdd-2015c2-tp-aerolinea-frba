@@ -16,6 +16,5 @@ namespace AerolineaFrba.Registro_de_Usuario
         {
             InitializeComponent();
         }
-
     }
 }
