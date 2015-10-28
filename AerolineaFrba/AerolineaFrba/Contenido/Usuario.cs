@@ -84,8 +84,8 @@ namespace AerolineaFrba.Content
             }
         }
 
-        private int activo;
-        public int Activo
+        private bool activo;
+        public bool Activo
         {
             get
             {
@@ -118,6 +118,7 @@ namespace AerolineaFrba.Content
                 usr.IntentosFallidos = usuarioRow.usu_intentos_logueo_fallidos;
                 usr.Password = usuarioRow.usu_password;
                 usr.Nombre = usuarioRow.usu_nombre;
+                usr.Rol = usuarioRow.rol_id;
                 //usr.Rol = buscarRol(usuarioRow.rol_id);
                 
                 return usr;

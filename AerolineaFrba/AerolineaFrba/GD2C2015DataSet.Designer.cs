@@ -7726,7 +7726,7 @@ namespace AerolineaFrba {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public UsuariosRow AddUsuariosRow(string usu_nombre, byte[] usu_password, RolesRow parentRolesRowByFK__Usuarios__rol_id__2B3F6F97, int usu_intentos_logueo_fallidos, int usu_activo) {
+            public UsuariosRow AddUsuariosRow(string usu_nombre, byte[] usu_password, RolesRow parentRolesRowByFK__Usuarios__rol_id__2B3F6F97, int usu_intentos_logueo_fallidos, bool usu_activo) {
                 UsuariosRow rowUsuariosRow = ((UsuariosRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -7788,7 +7788,7 @@ namespace AerolineaFrba {
                 base.Columns.Add(this.columnrol_id);
                 this.columnusu_intentos_logueo_fallidos = new global::System.Data.DataColumn("usu_intentos_logueo_fallidos", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnusu_intentos_logueo_fallidos);
-                this.columnusu_activo = new global::System.Data.DataColumn("usu_activo", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnusu_activo = new global::System.Data.DataColumn("usu_activo", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnusu_activo);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnusu_id}, true));
@@ -11951,9 +11951,9 @@ namespace AerolineaFrba {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int usu_activo {
+            public bool usu_activo {
                 get {
-                    return ((int)(this[this.tableUsuarios.usu_activoColumn]));
+                    return ((bool)(this[this.tableUsuarios.usu_activoColumn]));
                 }
                 set {
                     this[this.tableUsuarios.usu_activoColumn] = value;
@@ -20760,11 +20760,11 @@ SELECT tipo_servicio_id, ciudad_id FROM MILANESA.Tipos_Servicio_Rutas WHERE (ciu
             tableMapping.ColumnMappings.Add("usu_password", "usu_password");
             tableMapping.ColumnMappings.Add("rol_id", "rol_id");
             tableMapping.ColumnMappings.Add("usu_intentos_logueo_fallidos", "usu_intentos_logueo_fallidos");
-            tableMapping.ColumnMappings.Add("activo", "usu_activo");
+            tableMapping.ColumnMappings.Add("usu_activo", "usu_activo");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [MILANESA].[Usuarios] WHERE (([usu_id] = @Original_usu_id) AND ([usu_nombre] = @Original_usu_nombre) AND ([usu_password] = @Original_usu_password) AND ((@IsNull_rol_id = 1 AND [rol_id] IS NULL) OR ([rol_id] = @Original_rol_id)) AND ([usu_intentos_logueo_fallidos] = @Original_usu_intentos_logueo_fallidos) AND ([activo] = @Original_activo))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [MILANESA].[Usuarios] WHERE (([usu_id] = @Original_usu_id) AND ([usu_nombre] = @Original_usu_nombre) AND ([usu_password] = @Original_usu_password) AND ((@IsNull_rol_id = 1 AND [rol_id] IS NULL) OR ([rol_id] = @Original_rol_id)) AND ([usu_intentos_logueo_fallidos] = @Original_usu_intentos_logueo_fallidos) AND ([usu_activo] = @Original_usu_activo))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_usu_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "usu_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_usu_nombre", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "usu_nombre", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -20772,34 +20772,34 @@ SELECT tipo_servicio_id, ciudad_id FROM MILANESA.Tipos_Servicio_Rutas WHERE (ciu
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_rol_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rol_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rol_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rol_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_usu_intentos_logueo_fallidos", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "usu_intentos_logueo_fallidos", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_activo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "activo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_usu_activo", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "usu_activo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [MILANESA].[Usuarios] ([usu_nombre], [usu_password], [rol_id], [usu_intentos_logueo_fallidos], [activo]) VALUES (@usu_nombre, @usu_password, @rol_id, @usu_intentos_logueo_fallidos, @activo);
-SELECT usu_id, usu_nombre, usu_password, rol_id, usu_intentos_logueo_fallidos, activo FROM MILANESA.Usuarios WHERE (usu_id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [MILANESA].[Usuarios] ([usu_nombre], [usu_password], [rol_id], [usu_intentos_logueo_fallidos], [usu_activo]) VALUES (@usu_nombre, @usu_password, @rol_id, @usu_intentos_logueo_fallidos, @usu_activo);
+SELECT usu_id, usu_nombre, usu_password, rol_id, usu_intentos_logueo_fallidos, usu_activo FROM MILANESA.Usuarios WHERE (usu_id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@usu_nombre", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "usu_nombre", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@usu_password", global::System.Data.SqlDbType.VarBinary, 0, global::System.Data.ParameterDirection.Input, 0, 0, "usu_password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rol_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rol_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@usu_intentos_logueo_fallidos", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "usu_intentos_logueo_fallidos", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@activo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "activo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@usu_activo", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "usu_activo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [MILANESA].[Usuarios] SET [usu_nombre] = @usu_nombre, [usu_password] = @usu_password, [rol_id] = @rol_id, [usu_intentos_logueo_fallidos] = @usu_intentos_logueo_fallidos, [activo] = @activo WHERE (([usu_id] = @Original_usu_id) AND ([usu_nombre] = @Original_usu_nombre) AND ([usu_password] = @Original_usu_password) AND ((@IsNull_rol_id = 1 AND [rol_id] IS NULL) OR ([rol_id] = @Original_rol_id)) AND ([usu_intentos_logueo_fallidos] = @Original_usu_intentos_logueo_fallidos) AND ([activo] = @Original_activo));
-SELECT usu_id, usu_nombre, usu_password, rol_id, usu_intentos_logueo_fallidos, activo FROM MILANESA.Usuarios WHERE (usu_id = @usu_id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [MILANESA].[Usuarios] SET [usu_nombre] = @usu_nombre, [usu_password] = @usu_password, [rol_id] = @rol_id, [usu_intentos_logueo_fallidos] = @usu_intentos_logueo_fallidos, [usu_activo] = @usu_activo WHERE (([usu_id] = @Original_usu_id) AND ([usu_nombre] = @Original_usu_nombre) AND ([usu_password] = @Original_usu_password) AND ((@IsNull_rol_id = 1 AND [rol_id] IS NULL) OR ([rol_id] = @Original_rol_id)) AND ([usu_intentos_logueo_fallidos] = @Original_usu_intentos_logueo_fallidos) AND ([usu_activo] = @Original_usu_activo));
+SELECT usu_id, usu_nombre, usu_password, rol_id, usu_intentos_logueo_fallidos, usu_activo FROM MILANESA.Usuarios WHERE (usu_id = @usu_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@usu_nombre", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "usu_nombre", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@usu_password", global::System.Data.SqlDbType.VarBinary, 0, global::System.Data.ParameterDirection.Input, 0, 0, "usu_password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rol_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rol_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@usu_intentos_logueo_fallidos", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "usu_intentos_logueo_fallidos", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@activo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "activo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@usu_activo", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "usu_activo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_usu_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "usu_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_usu_nombre", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "usu_nombre", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_usu_password", global::System.Data.SqlDbType.VarBinary, 0, global::System.Data.ParameterDirection.Input, 0, 0, "usu_password", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_rol_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rol_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rol_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rol_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_usu_intentos_logueo_fallidos", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "usu_intentos_logueo_fallidos", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_activo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "activo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_usu_activo", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "usu_activo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@usu_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "usu_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -20816,8 +20816,8 @@ SELECT usu_id, usu_nombre, usu_password, rol_id, usu_intentos_logueo_fallidos, a
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT usu_id, usu_nombre, usu_password, rol_id, usu_intentos_logueo_fallidos, ac" +
-                "tivo FROM MILANESA.Usuarios";
+            this._commandCollection[0].CommandText = "SELECT usu_id, usu_nombre, usu_password, rol_id, usu_intentos_logueo_fallidos, us" +
+                "u_activo FROM MILANESA.Usuarios";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -20878,7 +20878,7 @@ SELECT usu_id, usu_nombre, usu_password, rol_id, usu_intentos_logueo_fallidos, a
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_usu_id, string Original_usu_nombre, byte[] Original_usu_password, global::System.Nullable<int> Original_rol_id, int Original_usu_intentos_logueo_fallidos, int Original_activo) {
+        public virtual int Delete(int Original_usu_id, string Original_usu_nombre, byte[] Original_usu_password, global::System.Nullable<int> Original_rol_id, int Original_usu_intentos_logueo_fallidos, bool Original_usu_activo) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_usu_id));
             if ((Original_usu_nombre == null)) {
                 throw new global::System.ArgumentNullException("Original_usu_nombre");
@@ -20901,7 +20901,7 @@ SELECT usu_id, usu_nombre, usu_password, rol_id, usu_intentos_logueo_fallidos, a
                 this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             this.Adapter.DeleteCommand.Parameters[5].Value = ((int)(Original_usu_intentos_logueo_fallidos));
-            this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_activo));
+            this.Adapter.DeleteCommand.Parameters[6].Value = ((bool)(Original_usu_activo));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -20922,7 +20922,7 @@ SELECT usu_id, usu_nombre, usu_password, rol_id, usu_intentos_logueo_fallidos, a
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string usu_nombre, byte[] usu_password, global::System.Nullable<int> rol_id, int usu_intentos_logueo_fallidos, int activo) {
+        public virtual int Insert(string usu_nombre, byte[] usu_password, global::System.Nullable<int> rol_id, int usu_intentos_logueo_fallidos, bool usu_activo) {
             if ((usu_nombre == null)) {
                 throw new global::System.ArgumentNullException("usu_nombre");
             }
@@ -20942,7 +20942,7 @@ SELECT usu_id, usu_nombre, usu_password, rol_id, usu_intentos_logueo_fallidos, a
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             this.Adapter.InsertCommand.Parameters[3].Value = ((int)(usu_intentos_logueo_fallidos));
-            this.Adapter.InsertCommand.Parameters[4].Value = ((int)(activo));
+            this.Adapter.InsertCommand.Parameters[4].Value = ((bool)(usu_activo));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -20963,7 +20963,7 @@ SELECT usu_id, usu_nombre, usu_password, rol_id, usu_intentos_logueo_fallidos, a
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string usu_nombre, byte[] usu_password, global::System.Nullable<int> rol_id, int usu_intentos_logueo_fallidos, int activo, int Original_usu_id, string Original_usu_nombre, byte[] Original_usu_password, global::System.Nullable<int> Original_rol_id, int Original_usu_intentos_logueo_fallidos, int Original_activo, int usu_id) {
+        public virtual int Update(string usu_nombre, byte[] usu_password, global::System.Nullable<int> rol_id, int usu_intentos_logueo_fallidos, bool usu_activo, int Original_usu_id, string Original_usu_nombre, byte[] Original_usu_password, global::System.Nullable<int> Original_rol_id, int Original_usu_intentos_logueo_fallidos, bool Original_usu_activo, int usu_id) {
             if ((usu_nombre == null)) {
                 throw new global::System.ArgumentNullException("usu_nombre");
             }
@@ -20983,7 +20983,7 @@ SELECT usu_id, usu_nombre, usu_password, rol_id, usu_intentos_logueo_fallidos, a
                 this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(usu_intentos_logueo_fallidos));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(activo));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((bool)(usu_activo));
             this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_usu_id));
             if ((Original_usu_nombre == null)) {
                 throw new global::System.ArgumentNullException("Original_usu_nombre");
@@ -21006,7 +21006,7 @@ SELECT usu_id, usu_nombre, usu_password, rol_id, usu_intentos_logueo_fallidos, a
                 this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
             this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_usu_intentos_logueo_fallidos));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_activo));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((bool)(Original_usu_activo));
             this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(usu_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -21028,8 +21028,8 @@ SELECT usu_id, usu_nombre, usu_password, rol_id, usu_intentos_logueo_fallidos, a
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string usu_nombre, byte[] usu_password, global::System.Nullable<int> rol_id, int usu_intentos_logueo_fallidos, int activo, int Original_usu_id, string Original_usu_nombre, byte[] Original_usu_password, global::System.Nullable<int> Original_rol_id, int Original_usu_intentos_logueo_fallidos, int Original_activo) {
-            return this.Update(usu_nombre, usu_password, rol_id, usu_intentos_logueo_fallidos, activo, Original_usu_id, Original_usu_nombre, Original_usu_password, Original_rol_id, Original_usu_intentos_logueo_fallidos, Original_activo, Original_usu_id);
+        public virtual int Update(string usu_nombre, byte[] usu_password, global::System.Nullable<int> rol_id, int usu_intentos_logueo_fallidos, bool usu_activo, int Original_usu_id, string Original_usu_nombre, byte[] Original_usu_password, global::System.Nullable<int> Original_rol_id, int Original_usu_intentos_logueo_fallidos, bool Original_usu_activo) {
+            return this.Update(usu_nombre, usu_password, rol_id, usu_intentos_logueo_fallidos, usu_activo, Original_usu_id, Original_usu_nombre, Original_usu_password, Original_rol_id, Original_usu_intentos_logueo_fallidos, Original_usu_activo, Original_usu_id);
         }
     }
     
