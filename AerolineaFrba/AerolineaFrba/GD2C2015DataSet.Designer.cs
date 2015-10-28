@@ -6410,6 +6410,8 @@ namespace AerolineaFrba {
             
             private global::System.Data.DataColumn columnrol_descripcion;
             
+            private global::System.Data.DataColumn columnrol_activo;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public RolesDataTable() {
@@ -6461,6 +6463,14 @@ namespace AerolineaFrba {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn rol_activoColumn {
+                get {
+                    return this.columnrol_activo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -6496,11 +6506,12 @@ namespace AerolineaFrba {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public RolesRow AddRolesRow(string rol_descripcion) {
+            public RolesRow AddRolesRow(string rol_descripcion, bool rol_activo) {
                 RolesRow rowRolesRow = ((RolesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
-                        rol_descripcion};
+                        rol_descripcion,
+                        rol_activo};
                 rowRolesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowRolesRow);
                 return rowRolesRow;
@@ -6532,6 +6543,7 @@ namespace AerolineaFrba {
             internal void InitVars() {
                 this.columnrol_id = base.Columns["rol_id"];
                 this.columnrol_descripcion = base.Columns["rol_descripcion"];
+                this.columnrol_activo = base.Columns["rol_activo"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6541,6 +6553,8 @@ namespace AerolineaFrba {
                 base.Columns.Add(this.columnrol_id);
                 this.columnrol_descripcion = new global::System.Data.DataColumn("rol_descripcion", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnrol_descripcion);
+                this.columnrol_activo = new global::System.Data.DataColumn("rol_activo", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnrol_activo);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnrol_id}, true));
                 this.columnrol_id.AutoIncrement = true;
@@ -6551,6 +6565,7 @@ namespace AerolineaFrba {
                 this.columnrol_id.Unique = true;
                 this.columnrol_descripcion.AllowDBNull = false;
                 this.columnrol_descripcion.MaxLength = 255;
+                this.columnrol_activo.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11465,6 +11480,17 @@ namespace AerolineaFrba {
                 }
                 set {
                     this[this.tableRoles.rol_descripcionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool rol_activo {
+                get {
+                    return ((bool)(this[this.tableRoles.rol_activoColumn]));
+                }
+                set {
+                    this[this.tableRoles.rol_activoColumn] = value;
                 }
             }
             
@@ -19316,30 +19342,35 @@ SELECT pro_id, canje_id, pro_descripcion, pro_cantidad_millas FROM MILANESA.Prod
             tableMapping.DataSetTable = "Roles";
             tableMapping.ColumnMappings.Add("rol_id", "rol_id");
             tableMapping.ColumnMappings.Add("rol_descripcion", "rol_descripcion");
+            tableMapping.ColumnMappings.Add("rol_activo", "rol_activo");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
             this._adapter.DeleteCommand.CommandText = "DELETE FROM [MILANESA].[Roles] WHERE (([rol_id] = @Original_rol_id) AND ([rol_des" +
-                "cripcion] = @Original_rol_descripcion))";
+                "cripcion] = @Original_rol_descripcion) AND ([rol_activo] = @Original_rol_activo)" +
+                ")";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rol_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rol_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rol_descripcion", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rol_descripcion", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rol_activo", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rol_activo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [MILANESA].[Roles] ([rol_descripcion]) VALUES (@rol_descripcion);\r\nSE" +
-                "LECT rol_id, rol_descripcion FROM MILANESA.Roles WHERE (rol_id = SCOPE_IDENTITY(" +
-                "))";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [MILANESA].[Roles] ([rol_descripcion], [rol_activo]) VALUES (@rol_des" +
+                "cripcion, @rol_activo);\r\nSELECT rol_id, rol_descripcion, rol_activo FROM MILANES" +
+                "A.Roles WHERE (rol_id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rol_descripcion", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rol_descripcion", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rol_activo", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rol_activo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [MILANESA].[Roles] SET [rol_descripcion] = @rol_descripcion WHERE (([rol_i" +
-                "d] = @Original_rol_id) AND ([rol_descripcion] = @Original_rol_descripcion));\r\nSE" +
-                "LECT rol_id, rol_descripcion FROM MILANESA.Roles WHERE (rol_id = @rol_id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [MILANESA].[Roles] SET [rol_descripcion] = @rol_descripcion, [rol_activo] = @rol_activo WHERE (([rol_id] = @Original_rol_id) AND ([rol_descripcion] = @Original_rol_descripcion) AND ([rol_activo] = @Original_rol_activo));
+SELECT rol_id, rol_descripcion, rol_activo FROM MILANESA.Roles WHERE (rol_id = @rol_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rol_descripcion", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rol_descripcion", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rol_activo", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rol_activo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rol_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rol_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rol_descripcion", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rol_descripcion", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rol_activo", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rol_activo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rol_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "rol_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -19356,7 +19387,7 @@ SELECT pro_id, canje_id, pro_descripcion, pro_cantidad_millas FROM MILANESA.Prod
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT rol_id, rol_descripcion FROM MILANESA.Roles";
+            this._commandCollection[0].CommandText = "SELECT rol_id, rol_descripcion, rol_activo FROM MILANESA.Roles";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -19417,7 +19448,7 @@ SELECT pro_id, canje_id, pro_descripcion, pro_cantidad_millas FROM MILANESA.Prod
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_rol_id, string Original_rol_descripcion) {
+        public virtual int Delete(int Original_rol_id, string Original_rol_descripcion, bool Original_rol_activo) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_rol_id));
             if ((Original_rol_descripcion == null)) {
                 throw new global::System.ArgumentNullException("Original_rol_descripcion");
@@ -19425,6 +19456,7 @@ SELECT pro_id, canje_id, pro_descripcion, pro_cantidad_millas FROM MILANESA.Prod
             else {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_rol_descripcion));
             }
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((bool)(Original_rol_activo));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -19445,13 +19477,14 @@ SELECT pro_id, canje_id, pro_descripcion, pro_cantidad_millas FROM MILANESA.Prod
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string rol_descripcion) {
+        public virtual int Insert(string rol_descripcion, bool rol_activo) {
             if ((rol_descripcion == null)) {
                 throw new global::System.ArgumentNullException("rol_descripcion");
             }
             else {
                 this.Adapter.InsertCommand.Parameters[0].Value = ((string)(rol_descripcion));
             }
+            this.Adapter.InsertCommand.Parameters[1].Value = ((bool)(rol_activo));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -19472,21 +19505,23 @@ SELECT pro_id, canje_id, pro_descripcion, pro_cantidad_millas FROM MILANESA.Prod
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string rol_descripcion, int Original_rol_id, string Original_rol_descripcion, int rol_id) {
+        public virtual int Update(string rol_descripcion, bool rol_activo, int Original_rol_id, string Original_rol_descripcion, bool Original_rol_activo, int rol_id) {
             if ((rol_descripcion == null)) {
                 throw new global::System.ArgumentNullException("rol_descripcion");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(rol_descripcion));
             }
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Original_rol_id));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((bool)(rol_activo));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Original_rol_id));
             if ((Original_rol_descripcion == null)) {
                 throw new global::System.ArgumentNullException("Original_rol_descripcion");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Original_rol_descripcion));
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Original_rol_descripcion));
             }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(rol_id));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((bool)(Original_rol_activo));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(rol_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -19507,8 +19542,8 @@ SELECT pro_id, canje_id, pro_descripcion, pro_cantidad_millas FROM MILANESA.Prod
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string rol_descripcion, int Original_rol_id, string Original_rol_descripcion) {
-            return this.Update(rol_descripcion, Original_rol_id, Original_rol_descripcion, Original_rol_id);
+        public virtual int Update(string rol_descripcion, bool rol_activo, int Original_rol_id, string Original_rol_descripcion, bool Original_rol_activo) {
+            return this.Update(rol_descripcion, rol_activo, Original_rol_id, Original_rol_descripcion, Original_rol_activo, Original_rol_id);
         }
     }
     
