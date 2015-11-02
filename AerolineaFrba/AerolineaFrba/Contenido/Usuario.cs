@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AerolineaFrba.GD2C2015DataSetTableAdapters;
+using AerolineaFrba.Contenido;
 
-namespace AerolineaFrba.Content
+namespace AerolineaFrba.Contenido
 {
     class Usuario
     {
@@ -56,8 +57,8 @@ namespace AerolineaFrba.Content
             }
         }
 
-        private int rol;
-        public int Rol
+        private AerolineaFrba.Contenido.Rol rol;
+        public AerolineaFrba.Contenido.Rol Rol
         {
             get
             {
@@ -118,8 +119,7 @@ namespace AerolineaFrba.Content
                 usr.IntentosFallidos = usuarioRow.usu_intentos_logueo_fallidos;
                 usr.Password = usuarioRow.usu_password;
                 usr.Nombre = usuarioRow.usu_nombre;
-                usr.Rol = usuarioRow.rol_id;
-                //usr.Rol = buscarRol(usuarioRow.rol_id);
+                usr.Rol = buscarRol(usuarioRow.rol_id);
                 
                 return usr;
             }
@@ -129,13 +129,18 @@ namespace AerolineaFrba.Content
             }
         }
 
+        private AerolineaFrba.Contenido.Rol buscarRol(int id)
+        {
+            return new AerolineaFrba.Contenido.Rol().buscarRol(id);
+        }
+
         public void update()
         {
             this.usuariosTableAdapter.Fill(this.dataSet.Usuarios);
             GD2C2015DataSet.UsuariosRow row = (GD2C2015DataSet.UsuariosRow)this.dataSet.Usuarios.Select("usu_nombre='" + nombre + "'").First();
             row.usu_nombre = this.Nombre;
             row.usu_password = this.Password;
-            row.rol_id = this.Rol;
+            row.rol_id = this.Rol.Id;
             row.usu_intentos_logueo_fallidos = this.IntentosFallidos;
             row.usu_activo = this.Activo;
 

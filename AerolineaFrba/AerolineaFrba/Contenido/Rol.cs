@@ -95,17 +95,7 @@ namespace AerolineaFrba.Contenido
 
         public List<Funcionalidad> buscarFuncionalidades(int id)
         {
-            GD2C2015DataSet.FuncionesDataTable data = new GD2C2015DataSet.FuncionesDataTable();
-            data = this.funcionesTableAdapter.buscarFuncionalidadesRol(id);
-            System.Data.DataRowCollection rows = data.Rows;
-            List<Funcionalidad> funcionalidades = new List<Funcionalidad>();
-            foreach (GD2C2015DataSet.FuncionesRow row in rows)
-            {
-                Funcionalidad f = new Funcionalidad();
-                f.Id = row.fun_id;
-                f.Descripcion = row.fun_descripcion;
-                funcionalidades.Add(f);
-            }
+            List<Funcionalidad> funcionalidades = Funcionalidad.getFuncionalidadesRol(id);
             return funcionalidades;
         }
 

@@ -73,7 +73,7 @@ namespace AerolineaFrba.Login
             usr.update();
 
             MenuForm menu = new MenuForm();
-            // menu.cargaDatosUsuario(usr);
+            menu.cargaDatosUsuario(usr);
             menu.ShowDialog();
 
             this.Close();
