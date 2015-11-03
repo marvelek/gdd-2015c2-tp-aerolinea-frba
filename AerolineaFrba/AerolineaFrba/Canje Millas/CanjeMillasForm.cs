@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AerolineaFrba.Devolucion
+namespace AerolineaFrba.Canje_Millas
 {
-    public partial class Form1 : Form
+    public partial class CanjeMillasForm : Form
     {
-        public Form1()
+        public CanjeMillasForm()
         {
             InitializeComponent();
         }

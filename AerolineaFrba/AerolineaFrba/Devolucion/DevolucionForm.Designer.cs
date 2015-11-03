@@ -1,6 +1,6 @@
-﻿namespace AerolineaFrba.Registro_Llegada_Destino
+﻿namespace AerolineaFrba.Devolucion
 {
-    partial class Form1
+    partial class DevolucionForm
     {
         /// <summary>
         /// Required designer variable.

@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AerolineaFrba.Abm_Ruta
+namespace AerolineaFrba.Compra
 {
-    public partial class Form1 : Form
+    public partial class CompraForm : Form
     {
-        public Form1()
+        public CompraForm()
         {
             InitializeComponent();
         }

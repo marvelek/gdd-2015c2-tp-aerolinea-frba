@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AerolineaFrba.Registro_Llegada_Destino
 {
-    public partial class Form1 : Form
+    public partial class RegistroLlegadaDestinoForm : Form
     {
-        public Form1()
+        public RegistroLlegadaDestinoForm()
         {
             InitializeComponent();
         }

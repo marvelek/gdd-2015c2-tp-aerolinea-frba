@@ -1,6 +1,6 @@
-﻿namespace AerolineaFrba.Listado_Estadistico
+﻿namespace AerolineaFrba.Generacion_Viaje
 {
-    partial class Form1
+    partial class GenerarViajeForm
     {
         /// <summary>
         /// Required designer variable.

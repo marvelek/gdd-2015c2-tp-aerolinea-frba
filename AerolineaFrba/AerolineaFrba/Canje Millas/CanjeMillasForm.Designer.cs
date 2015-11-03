@@ -1,6 +1,6 @@
-﻿namespace AerolineaFrba.Generacion_Viaje
+﻿namespace AerolineaFrba.Canje_Millas
 {
-    partial class Form1
+    partial class CanjeMillasForm
     {
         /// <summary>
         /// Required designer variable.

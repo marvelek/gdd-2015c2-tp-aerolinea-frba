@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AerolineaFrba.Abm_Rol
+namespace AerolineaFrba.Consulta_Millas
 {
-    public partial class Form1 : Form
+    public partial class ConsultaMillasForm : Form
     {
-        public Form1()
+        public ConsultaMillasForm()
         {
             InitializeComponent();
         }

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Registro_de_Usuario;
-using AerolineaFrba.Content;
+using AerolineaFrba.Contenido;
 
 namespace AerolineaFrba.Login
 {

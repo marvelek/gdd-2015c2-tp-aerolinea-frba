@@ -1,6 +1,6 @@
-﻿namespace AerolineaFrba.Abm_Aeronave
+﻿namespace AerolineaFrba.Abm_Rol
 {
-    partial class Form1
+    partial class RolesForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // RolesForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Name = "RolesForm";
+            this.Text = "Roles";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

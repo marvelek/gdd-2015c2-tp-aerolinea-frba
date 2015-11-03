@@ -7,7 +7,7 @@ using AerolineaFrba.GD2C2015DataSetTableAdapters;
 
 namespace AerolineaFrba.Contenido
 {
-    class Rol
+    public class Rol
     {
         private int id;
         public int Id
@@ -51,7 +51,7 @@ namespace AerolineaFrba.Contenido
             }
         }
 
-        private RolesTableAdapter rolTableAdapter = new RolesTableAdapter;
+        private RolesTableAdapter rolTableAdapter = new RolesTableAdapter();
         private Funciones_RolesTableAdapter funcionesRolTableAdapter = new Funciones_RolesTableAdapter();
         private FuncionesTableAdapter funcionesTableAdapter = new FuncionesTableAdapter();
         private UsuariosTableAdapter usuariosTableAdapter = new UsuariosTableAdapter();

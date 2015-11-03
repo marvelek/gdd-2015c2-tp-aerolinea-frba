@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AerolineaFrba.Canje_Millas
+namespace AerolineaFrba.Abm_Rol
 {
-    public partial class Form1 : Form
+    public partial class RolesForm : Form
     {
-        public Form1()
+        public RolesForm()
         {
             InitializeComponent();
         }

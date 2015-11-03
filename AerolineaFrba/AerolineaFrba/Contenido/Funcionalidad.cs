@@ -7,7 +7,7 @@ using AerolineaFrba.GD2C2015DataSetTableAdapters;
 
 namespace AerolineaFrba.Contenido
 {
-    class Funcionalidad
+    public class Funcionalidad
     {
         private int id;
         public int Id

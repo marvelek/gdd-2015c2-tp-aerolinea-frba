@@ -8,7 +8,7 @@ using AerolineaFrba.Contenido;
 
 namespace AerolineaFrba.Contenido
 {
-    class Usuario
+    public class Usuario
     {
 
         private UsuariosTableAdapter usuariosTableAdapter = new UsuariosTableAdapter();
