@@ -74,6 +74,12 @@
     <Compile Include="Abm Ciudad\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Rol\CargarRolForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\CargarRolForm.Designer.cs">
+      <DependentUpon>CargarRolForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Rol\RolesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +168,9 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Utiles.cs" />
+    <EmbeddedResource Include="Abm Rol\CargarRolForm.resx">
+      <DependentUpon>CargarRolForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\RolesForm.resx">
       <DependentUpon>RolesForm.cs</DependentUpon>
     </EmbeddedResource>

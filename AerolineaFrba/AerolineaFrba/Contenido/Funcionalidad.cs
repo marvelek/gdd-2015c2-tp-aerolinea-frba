@@ -73,5 +73,23 @@ namespace AerolineaFrba.Contenido
             return funcionalidades;
         }
 
+
+        internal static List<Funcionalidad> getFunciones()
+        {
+            GD2C2015DataSet dataSet = new GD2C2015DataSet();
+            FuncionesTableAdapter funcionesTableAdapter = new FuncionesTableAdapter();
+            List<Funcionalidad> funcionalidades = new List<Funcionalidad>();
+
+            funcionesTableAdapter.Fill(dataSet.Funciones);
+            GD2C2015DataSet.FuncionesRow[] funciones = (GD2C2015DataSet.FuncionesRow[])dataSet.Funciones.Select();
+            foreach (GD2C2015DataSet.FuncionesRow func in funciones)
+            {
+                Funcionalidad f = new Funcionalidad();
+                f.Id = func.fun_id;
+                f.Descripcion = func.fun_descripcion;
+                funcionalidades.Add(f);
+            }
+            return funcionalidades;
+        }
     }
 }

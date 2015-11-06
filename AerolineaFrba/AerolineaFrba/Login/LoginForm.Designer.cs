@@ -71,7 +71,7 @@
             // 
             // entrar
             // 
-            this.entrar.Location = new System.Drawing.Point(186, 206);
+            this.entrar.Location = new System.Drawing.Point(197, 206);
             this.entrar.Name = "entrar";
             this.entrar.Size = new System.Drawing.Size(75, 23);
             this.entrar.TabIndex = 4;
@@ -103,7 +103,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(284, 237);
             this.Controls.Add(this.cambiar_password);
             this.Controls.Add(this.registar_usuario);
             this.Controls.Add(this.entrar);
