@@ -23,11 +23,10 @@ namespace AerolineaFrba.Abm_Rol
         {
             InitializeComponent();
 
-            this.checkedListBox1.Items.Insert(0, "");
             List<Funcionalidad> funciones = Funcionalidad.getFunciones();
             foreach (Funcionalidad f in funciones)
             {
-                this.checkedListBox1.Items.Insert(f.Id, f.Descripcion);
+                this.checkedListBox1.Items.Insert(f.Id-1, f.Descripcion);
             }
             this.checkedListBox1.Refresh();
 
@@ -39,7 +38,7 @@ namespace AerolineaFrba.Abm_Rol
                 List<Funcionalidad> funcionalidades = rol.buscarFuncionalidades(rol.Id);
                 foreach (Funcionalidad f in funcionalidades)
                 {
-                    this.checkedListBox1.SetItemChecked(f.Id, true);
+                    this.checkedListBox1.SetItemChecked(f.Id-1, true);
                 }
             }
             else
@@ -67,7 +66,7 @@ namespace AerolineaFrba.Abm_Rol
 
                 foreach (object itemChecked in this.checkedListBox1.CheckedItems)
                 {
-                    int funcId = this.checkedListBox1.Items.IndexOf(itemChecked);
+                    int funcId = this.checkedListBox1.Items.IndexOf(itemChecked) + 1;
                     if (funcId != 0)
                     {
                         this.funcionesRolesTableAdapter.insertarFuncionRol(funcId, this.rol.Id);

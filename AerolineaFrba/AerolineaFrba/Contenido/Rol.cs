@@ -57,25 +57,6 @@ namespace AerolineaFrba.Contenido
         private UsuariosTableAdapter usuariosTableAdapter = new UsuariosTableAdapter();
         private GD2C2015DataSet dataSet = new GD2C2015DataSet();
 
-        public void crearRol(String nombre, List<Funcionalidad> funcionalidades)
-        {
-            this.rolTableAdapter.Insert(nombre, true);
-            int id = 0;
-            this.rolTableAdapter.Fill(this.dataSet.Roles);
-            if (this.dataSet.Roles.Select("rol_descripcion='" + nombre + "'").Length != 0)
-            {
-                GD2C2015DataSet.RolesRow row = (GD2C2015DataSet.RolesRow)this.dataSet.Roles.Select("rol_descripcion='" + nombre + "'").First();
-                id = row.rol_id;
-            }
-            foreach (Funcionalidad f in funcionalidades)
-            {
-                if (id != 0)
-                {
-                    this.funcionesRolTableAdapter.Insert(f.Id, id);
-                }
-            }
-        }
-
         public Rol buscarRol(int rolId)
         {
             Rol rol;
@@ -97,45 +78,6 @@ namespace AerolineaFrba.Contenido
         {
             List<Funcionalidad> funcionalidades = Funcionalidad.getFuncionalidadesRol(id);
             return funcionalidades;
-        }
-
-        public void modificarRol(String nombre, List<Funcionalidad> funcionalidades, int id)
-        {
-            this.rolTableAdapter.Fill(this.dataSet.Roles);
-            GD2C2015DataSet.RolesRow row = (GD2C2015DataSet.RolesRow)this.dataSet.Roles.Select("rol_id='" + id + "'").First();
-            String nombreOriginal = row.rol_descripcion;
-            bool activo = row.rol_activo;
-            this.rolTableAdapter.Update(nombre, activo, id, nombreOriginal, activo);
-
-            this.funcionesRolTableAdapter.Fill(this.dataSet.Funciones_Roles);
-            while (this.dataSet.Funciones_Roles.Select("rol_id='" + id + "'").Length != 0)
-            {
-                GD2C2015DataSet.Funciones_RolesRow rowF = (GD2C2015DataSet.Funciones_RolesRow)this.dataSet.Funciones_Roles.Select("rol_id='" + id + "'").First();
-                this.funcionesRolTableAdapter.Delete(id, rowF.funcion_id);
-                this.funcionesRolTableAdapter.Fill(this.dataSet.Funciones_Roles);
-            }
-
-            foreach (Funcionalidad f in funcionalidades)
-            {
-                this.funcionesRolTableAdapter.Insert(id, f.Id);
-            }
-        }
-
-        public void bajaLogica(int id)
-        {
-            this.rolTableAdapter.Fill(this.dataSet.Roles);
-            GD2C2015DataSet.RolesRow row = (GD2C2015DataSet.RolesRow)this.dataSet.Roles.Select("rol_id='" + id + "'").First();
-            String nombre = row.rol_descripcion;
-            bool activo = row.rol_activo;
-            this.rolTableAdapter.Update(nombre, false, id, nombre, activo);
-            
-            this.usuariosTableAdapter.Fill(this.dataSet.Usuarios);
-            while (this.dataSet.Usuarios.Select("rol_id='" + id + "'").Length != 0)
-            {
-                GD2C2015DataSet.UsuariosRow rowU = (GD2C2015DataSet.UsuariosRow) this.dataSet.Usuarios.Select("rol_id='" + id + "'").First();
-                this.usuariosTableAdapter.Update(rowU.usu_nombre, rowU.usu_password, null, rowU.usu_intentos_logueo_fallidos, rowU.usu_activo, rowU.usu_id, rowU.usu_nombre, rowU.usu_password, rowU.rol_id, rowU.usu_intentos_logueo_fallidos, rowU.usu_activo);
-                this.usuariosTableAdapter.Fill(this.dataSet.Usuarios);
-            }
         }
 
     }
