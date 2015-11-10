@@ -574,7 +574,7 @@ SELECT funcion_id, rol_id FROM MILANESA.Funciones_Roles WHERE (funcion_id = @fun
               <Mapping SourceColumn="rol_id" DataSetColumn="rol_id" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="borrarFuncionesRoles" Modifier="Public" Name="borrarFuncionesRoles" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="borrarFuncionesRoles">
+              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="borrarFuncionesRoles" Modifier="Public" Name="borrarFuncionesRoles" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="borrarFuncionesRoles">
                 <DeleteCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.borrarFuncionesRoles</CommandText>
@@ -585,7 +585,7 @@ SELECT funcion_id, rol_id FROM MILANESA.Funciones_Roles WHERE (funcion_id = @fun
                   </DbCommand>
                 </DeleteCommand>
               </DbSource>
-              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="insertarFuncionRol" Modifier="Public" Name="insertarFuncionRol" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="insertarFuncionRol">
+              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="insertarFuncionRol" Modifier="Public" Name="insertarFuncionRol" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="insertarFuncionRol">
                 <InsertCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.insertarFuncionRol</CommandText>
@@ -1087,7 +1087,7 @@ SELECT rol_id, rol_descripcion, rol_activo FROM MILANESA.Roles WHERE (rol_id = @
               <Mapping SourceColumn="rol_activo" DataSetColumn="rol_activo" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="bajaLogicaRol" Modifier="Public" Name="bajaLogicaRol" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="bajaLogicaRol">
+              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="bajaLogicaRol" Modifier="Public" Name="bajaLogicaRol" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="bajaLogicaRol">
                 <UpdateCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.bajaLogica</CommandText>
@@ -1098,7 +1098,7 @@ SELECT rol_id, rol_descripcion, rol_activo FROM MILANESA.Roles WHERE (rol_id = @
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
-              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.dbo.buscar" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetDataBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBy">
+              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.dbo.buscar" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy1" GeneratorSourceName="FillBy" GetMethodModifier="Public" GetMethodName="GetDataBy1" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillBy">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.buscar</CommandText>
@@ -1140,68 +1140,52 @@ SELECT rol_id, rol_descripcion, rol_activo FROM MILANESA.Roles WHERE (rol_id = @
               <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.Rutas" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>DELETE FROM [MILANESA].[Rutas] WHERE (([rut_id] = @Original_rut_id) AND ((@IsNull_ciudad_origen_id = 1 AND [ciudad_origen_id] IS NULL) OR ([ciudad_origen_id] = @Original_ciudad_origen_id)) AND ((@IsNull_ciudad_destino_id = 1 AND [ciudad_destino_id] IS NULL) OR ([ciudad_destino_id] = @Original_ciudad_destino_id)) AND ((@IsNull_tipo_servicio_id = 1 AND [tipo_servicio_id] IS NULL) OR ([tipo_servicio_id] = @Original_tipo_servicio_id)) AND ((@IsNull_rut_codigo = 1 AND [rut_codigo] IS NULL) OR ([rut_codigo] = @Original_rut_codigo)) AND ((@IsNull_rut_precio_base_kg = 1 AND [rut_precio_base_kg] IS NULL) OR ([rut_precio_base_kg] = @Original_rut_precio_base_kg)) AND ((@IsNull_rut_precio_base_pasaje = 1 AND [rut_precio_base_pasaje] IS NULL) OR ([rut_precio_base_pasaje] = @Original_rut_precio_base_pasaje)))</CommandText>
+                    <CommandText>DELETE FROM [MILANESA].[Rutas] WHERE (([rut_id] = @Original_rut_id) AND ([ciudad_origen_id] = @Original_ciudad_origen_id) AND ([ciudad_destino_id] = @Original_ciudad_destino_id) AND ([rut_codigo] = @Original_rut_codigo) AND ([rut_precio_base_kg] = @Original_rut_precio_base_kg) AND ([rut_precio_base_pasaje] = @Original_rut_precio_base_pasaje))</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_rut_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="rut_id" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_ciudad_origen_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_origen_id" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ciudad_origen_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_origen_id" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_ciudad_destino_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_destino_id" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ciudad_destino_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_destino_id" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_tipo_servicio_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="tipo_servicio_id" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_tipo_servicio_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="tipo_servicio_id" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_rut_codigo" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="rut_codigo" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_rut_codigo" Precision="18" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="rut_codigo" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_rut_precio_base_kg" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="rut_precio_base_kg" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_rut_precio_base_kg" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_kg" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_rut_precio_base_pasaje" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="rut_precio_base_pasaje" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_rut_precio_base_pasaje" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_pasaje" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ciudad_origen_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_origen_id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ciudad_destino_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_destino_id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_rut_codigo" Precision="18" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="rut_codigo" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_rut_precio_base_kg" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_kg" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_rut_precio_base_pasaje" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_pasaje" SourceColumnNullMapping="false" SourceVersion="Original" />
                     </Parameters>
                   </DbCommand>
                 </DeleteCommand>
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>INSERT INTO [MILANESA].[Rutas] ([ciudad_origen_id], [ciudad_destino_id], [tipo_servicio_id], [rut_codigo], [rut_precio_base_kg], [rut_precio_base_pasaje]) VALUES (@ciudad_origen_id, @ciudad_destino_id, @tipo_servicio_id, @rut_codigo, @rut_precio_base_kg, @rut_precio_base_pasaje);
-SELECT rut_id, ciudad_origen_id, ciudad_destino_id, tipo_servicio_id, rut_codigo, rut_precio_base_kg, rut_precio_base_pasaje FROM MILANESA.Rutas WHERE (rut_id = SCOPE_IDENTITY())</CommandText>
+                    <CommandText>INSERT INTO [MILANESA].[Rutas] ([ciudad_origen_id], [ciudad_destino_id], [rut_codigo], [rut_precio_base_kg], [rut_precio_base_pasaje]) VALUES (@ciudad_origen_id, @ciudad_destino_id, @rut_codigo, @rut_precio_base_kg, @rut_precio_base_pasaje);
+SELECT rut_id, ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_kg, rut_precio_base_pasaje FROM MILANESA.Rutas WHERE (rut_id = SCOPE_IDENTITY())</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ciudad_origen_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_origen_id" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ciudad_destino_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_destino_id" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@tipo_servicio_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="tipo_servicio_id" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@rut_codigo" Precision="18" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="rut_codigo" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@rut_precio_base_kg" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_kg" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@rut_precio_base_pasaje" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_pasaje" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ciudad_origen_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_origen_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ciudad_destino_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_destino_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@rut_codigo" Precision="18" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="rut_codigo" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@rut_precio_base_kg" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_kg" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@rut_precio_base_pasaje" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_pasaje" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </InsertCommand>
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT rut_id, ciudad_origen_id, ciudad_destino_id, tipo_servicio_id, rut_codigo, rut_precio_base_kg, rut_precio_base_pasaje FROM MILANESA.Rutas</CommandText>
+                    <CommandText>SELECT rut_id, ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_kg, rut_precio_base_pasaje FROM MILANESA.Rutas</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>UPDATE [MILANESA].[Rutas] SET [ciudad_origen_id] = @ciudad_origen_id, [ciudad_destino_id] = @ciudad_destino_id, [tipo_servicio_id] = @tipo_servicio_id, [rut_codigo] = @rut_codigo, [rut_precio_base_kg] = @rut_precio_base_kg, [rut_precio_base_pasaje] = @rut_precio_base_pasaje WHERE (([rut_id] = @Original_rut_id) AND ((@IsNull_ciudad_origen_id = 1 AND [ciudad_origen_id] IS NULL) OR ([ciudad_origen_id] = @Original_ciudad_origen_id)) AND ((@IsNull_ciudad_destino_id = 1 AND [ciudad_destino_id] IS NULL) OR ([ciudad_destino_id] = @Original_ciudad_destino_id)) AND ((@IsNull_tipo_servicio_id = 1 AND [tipo_servicio_id] IS NULL) OR ([tipo_servicio_id] = @Original_tipo_servicio_id)) AND ((@IsNull_rut_codigo = 1 AND [rut_codigo] IS NULL) OR ([rut_codigo] = @Original_rut_codigo)) AND ((@IsNull_rut_precio_base_kg = 1 AND [rut_precio_base_kg] IS NULL) OR ([rut_precio_base_kg] = @Original_rut_precio_base_kg)) AND ((@IsNull_rut_precio_base_pasaje = 1 AND [rut_precio_base_pasaje] IS NULL) OR ([rut_precio_base_pasaje] = @Original_rut_precio_base_pasaje)));
-SELECT rut_id, ciudad_origen_id, ciudad_destino_id, tipo_servicio_id, rut_codigo, rut_precio_base_kg, rut_precio_base_pasaje FROM MILANESA.Rutas WHERE (rut_id = @rut_id)</CommandText>
+                    <CommandText>UPDATE [MILANESA].[Rutas] SET [ciudad_origen_id] = @ciudad_origen_id, [ciudad_destino_id] = @ciudad_destino_id, [rut_codigo] = @rut_codigo, [rut_precio_base_kg] = @rut_precio_base_kg, [rut_precio_base_pasaje] = @rut_precio_base_pasaje WHERE (([rut_id] = @Original_rut_id) AND ([ciudad_origen_id] = @Original_ciudad_origen_id) AND ([ciudad_destino_id] = @Original_ciudad_destino_id) AND ([rut_codigo] = @Original_rut_codigo) AND ([rut_precio_base_kg] = @Original_rut_precio_base_kg) AND ([rut_precio_base_pasaje] = @Original_rut_precio_base_pasaje));
+SELECT rut_id, ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_kg, rut_precio_base_pasaje FROM MILANESA.Rutas WHERE (rut_id = @rut_id)</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ciudad_origen_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_origen_id" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ciudad_destino_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_destino_id" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@tipo_servicio_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="tipo_servicio_id" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@rut_codigo" Precision="18" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="rut_codigo" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@rut_precio_base_kg" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_kg" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@rut_precio_base_pasaje" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_pasaje" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ciudad_origen_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_origen_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ciudad_destino_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_destino_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@rut_codigo" Precision="18" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="rut_codigo" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@rut_precio_base_kg" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_kg" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@rut_precio_base_pasaje" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_pasaje" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_rut_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="rut_id" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_ciudad_origen_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_origen_id" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ciudad_origen_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_origen_id" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_ciudad_destino_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_destino_id" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ciudad_destino_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_destino_id" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_tipo_servicio_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="tipo_servicio_id" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_tipo_servicio_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="tipo_servicio_id" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_rut_codigo" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="rut_codigo" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_rut_codigo" Precision="18" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="rut_codigo" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_rut_precio_base_kg" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="rut_precio_base_kg" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_rut_precio_base_kg" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_kg" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_rut_precio_base_pasaje" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="rut_precio_base_pasaje" SourceColumnNullMapping="true" SourceVersion="Original" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_rut_precio_base_pasaje" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_pasaje" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ciudad_origen_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_origen_id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ciudad_destino_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_destino_id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_rut_codigo" Precision="18" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="rut_codigo" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_rut_precio_base_kg" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_kg" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_rut_precio_base_pasaje" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_pasaje" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="false" AutogeneratedName="rut_id" ColumnName="rut_id" DataSourceName="GD2C2015.MILANESA.Rutas" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@rut_id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="rut_id" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
@@ -1212,12 +1196,101 @@ SELECT rut_id, ciudad_origen_id, ciudad_destino_id, tipo_servicio_id, rut_codigo
               <Mapping SourceColumn="rut_id" DataSetColumn="rut_id" />
               <Mapping SourceColumn="ciudad_origen_id" DataSetColumn="ciudad_origen_id" />
               <Mapping SourceColumn="ciudad_destino_id" DataSetColumn="ciudad_destino_id" />
-              <Mapping SourceColumn="tipo_servicio_id" DataSetColumn="tipo_servicio_id" />
               <Mapping SourceColumn="rut_codigo" DataSetColumn="rut_codigo" />
               <Mapping SourceColumn="rut_precio_base_kg" DataSetColumn="rut_precio_base_kg" />
               <Mapping SourceColumn="rut_precio_base_pasaje" DataSetColumn="rut_precio_base_pasaje" />
+              <Mapping SourceColumn="rut_activo" DataSetColumn="rut_activo" />
             </Mappings>
-            <Sources />
+            <Sources>
+              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.Rutas" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="bajaLogicaRuta" Modifier="Public" Name="bajaLogicaRuta" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="bajaLogicaRuta">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE       MILANESA.Rutas
+SET                rut_activo = 0
+WHERE        (rut_id = @Original_rut_id)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Original_rut_id" ColumnName="rut_id" DataSourceName="GD2C2015.MILANESA.Rutas" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Original_rut_id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="rut_id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE [MILANESA].[Rutas] SET [rut_activo] = 0
+WHERE (([rut_id] = @Original_rut_id) </CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ciudad_origen_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_origen_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ciudad_destino_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_destino_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@tipo_servicio_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="tipo_servicio_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@rut_codigo" Precision="18" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="rut_codigo" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@rut_precio_base_kg" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_kg" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@rut_precio_base_pasaje" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_pasaje" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_rut_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="rut_id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ciudad_origen_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_origen_id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ciudad_destino_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_destino_id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_tipo_servicio_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="tipo_servicio_id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_rut_codigo" Precision="18" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="rut_codigo" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_rut_precio_base_kg" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_kg" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_rut_precio_base_pasaje" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_pasaje" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="rut_id" ColumnName="rut_id" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@rut_id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="rut_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="insertarRuta" Modifier="Public" Name="insertarRuta" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="insertarRuta">
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>INSERT INTO [MILANESA].[Rutas] ([ciudad_origen_id], [ciudad_destino_id], [rut_codigo], [rut_precio_base_kg], [rut_precio_base_pasaje]) VALUES (@ciudad_origen_id, @ciudad_destino_id, @rut_codigo, @rut_precio_base_kg, @rut_precio_base_pasaje);</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="ciudad_origen_id" ColumnName="ciudad_origen_id" DataSourceName="GD2C2015.MILANESA.Rutas" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@ciudad_origen_id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ciudad_origen_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="ciudad_destino_id" ColumnName="ciudad_destino_id" DataSourceName="GD2C2015.MILANESA.Rutas" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@ciudad_destino_id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ciudad_destino_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="rut_codigo" ColumnName="rut_codigo" DataSourceName="GD2C2015.MILANESA.Rutas" DataTypeServer="numeric(18, 0)" DbType="Decimal" Direction="Input" ParameterName="@rut_codigo" Precision="18" ProviderType="Decimal" Scale="0" Size="9" SourceColumn="rut_codigo" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="rut_precio_base_kg" ColumnName="rut_precio_base_kg" DataSourceName="GD2C2015.MILANESA.Rutas" DataTypeServer="numeric(18, 2)" DbType="Decimal" Direction="Input" ParameterName="@rut_precio_base_kg" Precision="18" ProviderType="Decimal" Scale="2" Size="9" SourceColumn="rut_precio_base_kg" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="rut_precio_base_pasaje" ColumnName="rut_precio_base_pasaje" DataSourceName="GD2C2015.MILANESA.Rutas" DataTypeServer="numeric(18, 2)" DbType="Decimal" Direction="Input" ParameterName="@rut_precio_base_pasaje" Precision="18" ProviderType="Decimal" Scale="2" Size="9" SourceColumn="rut_precio_base_pasaje" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+              </DbSource>
+              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.Rutas" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="modificarRuta" Modifier="Public" Name="modificarRuta" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="modificarRuta">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE       MILANESA.Rutas
+SET                ciudad_destino_id = @ciudad_destino_id, ciudad_origen_id = @ciudad_origen_id, rut_codigo = @rut_codigo, rut_precio_base_kg = @rut_precio_base_kg, 
+                         rut_precio_base_pasaje = @rut_precio_base_pasaje, rut_activo = @rut_activo
+WHERE        (rut_id = @Original_rut_id)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="ciudad_destino_id" ColumnName="ciudad_destino_id" DataSourceName="GD2C2015.MILANESA.Rutas" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@ciudad_destino_id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ciudad_destino_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="ciudad_origen_id" ColumnName="ciudad_origen_id" DataSourceName="GD2C2015.MILANESA.Rutas" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@ciudad_origen_id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ciudad_origen_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="rut_codigo" ColumnName="rut_codigo" DataSourceName="GD2C2015.MILANESA.Rutas" DataTypeServer="numeric(18, 0)" DbType="Decimal" Direction="Input" ParameterName="@rut_codigo" Precision="18" ProviderType="Decimal" Scale="0" Size="9" SourceColumn="rut_codigo" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="rut_precio_base_kg" ColumnName="rut_precio_base_kg" DataSourceName="GD2C2015.MILANESA.Rutas" DataTypeServer="numeric(18, 2)" DbType="Decimal" Direction="Input" ParameterName="@rut_precio_base_kg" Precision="18" ProviderType="Decimal" Scale="2" Size="9" SourceColumn="rut_precio_base_kg" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="rut_precio_base_pasaje" ColumnName="rut_precio_base_pasaje" DataSourceName="GD2C2015.MILANESA.Rutas" DataTypeServer="numeric(18, 2)" DbType="Decimal" Direction="Input" ParameterName="@rut_precio_base_pasaje" Precision="18" ProviderType="Decimal" Scale="2" Size="9" SourceColumn="rut_precio_base_pasaje" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="rut_activo" ColumnName="rut_activo" DataSourceName="GD2C2015.MILANESA.Rutas" DataTypeServer="bit" DbType="Boolean" Direction="Input" ParameterName="@rut_activo" Precision="0" ProviderType="Bit" Scale="0" Size="1" SourceColumn="rut_activo" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Original_rut_id" ColumnName="rut_id" DataSourceName="GD2C2015.MILANESA.Rutas" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Original_rut_id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="rut_id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>UPDATE [MILANESA].[Rutas] SET  [ciudad_destino_id] = @ciudad_destino_id, [rut_codigo] = @rut_codigo, [rut_precio_base_kg] = @rut_precio_base_kg, [rut_precio_base_pasaje] = @rut_precio_base_pasaje WHERE (([rut_id] = @Original_rut_id);</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ciudad_origen_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_origen_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ciudad_destino_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_destino_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@tipo_servicio_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="tipo_servicio_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@rut_codigo" Precision="18" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="rut_codigo" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@rut_precio_base_kg" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_kg" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@rut_precio_base_pasaje" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_pasaje" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_rut_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="rut_id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ciudad_origen_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_origen_id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ciudad_destino_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_destino_id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_tipo_servicio_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="tipo_servicio_id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_rut_codigo" Precision="18" ProviderType="Decimal" Scale="0" Size="0" SourceColumn="rut_codigo" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_rut_precio_base_kg" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_kg" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_rut_precio_base_pasaje" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="rut_precio_base_pasaje" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="rut_id" ColumnName="rut_id" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@rut_id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="rut_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </Sources>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Tipos_ServicioTableAdapter" GeneratorDataComponentClassName="Tipos_ServicioTableAdapter" Name="Tipos_Servicio" UserDataComponentName="Tipos_ServicioTableAdapter">
             <MainSource>
@@ -1270,41 +1343,41 @@ SELECT tip_id, tip_descripcion FROM MILANESA.Tipos_Servicio WHERE (tip_id = @tip
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Tipos_Servicio_RutasTableAdapter" GeneratorDataComponentClassName="Tipos_Servicio_RutasTableAdapter" Name="Tipos_Servicio_Rutas" UserDataComponentName="Tipos_Servicio_RutasTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.Tipos_Servicio_Rutas" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.Tipos_Servicio_Rutas" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>DELETE FROM [MILANESA].[Tipos_Servicio_Rutas] WHERE (([tipo_servicio_id] = @Original_tipo_servicio_id) AND ([ciudad_id] = @Original_ciudad_id))</CommandText>
+                    <CommandText>DELETE FROM [MILANESA].[Tipos_Servicio_Rutas] WHERE (([tipo_servicio_id] = @Original_tipo_servicio_id) AND ([rut_id] = @Original_rut_id))</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_tipo_servicio_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="tipo_servicio_id" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ciudad_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_rut_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="rut_id" SourceColumnNullMapping="false" SourceVersion="Original" />
                     </Parameters>
                   </DbCommand>
                 </DeleteCommand>
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>INSERT INTO [MILANESA].[Tipos_Servicio_Rutas] ([tipo_servicio_id], [ciudad_id]) VALUES (@tipo_servicio_id, @ciudad_id);
-SELECT tipo_servicio_id, ciudad_id FROM MILANESA.Tipos_Servicio_Rutas WHERE (ciudad_id = @ciudad_id) AND (tipo_servicio_id = @tipo_servicio_id)</CommandText>
+                    <CommandText>INSERT INTO [MILANESA].[Tipos_Servicio_Rutas] ([tipo_servicio_id], [rut_id]) VALUES (@tipo_servicio_id, @rut_id);
+SELECT tipo_servicio_id, rut_id FROM MILANESA.Tipos_Servicio_Rutas WHERE (rut_id = @rut_id) AND (tipo_servicio_id = @tipo_servicio_id)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@tipo_servicio_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="tipo_servicio_id" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ciudad_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@rut_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="rut_id" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </InsertCommand>
                 <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT tipo_servicio_id, ciudad_id FROM MILANESA.Tipos_Servicio_Rutas</CommandText>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT tipo_servicio_id, rut_id FROM MILANESA.Tipos_Servicio_Rutas</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>UPDATE [MILANESA].[Tipos_Servicio_Rutas] SET [tipo_servicio_id] = @tipo_servicio_id, [ciudad_id] = @ciudad_id WHERE (([tipo_servicio_id] = @Original_tipo_servicio_id) AND ([ciudad_id] = @Original_ciudad_id));
-SELECT tipo_servicio_id, ciudad_id FROM MILANESA.Tipos_Servicio_Rutas WHERE (ciudad_id = @ciudad_id) AND (tipo_servicio_id = @tipo_servicio_id)</CommandText>
+                    <CommandText>UPDATE [MILANESA].[Tipos_Servicio_Rutas] SET [tipo_servicio_id] = @tipo_servicio_id, [rut_id] = @rut_id WHERE (([tipo_servicio_id] = @Original_tipo_servicio_id) AND ([rut_id] = @Original_rut_id));
+SELECT tipo_servicio_id, rut_id FROM MILANESA.Tipos_Servicio_Rutas WHERE (rut_id = @rut_id) AND (tipo_servicio_id = @tipo_servicio_id)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@tipo_servicio_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="tipo_servicio_id" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@ciudad_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@rut_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="rut_id" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_tipo_servicio_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="tipo_servicio_id" SourceColumnNullMapping="false" SourceVersion="Original" />
-                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_ciudad_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="ciudad_id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_rut_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="rut_id" SourceColumnNullMapping="false" SourceVersion="Original" />
                     </Parameters>
                   </DbCommand>
                 </UpdateCommand>
@@ -1312,9 +1385,52 @@ SELECT tipo_servicio_id, ciudad_id FROM MILANESA.Tipos_Servicio_Rutas WHERE (ciu
             </MainSource>
             <Mappings>
               <Mapping SourceColumn="tipo_servicio_id" DataSetColumn="tipo_servicio_id" />
-              <Mapping SourceColumn="ciudad_id" DataSetColumn="ciudad_id" />
+              <Mapping SourceColumn="rut_id" DataSetColumn="rut_id" />
             </Mappings>
-            <Sources />
+            <Sources>
+              <DbSource ConnectionRef="DBurl (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="borrarTipos_Servicio_Rutas" Modifier="Public" Name="borrarTipos_Servicio_Rutas" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="borrarTipos_Servicio_Rutas">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>DELETE FROM MILANESA.Tipos_Servicio_Rutas
+WHERE   (ciudad_id = @Original_ciudad_id)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Original_ciudad_id" ColumnName="ciudad_id" DataSourceName="GD2C2015.MILANESA.Tipos_Servicio_Rutas" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Original_ciudad_id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ciudad_id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>DELETE FROM MILANESA.Tipos_Servicio_Rutas
+WHERE        (ruta_id = @Original_ruta_id)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Original_ruta_id" ColumnName="ruta_id" DataSourceName="GD2C2015.MILANESA.Tipos_Servicio_Rutas" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Original_ruta_id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ruta_id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.Tipos_Servicio_Rutas" DbObjectType="Table" GenerateShortCommands="true" GeneratorSourceName="insertarTipo_Servicio_Ruta" Modifier="Public" Name="insertarTipo_Servicio_Ruta" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="insertarTipo_Servicio_Ruta">
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>INSERT INTO [MILANESA].[Tipos_Servicio_Rutas] ([tipo_servicio_id], [ciudad_id]) VALUES (@tipo_servicio_id, @ciudad_id);</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="tipo_servicio_id" ColumnName="tipo_servicio_id" DataSourceName="GD2C2015.MILANESA.Tipos_Servicio_Rutas" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@tipo_servicio_id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="tipo_servicio_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="ciudad_id" ColumnName="ciudad_id" DataSourceName="GD2C2015.MILANESA.Tipos_Servicio_Rutas" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@ciudad_id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ciudad_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>INSERT INTO MILANESA.Tipos_Servicio_Rutas
+                         (tipo_servicio_id, ruta_id)
+VALUES        (@tipo_servicio_id,@ruta_id)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="tipo_servicio_id" ColumnName="tipo_servicio_id" DataSourceName="GD2C2015.MILANESA.Tipos_Servicio_Rutas" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@tipo_servicio_id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="tipo_servicio_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="ruta_id" ColumnName="ruta_id" DataSourceName="GD2C2015.MILANESA.Tipos_Servicio_Rutas" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@ruta_id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="ruta_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="UsuariosTableAdapter" GeneratorDataComponentClassName="UsuariosTableAdapter" Name="Usuarios" UserDataComponentName="UsuariosTableAdapter">
             <MainSource>
@@ -1885,12 +2001,12 @@ SELECT ven_id, comprador_id, vuelo_id, vendedor_id, ven_fecha FROM MILANESA.Vent
           <xs:complexType>
             <xs:sequence>
               <xs:element name="rut_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnrut_id" msprop:Generator_ColumnPropNameInRow="rut_id" msprop:Generator_ColumnPropNameInTable="rut_idColumn" msprop:Generator_UserColumnName="rut_id" type="xs:int" />
-              <xs:element name="ciudad_origen_id" msprop:Generator_ColumnVarNameInTable="columnciudad_origen_id" msprop:Generator_ColumnPropNameInRow="ciudad_origen_id" msprop:Generator_ColumnPropNameInTable="ciudad_origen_idColumn" msprop:Generator_UserColumnName="ciudad_origen_id" type="xs:int" minOccurs="0" />
-              <xs:element name="ciudad_destino_id" msprop:Generator_ColumnVarNameInTable="columnciudad_destino_id" msprop:Generator_ColumnPropNameInRow="ciudad_destino_id" msprop:Generator_ColumnPropNameInTable="ciudad_destino_idColumn" msprop:Generator_UserColumnName="ciudad_destino_id" type="xs:int" minOccurs="0" />
-              <xs:element name="tipo_servicio_id" msprop:Generator_ColumnVarNameInTable="columntipo_servicio_id" msprop:Generator_ColumnPropNameInRow="tipo_servicio_id" msprop:Generator_ColumnPropNameInTable="tipo_servicio_idColumn" msprop:Generator_UserColumnName="tipo_servicio_id" type="xs:int" minOccurs="0" />
-              <xs:element name="rut_codigo" msprop:Generator_ColumnVarNameInTable="columnrut_codigo" msprop:Generator_ColumnPropNameInRow="rut_codigo" msprop:Generator_ColumnPropNameInTable="rut_codigoColumn" msprop:Generator_UserColumnName="rut_codigo" type="xs:decimal" minOccurs="0" />
-              <xs:element name="rut_precio_base_kg" msprop:Generator_ColumnVarNameInTable="columnrut_precio_base_kg" msprop:Generator_ColumnPropNameInRow="rut_precio_base_kg" msprop:Generator_ColumnPropNameInTable="rut_precio_base_kgColumn" msprop:Generator_UserColumnName="rut_precio_base_kg" type="xs:decimal" minOccurs="0" />
-              <xs:element name="rut_precio_base_pasaje" msprop:Generator_ColumnVarNameInTable="columnrut_precio_base_pasaje" msprop:Generator_ColumnPropNameInRow="rut_precio_base_pasaje" msprop:Generator_ColumnPropNameInTable="rut_precio_base_pasajeColumn" msprop:Generator_UserColumnName="rut_precio_base_pasaje" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ciudad_origen_id" msprop:Generator_ColumnVarNameInTable="columnciudad_origen_id" msprop:Generator_ColumnPropNameInRow="ciudad_origen_id" msprop:Generator_ColumnPropNameInTable="ciudad_origen_idColumn" msprop:Generator_UserColumnName="ciudad_origen_id" type="xs:int" />
+              <xs:element name="ciudad_destino_id" msprop:Generator_ColumnVarNameInTable="columnciudad_destino_id" msprop:Generator_ColumnPropNameInRow="ciudad_destino_id" msprop:Generator_ColumnPropNameInTable="ciudad_destino_idColumn" msprop:Generator_UserColumnName="ciudad_destino_id" type="xs:int" />
+              <xs:element name="rut_codigo" msprop:Generator_ColumnVarNameInTable="columnrut_codigo" msprop:Generator_ColumnPropNameInRow="rut_codigo" msprop:Generator_ColumnPropNameInTable="rut_codigoColumn" msprop:Generator_UserColumnName="rut_codigo" type="xs:decimal" />
+              <xs:element name="rut_precio_base_kg" msprop:Generator_ColumnVarNameInTable="columnrut_precio_base_kg" msprop:Generator_ColumnPropNameInRow="rut_precio_base_kg" msprop:Generator_ColumnPropNameInTable="rut_precio_base_kgColumn" msprop:Generator_UserColumnName="rut_precio_base_kg" type="xs:decimal" />
+              <xs:element name="rut_precio_base_pasaje" msprop:Generator_ColumnVarNameInTable="columnrut_precio_base_pasaje" msprop:Generator_ColumnPropNameInRow="rut_precio_base_pasaje" msprop:Generator_ColumnPropNameInTable="rut_precio_base_pasajeColumn" msprop:Generator_UserColumnName="rut_precio_base_pasaje" type="xs:decimal" />
+              <xs:element name="rut_activo" msprop:Generator_ColumnVarNameInTable="columnrut_activo" msprop:Generator_ColumnPropNameInRow="rut_activo" msprop:Generator_ColumnPropNameInTable="rut_activoColumn" msprop:Generator_UserColumnName="rut_activo" type="xs:boolean" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -1912,7 +2028,7 @@ SELECT ven_id, comprador_id, vuelo_id, vendedor_id, ven_fecha FROM MILANESA.Vent
           <xs:complexType>
             <xs:sequence>
               <xs:element name="tipo_servicio_id" msprop:Generator_ColumnVarNameInTable="columntipo_servicio_id" msprop:Generator_ColumnPropNameInRow="tipo_servicio_id" msprop:Generator_ColumnPropNameInTable="tipo_servicio_idColumn" msprop:Generator_UserColumnName="tipo_servicio_id" type="xs:int" />
-              <xs:element name="ciudad_id" msprop:Generator_ColumnVarNameInTable="columnciudad_id" msprop:Generator_ColumnPropNameInRow="ciudad_id" msprop:Generator_ColumnPropNameInTable="ciudad_idColumn" msprop:Generator_UserColumnName="ciudad_id" type="xs:int" />
+              <xs:element name="rut_id" msprop:Generator_ColumnVarNameInTable="columnrut_id" msprop:Generator_ColumnPropNameInRow="rut_id" msprop:Generator_ColumnPropNameInTable="rut_idColumn" msprop:Generator_UserColumnName="rut_id" type="xs:int" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -2031,7 +2147,7 @@ SELECT ven_id, comprador_id, vuelo_id, vendedor_id, ven_fecha FROM MILANESA.Vent
     <xs:unique name="Tipos_Servicio_Rutas_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:Tipos_Servicio_Rutas" />
       <xs:field xpath="mstns:tipo_servicio_id" />
-      <xs:field xpath="mstns:ciudad_id" />
+      <xs:field xpath="mstns:rut_id" />
     </xs:unique>
     <xs:unique name="Usuarios_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:Usuarios" />
@@ -2067,8 +2183,6 @@ SELECT ven_id, comprador_id, vuelo_id, vendedor_id, ven_fecha FROM MILANESA.Vent
       <msdata:Relationship name="FK__Productos__canje__30F848ED" msdata:parent="Canjes" msdata:child="Productos" msdata:parentkey="can_id" msdata:childkey="canje_id" msprop:Generator_UserChildTable="Productos" msprop:Generator_ChildPropName="GetProductosRows" msprop:Generator_UserRelationName="FK__Productos__canje__30F848ED" msprop:Generator_RelationVarName="relationFK__Productos__canje__30F848ED" msprop:Generator_UserParentTable="Canjes" msprop:Generator_ParentPropName="CanjesRow" />
       <msdata:Relationship name="FK__Rutas__ciudad_de__403A8C7D" msdata:parent="Ciudades" msdata:child="Rutas" msdata:parentkey="ciu_id" msdata:childkey="ciudad_destino_id" msprop:Generator_UserChildTable="Rutas" msprop:Generator_ChildPropName="GetRutasRowsByFK__Rutas__ciudad_de__403A8C7D" msprop:Generator_UserRelationName="FK__Rutas__ciudad_de__403A8C7D" msprop:Generator_RelationVarName="relationFK__Rutas__ciudad_de__403A8C7D" msprop:Generator_UserParentTable="Ciudades" msprop:Generator_ParentPropName="CiudadesRowByFK__Rutas__ciudad_de__403A8C7D" />
       <msdata:Relationship name="FK__Rutas__ciudad_or__3F466844" msdata:parent="Ciudades" msdata:child="Rutas" msdata:parentkey="ciu_id" msdata:childkey="ciudad_origen_id" msprop:Generator_UserChildTable="Rutas" msprop:Generator_ChildPropName="GetRutasRowsByFK__Rutas__ciudad_or__3F466844" msprop:Generator_UserRelationName="FK__Rutas__ciudad_or__3F466844" msprop:Generator_RelationVarName="relationFK__Rutas__ciudad_or__3F466844" msprop:Generator_UserParentTable="Ciudades" msprop:Generator_ParentPropName="CiudadesRowByFK__Rutas__ciudad_or__3F466844" />
-      <msdata:Relationship name="FK__Rutas__tipo_serv__412EB0B6" msdata:parent="Tipos_Servicio" msdata:child="Rutas" msdata:parentkey="tip_id" msdata:childkey="tipo_servicio_id" msprop:Generator_UserChildTable="Rutas" msprop:Generator_ChildPropName="GetRutasRows" msprop:Generator_UserRelationName="FK__Rutas__tipo_serv__412EB0B6" msprop:Generator_ParentPropName="Tipos_ServicioRow" msprop:Generator_RelationVarName="relationFK__Rutas__tipo_serv__412EB0B6" msprop:Generator_UserParentTable="Tipos_Servicio" />
-      <msdata:Relationship name="FK__Tipos_Ser__ciuda__5FB337D6" msdata:parent="Ciudades" msdata:child="Tipos_Servicio_Rutas" msdata:parentkey="ciu_id" msdata:childkey="ciudad_id" msprop:Generator_UserChildTable="Tipos_Servicio_Rutas" msprop:Generator_ChildPropName="GetTipos_Servicio_RutasRows" msprop:Generator_UserRelationName="FK__Tipos_Ser__ciuda__5FB337D6" msprop:Generator_RelationVarName="relationFK__Tipos_Ser__ciuda__5FB337D6" msprop:Generator_UserParentTable="Ciudades" msprop:Generator_ParentPropName="CiudadesRow" />
       <msdata:Relationship name="FK__Tipos_Ser__tipo___5EBF139D" msdata:parent="Tipos_Servicio" msdata:child="Tipos_Servicio_Rutas" msdata:parentkey="tip_id" msdata:childkey="tipo_servicio_id" msprop:Generator_UserChildTable="Tipos_Servicio_Rutas" msprop:Generator_ChildPropName="GetTipos_Servicio_RutasRows" msprop:Generator_UserRelationName="FK__Tipos_Ser__tipo___5EBF139D" msprop:Generator_RelationVarName="relationFK__Tipos_Ser__tipo___5EBF139D" msprop:Generator_UserParentTable="Tipos_Servicio" msprop:Generator_ParentPropName="Tipos_ServicioRow" />
       <msdata:Relationship name="FK__Usuarios__rol_id__2B3F6F97" msdata:parent="Roles" msdata:child="Usuarios" msdata:parentkey="rol_id" msdata:childkey="rol_id" msprop:Generator_UserChildTable="Usuarios" msprop:Generator_ChildPropName="GetUsuariosRows" msprop:Generator_UserRelationName="FK__Usuarios__rol_id__2B3F6F97" msprop:Generator_RelationVarName="relationFK__Usuarios__rol_id__2B3F6F97" msprop:Generator_UserParentTable="Roles" msprop:Generator_ParentPropName="RolesRow" />
       <msdata:Relationship name="FK__Vuelos__aeronave__47DBAE45" msdata:parent="Aeronaves" msdata:child="Vuelos" msdata:parentkey="aer_id" msdata:childkey="aeronave_id" msprop:Generator_UserChildTable="Vuelos" msprop:Generator_ChildPropName="GetVuelosRows" msprop:Generator_UserRelationName="FK__Vuelos__aeronave__47DBAE45" msprop:Generator_RelationVarName="relationFK__Vuelos__aeronave__47DBAE45" msprop:Generator_UserParentTable="Aeronaves" msprop:Generator_ParentPropName="AeronavesRow" />
@@ -2076,6 +2190,7 @@ SELECT ven_id, comprador_id, vuelo_id, vendedor_id, ven_fecha FROM MILANESA.Vent
       <msdata:Relationship name="FK__Ventas__comprado__220B0B18" msdata:parent="Clientes" msdata:child="Ventas" msdata:parentkey="cli_id" msdata:childkey="comprador_id" msprop:Generator_UserChildTable="Ventas" msprop:Generator_ChildPropName="GetVentasRows" msprop:Generator_UserRelationName="FK__Ventas__comprado__220B0B18" msprop:Generator_RelationVarName="relationFK__Ventas__comprado__220B0B18" msprop:Generator_UserParentTable="Clientes" msprop:Generator_ParentPropName="ClientesRow" />
       <msdata:Relationship name="FK__Ventas__vendedor__23F3538A" msdata:parent="Usuarios" msdata:child="Ventas" msdata:parentkey="usu_id" msdata:childkey="vendedor_id" msprop:Generator_UserChildTable="Ventas" msprop:Generator_ChildPropName="GetVentasRows" msprop:Generator_UserRelationName="FK__Ventas__vendedor__23F3538A" msprop:Generator_RelationVarName="relationFK__Ventas__vendedor__23F3538A" msprop:Generator_UserParentTable="Usuarios" msprop:Generator_ParentPropName="UsuariosRow" />
       <msdata:Relationship name="FK__Ventas__vuelo_id__22FF2F51" msdata:parent="Vuelos" msdata:child="Ventas" msdata:parentkey="vue_id" msdata:childkey="vuelo_id" msprop:Generator_UserChildTable="Ventas" msprop:Generator_ChildPropName="GetVentasRows" msprop:Generator_UserRelationName="FK__Ventas__vuelo_id__22FF2F51" msprop:Generator_RelationVarName="relationFK__Ventas__vuelo_id__22FF2F51" msprop:Generator_UserParentTable="Vuelos" msprop:Generator_ParentPropName="VuelosRow" />
+      <msdata:Relationship name="FK__Tipos_Ser__rut_i__25918339" msdata:parent="Rutas" msdata:child="Tipos_Servicio_Rutas" msdata:parentkey="rut_id" msdata:childkey="rut_id" msprop:Generator_UserChildTable="Tipos_Servicio_Rutas" msprop:Generator_ChildPropName="GetTipos_Servicio_RutasRows" msprop:Generator_UserRelationName="FK__Tipos_Ser__rut_i__25918339" msprop:Generator_ParentPropName="RutasRow" msprop:Generator_RelationVarName="relationFK__Tipos_Ser__rut_i__25918339" msprop:Generator_UserParentTable="Rutas" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

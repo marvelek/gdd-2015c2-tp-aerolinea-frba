@@ -30,7 +30,7 @@ CREATE PROCEDURE MILANESA.sp_migracion_rutas AS
 BEGIN
 	SET NOCOUNT ON;
 
-	INSERT INTO Rutas (rut_codigo, rut_precio_base_pasaje, rut_precio_base_kg, ciudad_origen_id, ciudad_destino_id, tipo_servicio_id )
+	INSERT INTO Rutas (rut_codigo, rut_precio_base_pasaje, rut_precio_base_kg, ciudad_origen_id, ciudad_destino_id )
 	SELECT DISTINCT 
 		Ruta_Codigo, 
 		Ruta_Precio_BasePasaje,
@@ -40,10 +40,20 @@ BEGIN
 		 WHERE Ruta_Ciudad_Origen = ciu_descripcion),
 		(SELECT ciu_id
 		 FROM MILANESA.Ciudades
-		 WHERE Ruta_Ciudad_Destino = ciu_descripcion),
+		 WHERE Ruta_Ciudad_Destino = ciu_descripcion)
+	FROM gd_esquema.Maestra M
+	WHERE Ruta_Precio_BasePasaje > 0
+
+	INSERT INTO MILANESA.Tipos_Servicio_Rutas(tipo_servicio_id, rut_id )
+	SELECT DISTINCT 
 		(SELECT tip_id
 		 FROM MILANESA.Tipos_Servicio
-		 WHERE tip_descripcion = M.Tipo_Servicio)
+		 WHERE tip_descripcion = M.Tipo_Servicio),
+		 (SELECT rut_id
+		 FROM MILANESA.Rutas R
+		 WHERE R.rut_codigo = M.Ruta_Codigo AND
+			M.Ruta_Ciudad_Origen = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_origen_id) AND
+			M.Ruta_Ciudad_Destino = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_destino_id))
 	FROM gd_esquema.Maestra M
 	WHERE Ruta_Precio_BasePasaje > 0
 
@@ -57,8 +67,8 @@ BEGIN
 		m.Ruta_Precio_BaseKG > 0 AND
 		m.Ruta_Codigo = r.rut_codigo AND
 		m.Ruta_Ciudad_Origen = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = r.ciudad_origen_id) AND
-		m.Ruta_Ciudad_Destino = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = r.ciudad_destino_id) AND
-		m.Tipo_Servicio = (SELECT tip_descripcion FROM MILANESA.Tipos_Servicio WHERE tip_id = r.tipo_servicio_id)
+		m.Ruta_Ciudad_Destino = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = r.ciudad_destino_id)-- AND
+		--m.Tipo_Servicio = (SELECT tip_descripcion FROM MILANESA.Tipos_Servicio WHERE tip_id = r.tipo_servicio_id)
 
 END
 GO
@@ -120,8 +130,8 @@ BEGIN
 		 WHERE 
 			rut_codigo = M.Ruta_Codigo AND
 			M.Ruta_Ciudad_Origen = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_origen_id) AND
-			M.Ruta_Ciudad_Destino = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_destino_id) AND
-			M.Tipo_Servicio = (SELECT tip_descripcion FROM MILANESA.Tipos_Servicio WHERE tip_id = R.tipo_servicio_id)),
+			M.Ruta_Ciudad_Destino = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_destino_id)), --AND
+			--M.Tipo_Servicio = (SELECT tip_descripcion FROM MILANESA.Tipos_Servicio WHERE tip_id = R.tipo_servicio_id)),
 		(SELECT aer_id
 		 FROM MILANESA.Aeronaves 
 		 WHERE aer_matricula = M.Aeronave_Matricula)
@@ -151,8 +161,8 @@ BEGIN
 								WHERE
 								R.rut_codigo = M.Ruta_Codigo AND
 								M.Ruta_Ciudad_Origen = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_origen_id) AND
-								M.Ruta_Ciudad_Destino = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_destino_id) AND
-								M.Tipo_Servicio = (SELECT tip_descripcion FROM MILANESA.Tipos_Servicio WHERE tip_id = R.tipo_servicio_id))
+								M.Ruta_Ciudad_Destino = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_destino_id)) --AND
+								--M.Tipo_Servicio = (SELECT tip_descripcion FROM MILANESA.Tipos_Servicio WHERE tip_id = R.tipo_servicio_id))
 			AND V.aeronave_id = (SELECT aer_id
 									 FROM MILANESA.Aeronaves A
 									 WHERE M.Aeronave_Matricula = A.aer_matricula)
@@ -177,8 +187,8 @@ BEGIN
 								WHERE
 								R.rut_codigo = M.Ruta_Codigo AND
 								M.Ruta_Ciudad_Origen = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_origen_id) AND
-								M.Ruta_Ciudad_Destino = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_destino_id) AND
-								M.Tipo_Servicio = (SELECT tip_descripcion FROM MILANESA.Tipos_Servicio WHERE tip_id = R.tipo_servicio_id))
+								M.Ruta_Ciudad_Destino = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_destino_id)) --AND
+								--M.Tipo_Servicio = (SELECT tip_descripcion FROM MILANESA.Tipos_Servicio WHERE tip_id = R.tipo_servicio_id))
 			AND V.aeronave_id = (SELECT aer_id
 									 FROM MILANESA.Aeronaves A
 									 WHERE M.Aeronave_Matricula = A.aer_matricula)
@@ -215,8 +225,8 @@ BEGIN
 								WHERE
 								R.rut_codigo = M.Ruta_Codigo AND
 								M.Ruta_Ciudad_Origen = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_origen_id) AND
-								M.Ruta_Ciudad_Destino = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_destino_id) AND
-								M.Tipo_Servicio = (SELECT tip_descripcion FROM MILANESA.Tipos_Servicio WHERE tip_id = R.tipo_servicio_id))
+								M.Ruta_Ciudad_Destino = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_destino_id))-- AND
+								--M.Tipo_Servicio = (SELECT tip_descripcion FROM MILANESA.Tipos_Servicio WHERE tip_id = R.tipo_servicio_id))
 			AND V.aeronave_id = (SELECT aer_id
 									 FROM MILANESA.Aeronaves A
 									 WHERE M.Aeronave_Matricula = A.aer_matricula)
@@ -252,8 +262,8 @@ BEGIN
 							WHERE
 							R.rut_codigo = M.Ruta_Codigo AND
 							M.Ruta_Ciudad_Origen = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_origen_id) AND
-							M.Ruta_Ciudad_Destino = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_destino_id) AND
-							M.Tipo_Servicio = (SELECT tip_descripcion FROM MILANESA.Tipos_Servicio WHERE tip_id = R.tipo_servicio_id))
+							M.Ruta_Ciudad_Destino = (SELECT ciu_descripcion FROM MILANESA.Ciudades WHERE ciu_id = R.ciudad_destino_id))-- AND
+							--M.Tipo_Servicio = (SELECT tip_descripcion FROM MILANESA.Tipos_Servicio WHERE tip_id = R.tipo_servicio_id))
 		AND V.aeronave_id = (SELECT aer_id
 								 FROM MILANESA.Aeronaves A
 								 WHERE M.Aeronave_Matricula = A.aer_matricula)

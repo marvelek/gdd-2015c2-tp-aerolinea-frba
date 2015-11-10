@@ -123,7 +123,7 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Rutas' AND xtype='U')
 		rut_id int identity(1,1) Primary Key,
 		ciudad_origen_id int REFERENCES MILANESA.Ciudades NOT NULL,
 		ciudad_destino_id int REFERENCES MILANESA.Ciudades NOT NULL,
-		tipo_servicio_id int REFERENCES MILANESA.Tipos_Servicio NOT NULL,
+		--tipo_servicio_id int REFERENCES MILANESA.Tipos_Servicio NOT NULL,
 		rut_codigo numeric(18,0) NOT NULL,
 		rut_precio_base_kg numeric(18,2) NOT NULL,
 		rut_precio_base_pasaje numeric(18,2) NOT NULL,
@@ -233,7 +233,7 @@ GO
 IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Tipos_Servicio_Rutas' AND xtype='U')
 	CREATE TABLE MILANESA.Tipos_Servicio_Rutas (
 		tipo_servicio_id int REFERENCES MILANESA.Tipos_Servicio,
-		ciudad_id int REFERENCES MILANESA.Ciudades,
-		Primary Key (tipo_servicio_id, ciudad_id)
+		rut_id int REFERENCES MILANESA.Rutas,
+		Primary Key (tipo_servicio_id, rut_id)
 	)
 GO

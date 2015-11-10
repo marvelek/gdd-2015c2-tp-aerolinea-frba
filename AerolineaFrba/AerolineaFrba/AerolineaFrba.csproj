@@ -86,6 +86,12 @@
     <Compile Include="Abm Rol\RolesForm.Designer.cs">
       <DependentUpon>RolesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Ruta\CargarRutaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ruta\CargarRutaForm.Designer.cs">
+      <DependentUpon>CargarRutaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Ruta\RutasForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +116,8 @@
     <Compile Include="Consulta Millas\ConsultaMillasForm.Designer.cs">
       <DependentUpon>ConsultaMillasForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Contenido\Tipo_Servicio.cs" />
+    <Compile Include="Contenido\Ruta.cs" />
     <Compile Include="Contenido\Funcionalidad.cs" />
     <Compile Include="Contenido\Rol.cs" />
     <Compile Include="Contenido\Usuario.cs" />
@@ -173,6 +181,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\RolesForm.resx">
       <DependentUpon>RolesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\CargarRutaForm.resx">
+      <DependentUpon>CargarRutaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\RutasForm.resx">
+      <DependentUpon>RutasForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
