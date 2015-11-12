@@ -127,20 +127,16 @@
     <Compile Include="Devolucion\DevolucionForm.Designer.cs">
       <DependentUpon>DevolucionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GD2C2015DataSet.cs">
+    <Compile Include="GD2C2015DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>GD2C2015DataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="MenuForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MenuForm.Designer.cs">
       <DependentUpon>MenuForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GD2C2015DataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GD2C2015DataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Generacion Viaje\GenerarViajeForm.cs">
       <SubType>Form</SubType>
