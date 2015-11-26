@@ -54,14 +54,14 @@ namespace AerolineaFrba.Abm_Rol
                 if (rol != null)
                 {
                     // update
-                    this.rolesTableAdapter.modificarRol(this.descripcion.Text, this.checkBox1.Checked, this.rol.Id);
-                    this.funcionesRolesTableAdapter.borrarFuncionesRoles(this.rol.Id);
+                    this.rolesTableAdapter.rolModificar(this.descripcion.Text, this.checkBox1.Checked, this.rol.Id);
+                    this.funcionesRolesTableAdapter.funcionesRolesBorrar(this.rol.Id);
                 }
                 else
                 {
                     // insert
                     this.rol = new Rol();
-                    this.rol.Id = Convert.ToInt16(this.rolesTableAdapter.insertarRol(this.descripcion.Text));
+                    this.rol.Id = Convert.ToInt16(this.rolesTableAdapter.rolInsertar(this.descripcion.Text));
                 }
 
                 foreach (object itemChecked in this.checkedListBox1.CheckedItems)
@@ -69,7 +69,7 @@ namespace AerolineaFrba.Abm_Rol
                     int funcId = this.checkedListBox1.Items.IndexOf(itemChecked) + 1;
                     if (funcId != 0)
                     {
-                        this.funcionesRolesTableAdapter.insertarFuncionRol(funcId, this.rol.Id);
+                        this.funcionesRolesTableAdapter.funcionesRolesInsertar(funcId, this.rol.Id);
                     }
                 }
                 this.rolesTableAdapter.Fill(this.dataSet.Roles);

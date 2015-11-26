@@ -57,7 +57,7 @@ namespace AerolineaFrba.Abm_Rol
         private void eliminar_Click(object sender, EventArgs e)
         {
             int id = Convert.ToInt16(data.Rows[data.CurrentRow.Index].Cells[0].Value);
-            this.rolesTableAdapter.bajaLogicaRol(id);
+            this.rolesTableAdapter.rolBajaLogica(id);
             // Aca tendria que tener un trigger que se dispare y le saque este rol a los usuarios que lo tengan
             this.rolesTableAdapter.Fill(this.gD2C2015DataSet.Roles);
         }
