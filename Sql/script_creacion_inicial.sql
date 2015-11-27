@@ -632,11 +632,7 @@ GO
 -- PROCEDURES NECESARIOS PARA LA APP ---------------------------------------------------
 
 
-IF EXISTS (SELECT * FROM sysobjects WHERE name = 'rolBajaLogica' AND user_name(uid) = 'dbo')
-	DROP PROCEDURE [dbo].rolBajaLogica
-GO
-
-CREATE PROCEDURE [dbo].rolBajaLogica
+CREATE PROCEDURE MILANESA.rolBajaLogica
 (
 	@rol_id int
 )
@@ -647,12 +643,7 @@ SET                rol_activo = 'false'
 WHERE        (rol_id = @rol_id)
 GO
 
-
-IF EXISTS (SELECT * FROM sysobjects WHERE name = 'funcionesRolesBorrar' AND user_name(uid) = 'dbo')
-	DROP PROCEDURE [dbo].funcionesRolesBorrar
-GO
-
-CREATE PROCEDURE [dbo].funcionesRolesBorrar
+CREATE PROCEDURE MILANESA.funcionesRolesBorrar
 (
 	@rol_id int
 )
@@ -662,11 +653,7 @@ DELETE FROM MILANESA.Funciones_Roles
 WHERE        (rol_id = @rol_id)
 GO
 
-IF EXISTS (SELECT * FROM sysobjects WHERE name = 'rolBuscar' AND user_name(uid) = 'dbo')
-	DROP PROCEDURE [dbo].rolBuscar
-GO
-
-CREATE PROCEDURE [dbo].rolBuscar
+CREATE PROCEDURE MILANESA.rolBuscar
 (
 	@param1 nvarchar(255)
 )
@@ -677,11 +664,7 @@ FROM            MILANESA.Roles
 WHERE        (rol_descripcion LIKE '%' + @param1 + '%')
 GO
 
-IF EXISTS (SELECT * FROM sysobjects WHERE name = 'rolInsertar' AND user_name(uid) = 'dbo')
-	DROP PROCEDURE [dbo].rolInsertar
-GO
-
-CREATE PROCEDURE [dbo].rolInsertar
+CREATE PROCEDURE MILANESA.rolInsertar
 (
 	@rol_descripcion nvarchar(255)
 )
@@ -695,11 +678,7 @@ VALUES        (@rol_descripcion, 'true');
 SELECT rol_id FROM MILANESA.Roles WHERE (rol_id = SCOPE_IDENTITY())
 GO
 
-IF EXISTS (SELECT * FROM sysobjects WHERE name = 'funcionesRolesInsertar' AND user_name(uid) = 'dbo')
-	DROP PROCEDURE [dbo].funcionesRolesInsertar
-GO
-
-CREATE PROCEDURE [dbo].funcionesRolesInsertar
+CREATE PROCEDURE MILANESA.funcionesRolesInsertar
 (
 	@funcion_id int,
 	@rol_id int
@@ -711,11 +690,7 @@ INSERT INTO MILANESA.Funciones_Roles
 VALUES        (@funcion_id,@rol_id)
 GO
 
-IF EXISTS (SELECT * FROM sysobjects WHERE name = 'rolModificar' AND user_name(uid) = 'dbo')
-	DROP PROCEDURE [dbo].rolModificar
-GO
-
-CREATE PROCEDURE [dbo].rolModificar
+CREATE PROCEDURE MILANESA.rolModificar
 (
 	@rol_descripcion nvarchar(255),
 	@rol_activo bit,

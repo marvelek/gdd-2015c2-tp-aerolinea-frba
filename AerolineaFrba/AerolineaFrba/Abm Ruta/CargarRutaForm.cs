@@ -72,14 +72,14 @@ namespace AerolineaFrba.Abm_Ruta
                 if (ruta != null)
                 {                    
                     // update
-                    this.rutasTableAdapter.modificarRuta(Convert.ToInt16(this.ciudadDestino.SelectedValue), Convert.ToInt16(this.ciudadOrigen.SelectedValue), Convert.ToDecimal(this.codigo.Text), Convert.ToDecimal(this.precioKg.Text), Convert.ToDecimal(this.precioBase.Text), Convert.ToBoolean(this.activo.Checked), this.ruta.Id);
-                    this.tipos_servicio_RutasTableAdapter.borrarTipos_Servicio_Rutas(this.ruta.Id);
+                    //this.rutasTableAdapter.modificarRuta(Convert.ToInt16(this.ciudadDestino.SelectedValue), Convert.ToInt16(this.ciudadOrigen.SelectedValue), Convert.ToDecimal(this.codigo.Text), Convert.ToDecimal(this.precioKg.Text), Convert.ToDecimal(this.precioBase.Text), Convert.ToBoolean(this.activo.Checked), this.ruta.Id);
+                    //this.tipos_servicio_RutasTableAdapter.borrarTipos_Servicio_Rutas(this.ruta.Id);
                 }
                 else
                 {
                     // insert
                     this.ruta = new Ruta();
-                    this.ruta.Id = Convert.ToInt16(this.rutasTableAdapter.insertarRuta(Convert.ToInt16(this.ciudadOrigen.Text), Convert.ToInt16(this.ciudadDestino.Text), Convert.ToDecimal(this.codigo.Text), Convert.ToDecimal(this.precioKg.Text), Convert.ToDecimal(this.precioBase.Text)));
+                    //this.ruta.Id = Convert.ToInt16(this.rutasTableAdapter.insertarRuta(Convert.ToInt16(this.ciudadOrigen.Text), Convert.ToInt16(this.ciudadDestino.Text), Convert.ToDecimal(this.codigo.Text), Convert.ToDecimal(this.precioKg.Text), Convert.ToDecimal(this.precioBase.Text)));
                 }
 
                 foreach (object itemChecked in this.checkedListBox1.CheckedItems)
@@ -87,7 +87,7 @@ namespace AerolineaFrba.Abm_Ruta
                     int tipo_servicio_id = this.checkedListBox1.Items.IndexOf(itemChecked) + 1;
                     if (tipo_servicio_id != 0)
                     {
-                        this.tipos_servicio_RutasTableAdapter.insertarTipo_Servicio_Ruta(tipo_servicio_id, this.ruta.Id);
+                        //this.tipos_servicio_RutasTableAdapter.insertarTipo_Servicio_Ruta(tipo_servicio_id, this.ruta.Id);
                     }
                 }
                 this.rutasTableAdapter.Fill(this.dataSet.Rutas);

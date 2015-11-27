@@ -82,7 +82,7 @@ namespace AerolineaFrba.Abm_Ruta
         private void eliminar_Click_1(object sender, EventArgs e)
         {
             int id = Convert.ToInt16(data.Rows[data.CurrentRow.Index].Cells[0].Value);
-            this.rutasTableAdapter.bajaLogicaRuta(id);
+            //this.rutasTableAdapter.bajaLogicaRuta(id);
             // Aca tendria que tener un trigger que se dispare y le saque este rol a los usuarios que lo tengan
             this.rutasTableAdapter.Fill(this.gD2C2015DataSet.Rutas);
         }
