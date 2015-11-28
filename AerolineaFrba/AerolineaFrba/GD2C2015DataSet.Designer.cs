@@ -104,10 +104,6 @@ namespace AerolineaFrba {
         
         private global::System.Data.DataRelation relationFK__Rutas__ciudad_or__6B79F03D;
         
-        private global::System.Data.DataRelation relationFK__Rutas__tipo_serv__6D6238AF;
-        
-        private global::System.Data.DataRelation relationFK__Tipos_Ser__ciuda__1387E197;
-        
         private global::System.Data.DataRelation relationFK__Tipos_Ser__tipo___1293BD5E;
         
         private global::System.Data.DataRelation relationFK__Usuarios__rol_id__52AE4273;
@@ -121,6 +117,8 @@ namespace AerolineaFrba {
         private global::System.Data.DataRelation relationFK__Vuelos__aeronave__75F77EB0;
         
         private global::System.Data.DataRelation relationFK__Vuelos__ruta_id__75035A77;
+        
+        private global::System.Data.DataRelation relationFK__Tipos_Ser__rut_i__789EE131;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -749,8 +747,6 @@ namespace AerolineaFrba {
             this.relationFK__Periodos___aeron__0AF29B96 = this.Relations["FK__Periodos___aeron__0AF29B96"];
             this.relationFK__Rutas__ciudad_de__6C6E1476 = this.Relations["FK__Rutas__ciudad_de__6C6E1476"];
             this.relationFK__Rutas__ciudad_or__6B79F03D = this.Relations["FK__Rutas__ciudad_or__6B79F03D"];
-            this.relationFK__Rutas__tipo_serv__6D6238AF = this.Relations["FK__Rutas__tipo_serv__6D6238AF"];
-            this.relationFK__Tipos_Ser__ciuda__1387E197 = this.Relations["FK__Tipos_Ser__ciuda__1387E197"];
             this.relationFK__Tipos_Ser__tipo___1293BD5E = this.Relations["FK__Tipos_Ser__tipo___1293BD5E"];
             this.relationFK__Usuarios__rol_id__52AE4273 = this.Relations["FK__Usuarios__rol_id__52AE4273"];
             this.relationFK__Ventas__comprado__78D3EB5B = this.Relations["FK__Ventas__comprado__78D3EB5B"];
@@ -758,6 +754,7 @@ namespace AerolineaFrba {
             this.relationFK__Ventas__vuelo_id__79C80F94 = this.Relations["FK__Ventas__vuelo_id__79C80F94"];
             this.relationFK__Vuelos__aeronave__75F77EB0 = this.Relations["FK__Vuelos__aeronave__75F77EB0"];
             this.relationFK__Vuelos__ruta_id__75035A77 = this.Relations["FK__Vuelos__ruta_id__75035A77"];
+            this.relationFK__Tipos_Ser__rut_i__789EE131 = this.Relations["FK__Tipos_Ser__rut_i__789EE131"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -886,14 +883,6 @@ namespace AerolineaFrba {
                         this.tableCiudades.ciu_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableRutas.ciudad_origen_idColumn}, false);
             this.Relations.Add(this.relationFK__Rutas__ciudad_or__6B79F03D);
-            this.relationFK__Rutas__tipo_serv__6D6238AF = new global::System.Data.DataRelation("FK__Rutas__tipo_serv__6D6238AF", new global::System.Data.DataColumn[] {
-                        this.tableTipos_Servicio.tip_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableRutas.tipo_servicio_idColumn}, false);
-            this.Relations.Add(this.relationFK__Rutas__tipo_serv__6D6238AF);
-            this.relationFK__Tipos_Ser__ciuda__1387E197 = new global::System.Data.DataRelation("FK__Tipos_Ser__ciuda__1387E197", new global::System.Data.DataColumn[] {
-                        this.tableCiudades.ciu_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableTipos_Servicio_Rutas.ciudad_idColumn}, false);
-            this.Relations.Add(this.relationFK__Tipos_Ser__ciuda__1387E197);
             this.relationFK__Tipos_Ser__tipo___1293BD5E = new global::System.Data.DataRelation("FK__Tipos_Ser__tipo___1293BD5E", new global::System.Data.DataColumn[] {
                         this.tableTipos_Servicio.tip_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableTipos_Servicio_Rutas.tipo_servicio_idColumn}, false);
@@ -922,6 +911,10 @@ namespace AerolineaFrba {
                         this.tableRutas.rut_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableVuelos.ruta_idColumn}, false);
             this.Relations.Add(this.relationFK__Vuelos__ruta_id__75035A77);
+            this.relationFK__Tipos_Ser__rut_i__789EE131 = new global::System.Data.DataRelation("FK__Tipos_Ser__rut_i__789EE131", new global::System.Data.DataColumn[] {
+                        this.tableRutas.rut_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableTipos_Servicio_Rutas.rut_idColumn}, false);
+            this.Relations.Add(this.relationFK__Tipos_Ser__rut_i__789EE131);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6047,8 +6040,6 @@ namespace AerolineaFrba {
             
             private global::System.Data.DataColumn columnciudad_destino_id;
             
-            private global::System.Data.DataColumn columntipo_servicio_id;
-            
             private global::System.Data.DataColumn columnrut_codigo;
             
             private global::System.Data.DataColumn columnrut_precio_base_kg;
@@ -6111,14 +6102,6 @@ namespace AerolineaFrba {
             public global::System.Data.DataColumn ciudad_destino_idColumn {
                 get {
                     return this.columnciudad_destino_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn tipo_servicio_idColumn {
-                get {
-                    return this.columntipo_servicio_id;
                 }
             }
             
@@ -6191,10 +6174,9 @@ namespace AerolineaFrba {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public RutasRow AddRutasRow(CiudadesRow parentCiudadesRowByFK__Rutas__ciudad_or__6B79F03D, CiudadesRow parentCiudadesRowByFK__Rutas__ciudad_de__6C6E1476, Tipos_ServicioRow parentTipos_ServicioRowByFK__Rutas__tipo_serv__6D6238AF, decimal rut_codigo, decimal rut_precio_base_kg, decimal rut_precio_base_pasaje, bool rut_activo) {
+            public RutasRow AddRutasRow(CiudadesRow parentCiudadesRowByFK__Rutas__ciudad_or__6B79F03D, CiudadesRow parentCiudadesRowByFK__Rutas__ciudad_de__6C6E1476, decimal rut_codigo, decimal rut_precio_base_kg, decimal rut_precio_base_pasaje, bool rut_activo) {
                 RutasRow rowRutasRow = ((RutasRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        null,
                         null,
                         null,
                         null,
@@ -6207,9 +6189,6 @@ namespace AerolineaFrba {
                 }
                 if ((parentCiudadesRowByFK__Rutas__ciudad_de__6C6E1476 != null)) {
                     columnValuesArray[2] = parentCiudadesRowByFK__Rutas__ciudad_de__6C6E1476[0];
-                }
-                if ((parentTipos_ServicioRowByFK__Rutas__tipo_serv__6D6238AF != null)) {
-                    columnValuesArray[3] = parentTipos_ServicioRowByFK__Rutas__tipo_serv__6D6238AF[0];
                 }
                 rowRutasRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowRutasRow);
@@ -6243,7 +6222,6 @@ namespace AerolineaFrba {
                 this.columnrut_id = base.Columns["rut_id"];
                 this.columnciudad_origen_id = base.Columns["ciudad_origen_id"];
                 this.columnciudad_destino_id = base.Columns["ciudad_destino_id"];
-                this.columntipo_servicio_id = base.Columns["tipo_servicio_id"];
                 this.columnrut_codigo = base.Columns["rut_codigo"];
                 this.columnrut_precio_base_kg = base.Columns["rut_precio_base_kg"];
                 this.columnrut_precio_base_pasaje = base.Columns["rut_precio_base_pasaje"];
@@ -6259,8 +6237,6 @@ namespace AerolineaFrba {
                 base.Columns.Add(this.columnciudad_origen_id);
                 this.columnciudad_destino_id = new global::System.Data.DataColumn("ciudad_destino_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnciudad_destino_id);
-                this.columntipo_servicio_id = new global::System.Data.DataColumn("tipo_servicio_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntipo_servicio_id);
                 this.columnrut_codigo = new global::System.Data.DataColumn("rut_codigo", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnrut_codigo);
                 this.columnrut_precio_base_kg = new global::System.Data.DataColumn("rut_precio_base_kg", typeof(decimal), null, global::System.Data.MappingType.Element);
@@ -6279,7 +6255,6 @@ namespace AerolineaFrba {
                 this.columnrut_id.Unique = true;
                 this.columnciudad_origen_id.AllowDBNull = false;
                 this.columnciudad_destino_id.AllowDBNull = false;
-                this.columntipo_servicio_id.AllowDBNull = false;
                 this.columnrut_codigo.AllowDBNull = false;
                 this.columnrut_precio_base_kg.AllowDBNull = false;
                 this.columnrut_precio_base_pasaje.AllowDBNull = false;
@@ -6712,7 +6687,7 @@ namespace AerolineaFrba {
             
             private global::System.Data.DataColumn columntipo_servicio_id;
             
-            private global::System.Data.DataColumn columnciudad_id;
+            private global::System.Data.DataColumn columnrut_id;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -6757,9 +6732,9 @@ namespace AerolineaFrba {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ciudad_idColumn {
+            public global::System.Data.DataColumn rut_idColumn {
                 get {
-                    return this.columnciudad_id;
+                    return this.columnrut_id;
                 }
             }
             
@@ -6800,7 +6775,7 @@ namespace AerolineaFrba {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Tipos_Servicio_RutasRow AddTipos_Servicio_RutasRow(Tipos_ServicioRow parentTipos_ServicioRowByFK__Tipos_Ser__tipo___1293BD5E, CiudadesRow parentCiudadesRowByFK__Tipos_Ser__ciuda__1387E197) {
+            public Tipos_Servicio_RutasRow AddTipos_Servicio_RutasRow(Tipos_ServicioRow parentTipos_ServicioRowByFK__Tipos_Ser__tipo___1293BD5E, RutasRow parentRutasRowByFK__Tipos_Ser__rut_i__789EE131) {
                 Tipos_Servicio_RutasRow rowTipos_Servicio_RutasRow = ((Tipos_Servicio_RutasRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -6808,8 +6783,8 @@ namespace AerolineaFrba {
                 if ((parentTipos_ServicioRowByFK__Tipos_Ser__tipo___1293BD5E != null)) {
                     columnValuesArray[0] = parentTipos_ServicioRowByFK__Tipos_Ser__tipo___1293BD5E[0];
                 }
-                if ((parentCiudadesRowByFK__Tipos_Ser__ciuda__1387E197 != null)) {
-                    columnValuesArray[1] = parentCiudadesRowByFK__Tipos_Ser__ciuda__1387E197[0];
+                if ((parentRutasRowByFK__Tipos_Ser__rut_i__789EE131 != null)) {
+                    columnValuesArray[1] = parentRutasRowByFK__Tipos_Ser__rut_i__789EE131[0];
                 }
                 rowTipos_Servicio_RutasRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTipos_Servicio_RutasRow);
@@ -6818,10 +6793,10 @@ namespace AerolineaFrba {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Tipos_Servicio_RutasRow FindBytipo_servicio_idciudad_id(int tipo_servicio_id, int ciudad_id) {
+            public Tipos_Servicio_RutasRow FindBytipo_servicio_idrut_id(int tipo_servicio_id, int rut_id) {
                 return ((Tipos_Servicio_RutasRow)(this.Rows.Find(new object[] {
                             tipo_servicio_id,
-                            ciudad_id})));
+                            rut_id})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6842,7 +6817,7 @@ namespace AerolineaFrba {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columntipo_servicio_id = base.Columns["tipo_servicio_id"];
-                this.columnciudad_id = base.Columns["ciudad_id"];
+                this.columnrut_id = base.Columns["rut_id"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6850,13 +6825,13 @@ namespace AerolineaFrba {
             private void InitClass() {
                 this.columntipo_servicio_id = new global::System.Data.DataColumn("tipo_servicio_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntipo_servicio_id);
-                this.columnciudad_id = new global::System.Data.DataColumn("ciudad_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnciudad_id);
+                this.columnrut_id = new global::System.Data.DataColumn("rut_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnrut_id);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columntipo_servicio_id,
-                                this.columnciudad_id}, true));
+                                this.columnrut_id}, true));
                 this.columntipo_servicio_id.AllowDBNull = false;
-                this.columnciudad_id.AllowDBNull = false;
+                this.columnrut_id.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8640,17 +8615,6 @@ namespace AerolineaFrba {
                     return ((RutasRow[])(base.GetChildRows(this.Table.ChildRelations["FK__Rutas__ciudad_or__6B79F03D"])));
                 }
             }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Tipos_Servicio_RutasRow[] GetTipos_Servicio_RutasRows() {
-                if ((this.Table.ChildRelations["FK__Tipos_Ser__ciuda__1387E197"] == null)) {
-                    return new Tipos_Servicio_RutasRow[0];
-                }
-                else {
-                    return ((Tipos_Servicio_RutasRow[])(base.GetChildRows(this.Table.ChildRelations["FK__Tipos_Ser__ciuda__1387E197"])));
-                }
-            }
         }
         
         /// <summary>
@@ -9681,17 +9645,6 @@ namespace AerolineaFrba {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int tipo_servicio_id {
-                get {
-                    return ((int)(this[this.tableRutas.tipo_servicio_idColumn]));
-                }
-                set {
-                    this[this.tableRutas.tipo_servicio_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public decimal rut_codigo {
                 get {
                     return ((decimal)(this[this.tableRutas.rut_codigoColumn]));
@@ -9758,23 +9711,23 @@ namespace AerolineaFrba {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Tipos_ServicioRow Tipos_ServicioRow {
-                get {
-                    return ((Tipos_ServicioRow)(this.GetParentRow(this.Table.ParentRelations["FK__Rutas__tipo_serv__6D6238AF"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK__Rutas__tipo_serv__6D6238AF"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public VuelosRow[] GetVuelosRows() {
                 if ((this.Table.ChildRelations["FK__Vuelos__ruta_id__75035A77"] == null)) {
                     return new VuelosRow[0];
                 }
                 else {
                     return ((VuelosRow[])(base.GetChildRows(this.Table.ChildRelations["FK__Vuelos__ruta_id__75035A77"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public Tipos_Servicio_RutasRow[] GetTipos_Servicio_RutasRows() {
+                if ((this.Table.ChildRelations["FK__Tipos_Ser__rut_i__789EE131"] == null)) {
+                    return new Tipos_Servicio_RutasRow[0];
+                }
+                else {
+                    return ((Tipos_Servicio_RutasRow[])(base.GetChildRows(this.Table.ChildRelations["FK__Tipos_Ser__rut_i__789EE131"])));
                 }
             }
         }
@@ -9839,17 +9792,6 @@ namespace AerolineaFrba {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public RutasRow[] GetRutasRows() {
-                if ((this.Table.ChildRelations["FK__Rutas__tipo_serv__6D6238AF"] == null)) {
-                    return new RutasRow[0];
-                }
-                else {
-                    return ((RutasRow[])(base.GetChildRows(this.Table.ChildRelations["FK__Rutas__tipo_serv__6D6238AF"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public Tipos_Servicio_RutasRow[] GetTipos_Servicio_RutasRows() {
                 if ((this.Table.ChildRelations["FK__Tipos_Ser__tipo___1293BD5E"] == null)) {
                     return new Tipos_Servicio_RutasRow[0];
@@ -9887,23 +9829,12 @@ namespace AerolineaFrba {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int ciudad_id {
+            public int rut_id {
                 get {
-                    return ((int)(this[this.tableTipos_Servicio_Rutas.ciudad_idColumn]));
+                    return ((int)(this[this.tableTipos_Servicio_Rutas.rut_idColumn]));
                 }
                 set {
-                    this[this.tableTipos_Servicio_Rutas.ciudad_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public CiudadesRow CiudadesRow {
-                get {
-                    return ((CiudadesRow)(this.GetParentRow(this.Table.ParentRelations["FK__Tipos_Ser__ciuda__1387E197"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK__Tipos_Ser__ciuda__1387E197"]);
+                    this[this.tableTipos_Servicio_Rutas.rut_idColumn] = value;
                 }
             }
             
@@ -9915,6 +9846,17 @@ namespace AerolineaFrba {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK__Tipos_Ser__tipo___1293BD5E"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public RutasRow RutasRow {
+                get {
+                    return ((RutasRow)(this.GetParentRow(this.Table.ParentRelations["FK__Tipos_Ser__rut_i__789EE131"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK__Tipos_Ser__rut_i__789EE131"]);
                 }
             }
         }
@@ -16863,7 +16805,6 @@ SELECT rol_id, rol_descripcion, rol_activo FROM MILANESA.Roles WHERE (rol_id = @
             tableMapping.ColumnMappings.Add("rut_id", "rut_id");
             tableMapping.ColumnMappings.Add("ciudad_origen_id", "ciudad_origen_id");
             tableMapping.ColumnMappings.Add("ciudad_destino_id", "ciudad_destino_id");
-            tableMapping.ColumnMappings.Add("tipo_servicio_id", "tipo_servicio_id");
             tableMapping.ColumnMappings.Add("rut_codigo", "rut_codigo");
             tableMapping.ColumnMappings.Add("rut_precio_base_kg", "rut_precio_base_kg");
             tableMapping.ColumnMappings.Add("rut_precio_base_pasaje", "rut_precio_base_pasaje");
@@ -16871,36 +16812,33 @@ SELECT rol_id, rol_descripcion, rol_activo FROM MILANESA.Roles WHERE (rol_id = @
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [MILANESA].[Rutas] WHERE (([rut_id] = @Original_rut_id) AND ([ciudad_origen_id] = @Original_ciudad_origen_id) AND ([ciudad_destino_id] = @Original_ciudad_destino_id) AND ([tipo_servicio_id] = @Original_tipo_servicio_id) AND ([rut_codigo] = @Original_rut_codigo) AND ([rut_precio_base_kg] = @Original_rut_precio_base_kg) AND ([rut_precio_base_pasaje] = @Original_rut_precio_base_pasaje) AND ([rut_activo] = @Original_rut_activo))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [MILANESA].[Rutas] WHERE (([rut_id] = @Original_rut_id) AND ([ciudad_origen_id] = @Original_ciudad_origen_id) AND ([ciudad_destino_id] = @Original_ciudad_destino_id) AND ([rut_codigo] = @Original_rut_codigo) AND ([rut_precio_base_kg] = @Original_rut_precio_base_kg) AND ([rut_precio_base_pasaje] = @Original_rut_precio_base_pasaje) AND ([rut_activo] = @Original_rut_activo))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rut_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rut_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ciudad_origen_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ciudad_origen_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ciudad_destino_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ciudad_destino_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_tipo_servicio_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "tipo_servicio_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rut_codigo", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "rut_codigo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rut_precio_base_kg", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 2, "rut_precio_base_kg", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rut_precio_base_pasaje", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 2, "rut_precio_base_pasaje", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rut_activo", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rut_activo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [MILANESA].[Rutas] ([ciudad_origen_id], [ciudad_destino_id], [tipo_servicio_id], [rut_codigo], [rut_precio_base_kg], [rut_precio_base_pasaje], [rut_activo]) VALUES (@ciudad_origen_id, @ciudad_destino_id, @tipo_servicio_id, @rut_codigo, @rut_precio_base_kg, @rut_precio_base_pasaje, @rut_activo);
-SELECT rut_id, ciudad_origen_id, ciudad_destino_id, tipo_servicio_id, rut_codigo, rut_precio_base_kg, rut_precio_base_pasaje, rut_activo FROM MILANESA.Rutas WHERE (rut_id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [MILANESA].[Rutas] ([ciudad_origen_id], [ciudad_destino_id], [rut_codigo], [rut_precio_base_kg], [rut_precio_base_pasaje], [rut_activo]) VALUES (@ciudad_origen_id, @ciudad_destino_id, @rut_codigo, @rut_precio_base_kg, @rut_precio_base_pasaje, @rut_activo);
+SELECT rut_id, ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_kg, rut_precio_base_pasaje, rut_activo FROM MILANESA.Rutas WHERE (rut_id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ciudad_origen_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ciudad_origen_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ciudad_destino_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ciudad_destino_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@tipo_servicio_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "tipo_servicio_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rut_codigo", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "rut_codigo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rut_precio_base_kg", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 2, "rut_precio_base_kg", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rut_precio_base_pasaje", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 2, "rut_precio_base_pasaje", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rut_activo", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rut_activo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [MILANESA].[Rutas] SET [ciudad_origen_id] = @ciudad_origen_id, [ciudad_destino_id] = @ciudad_destino_id, [tipo_servicio_id] = @tipo_servicio_id, [rut_codigo] = @rut_codigo, [rut_precio_base_kg] = @rut_precio_base_kg, [rut_precio_base_pasaje] = @rut_precio_base_pasaje, [rut_activo] = @rut_activo WHERE (([rut_id] = @Original_rut_id) AND ([ciudad_origen_id] = @Original_ciudad_origen_id) AND ([ciudad_destino_id] = @Original_ciudad_destino_id) AND ([tipo_servicio_id] = @Original_tipo_servicio_id) AND ([rut_codigo] = @Original_rut_codigo) AND ([rut_precio_base_kg] = @Original_rut_precio_base_kg) AND ([rut_precio_base_pasaje] = @Original_rut_precio_base_pasaje) AND ([rut_activo] = @Original_rut_activo));
-SELECT rut_id, ciudad_origen_id, ciudad_destino_id, tipo_servicio_id, rut_codigo, rut_precio_base_kg, rut_precio_base_pasaje, rut_activo FROM MILANESA.Rutas WHERE (rut_id = @rut_id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [MILANESA].[Rutas] SET [ciudad_origen_id] = @ciudad_origen_id, [ciudad_destino_id] = @ciudad_destino_id, [rut_codigo] = @rut_codigo, [rut_precio_base_kg] = @rut_precio_base_kg, [rut_precio_base_pasaje] = @rut_precio_base_pasaje, [rut_activo] = @rut_activo WHERE (([rut_id] = @Original_rut_id) AND ([ciudad_origen_id] = @Original_ciudad_origen_id) AND ([ciudad_destino_id] = @Original_ciudad_destino_id) AND ([rut_codigo] = @Original_rut_codigo) AND ([rut_precio_base_kg] = @Original_rut_precio_base_kg) AND ([rut_precio_base_pasaje] = @Original_rut_precio_base_pasaje) AND ([rut_activo] = @Original_rut_activo));
+SELECT rut_id, ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_kg, rut_precio_base_pasaje, rut_activo FROM MILANESA.Rutas WHERE (rut_id = @rut_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ciudad_origen_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ciudad_origen_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ciudad_destino_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ciudad_destino_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@tipo_servicio_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "tipo_servicio_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rut_codigo", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "rut_codigo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rut_precio_base_kg", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 2, "rut_precio_base_kg", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rut_precio_base_pasaje", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 2, "rut_precio_base_pasaje", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -16908,7 +16846,6 @@ SELECT rut_id, ciudad_origen_id, ciudad_destino_id, tipo_servicio_id, rut_codigo
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rut_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rut_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ciudad_origen_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ciudad_origen_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ciudad_destino_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ciudad_destino_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_tipo_servicio_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "tipo_servicio_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rut_codigo", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "rut_codigo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rut_precio_base_kg", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 2, "rut_precio_base_kg", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rut_precio_base_pasaje", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 2, "rut_precio_base_pasaje", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -16929,8 +16866,8 @@ SELECT rut_id, ciudad_origen_id, ciudad_destino_id, tipo_servicio_id, rut_codigo
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT rut_id, ciudad_origen_id, ciudad_destino_id, tipo_servicio_id, rut_codigo," +
-                " rut_precio_base_kg, rut_precio_base_pasaje, rut_activo FROM MILANESA.Rutas";
+            this._commandCollection[0].CommandText = "SELECT rut_id, ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_k" +
+                "g, rut_precio_base_pasaje, rut_activo FROM MILANESA.Rutas";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -16991,15 +16928,14 @@ SELECT rut_id, ciudad_origen_id, ciudad_destino_id, tipo_servicio_id, rut_codigo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_rut_id, int Original_ciudad_origen_id, int Original_ciudad_destino_id, int Original_tipo_servicio_id, decimal Original_rut_codigo, decimal Original_rut_precio_base_kg, decimal Original_rut_precio_base_pasaje, bool Original_rut_activo) {
+        public virtual int Delete(int Original_rut_id, int Original_ciudad_origen_id, int Original_ciudad_destino_id, decimal Original_rut_codigo, decimal Original_rut_precio_base_kg, decimal Original_rut_precio_base_pasaje, bool Original_rut_activo) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_rut_id));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_ciudad_origen_id));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_ciudad_destino_id));
-            this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_tipo_servicio_id));
-            this.Adapter.DeleteCommand.Parameters[4].Value = ((decimal)(Original_rut_codigo));
-            this.Adapter.DeleteCommand.Parameters[5].Value = ((decimal)(Original_rut_precio_base_kg));
-            this.Adapter.DeleteCommand.Parameters[6].Value = ((decimal)(Original_rut_precio_base_pasaje));
-            this.Adapter.DeleteCommand.Parameters[7].Value = ((bool)(Original_rut_activo));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((decimal)(Original_rut_codigo));
+            this.Adapter.DeleteCommand.Parameters[4].Value = ((decimal)(Original_rut_precio_base_kg));
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((decimal)(Original_rut_precio_base_pasaje));
+            this.Adapter.DeleteCommand.Parameters[6].Value = ((bool)(Original_rut_activo));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -17020,14 +16956,13 @@ SELECT rut_id, ciudad_origen_id, ciudad_destino_id, tipo_servicio_id, rut_codigo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int ciudad_origen_id, int ciudad_destino_id, int tipo_servicio_id, decimal rut_codigo, decimal rut_precio_base_kg, decimal rut_precio_base_pasaje, bool rut_activo) {
+        public virtual int Insert(int ciudad_origen_id, int ciudad_destino_id, decimal rut_codigo, decimal rut_precio_base_kg, decimal rut_precio_base_pasaje, bool rut_activo) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(ciudad_origen_id));
             this.Adapter.InsertCommand.Parameters[1].Value = ((int)(ciudad_destino_id));
-            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(tipo_servicio_id));
-            this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(rut_codigo));
-            this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(rut_precio_base_kg));
-            this.Adapter.InsertCommand.Parameters[5].Value = ((decimal)(rut_precio_base_pasaje));
-            this.Adapter.InsertCommand.Parameters[6].Value = ((bool)(rut_activo));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((decimal)(rut_codigo));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(rut_precio_base_kg));
+            this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(rut_precio_base_pasaje));
+            this.Adapter.InsertCommand.Parameters[5].Value = ((bool)(rut_activo));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -17048,39 +16983,21 @@ SELECT rut_id, ciudad_origen_id, ciudad_destino_id, tipo_servicio_id, rut_codigo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    int ciudad_origen_id, 
-                    int ciudad_destino_id, 
-                    int tipo_servicio_id, 
-                    decimal rut_codigo, 
-                    decimal rut_precio_base_kg, 
-                    decimal rut_precio_base_pasaje, 
-                    bool rut_activo, 
-                    int Original_rut_id, 
-                    int Original_ciudad_origen_id, 
-                    int Original_ciudad_destino_id, 
-                    int Original_tipo_servicio_id, 
-                    decimal Original_rut_codigo, 
-                    decimal Original_rut_precio_base_kg, 
-                    decimal Original_rut_precio_base_pasaje, 
-                    bool Original_rut_activo, 
-                    int rut_id) {
+        public virtual int Update(int ciudad_origen_id, int ciudad_destino_id, decimal rut_codigo, decimal rut_precio_base_kg, decimal rut_precio_base_pasaje, bool rut_activo, int Original_rut_id, int Original_ciudad_origen_id, int Original_ciudad_destino_id, decimal Original_rut_codigo, decimal Original_rut_precio_base_kg, decimal Original_rut_precio_base_pasaje, bool Original_rut_activo, int rut_id) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ciudad_origen_id));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(ciudad_destino_id));
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(tipo_servicio_id));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(rut_codigo));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(rut_precio_base_kg));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((decimal)(rut_precio_base_pasaje));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((bool)(rut_activo));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_rut_id));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_ciudad_origen_id));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_ciudad_destino_id));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_tipo_servicio_id));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_rut_codigo));
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(Original_rut_precio_base_kg));
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_rut_precio_base_pasaje));
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((bool)(Original_rut_activo));
-            this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(rut_id));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((decimal)(rut_codigo));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(rut_precio_base_kg));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(rut_precio_base_pasaje));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((bool)(rut_activo));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_rut_id));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_ciudad_origen_id));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_ciudad_destino_id));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(Original_rut_codigo));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(Original_rut_precio_base_kg));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_rut_precio_base_pasaje));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((bool)(Original_rut_activo));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(rut_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -17101,8 +17018,8 @@ SELECT rut_id, ciudad_origen_id, ciudad_destino_id, tipo_servicio_id, rut_codigo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ciudad_origen_id, int ciudad_destino_id, int tipo_servicio_id, decimal rut_codigo, decimal rut_precio_base_kg, decimal rut_precio_base_pasaje, bool rut_activo, int Original_rut_id, int Original_ciudad_origen_id, int Original_ciudad_destino_id, int Original_tipo_servicio_id, decimal Original_rut_codigo, decimal Original_rut_precio_base_kg, decimal Original_rut_precio_base_pasaje, bool Original_rut_activo) {
-            return this.Update(ciudad_origen_id, ciudad_destino_id, tipo_servicio_id, rut_codigo, rut_precio_base_kg, rut_precio_base_pasaje, rut_activo, Original_rut_id, Original_ciudad_origen_id, Original_ciudad_destino_id, Original_tipo_servicio_id, Original_rut_codigo, Original_rut_precio_base_kg, Original_rut_precio_base_pasaje, Original_rut_activo, Original_rut_id);
+        public virtual int Update(int ciudad_origen_id, int ciudad_destino_id, decimal rut_codigo, decimal rut_precio_base_kg, decimal rut_precio_base_pasaje, bool rut_activo, int Original_rut_id, int Original_ciudad_origen_id, int Original_ciudad_destino_id, decimal Original_rut_codigo, decimal Original_rut_precio_base_kg, decimal Original_rut_precio_base_pasaje, bool Original_rut_activo) {
+            return this.Update(ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_kg, rut_precio_base_pasaje, rut_activo, Original_rut_id, Original_ciudad_origen_id, Original_ciudad_destino_id, Original_rut_codigo, Original_rut_precio_base_kg, Original_rut_precio_base_pasaje, Original_rut_activo, Original_rut_id);
         }
     }
     
@@ -17556,31 +17473,33 @@ SELECT tip_id, tip_descripcion, tip_activo FROM MILANESA.Tipos_Servicio WHERE (t
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "Tipos_Servicio_Rutas";
             tableMapping.ColumnMappings.Add("tipo_servicio_id", "tipo_servicio_id");
-            tableMapping.ColumnMappings.Add("ciudad_id", "ciudad_id");
+            tableMapping.ColumnMappings.Add("rut_id", "rut_id");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
             this._adapter.DeleteCommand.CommandText = "DELETE FROM [MILANESA].[Tipos_Servicio_Rutas] WHERE (([tipo_servicio_id] = @Origi" +
-                "nal_tipo_servicio_id) AND ([ciudad_id] = @Original_ciudad_id))";
+                "nal_tipo_servicio_id) AND ([rut_id] = @Original_rut_id))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_tipo_servicio_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "tipo_servicio_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ciudad_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ciudad_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rut_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rut_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [MILANESA].[Tipos_Servicio_Rutas] ([tipo_servicio_id], [ciudad_id]) VALUES (@tipo_servicio_id, @ciudad_id);
-SELECT tipo_servicio_id, ciudad_id FROM MILANESA.Tipos_Servicio_Rutas WHERE (ciudad_id = @ciudad_id) AND (tipo_servicio_id = @tipo_servicio_id)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [MILANESA].[Tipos_Servicio_Rutas] ([tipo_servicio_id], [rut_id]) VALU" +
+                "ES (@tipo_servicio_id, @rut_id);\r\nSELECT tipo_servicio_id, rut_id FROM MILANESA." +
+                "Tipos_Servicio_Rutas WHERE (rut_id = @rut_id) AND (tipo_servicio_id = @tipo_serv" +
+                "icio_id)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@tipo_servicio_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "tipo_servicio_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ciudad_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ciudad_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rut_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rut_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [MILANESA].[Tipos_Servicio_Rutas] SET [tipo_servicio_id] = @tipo_servicio_id, [ciudad_id] = @ciudad_id WHERE (([tipo_servicio_id] = @Original_tipo_servicio_id) AND ([ciudad_id] = @Original_ciudad_id));
-SELECT tipo_servicio_id, ciudad_id FROM MILANESA.Tipos_Servicio_Rutas WHERE (ciudad_id = @ciudad_id) AND (tipo_servicio_id = @tipo_servicio_id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [MILANESA].[Tipos_Servicio_Rutas] SET [tipo_servicio_id] = @tipo_servicio_id, [rut_id] = @rut_id WHERE (([tipo_servicio_id] = @Original_tipo_servicio_id) AND ([rut_id] = @Original_rut_id));
+SELECT tipo_servicio_id, rut_id FROM MILANESA.Tipos_Servicio_Rutas WHERE (rut_id = @rut_id) AND (tipo_servicio_id = @tipo_servicio_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@tipo_servicio_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "tipo_servicio_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ciudad_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ciudad_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rut_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rut_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_tipo_servicio_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "tipo_servicio_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ciudad_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ciudad_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rut_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rut_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -17596,7 +17515,7 @@ SELECT tipo_servicio_id, ciudad_id FROM MILANESA.Tipos_Servicio_Rutas WHERE (ciu
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT tipo_servicio_id, ciudad_id, rut_id FROM MILANESA.Tipos_Servicio_Rutas";
+            this._commandCollection[0].CommandText = "SELECT tipo_servicio_id, rut_id FROM MILANESA.Tipos_Servicio_Rutas";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -17657,9 +17576,9 @@ SELECT tipo_servicio_id, ciudad_id FROM MILANESA.Tipos_Servicio_Rutas WHERE (ciu
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_tipo_servicio_id, int Original_ciudad_id) {
+        public virtual int Delete(int Original_tipo_servicio_id, int Original_rut_id) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_tipo_servicio_id));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_ciudad_id));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_rut_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -17680,9 +17599,9 @@ SELECT tipo_servicio_id, ciudad_id FROM MILANESA.Tipos_Servicio_Rutas WHERE (ciu
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int tipo_servicio_id, int ciudad_id) {
+        public virtual int Insert(int tipo_servicio_id, int rut_id) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(tipo_servicio_id));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(ciudad_id));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(rut_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -17703,11 +17622,11 @@ SELECT tipo_servicio_id, ciudad_id FROM MILANESA.Tipos_Servicio_Rutas WHERE (ciu
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int tipo_servicio_id, int ciudad_id, int Original_tipo_servicio_id, int Original_ciudad_id) {
+        public virtual int Update(int tipo_servicio_id, int rut_id, int Original_tipo_servicio_id, int Original_rut_id) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(tipo_servicio_id));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(ciudad_id));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(rut_id));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Original_tipo_servicio_id));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_ciudad_id));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_rut_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -17728,8 +17647,8 @@ SELECT tipo_servicio_id, ciudad_id FROM MILANESA.Tipos_Servicio_Rutas WHERE (ciu
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int Original_tipo_servicio_id, int Original_ciudad_id) {
-            return this.Update(Original_tipo_servicio_id, Original_ciudad_id, Original_tipo_servicio_id, Original_ciudad_id);
+        public virtual int Update(int Original_tipo_servicio_id, int Original_rut_id) {
+            return this.Update(Original_tipo_servicio_id, Original_rut_id, Original_tipo_servicio_id, Original_rut_id);
         }
     }
     

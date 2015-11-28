@@ -702,4 +702,3 @@ UPDATE       MILANESA.Roles
 SET                rol_descripcion = @rol_descripcion, rol_activo = @rol_activo
 WHERE        (rol_id = @rol_id)
 GO
-

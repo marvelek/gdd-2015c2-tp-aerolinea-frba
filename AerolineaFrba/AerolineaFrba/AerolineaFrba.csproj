@@ -121,6 +121,7 @@
     <Compile Include="Contenido\Funcionalidad.cs" />
     <Compile Include="Contenido\Rol.cs" />
     <Compile Include="Contenido\Usuario.cs" />
+    <Compile Include="Contenido\Viaje.cs" />
     <Compile Include="Devolucion\DevolucionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Ruta\RutasForm.resx">
       <DependentUpon>RutasForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generacion Viaje\GenerarViajeForm.resx">
+      <DependentUpon>GenerarViajeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
