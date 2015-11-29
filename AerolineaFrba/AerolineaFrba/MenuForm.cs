@@ -65,7 +65,7 @@ namespace AerolineaFrba
         private void ocultarMenus()
         {
             // ocultar todos los menus
-            //this.rolesToolStripMenuItem.Visible = false;
+            this.rolesToolStripMenuItem.Visible = false;
             this.rutaAereaToolStripMenuItem.Visible = false;
             this.aeronavesToolStripMenuItem.Visible = false;
             this.generarViajeToolStripMenuItem.Visible = false;

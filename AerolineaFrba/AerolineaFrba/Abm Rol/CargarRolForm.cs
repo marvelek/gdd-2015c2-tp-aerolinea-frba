@@ -91,7 +91,7 @@ namespace AerolineaFrba.Abm_Rol
 
             if (this.descripcion.Text == "")
             {
-                error = "El nombre del Rol no pueder ser nulo\n";
+                error = "El nombre del Rol no puede ser nulo\n";
             }
             if (this.checkedListBox1.CheckedItems.Count < 1)
             {

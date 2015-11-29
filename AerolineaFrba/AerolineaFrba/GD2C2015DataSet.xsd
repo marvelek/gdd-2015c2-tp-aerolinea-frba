@@ -1058,7 +1058,7 @@ SELECT rut_id, ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_
                   </DbCommand>
                 </InsertCommand>
                 <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>SELECT rut_id, ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_kg, rut_precio_base_pasaje, rut_activo FROM MILANESA.Rutas</CommandText>
                     <Parameters />
                   </DbCommand>
@@ -1229,8 +1229,7 @@ SELECT tipo_servicio_id, rut_id FROM MILANESA.Tipos_Servicio_Rutas WHERE (rut_id
                 </InsertCommand>
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT        tipo_servicio_id, rut_id
-FROM            MILANESA.Tipos_Servicio_Rutas</CommandText>
+                    <CommandText>SELECT tipo_servicio_id, rut_id FROM MILANESA.Tipos_Servicio_Rutas</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -1990,7 +1989,7 @@ SELECT vue_id, ruta_id, aeronave_id, vue_fecha_salida, vue_fecha_llegada_estimad
       <msdata:Relationship name="FK__Ventas__vuelo_id__79C80F94" msdata:parent="Vuelos" msdata:child="Ventas" msdata:parentkey="vue_id" msdata:childkey="vuelo_id" msprop:Generator_UserChildTable="Ventas" msprop:Generator_ChildPropName="GetVentasRows" msprop:Generator_UserRelationName="FK__Ventas__vuelo_id__79C80F94" msprop:Generator_RelationVarName="relationFK__Ventas__vuelo_id__79C80F94" msprop:Generator_UserParentTable="Vuelos" msprop:Generator_ParentPropName="VuelosRow" />
       <msdata:Relationship name="FK__Vuelos__aeronave__75F77EB0" msdata:parent="Aeronaves" msdata:child="Vuelos" msdata:parentkey="aer_id" msdata:childkey="aeronave_id" msprop:Generator_UserChildTable="Vuelos" msprop:Generator_ChildPropName="GetVuelosRows" msprop:Generator_UserRelationName="FK__Vuelos__aeronave__75F77EB0" msprop:Generator_ParentPropName="AeronavesRow" msprop:Generator_RelationVarName="relationFK__Vuelos__aeronave__75F77EB0" msprop:Generator_UserParentTable="Aeronaves" />
       <msdata:Relationship name="FK__Vuelos__ruta_id__75035A77" msdata:parent="Rutas" msdata:child="Vuelos" msdata:parentkey="rut_id" msdata:childkey="ruta_id" msprop:Generator_UserChildTable="Vuelos" msprop:Generator_ChildPropName="GetVuelosRows" msprop:Generator_UserRelationName="FK__Vuelos__ruta_id__75035A77" msprop:Generator_ParentPropName="RutasRow" msprop:Generator_RelationVarName="relationFK__Vuelos__ruta_id__75035A77" msprop:Generator_UserParentTable="Rutas" />
-      <msdata:Relationship name="FK__Tipos_Ser__rut_i__7231DAC4" msdata:parent="Rutas" msdata:child="Tipos_Servicio_Rutas" msdata:parentkey="rut_id" msdata:childkey="rut_id" msprop:Generator_UserChildTable="Tipos_Servicio_Rutas" msprop:Generator_ChildPropName="GetTipos_Servicio_RutasRows" msprop:Generator_UserRelationName="FK__Tipos_Ser__rut_i__7231DAC4" msprop:Generator_RelationVarName="relationFK__Tipos_Ser__rut_i__7231DAC4" msprop:Generator_UserParentTable="Rutas" msprop:Generator_ParentPropName="RutasRow" />
+      <msdata:Relationship name="FK__Tipos_Ser__rut_i__789EE131" msdata:parent="Rutas" msdata:child="Tipos_Servicio_Rutas" msdata:parentkey="rut_id" msdata:childkey="rut_id" msprop:Generator_UserChildTable="Tipos_Servicio_Rutas" msprop:Generator_ChildPropName="GetTipos_Servicio_RutasRows" msprop:Generator_UserRelationName="FK__Tipos_Ser__rut_i__789EE131" msprop:Generator_ParentPropName="RutasRow" msprop:Generator_RelationVarName="relationFK__Tipos_Ser__rut_i__789EE131" msprop:Generator_UserParentTable="Rutas" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

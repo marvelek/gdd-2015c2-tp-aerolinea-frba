@@ -118,8 +118,6 @@ namespace AerolineaFrba {
         
         private global::System.Data.DataRelation relationFK__Vuelos__ruta_id__75035A77;
         
-        private global::System.Data.DataRelation relationFK__Tipos_Ser__rut_i__7231DAC4;
-        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -754,7 +752,7 @@ namespace AerolineaFrba {
             this.relationFK__Ventas__vuelo_id__79C80F94 = this.Relations["FK__Ventas__vuelo_id__79C80F94"];
             this.relationFK__Vuelos__aeronave__75F77EB0 = this.Relations["FK__Vuelos__aeronave__75F77EB0"];
             this.relationFK__Vuelos__ruta_id__75035A77 = this.Relations["FK__Vuelos__ruta_id__75035A77"];
-            this.relationFK__Tipos_Ser__rut_i__7231DAC4 = this.Relations["FK__Tipos_Ser__rut_i__7231DAC4"];
+            this.relationFK__Tipos_Ser__rut_i__789EE131 = this.Relations["FK__Tipos_Ser__rut_i__789EE131"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -911,10 +909,10 @@ namespace AerolineaFrba {
                         this.tableRutas.rut_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableVuelos.ruta_idColumn}, false);
             this.Relations.Add(this.relationFK__Vuelos__ruta_id__75035A77);
-            this.relationFK__Tipos_Ser__rut_i__7231DAC4 = new global::System.Data.DataRelation("FK__Tipos_Ser__rut_i__7231DAC4", new global::System.Data.DataColumn[] {
+            this.relationFK__Tipos_Ser__rut_i__789EE131 = new global::System.Data.DataRelation("FK__Tipos_Ser__rut_i__789EE131", new global::System.Data.DataColumn[] {
                         this.tableRutas.rut_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableTipos_Servicio_Rutas.rut_idColumn}, false);
-            this.Relations.Add(this.relationFK__Tipos_Ser__rut_i__7231DAC4);
+            this.Relations.Add(this.relationFK__Tipos_Ser__rut_i__789EE131);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6775,7 +6773,7 @@ namespace AerolineaFrba {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public Tipos_Servicio_RutasRow AddTipos_Servicio_RutasRow(Tipos_ServicioRow parentTipos_ServicioRowByFK__Tipos_Ser__tipo___1293BD5E, RutasRow parentRutasRowByFK__Tipos_Ser__rut_i__7231DAC4) {
+            public Tipos_Servicio_RutasRow AddTipos_Servicio_RutasRow(Tipos_ServicioRow parentTipos_ServicioRowByFK__Tipos_Ser__tipo___1293BD5E, RutasRow parentRutasRowByFK__Tipos_Ser__rut_i__789EE131) {
                 Tipos_Servicio_RutasRow rowTipos_Servicio_RutasRow = ((Tipos_Servicio_RutasRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -6783,8 +6781,8 @@ namespace AerolineaFrba {
                 if ((parentTipos_ServicioRowByFK__Tipos_Ser__tipo___1293BD5E != null)) {
                     columnValuesArray[0] = parentTipos_ServicioRowByFK__Tipos_Ser__tipo___1293BD5E[0];
                 }
-                if ((parentRutasRowByFK__Tipos_Ser__rut_i__7231DAC4 != null)) {
-                    columnValuesArray[1] = parentRutasRowByFK__Tipos_Ser__rut_i__7231DAC4[0];
+                if ((parentRutasRowByFK__Tipos_Ser__rut_i__789EE131 != null)) {
+                    columnValuesArray[1] = parentRutasRowByFK__Tipos_Ser__rut_i__789EE131[0];
                 }
                 rowTipos_Servicio_RutasRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTipos_Servicio_RutasRow);
@@ -8615,7 +8613,7 @@ namespace AerolineaFrba {
                     return ((RutasRow[])(base.GetChildRows(this.Table.ChildRelations["FK__Rutas__ciudad_or__6B79F03D"])));
                 }
             }
-        }
+                }
         
         /// <summary>
         ///Represents strongly named DataRow class.
@@ -9723,11 +9721,11 @@ namespace AerolineaFrba {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public Tipos_Servicio_RutasRow[] GetTipos_Servicio_RutasRows() {
-                if ((this.Table.ChildRelations["FK__Tipos_Ser__rut_i__7231DAC4"] == null)) {
+                if ((this.Table.ChildRelations["FK__Tipos_Ser__rut_i__789EE131"] == null)) {
                     return new Tipos_Servicio_RutasRow[0];
                 }
                 else {
-                    return ((Tipos_Servicio_RutasRow[])(base.GetChildRows(this.Table.ChildRelations["FK__Tipos_Ser__rut_i__7231DAC4"])));
+                    return ((Tipos_Servicio_RutasRow[])(base.GetChildRows(this.Table.ChildRelations["FK__Tipos_Ser__rut_i__789EE131"])));
                 }
             }
         }
@@ -9853,10 +9851,10 @@ namespace AerolineaFrba {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public RutasRow RutasRow {
                 get {
-                    return ((RutasRow)(this.GetParentRow(this.Table.ParentRelations["FK__Tipos_Ser__rut_i__7231DAC4"])));
+                    return ((RutasRow)(this.GetParentRow(this.Table.ParentRelations["FK__Tipos_Ser__rut_i__789EE131"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK__Tipos_Ser__rut_i__7231DAC4"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["FK__Tipos_Ser__rut_i__789EE131"]);
                 }
             }
         }
@@ -17729,8 +17727,7 @@ SELECT tipo_servicio_id, rut_id FROM MILANESA.Tipos_Servicio_Rutas WHERE (rut_id
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT        tipo_servicio_id, rut_id\r\nFROM            MILANESA.Tipos_Servicio_R" +
-                "utas";
+            this._commandCollection[0].CommandText = "SELECT tipo_servicio_id, rut_id FROM MILANESA.Tipos_Servicio_Rutas";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
