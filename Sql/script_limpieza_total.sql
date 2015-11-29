@@ -1,7 +1,7 @@
 USE [GD2C2015]
 GO
 
-/*Drop Tables*/
+/*Drop Tables */
 BEGIN
 	DROP TABLE MILANESA.Butacas
 	DROP TABLE MILANESA.Funciones_Roles
