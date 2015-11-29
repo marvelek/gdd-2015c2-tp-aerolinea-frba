@@ -26,6 +26,8 @@ namespace AerolineaFrba.Generacion_Viaje
         public GenerarViajeForm()
         {
             InitializeComponent();
+            this.fechaSalida.Value = DateTime.Today;
+            this.fechaLlegadaEstimada.Value = DateTime.Today;
             this.fillRutas();
             this.fillAeronaves();
         }
@@ -91,25 +93,17 @@ namespace AerolineaFrba.Generacion_Viaje
             Utiles validador = new Utiles();
             string error = null;
 
-            if (this.rutas.SelectedText == "")
+            if (this.rutas.Text == "" || this.rutas.SelectedIndex == -1)
             {
                 error = "La ruta no puede ser nula\n";
             }
-            if (this.aeronaves.SelectedText == "")
+            if (this.aeronaves.Text == "" || this.aeronaves.SelectedIndex == -1)
             {
                 error = error + "Debe seleccionar un aeronave\n";
             }
             if (DateTime.Today.Subtract(this.fechaSalida.Value).Seconds > 0)
             {
                 error = error + "La fecha de salida debe ser posterior a hoy\n";
-            }
-            if (this.serviciosNoConcuerdan())
-            {
-                error = error + "El servicio del aeronave no concuerda con el servicio de la ruta\n";
-            }
-            if (this.aeronaveNoDisponible())
-            {
-                error = error + "El aeronave seleccionada no se encuentra disponible para la fecha ingresada\n";
             }
             if (this.fechaLlegadaEstimada.Value.Subtract(this.fechaSalida.Value).Hours > 24)
             {
@@ -120,6 +114,22 @@ namespace AerolineaFrba.Generacion_Viaje
                 MessageBox.Show(error);
                 return false;
             }
+            else
+            {
+                if (this.serviciosNoConcuerdan())
+                {
+                    error = error + "El servicio del aeronave no concuerda con el servicio de la ruta\n";
+                }
+                if (this.aeronaveNoDisponible())
+                {
+                    error = error + "El aeronave seleccionada no se encuentra disponible para la fecha ingresada\n";
+                }
+                if (error != null)
+                {
+                    MessageBox.Show(error);
+                    return false;
+                }
+            }
             return true;
         }
 
@@ -129,8 +139,8 @@ namespace AerolineaFrba.Generacion_Viaje
             int aeronaveId = this.aeronavesArray[this.aeronaves.SelectedIndex];
             DateTime fecha = this.fechaSalida.Value;
             this.vuelosTableAdapter.Fill(this.dataSet.Vuelos);
-            GD2C2015DataSet.VuelosRow row = (GD2C2015DataSet.VuelosRow)this.dataSet.Vuelos.Select("aeronave_id='" + aeronaveId + "' AND vue_fecha_salida='" + fecha + "'").First();
-            if (row != null)
+            GD2C2015DataSet.VuelosRow[] row = (GD2C2015DataSet.VuelosRow[])this.dataSet.Vuelos.Select("aeronave_id='" + aeronaveId + "' AND vue_fecha_salida='" + fecha + "'");
+            if (row.Length > 0)
             {
                 result = true;
             }
@@ -147,8 +157,8 @@ namespace AerolineaFrba.Generacion_Viaje
             GD2C2015DataSet.AeronavesRow row1 = (GD2C2015DataSet.AeronavesRow)this.dataSet.Aeronaves.Select("aer_id='" + aeronaveId + "'").First();
             tipoServicioId = row1.tipo_servicio_id;
             this.tipos_Servicio_RutasTableAdapter.Fill(this.dataSet.Tipos_Servicio_Rutas);
-            GD2C2015DataSet.Tipos_Servicio_RutasRow row2 = (GD2C2015DataSet.Tipos_Servicio_RutasRow)this.dataSet.Tipos_Servicio_Rutas.Select("tipo_servicio_id='" + tipoServicioId + "' AND rut_id='" + rutaId + "'").First();
-            if (row2 == null)
+            GD2C2015DataSet.Tipos_Servicio_RutasRow[] row2 = (GD2C2015DataSet.Tipos_Servicio_RutasRow[])this.dataSet.Tipos_Servicio_Rutas.Select("tipo_servicio_id='" + tipoServicioId + "' AND rut_id='" + rutaId + "'");
+            if (row2.Length == 0)
             {
                 result = true;
             }
@@ -159,8 +169,8 @@ namespace AerolineaFrba.Generacion_Viaje
         {
             this.rutas.ResetText();
             this.aeronaves.ResetText();
-            this.fechaSalida.ResetText();
-            this.fechaLlegadaEstimada.ResetText();
+            this.fechaSalida.Value = DateTime.Today;
+            this.fechaLlegadaEstimada.Value = DateTime.Today;
         }
     }
 }
