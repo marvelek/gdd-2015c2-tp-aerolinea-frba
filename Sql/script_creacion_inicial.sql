@@ -703,3 +703,77 @@ SET                rol_descripcion = @rol_descripcion, rol_activo = @rol_activo
 WHERE        (rol_id = @rol_id)
 GO
 
+----------------------------- PROCEDURES DE RUTAS -----------------
+
+CREATE PROCEDURE [MILANESA].[rutaBajaLogica]
+(
+	@rut_id int
+)
+AS
+	SET NOCOUNT OFF;
+UPDATE       MILANESA.Rutas
+SET                rut_activo = 'false'
+WHERE        (rut_id = @rut_id)
+GO
+
+CREATE PROCEDURE [MILANESA].[rutaBuscar]
+(
+	@param1 nvarchar(255)
+)
+AS
+	SET NOCOUNT ON;
+SELECT        rut_id, rut_codigo, rut_activo
+FROM            MILANESA.Rutas
+WHERE        (CAST(rut_codigo as varchar(18)) LIKE '%' + @param1 + '%')
+GO
+
+CREATE PROCEDURE [MILANESA].[rutaInsertar]
+(
+	@ciudad_origen_id int,
+	@ciudad_destino_id int,
+	@rut_codigo numeric(18, 0),
+	@rut_precio_base_kg numeric(18, 2),
+	@rut_precio_base_pasaje numeric(18, 2)
+)
+AS
+	SET NOCOUNT OFF;
+INSERT INTO [MILANESA].[Rutas] ([ciudad_origen_id], [ciudad_destino_id], [rut_codigo], [rut_precio_base_kg], [rut_precio_base_pasaje], [rut_activo]) VALUES (@ciudad_origen_id, @ciudad_destino_id, @rut_codigo, @rut_precio_base_kg, @rut_precio_base_pasaje, 1)
+GO
+
+CREATE PROCEDURE [MILANESA].[rutaModificar]
+(
+	@ciudad_destino_id int,
+	@ciudad_origen_id int,	
+	@rut_codigo numeric(18, 0),
+	@rut_precio_base_kg numeric(18, 2),
+	@rut_precio_base_pasaje numeric(18, 2),
+	@rut_activo bit,
+	@Original_rut_id int
+)
+AS
+	SET NOCOUNT OFF;
+UPDATE [MILANESA].[Rutas] SET [ciudad_origen_id] = @ciudad_origen_id, [ciudad_destino_id] = @ciudad_destino_id, [rut_codigo] = @rut_codigo, [rut_precio_base_kg] = @rut_precio_base_kg, [rut_precio_base_pasaje] = @rut_precio_base_pasaje, [rut_activo] = @rut_activo WHERE (([rut_id] = @Original_rut_id))
+GO
+
+CREATE PROCEDURE [MILANESA].[tipo_Servicio_RutaInsertar]
+(
+	@tipo_servicio_id int,
+	@rut_id int
+)
+AS
+	SET NOCOUNT OFF;
+INSERT INTO [MILANESA].[Tipos_Servicio_Rutas] ([tipo_servicio_id], [rut_id]) VALUES (@tipo_servicio_id, @rut_id)
+GO
+
+CREATE PROCEDURE [MILANESA].[tipos_Servicio_RutasBorrar]
+(
+	@rut_id int
+)
+AS
+	SET NOCOUNT OFF;
+DELETE FROM MILANESA.Tipos_Servicio_Rutas
+WHERE        (rut_id = @rut_id)
+GO
+
+
+

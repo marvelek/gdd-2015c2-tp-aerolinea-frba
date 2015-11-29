@@ -36,10 +36,10 @@ namespace AerolineaFrba.Abm_Ruta
             ruta.Codigo = Convert.ToDecimal(data.Rows[data.CurrentRow.Index].Cells[1].Value);
             ruta.CiudadOrigen = Convert.ToInt16(data.Rows[data.CurrentRow.Index].Cells[2].Value);
             ruta.CiudadDestino = Convert.ToInt16(data.Rows[data.CurrentRow.Index].Cells[3].Value);
-            ruta.PrecioKg = Convert.ToDecimal(data.Rows[data.CurrentRow.Index].Cells[5].Value);
-            ruta.PrecioBase = Convert.ToDecimal(data.Rows[data.CurrentRow.Index].Cells[6].Value);
-            ruta.Activo = Convert.ToBoolean(data.Rows[data.CurrentRow.Index].Cells[7].Value);
-            new CargarRutaForm(ruta).ShowDialog();
+            ruta.PrecioKg = Convert.ToDecimal(data.Rows[data.CurrentRow.Index].Cells[4].Value);
+            ruta.PrecioBase = Convert.ToDecimal(data.Rows[data.CurrentRow.Index].Cells[5].Value);
+            ruta.Activo = Convert.ToBoolean(data.Rows[data.CurrentRow.Index].Cells[6].Value);
+            new CargarRutaForm(ruta).ShowDialog();          
         }
 
         private void data_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -61,7 +61,7 @@ namespace AerolineaFrba.Abm_Ruta
         {
             if (this.descripcion.Text != "")
             {
-                //this.rutasTableAdapter.FillBy(this.gD2C2015DataSet.Rutas, this.descripcion.Text);
+                this.rutasTableAdapter.FillBy(this.gD2C2015DataSet.Rutas, this.descripcion.Text);
             }
             else
             {
@@ -82,7 +82,7 @@ namespace AerolineaFrba.Abm_Ruta
         private void eliminar_Click_1(object sender, EventArgs e)
         {
             int id = Convert.ToInt16(data.Rows[data.CurrentRow.Index].Cells[0].Value);
-            //this.rutasTableAdapter.bajaLogicaRuta(id);
+            this.rutasTableAdapter.rutaBajaLogica(id);
             // Aca tendria que tener un trigger que se dispare y le saque este rol a los usuarios que lo tengan
             this.rutasTableAdapter.Fill(this.gD2C2015DataSet.Rutas);
         }

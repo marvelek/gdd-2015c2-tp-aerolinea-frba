@@ -37,20 +37,23 @@
             this.label6 = new System.Windows.Forms.Label();
             this.activo = new System.Windows.Forms.CheckBox();
             this.ciudadOrigen = new System.Windows.Forms.ComboBox();
-            this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
             this.ciudadesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ciudadesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.CiudadesTableAdapter();
+            this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
             this.ciudadDestino = new System.Windows.Forms.ComboBox();
             this.tiposServicioBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tipos_ServicioTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.Tipos_ServicioTableAdapter();
             this.codigo = new System.Windows.Forms.TextBox();
             this.precioKg = new System.Windows.Forms.TextBox();
             this.precioBase = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
+            this.ciudadesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.tipos_ServicioTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.Tipos_ServicioTableAdapter();
+            this.rutasTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.RutasTableAdapter();
+            this.ciudadesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.CiudadesTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tiposServicioBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -123,44 +126,41 @@
             // 
             this.ciudadOrigen.DataSource = this.ciudadesBindingSource;
             this.ciudadOrigen.DisplayMember = "ciu_descripcion";
+            this.ciudadOrigen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ciudadOrigen.FormattingEnabled = true;
             this.ciudadOrigen.Location = new System.Drawing.Point(180, 80);
             this.ciudadOrigen.Name = "ciudadOrigen";
             this.ciudadOrigen.Size = new System.Drawing.Size(121, 21);
             this.ciudadOrigen.TabIndex = 7;
-            // 
-            // gD2C2015DataSet
-            // 
-            this.gD2C2015DataSet.DataSetName = "GD2C2015DataSet";
-            this.gD2C2015DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.ciudadOrigen.ValueMember = "ciu_id";
+            this.ciudadOrigen.SelectedIndexChanged += new System.EventHandler(this.ciudadOrigen_SelectedIndexChanged);
             // 
             // ciudadesBindingSource
             // 
             this.ciudadesBindingSource.DataMember = "Ciudades";
             this.ciudadesBindingSource.DataSource = this.gD2C2015DataSet;
             // 
-            // ciudadesTableAdapter
+            // gD2C2015DataSet
             // 
-            this.ciudadesTableAdapter.ClearBeforeFill = true;
+            this.gD2C2015DataSet.DataSetName = "GD2C2015DataSet";
+            this.gD2C2015DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // ciudadDestino
             // 
-            this.ciudadDestino.DataSource = this.ciudadesBindingSource;
+            this.ciudadDestino.DataSource = this.ciudadesBindingSource1;
             this.ciudadDestino.DisplayMember = "ciu_descripcion";
+            this.ciudadDestino.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ciudadDestino.FormattingEnabled = true;
             this.ciudadDestino.Location = new System.Drawing.Point(180, 117);
             this.ciudadDestino.Name = "ciudadDestino";
             this.ciudadDestino.Size = new System.Drawing.Size(121, 21);
             this.ciudadDestino.TabIndex = 8;
+            this.ciudadDestino.ValueMember = "ciu_id";
             // 
             // tiposServicioBindingSource
             // 
             this.tiposServicioBindingSource.DataMember = "Tipos_Servicio";
             this.tiposServicioBindingSource.DataSource = this.gD2C2015DataSet;
-            // 
-            // tipos_ServicioTableAdapter
-            // 
-            this.tipos_ServicioTableAdapter.ClearBeforeFill = true;
             // 
             // codigo
             // 
@@ -200,7 +200,24 @@
             this.checkedListBox1.Location = new System.Drawing.Point(180, 154);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(120, 94);
-            this.checkedListBox1.TabIndex = 14;
+            this.checkedListBox1.TabIndex = 3;
+            // 
+            // ciudadesBindingSource1
+            // 
+            this.ciudadesBindingSource1.DataMember = "Ciudades";
+            this.ciudadesBindingSource1.DataSource = this.gD2C2015DataSet;
+            // 
+            // tipos_ServicioTableAdapter
+            // 
+            this.tipos_ServicioTableAdapter.ClearBeforeFill = true;
+            // 
+            // rutasTableAdapter1
+            // 
+            this.rutasTableAdapter1.ClearBeforeFill = true;
+            // 
+            // ciudadesTableAdapter
+            // 
+            this.ciudadesTableAdapter.ClearBeforeFill = true;
             // 
             // CargarRutaForm
             // 
@@ -224,9 +241,10 @@
             this.Name = "CargarRutaForm";
             this.Text = "Formulario de Ruta";
             this.Load += new System.EventHandler(this.CargarRutaForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tiposServicioBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,14 +262,16 @@
         private System.Windows.Forms.ComboBox ciudadOrigen;
         private GD2C2015DataSet gD2C2015DataSet;
         private System.Windows.Forms.BindingSource ciudadesBindingSource;
-        private GD2C2015DataSetTableAdapters.CiudadesTableAdapter ciudadesTableAdapter;
         private System.Windows.Forms.ComboBox ciudadDestino;
         private System.Windows.Forms.BindingSource tiposServicioBindingSource;
-        private GD2C2015DataSetTableAdapters.Tipos_ServicioTableAdapter tipos_ServicioTableAdapter;
         private System.Windows.Forms.TextBox codigo;
         private System.Windows.Forms.TextBox precioKg;
         private System.Windows.Forms.TextBox precioBase;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.BindingSource ciudadesBindingSource1;
+        private GD2C2015DataSetTableAdapters.Tipos_ServicioTableAdapter tipos_ServicioTableAdapter;
+        private GD2C2015DataSetTableAdapters.RutasTableAdapter rutasTableAdapter1;
+        private GD2C2015DataSetTableAdapters.CiudadesTableAdapter ciudadesTableAdapter;
     }
 }

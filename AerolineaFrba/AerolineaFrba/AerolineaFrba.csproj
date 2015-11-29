@@ -127,7 +127,11 @@
     <Compile Include="Devolucion\DevolucionForm.Designer.cs">
       <DependentUpon>DevolucionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GD2C2015DataSet.Designer.cs">
+    <Compile Include="GD2C2015DataSet.cs">
+      <DependentUpon>GD2C2015DataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GD2C2015DataSet2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GD2C2015DataSet.xsd</DependentUpon>
@@ -204,8 +208,8 @@
     </None>
     <None Include="GD2C2015DataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>GD2C2015DataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>GD2C2015DataSet2.Designer.cs</LastGenOutput>
     </None>
     <None Include="GD2C2015DataSet.xss">
       <DependentUpon>GD2C2015DataSet.xsd</DependentUpon>

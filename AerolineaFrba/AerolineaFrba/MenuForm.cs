@@ -42,7 +42,7 @@ namespace AerolineaFrba
             ocultarMenus();
             foreach (Funcionalidad f in funcionalidades)
             {
-                if (f.Id == 0) //ADMIN
+                if (f.Id == 1) //ADMIN
                 {
                     this.rolesToolStripMenuItem.Visible = true;
                     this.rutaAereaToolStripMenuItem.Visible = true;
@@ -55,7 +55,7 @@ namespace AerolineaFrba
                     this.canjeDeMillasToolStripMenuItem.Visible = true;
                     this.listadoEstadisticoToolStripMenuItem.Visible = true;
                 }
-                if (f.Id == 1) // CLIENTE
+                if (f.Id == 2) // CLIENTE
                 {
                     this.compraToolStripMenuItem.Visible = true;
                 }
