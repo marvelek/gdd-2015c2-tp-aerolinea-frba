@@ -118,6 +118,8 @@ namespace AerolineaFrba {
         
         private global::System.Data.DataRelation relationFK__Vuelos__ruta_id__75035A77;
         
+        private global::System.Data.DataRelation relationFK__Tipos_Ser__rut_i__789EE131;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8613,7 +8615,7 @@ namespace AerolineaFrba {
                     return ((RutasRow[])(base.GetChildRows(this.Table.ChildRelations["FK__Rutas__ciudad_or__6B79F03D"])));
                 }
             }
-                }
+        }
         
         /// <summary>
         ///Represents strongly named DataRow class.
