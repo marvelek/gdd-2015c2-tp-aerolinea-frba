@@ -39,7 +39,9 @@ namespace AerolineaFrba.Abm_Ruta
             ruta.PrecioKg = Convert.ToDecimal(data.Rows[data.CurrentRow.Index].Cells[4].Value);
             ruta.PrecioBase = Convert.ToDecimal(data.Rows[data.CurrentRow.Index].Cells[5].Value);
             ruta.Activo = Convert.ToBoolean(data.Rows[data.CurrentRow.Index].Cells[6].Value);
-            new CargarRutaForm(ruta).ShowDialog();          
+            new CargarRutaForm(ruta).ShowDialog();
+
+            this.rutasTableAdapter.Fill(this.gD2C2015DataSet.Rutas);
         }
 
         private void data_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -72,6 +74,7 @@ namespace AerolineaFrba.Abm_Ruta
         private void limpiar_Click_1(object sender, EventArgs e)
         {
             this.descripcion.Clear();
+            this.rutasTableAdapter.Fill(this.gD2C2015DataSet.Rutas);
         }
 
         private void descripcion_TextChanged(object sender, EventArgs e)
@@ -85,6 +88,7 @@ namespace AerolineaFrba.Abm_Ruta
             this.rutasTableAdapter.rutaBajaLogica(id);
             // Aca tendria que tener un trigger que se dispare y le saque este rol a los usuarios que lo tengan
             this.rutasTableAdapter.Fill(this.gD2C2015DataSet.Rutas);
+
         }
     }
 }

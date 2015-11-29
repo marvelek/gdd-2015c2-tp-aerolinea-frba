@@ -98,7 +98,7 @@ namespace AerolineaFrba.Abm_Ruta
                 {
                     // insert
                     this.ruta = new Ruta();
-                    this.ruta.Id = Convert.ToInt16(this.rutasTableAdapter.rutaInsertar(Convert.ToInt16(this.ciudadOrigen.Text), Convert.ToInt16(this.ciudadDestino.Text), Convert.ToDecimal(this.codigo.Text), Convert.ToDecimal(this.precioKg.Text), Convert.ToDecimal(this.precioBase.Text)));
+                    this.ruta.Id = Convert.ToInt16(this.rutasTableAdapter.rutaInsertar(Convert.ToInt16(this.ciudadOrigen.SelectedValue), Convert.ToInt16(this.ciudadDestino.SelectedValue), Convert.ToDecimal(this.codigo.Text), Convert.ToDecimal(this.precioKg.Text), Convert.ToDecimal(this.precioBase.Text)));
                 }
 
                 foreach (object itemChecked in this.checkedListBox1.CheckedItems)

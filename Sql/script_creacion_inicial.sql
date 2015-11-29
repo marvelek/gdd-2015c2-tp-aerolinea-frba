@@ -722,7 +722,7 @@ CREATE PROCEDURE [MILANESA].[rutaBuscar]
 )
 AS
 	SET NOCOUNT ON;
-SELECT        rut_id, rut_codigo, rut_activo
+SELECT        rut_id, rut_codigo, ciudad_origen_id, ciudad_destino_id, rut_precio_base_kg, rut_precio_base_pasaje, rut_activo
 FROM            MILANESA.Rutas
 WHERE        (CAST(rut_codigo as varchar(18)) LIKE '%' + @param1 + '%')
 GO
@@ -737,7 +737,10 @@ CREATE PROCEDURE [MILANESA].[rutaInsertar]
 )
 AS
 	SET NOCOUNT OFF;
-INSERT INTO [MILANESA].[Rutas] ([ciudad_origen_id], [ciudad_destino_id], [rut_codigo], [rut_precio_base_kg], [rut_precio_base_pasaje], [rut_activo]) VALUES (@ciudad_origen_id, @ciudad_destino_id, @rut_codigo, @rut_precio_base_kg, @rut_precio_base_pasaje, 1)
+INSERT INTO [MILANESA].[Rutas] (ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_kg, rut_precio_base_pasaje, rut_activo) 
+VALUES (@ciudad_origen_id, @ciudad_destino_id, @rut_codigo, @rut_precio_base_kg, @rut_precio_base_pasaje, 'true')
+
+SELECT rut_id FROM MILANESA.Rutas WHERE (rut_id = SCOPE_IDENTITY())
 GO
 
 CREATE PROCEDURE [MILANESA].[rutaModificar]

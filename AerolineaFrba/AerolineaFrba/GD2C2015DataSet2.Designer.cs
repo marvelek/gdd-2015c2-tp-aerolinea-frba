@@ -16951,23 +16951,6 @@ SELECT rut_id, ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
-        public virtual GD2C2015DataSet.RutasDataTable GetDataBy2(string param1) {
-            this.Adapter.SelectCommand = this.CommandCollection[1];
-            if ((param1 == null)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(param1));
-            }
-            GD2C2015DataSet.RutasDataTable dataTable = new GD2C2015DataSet.RutasDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual int Update(GD2C2015DataSet.RutasDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
@@ -17123,7 +17106,7 @@ SELECT rut_id, ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int rutaInsertar(global::System.Nullable<int> ciudad_origen_id, global::System.Nullable<int> ciudad_destino_id, global::System.Nullable<decimal> rut_codigo, global::System.Nullable<decimal> rut_precio_base_kg, global::System.Nullable<decimal> rut_precio_base_pasaje) {
+        public virtual object rutaInsertar(global::System.Nullable<int> ciudad_origen_id, global::System.Nullable<int> ciudad_destino_id, global::System.Nullable<decimal> rut_codigo, global::System.Nullable<decimal> rut_precio_base_kg, global::System.Nullable<decimal> rut_precio_base_pasaje) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
             if ((ciudad_origen_id.HasValue == true)) {
                 command.Parameters[1].Value = ((int)(ciudad_origen_id.Value));
@@ -17160,16 +17143,22 @@ SELECT rut_id, ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_
                         != global::System.Data.ConnectionState.Open)) {
                 command.Connection.Open();
             }
-            int returnValue;
+            object returnValue;
             try {
-                returnValue = command.ExecuteNonQuery();
+                returnValue = command.ExecuteScalar();
             }
             finally {
                 if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
                     command.Connection.Close();
                 }
             }
-            return returnValue;
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return null;
+            }
+            else {
+                return ((object)(returnValue));
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
