@@ -90,7 +90,6 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private bool valido()
         {
-            Utiles validador = new Utiles();
             string error = null;
 
             if (this.rutas.Text == "" || this.rutas.SelectedIndex == -1)
@@ -101,13 +100,14 @@ namespace AerolineaFrba.Generacion_Viaje
             {
                 error = error + "Debe seleccionar un aeronave\n";
             }
-            if (DateTime.Today.Subtract(this.fechaSalida.Value).Seconds > 0)
+            if (this.fechaSalida.Value.Date.CompareTo(DateTime.Today.Date) <= 0)
             {
                 error = error + "La fecha de salida debe ser posterior a hoy\n";
             }
-            if (this.fechaLlegadaEstimada.Value.Subtract(this.fechaSalida.Value).Hours > 24)
+            int aux = this.fechaLlegadaEstimada.Value.Subtract(this.fechaSalida.Value).Hours;
+            if (aux > 24 || aux <= 0)
             {
-                error = error + "La fecha de llegada estimada no puede superar las 24hs de la fecha de salida\n";
+                error = error + "La fecha de llegada estimada no puede superar las 24hs de la fecha de salida o ser posterior\n";
             }
             if (error != null)
             {
