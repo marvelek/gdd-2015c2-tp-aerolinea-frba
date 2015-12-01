@@ -17,6 +17,12 @@ namespace AerolineaFrba.Login
         public LoginForm()
         {
             InitializeComponent();
+            if (!ConexionSQL.conectarABaseDeDatos())
+            {
+                MessageBox.Show("Error al iniciar aplicación. Cierre el programa e intente Nuevamente");
+            }
+            //new Abm_Aeronave.AltaAeronave().ShowDialog();
+
         }
 
         private void entrar_Click(object sender, EventArgs e)
@@ -73,6 +79,7 @@ namespace AerolineaFrba.Login
             usr.update();
 
             MenuForm menu = new MenuForm();
+            FormsUtils.initForm(menu);
             menu.cargaDatosUsuario(usr);
             menu.ShowDialog();
 

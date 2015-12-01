@@ -2,6 +2,10 @@
     
     
     public partial class GD2C2015DataSet {
+        partial class AeronavesDataTable
+        {
+        }
+    
         partial class Tipos_Servicio_RutasDataTable
         {
         }
