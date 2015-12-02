@@ -117,6 +117,7 @@
     <Compile Include="Consulta Millas\ConsultaMillasForm.Designer.cs">
       <DependentUpon>ConsultaMillasForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Contenido\Aeronave.cs" />
     <Compile Include="Contenido\Tipo_Servicio.cs" />
     <Compile Include="Contenido\Ruta.cs" />
     <Compile Include="Contenido\Funcionalidad.cs" />

@@ -91,7 +91,8 @@ namespace AerolineaFrba
 
         private void aeronavesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormsUtils.openNewForm(new AltaAeronave());
+            AltaAeronave form = new AltaAeronave();
+            form.ShowDialog();
         }
 
         private void generarViajeToolStripMenuItem_Click(object sender, EventArgs e)

@@ -7,21 +7,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba.Contenido;
+using AerolineaFrba.GD2C2015DataSetTableAdapters;
 
 namespace AerolineaFrba.Abm_Aeronave
 {
     public partial class AltaAeronave : Form
     {
+
+        GD2C2015DataSet dataSet = new GD2C2015DataSet();
         public AltaAeronave()
         {
             InitializeComponent();
-            Funciones.llenarCombobox(ComboTipoServicio, "TIP_ID","TIP_DESCRIPCION", "select TIP_ID, TIP_DESCRIPCION from MILANESA.Tipos_servicio where TIP_ACTIVO = 1");
-        }
+            this.tipos_ServicioTableAdapter.Fill(this.gD2C2015DataSet.Tipos_Servicio);
+            List<Tipo_Servicio> tipos_servicios = Tipo_Servicio.getTipos_Servicio();
+            foreach (Tipo_Servicio f in tipos_servicios)
+            {
+                this.ComboTipoServicio.Items.Insert(f.Id - 1, f.Descripcion);
+            }
+            this.ComboTipoServicio.Refresh();
+
+            }
 
 
 
         private void AltaAeronave_Load(object sender, EventArgs e)
         {
+            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Tipos_Servicio' Puede moverla o quitarla según sea necesario.
+            this.tipos_ServicioTableAdapter.Fill(this.gD2C2015DataSet.Tipos_Servicio);
             // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Butacas' Puede moverla o quitarla según sea necesario.
             this.butacasTableAdapter.Fill(this.gD2C2015DataSet.Butacas);
             // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Aeronaves' Puede moverla o quitarla según sea necesario.
@@ -60,17 +73,17 @@ namespace AerolineaFrba.Abm_Aeronave
                 butacasVentanilla = Int32.Parse(this.ButacasVentanillaText.Text);
             }
             else { errores = errores + "Butacas Ventanilla. "; }
-
-            if (this.ComboTipoServicio.SelectedValue == null)
+            
+            if (this.ComboTipoServicio.SelectedIndex == null)
             {
                 errores = errores + "Tipo de Servicio. ";
             }
             else
             {
-                tipoServicio = (Int32)this.ComboTipoServicio.SelectedValue;
+                tipoServicio = (Int32)this.ComboTipoServicio.SelectedIndex;
                 if (tipoServicio < 0)
                 {
-                    errores = errores + "Tipo de Servicio. ";
+                    errores = errores + "Tipo de Servicio.2 ";
                 }
             }
             
@@ -92,7 +105,7 @@ namespace AerolineaFrba.Abm_Aeronave
             {
                 MessageBox.Show("Debe completar los siguientes campos: "+errores, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (!validarMatricula(matricula))
+            else if (matriculaExistente(matricula))
             {
                 MessageBox.Show("La matricula ya existe o es inválida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -138,17 +151,13 @@ namespace AerolineaFrba.Abm_Aeronave
 
 
         }
-        private bool validarMatricula(String matricula)
+        private bool matriculaExistente(String matricula)
         {
 
-            if (matricula.Length > 255)
-            {
-                return true;
-            }
-            DataTable dt = new DataTable();
-            dt = ConexionSQL.getTablaPorConsulta(@"select AER_MATRICULA from " + ConexionSQL.getSchema() + @".aeronaves where 
-                AER_MATRICULA = UPPER('" + matricula + "')");
-            if (dt.Rows.Count != 0)
+            Aeronave aer = new Aeronave();
+            aer = aer.buscarByMatricula(matricula);
+
+            if (aer == null)
             {
                 return false;
             }
