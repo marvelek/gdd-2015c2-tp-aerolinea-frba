@@ -55,10 +55,13 @@
             this.FabricateTextBox = new System.Windows.Forms.TextBox();
             this.butacasBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.butacasTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.ButacasTableAdapter();
+            this.tiposServicioBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tipos_ServicioTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.Tipos_ServicioTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.aeronavesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.butacasBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tiposServicioBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // matricula
@@ -265,6 +268,15 @@
             // 
             this.butacasTableAdapter.ClearBeforeFill = true;
             // 
+            // tiposServicioBindingSource
+            // 
+            this.tiposServicioBindingSource.DataMember = "Tipos_Servicio";
+            this.tiposServicioBindingSource.DataSource = this.gD2C2015DataSetBindingSource;
+            // 
+            // tipos_ServicioTableAdapter
+            // 
+            this.tipos_ServicioTableAdapter.ClearBeforeFill = true;
+            // 
             // AltaAeronave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -297,6 +309,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.butacasBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tiposServicioBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -330,5 +343,7 @@
         private System.Windows.Forms.TextBox FabricateTextBox;
         private System.Windows.Forms.BindingSource butacasBindingSource;
         private GD2C2015DataSetTableAdapters.ButacasTableAdapter butacasTableAdapter;
+        private System.Windows.Forms.BindingSource tiposServicioBindingSource;
+        private GD2C2015DataSetTableAdapters.Tipos_ServicioTableAdapter tipos_ServicioTableAdapter;
     }
 }
