@@ -55,7 +55,7 @@ namespace AerolineaFrba
                     this.canjeDeMillasToolStripMenuItem.Visible = true;
                     this.listadoEstadisticoToolStripMenuItem.Visible = true;
                 }
-                if (f.Id == 2) // CLIENTE
+                else // CLIENTE
                 {
                     this.compraToolStripMenuItem.Visible = true;
                 }
