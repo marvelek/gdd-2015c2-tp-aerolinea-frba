@@ -20,14 +20,18 @@ namespace AerolineaFrba.Login
         private void button1_Click(object sender, EventArgs e)
         {
             LoginForm menu = new LoginForm();
+            this.Hide();
             menu.ShowDialog();
+            this.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             MenuForm menu = new MenuForm();
             menu.setPermisos(0);
+            this.Hide();
             menu.ShowDialog();
+            this.Show();
         }
     }
 }
