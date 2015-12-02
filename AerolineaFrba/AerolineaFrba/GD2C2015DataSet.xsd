@@ -1097,7 +1097,7 @@ SELECT rut_id, ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_
               <Mapping SourceColumn="rut_activo" DataSetColumn="rut_activo" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.rutaBuscar" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="FillBy">
+              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.rutaBuscar" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBy">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>MILANESA.rutaBuscar</CommandText>
@@ -1108,7 +1108,7 @@ SELECT rut_id, ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.rutaBajaLogica" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="rutaBajaLogica" Modifier="Public" Name="rutaBajaLogica" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="rutaBajaLogica">
+              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.rutaBajaLogica" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="rutaBajaLogica" Modifier="Public" Name="rutaBajaLogica" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="rutaBajaLogica">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>MILANESA.rutaBajaLogica</CommandText>
@@ -1119,7 +1119,7 @@ SELECT rut_id, ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.rutaInsertar" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="rutaInsertar" Modifier="Public" Name="rutaInsertar" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="rutaInsertar">
+              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.rutaInsertar" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="rutaInsertar" Modifier="Public" Name="rutaInsertar" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="rutaInsertar">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>MILANESA.rutaInsertar</CommandText>

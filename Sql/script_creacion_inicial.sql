@@ -194,7 +194,8 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Vuelos' AND xtype='U')
 		aeronave_id int REFERENCES MILANESA.Aeronaves NOT NULL,
 		vue_fecha_salida datetime NOT NULL,
 		vue_fecha_llegada_estimada datetime NOT NULL,
-		vue_fecha_llegada datetime
+		vue_fecha_llegada datetime,
+		vue_activo bit NOT NULL DEFAULT 1
 	)
 GO
 
@@ -206,6 +207,7 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Ventas' AND xtype='U')
 		vuelo_id int REFERENCES MILANESA.Vuelos NOT NULL,
 		vendedor_id int REFERENCES MILANESA.Usuarios,
 		ven_fecha datetime NOT NULL,
+		ven_activo bit NOT NULL DEFAULT 1
 	)
 GO
 
@@ -230,7 +232,8 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Pasajes' AND xtype='U')
 		venta_id int REFERENCES MILANESA.Ventas NOT NULL,
 		butaca_id int REFERENCES MILANESA.Butacas,
 		pas_codigo numeric(18,0) NOT NULL,
-		pas_precio numeric(18,2) NOT NULL
+		pas_precio numeric(18,2) NOT NULL,
+		pas_activo bit NOT NULL DEFAULT 1
 	)
 GO
 
@@ -242,7 +245,8 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Paquetes' AND xtype='U')
 		venta_id int REFERENCES MILANESA.Ventas NOT NULL,
 		paq_codigo numeric(18,0) NOT NULL,
 		paq_precio numeric(18,2) NOT NULL,
-		paq_kg numeric(18,0) NOT NULL
+		paq_kg numeric(18,0) NOT NULL,
+		paq_activo bit NOT NULL DEFAULT 1
 	)
 GO
 	
@@ -705,12 +709,57 @@ GO
 
 ----------------------------- PROCEDURES DE RUTAS -----------------
 
+
+CREATE PROCEDURE [MILANESA].[paqueteBajaPorVenta]
+(
+	@venta_id int
+)
+AS
+UPDATE       MILANESA.Paquetes
+SET                paq_activo = 'false'
+WHERE        (venta_id = @venta_id)
+GO
+
+CREATE PROCEDURE [MILANESA].[pasajeBajaPorVenta]
+(
+	@venta_id int
+)
+AS
+UPDATE       MILANESA.Pasajes
+SET                pas_activo = 'false'
+WHERE        (venta_id = @venta_id)
+GO
+
+CREATE PROCEDURE [MILANESA].[ventaBajaPorVuelo]
+(
+	@vuelo_id int
+)
+AS
+	SET NOCOUNT OFF;	
+UPDATE       MILANESA.Ventas
+SET                ven_activo = 'false'
+WHERE        (vuelo_id = @vuelo_id)
+GO
+
+CREATE PROCEDURE [MILANESA].[vueloBajaPorRuta]
+(
+	@ruta_id int
+)
+AS	
+	SET NOCOUNT OFF;
+UPDATE       MILANESA.Vuelos
+SET                vue_activo = 'false'
+WHERE        (ruta_id = @ruta_id)
+GO
+
+
 CREATE PROCEDURE [MILANESA].[rutaBajaLogica]
 (
 	@rut_id int
 )
 AS
 	SET NOCOUNT OFF;
+EXEC MILANESA.vueloBajaPorRuta @rut_id;
 UPDATE       MILANESA.Rutas
 SET                rut_activo = 'false'
 WHERE        (rut_id = @rut_id)
@@ -777,6 +826,38 @@ AS
 DELETE FROM MILANESA.Tipos_Servicio_Rutas
 WHERE        (rut_id = @rut_id)
 GO
+
+CREATE TRIGGER [MILANESA].[vueloBajaLogica] ON [MILANESA].[Vuelos]
+after Update
+AS
+ if UPDATE(vue_Activo)
+ begin
+	DECLARE @activo bit
+	DECLARE @Id int
+	SELECT @activo = vue_Activo, @Id = vue_id FROM inserted
+	IF @activo = 'false'
+	begin
+		EXEC MILANESA.ventaBajaPorVuelo @Id;
+	end
+end
+GO
+
+CREATE TRIGGER [MILANESA].[ventaBajaLogica] ON [MILANESA].[Ventas]
+after Update
+AS
+ if UPDATE(ven_Activo)
+ begin
+	DECLARE @activo bit
+	DECLARE @Id int
+	SELECT @activo = ven_Activo, @Id = ven_id FROM inserted	
+	IF @activo = 'false'
+	begin
+		EXEC MILANESA.pasajeBajaPorVenta @Id;
+		EXEC MILANESA.paqueteBajaPorVenta @Id;
+	end
+end
+GO
+
 
 
 
