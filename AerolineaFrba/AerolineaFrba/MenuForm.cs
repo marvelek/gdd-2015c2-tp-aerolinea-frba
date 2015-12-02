@@ -23,42 +23,38 @@ namespace AerolineaFrba
 {
     public partial class MenuForm : Form
     {
-        Usuario user;
+        int permisos;
 
         public MenuForm()
         {
             InitializeComponent();
         }
 
-        public void cargaDatosUsuario(Usuario user)
+        public void setPermisos(int value)
         {
-            this.user = user;
-            validaDatosUsuario();
+            this.permisos = value;
+            validarPermisosUsuario();
         }
 
-        private void validaDatosUsuario()
+        private void validarPermisosUsuario()
         {
-            List<Funcionalidad> funcionalidades = Funcionalidad.getFuncionalidadesRol(user.Rol.Id);
-            ocultarMenus();
-            foreach (Funcionalidad f in funcionalidades)
+            this.ocultarMenus();
+            if (this.permisos == 1) //ADMIN
             {
-                if (f.Id == 1) //ADMIN
-                {
-                    this.rolesToolStripMenuItem.Visible = true;
-                    this.rutaAereaToolStripMenuItem.Visible = true;
-                    this.aeronavesToolStripMenuItem.Visible = true;
-                    this.generarViajeToolStripMenuItem.Visible = true;
-                    this.registroDeLlegadaADestinoToolStripMenuItem.Visible = true;
-                    this.compraToolStripMenuItem.Visible = true;
-                    this.cancelacionDevolucionToolStripMenuItem.Visible = true;
-                    this.consultaDeMillasToolStripMenuItem.Visible = true;
-                    this.canjeDeMillasToolStripMenuItem.Visible = true;
-                    this.listadoEstadisticoToolStripMenuItem.Visible = true;
-                }
-                else // CLIENTE
-                {
-                    this.compraToolStripMenuItem.Visible = true;
-                }
+                this.rolesToolStripMenuItem.Visible = true;
+                this.rutaAereaToolStripMenuItem.Visible = true;
+                this.aeronavesToolStripMenuItem.Visible = true;
+                this.generarViajeToolStripMenuItem.Visible = true;
+                this.registroDeLlegadaADestinoToolStripMenuItem.Visible = true;
+                this.compraToolStripMenuItem.Visible = true;
+                this.cancelacionDevolucionToolStripMenuItem.Visible = true;
+                this.consultaDeMillasToolStripMenuItem.Visible = true;
+                this.canjeDeMillasToolStripMenuItem.Visible = true;
+                this.listadoEstadisticoToolStripMenuItem.Visible = true;
+            }
+            else // CLIENTE
+            {
+                this.compraToolStripMenuItem.Visible = true;
             }
         }
 
