@@ -55,7 +55,7 @@ namespace AerolineaFrba
                     this.canjeDeMillasToolStripMenuItem.Visible = true;
                     this.listadoEstadisticoToolStripMenuItem.Visible = true;
                 }
-                if (f.Id == 2) // CLIENTE
+                else // CLIENTE
                 {
                     this.compraToolStripMenuItem.Visible = true;
                 }
@@ -91,8 +91,7 @@ namespace AerolineaFrba
 
         private void aeronavesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AeronavesForm form = new AeronavesForm();
-            form.ShowDialog();
+            FormsUtils.openNewForm(new AltaAeronave());
         }
 
         private void generarViajeToolStripMenuItem_Click(object sender, EventArgs e)

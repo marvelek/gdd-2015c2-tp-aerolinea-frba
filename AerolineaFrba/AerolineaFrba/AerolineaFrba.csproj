@@ -62,11 +62,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abm Aeronave\AeronavesForm.cs">
+    <Compile Include="Abm Aeronave\AltaAeronave.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Aeronave\AeronavesForm.Designer.cs">
-      <DependentUpon>AeronavesForm.cs</DependentUpon>
+    <Compile Include="Abm Aeronave\AltaAeronave.Designer.cs">
+      <DependentUpon>AltaAeronave.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Ciudad\Form1.cs">
       <SubType>Form</SubType>
@@ -110,6 +110,7 @@
     <Compile Include="Compra\CompraForm.Designer.cs">
       <DependentUpon>CompraForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConexionSQL.cs" />
     <Compile Include="Consulta Millas\ConsultaMillasForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +129,8 @@
     <Compile Include="Devolucion\DevolucionForm.Designer.cs">
       <DependentUpon>DevolucionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormsUtils.cs" />
+    <Compile Include="Funciones.cs" />
     <Compile Include="GD2C2015DataSet.cs">
       <DependentUpon>GD2C2015DataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -177,6 +180,9 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Utiles.cs" />
+    <EmbeddedResource Include="Abm Aeronave\AltaAeronave.resx">
+      <DependentUpon>AltaAeronave.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\CargarRolForm.resx">
       <DependentUpon>CargarRolForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -207,6 +213,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Registro Llegada Destino\RegistroLlegadaDestinoForm.resx">
+      <DependentUpon>RegistroLlegadaDestinoForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="GD2C2015DataSet.xsc">
       <DependentUpon>GD2C2015DataSet.xsd</DependentUpon>
     </None>

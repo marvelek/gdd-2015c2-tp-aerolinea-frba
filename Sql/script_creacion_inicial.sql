@@ -179,6 +179,7 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Aeronaves' AND xtype='U')
 		aer_modelo nvarchar(255) NOT NULL,
 		aer_kg_disponibles numeric(18,0) NOT NULL,
 		aer_fabricante nvarchar(255) NOT NULL,
+		aer_fecha_alta datetime,
 		aer_fecha_fuera_servicio datetime,
 		aer_fecha_reinicio_servicio datetime,
 		aer_fecha_baja_definitiva datetime,

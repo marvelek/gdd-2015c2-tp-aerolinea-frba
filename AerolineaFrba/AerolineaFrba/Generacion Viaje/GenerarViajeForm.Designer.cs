@@ -70,7 +70,7 @@
             // 
             // fechaSalida
             // 
-            this.fechaSalida.CustomFormat = "dd/MM/yyyy hh:mm:ss";
+            this.fechaSalida.CustomFormat = "dd/MM/yyyy HH:mm:ss";
             this.fechaSalida.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.fechaSalida.Location = new System.Drawing.Point(170, 30);
             this.fechaSalida.MinDate = new System.DateTime(2015, 11, 28, 0, 0, 0, 0);
@@ -99,7 +99,7 @@
             // 
             // fechaLlegadaEstimada
             // 
-            this.fechaLlegadaEstimada.CustomFormat = "dd/MM/yyyy hh:mm:ss";
+            this.fechaLlegadaEstimada.CustomFormat = "dd/MM/yyyy HH:mm:ss";
             this.fechaLlegadaEstimada.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.fechaLlegadaEstimada.Location = new System.Drawing.Point(170, 80);
             this.fechaLlegadaEstimada.MinDate = new System.DateTime(2015, 11, 28, 0, 0, 0, 0);

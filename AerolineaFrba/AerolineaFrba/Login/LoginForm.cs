@@ -17,6 +17,7 @@ namespace AerolineaFrba.Login
         public LoginForm()
         {
             InitializeComponent();
+
         }
 
         private void entrar_Click(object sender, EventArgs e)
@@ -80,10 +81,5 @@ namespace AerolineaFrba.Login
 
         }
 
-        private void alta_usuario_Click(object sender, EventArgs e)
-        {
-            AltaUsuarioForm form = new AltaUsuarioForm();
-            form.ShowDialog();
-        }
     }
 }
