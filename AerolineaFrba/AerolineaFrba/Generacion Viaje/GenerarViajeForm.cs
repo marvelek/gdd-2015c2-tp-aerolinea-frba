@@ -100,14 +100,14 @@ namespace AerolineaFrba.Generacion_Viaje
             {
                 error = error + "Debe seleccionar un aeronave\n";
             }
-            if (this.fechaSalida.Value.Date.CompareTo(DateTime.Today.Date) <= 0)
+            if ((this.fechaSalida.Value.Date.CompareTo(DateTime.Now.Date) < 0) || (this.fechaSalida.Value.Date.CompareTo(DateTime.Now.Date) == 0 && this.fechaSalida.Value.TimeOfDay.CompareTo(DateTime.Now.TimeOfDay) < 0))
             {
-                error = error + "La fecha de salida debe ser posterior a hoy\n";
+                error = error + "La fecha de salida debe ser posterior a ahora\n";
             }
-            int aux = this.fechaLlegadaEstimada.Value.Subtract(this.fechaSalida.Value).Hours;
-            if (aux > 24 || aux <= 0)
+            double aux = this.fechaLlegadaEstimada.Value.Subtract(this.fechaSalida.Value).TotalSeconds;
+            if (aux > 86400 || aux <= 0)
             {
-                error = error + "La fecha de llegada estimada no puede superar las 24hs de la fecha de salida o ser posterior\n";
+                error = error + "La fecha de llegada estimada no puede superar las 24hs de la fecha de salida o ser anterior\n";
             }
             if (error != null)
             {
