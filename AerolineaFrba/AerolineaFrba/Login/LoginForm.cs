@@ -75,8 +75,8 @@ namespace AerolineaFrba.Login
 
             MenuForm menu = new MenuForm();
             menu.setPermisos(1);
+            this.Hide();
             menu.ShowDialog();
-
             this.Close();
 
         }

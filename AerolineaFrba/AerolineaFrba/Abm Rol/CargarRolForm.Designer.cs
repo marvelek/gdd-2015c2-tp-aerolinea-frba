@@ -50,7 +50,7 @@
             this.descripcion.Location = new System.Drawing.Point(104, 63);
             this.descripcion.Name = "descripcion";
             this.descripcion.Size = new System.Drawing.Size(100, 20);
-            this.descripcion.TabIndex = 1;
+            this.descripcion.TabIndex = 2;
             // 
             // checkedListBox1
             // 
@@ -58,7 +58,7 @@
             this.checkedListBox1.Location = new System.Drawing.Point(101, 95);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(120, 94);
-            this.checkedListBox1.TabIndex = 2;
+            this.checkedListBox1.TabIndex = 3;
             this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
             // 
             // label2
@@ -76,7 +76,7 @@
             this.checkBox1.Location = new System.Drawing.Point(165, 27);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(56, 17);
-            this.checkBox1.TabIndex = 5;
+            this.checkBox1.TabIndex = 1;
             this.checkBox1.Text = "Activo";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
@@ -85,13 +85,14 @@
             this.button1.Location = new System.Drawing.Point(197, 227);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
+            this.button1.TabIndex = 4;
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // CargarRolForm
             // 
+            this.AcceptButton = this.button1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
