@@ -30,19 +30,31 @@ namespace AerolineaFrba.Abm_Rol
 
         private void buscar_Click(object sender, EventArgs e)
         {
-            if (this.descripcion.Text != "")
+            int rolId = 0;
+            string descripcion = '%' + this.descripcion.Text + '%';
+            try
             {
-                this.rolesTableAdapter.FillBy(this.gD2C2015DataSet.Roles, this.descripcion.Text);
+                if (this.id.Text != "")
+                {
+                    rolId = Convert.ToInt16(this.id.Text);
+                }
             }
-            else
+            catch (FormatException)
             {
-                this.rolesTableAdapter.Fill(this.gD2C2015DataSet.Roles);
+                MessageBox.Show("Debe ingresar un número como ID");
+                this.id.Clear();
+                return;
             }
+            
+            this.rolesTableAdapter.FillByCriterios(this.gD2C2015DataSet.Roles, rolId, descripcion, this.checkActivos.Checked);
+            
         }
 
         private void limpiar_Click(object sender, EventArgs e)
         {
             this.descripcion.Clear();
+            this.id.Clear();
+            this.checkActivos.Checked = false;
         }
 
         private void modificar_Click(object sender, EventArgs e)
@@ -60,10 +72,6 @@ namespace AerolineaFrba.Abm_Rol
             this.rolesTableAdapter.rolBajaLogica(id);
             // Aca tendria que tener un trigger que se dispare y le saque este rol a los usuarios que lo tengan
             this.rolesTableAdapter.Fill(this.gD2C2015DataSet.Roles);
-        }
-
-        private void fillByToolStripButton_Click(object sender, EventArgs e)
-        {
         }
     }
 }

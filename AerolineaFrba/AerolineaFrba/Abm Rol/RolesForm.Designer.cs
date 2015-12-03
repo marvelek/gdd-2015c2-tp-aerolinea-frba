@@ -30,19 +30,22 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.descripcion = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.limpiar = new System.Windows.Forms.Button();
+            this.buscar = new System.Windows.Forms.Button();
             this.data = new System.Windows.Forms.DataGridView();
             this.carga = new System.Windows.Forms.Button();
-            this.buscar = new System.Windows.Forms.Button();
-            this.limpiar = new System.Windows.Forms.Button();
             this.modificar = new System.Windows.Forms.Button();
             this.eliminar = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.descripcion = new System.Windows.Forms.TextBox();
-            this.rolidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.roldescripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.id = new System.Windows.Forms.TextBox();
+            this.checkActivos = new System.Windows.Forms.CheckBox();
             this.rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
             this.rolesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.RolesTableAdapter();
+            this.rolidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.roldescripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rol_activo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data)).BeginInit();
@@ -52,7 +55,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkActivos);
+            this.groupBox1.Controls.Add(this.id);
             this.groupBox1.Controls.Add(this.descripcion);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.limpiar);
             this.groupBox1.Controls.Add(this.buscar);
@@ -62,6 +68,42 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de busqueda";
+            // 
+            // descripcion
+            // 
+            this.descripcion.Location = new System.Drawing.Point(78, 23);
+            this.descripcion.Name = "descripcion";
+            this.descripcion.Size = new System.Drawing.Size(100, 20);
+            this.descripcion.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(66, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Descripcion:";
+            // 
+            // limpiar
+            // 
+            this.limpiar.Location = new System.Drawing.Point(7, 54);
+            this.limpiar.Name = "limpiar";
+            this.limpiar.Size = new System.Drawing.Size(75, 23);
+            this.limpiar.TabIndex = 1;
+            this.limpiar.Text = "Limpiar";
+            this.limpiar.UseVisualStyleBackColor = true;
+            this.limpiar.Click += new System.EventHandler(this.limpiar_Click);
+            // 
+            // buscar
+            // 
+            this.buscar.Location = new System.Drawing.Point(462, 54);
+            this.buscar.Name = "buscar";
+            this.buscar.Size = new System.Drawing.Size(75, 23);
+            this.buscar.TabIndex = 0;
+            this.buscar.Text = "Buscar";
+            this.buscar.UseVisualStyleBackColor = true;
+            this.buscar.Click += new System.EventHandler(this.buscar_Click);
             // 
             // data
             // 
@@ -90,26 +132,6 @@
             this.carga.UseVisualStyleBackColor = true;
             this.carga.Click += new System.EventHandler(this.carga_Click);
             // 
-            // buscar
-            // 
-            this.buscar.Location = new System.Drawing.Point(462, 54);
-            this.buscar.Name = "buscar";
-            this.buscar.Size = new System.Drawing.Size(75, 23);
-            this.buscar.TabIndex = 0;
-            this.buscar.Text = "Buscar";
-            this.buscar.UseVisualStyleBackColor = true;
-            this.buscar.Click += new System.EventHandler(this.buscar_Click);
-            // 
-            // limpiar
-            // 
-            this.limpiar.Location = new System.Drawing.Point(7, 54);
-            this.limpiar.Name = "limpiar";
-            this.limpiar.Size = new System.Drawing.Size(75, 23);
-            this.limpiar.TabIndex = 1;
-            this.limpiar.Text = "Limpiar";
-            this.limpiar.UseVisualStyleBackColor = true;
-            this.limpiar.Click += new System.EventHandler(this.limpiar_Click);
-            // 
             // modificar
             // 
             this.modificar.Location = new System.Drawing.Point(480, 271);
@@ -130,35 +152,31 @@
             this.eliminar.UseVisualStyleBackColor = true;
             this.eliminar.Click += new System.EventHandler(this.eliminar_Click);
             // 
-            // label1
+            // label2
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Descripcion:";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(184, 23);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(19, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Id:";
             // 
-            // descripcion
+            // id
             // 
-            this.descripcion.Location = new System.Drawing.Point(78, 23);
-            this.descripcion.Name = "descripcion";
-            this.descripcion.Size = new System.Drawing.Size(100, 20);
-            this.descripcion.TabIndex = 3;
+            this.id.Location = new System.Drawing.Point(209, 23);
+            this.id.Name = "id";
+            this.id.Size = new System.Drawing.Size(100, 20);
+            this.id.TabIndex = 6;
             // 
-            // rolidDataGridViewTextBoxColumn
+            // checkActivos
             // 
-            this.rolidDataGridViewTextBoxColumn.DataPropertyName = "rol_id";
-            this.rolidDataGridViewTextBoxColumn.HeaderText = "rol_id";
-            this.rolidDataGridViewTextBoxColumn.Name = "rolidDataGridViewTextBoxColumn";
-            this.rolidDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // roldescripcionDataGridViewTextBoxColumn
-            // 
-            this.roldescripcionDataGridViewTextBoxColumn.DataPropertyName = "rol_descripcion";
-            this.roldescripcionDataGridViewTextBoxColumn.HeaderText = "rol_descripcion";
-            this.roldescripcionDataGridViewTextBoxColumn.Name = "roldescripcionDataGridViewTextBoxColumn";
-            this.roldescripcionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.checkActivos.AutoSize = true;
+            this.checkActivos.Location = new System.Drawing.Point(349, 22);
+            this.checkActivos.Name = "checkActivos";
+            this.checkActivos.Size = new System.Drawing.Size(85, 17);
+            this.checkActivos.TabIndex = 7;
+            this.checkActivos.Text = "Solo Activos";
+            this.checkActivos.UseVisualStyleBackColor = true;
             // 
             // rolesBindingSource
             // 
@@ -174,10 +192,24 @@
             // 
             this.rolesTableAdapter.ClearBeforeFill = true;
             // 
+            // rolidDataGridViewTextBoxColumn
+            // 
+            this.rolidDataGridViewTextBoxColumn.DataPropertyName = "rol_id";
+            this.rolidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.rolidDataGridViewTextBoxColumn.Name = "rolidDataGridViewTextBoxColumn";
+            this.rolidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // roldescripcionDataGridViewTextBoxColumn
+            // 
+            this.roldescripcionDataGridViewTextBoxColumn.DataPropertyName = "rol_descripcion";
+            this.roldescripcionDataGridViewTextBoxColumn.HeaderText = "Descripción";
+            this.roldescripcionDataGridViewTextBoxColumn.Name = "roldescripcionDataGridViewTextBoxColumn";
+            this.roldescripcionDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // rol_activo
             // 
             this.rol_activo.DataPropertyName = "rol_activo";
-            this.rol_activo.HeaderText = "rol_activo";
+            this.rol_activo.HeaderText = "Activo";
             this.rol_activo.Name = "rol_activo";
             this.rol_activo.ReadOnly = true;
             // 
@@ -217,6 +249,9 @@
         private System.Windows.Forms.Button carga;
         private System.Windows.Forms.Button modificar;
         private System.Windows.Forms.Button eliminar;
+        private System.Windows.Forms.CheckBox checkActivos;
+        private System.Windows.Forms.TextBox id;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn rolidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn roldescripcionDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn rol_activo;
