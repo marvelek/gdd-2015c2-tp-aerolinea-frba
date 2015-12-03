@@ -37,21 +37,23 @@
             this.buscar = new System.Windows.Forms.Button();
             this.eliminar = new System.Windows.Forms.Button();
             this.modificar = new System.Windows.Forms.Button();
-            this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
-            this.rutasBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.rutasTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.RutasTableAdapter();
             this.data = new System.Windows.Forms.DataGridView();
+            this.rutasBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
+            this.rutasTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.RutasTableAdapter();
             this.rutidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rutcodigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ciudadorigenidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ciudad_origen_desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ciudaddestinoidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ciudad_destino_desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rutpreciobasekgDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rutpreciobasepasajeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rut_activo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rutasBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.data)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rutasBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // carga
@@ -135,20 +137,6 @@
             this.modificar.UseVisualStyleBackColor = true;
             this.modificar.Click += new System.EventHandler(this.modificar_Click);
             // 
-            // gD2C2015DataSet
-            // 
-            this.gD2C2015DataSet.DataSetName = "GD2C2015DataSet";
-            this.gD2C2015DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // rutasBindingSource
-            // 
-            this.rutasBindingSource.DataMember = "Rutas";
-            this.rutasBindingSource.DataSource = this.gD2C2015DataSet;
-            // 
-            // rutasTableAdapter
-            // 
-            this.rutasTableAdapter.ClearBeforeFill = true;
-            // 
             // data
             // 
             this.data.AllowUserToAddRows = false;
@@ -159,7 +147,9 @@
             this.rutidDataGridViewTextBoxColumn,
             this.rutcodigoDataGridViewTextBoxColumn,
             this.ciudadorigenidDataGridViewTextBoxColumn,
+            this.ciudad_origen_desc,
             this.ciudaddestinoidDataGridViewTextBoxColumn,
+            this.ciudad_destino_desc,
             this.rutpreciobasekgDataGridViewTextBoxColumn,
             this.rutpreciobasepasajeDataGridViewTextBoxColumn,
             this.rut_activo});
@@ -170,6 +160,20 @@
             this.data.Size = new System.Drawing.Size(543, 134);
             this.data.TabIndex = 5;
             this.data.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.data_CellContentClick);
+            // 
+            // rutasBindingSource
+            // 
+            this.rutasBindingSource.DataMember = "Rutas";
+            this.rutasBindingSource.DataSource = this.gD2C2015DataSet;
+            // 
+            // gD2C2015DataSet
+            // 
+            this.gD2C2015DataSet.DataSetName = "GD2C2015DataSet";
+            this.gD2C2015DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // rutasTableAdapter
+            // 
+            this.rutasTableAdapter.ClearBeforeFill = true;
             // 
             // rutidDataGridViewTextBoxColumn
             // 
@@ -188,16 +192,32 @@
             // ciudadorigenidDataGridViewTextBoxColumn
             // 
             this.ciudadorigenidDataGridViewTextBoxColumn.DataPropertyName = "ciudad_origen_id";
-            this.ciudadorigenidDataGridViewTextBoxColumn.HeaderText = "Ciudad Origen";
+            this.ciudadorigenidDataGridViewTextBoxColumn.HeaderText = "Id";
             this.ciudadorigenidDataGridViewTextBoxColumn.Name = "ciudadorigenidDataGridViewTextBoxColumn";
             this.ciudadorigenidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ciudadorigenidDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // ciudad_origen_desc
+            // 
+            this.ciudad_origen_desc.DataPropertyName = "ciudad_origen_desc";
+            this.ciudad_origen_desc.HeaderText = "Ciudad Origen";
+            this.ciudad_origen_desc.Name = "ciudad_origen_desc";
+            this.ciudad_origen_desc.ReadOnly = true;
             // 
             // ciudaddestinoidDataGridViewTextBoxColumn
             // 
             this.ciudaddestinoidDataGridViewTextBoxColumn.DataPropertyName = "ciudad_destino_id";
-            this.ciudaddestinoidDataGridViewTextBoxColumn.HeaderText = "Ciudad Destino";
+            this.ciudaddestinoidDataGridViewTextBoxColumn.HeaderText = "Id";
             this.ciudaddestinoidDataGridViewTextBoxColumn.Name = "ciudaddestinoidDataGridViewTextBoxColumn";
             this.ciudaddestinoidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ciudaddestinoidDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // ciudad_destino_desc
+            // 
+            this.ciudad_destino_desc.DataPropertyName = "ciudad_destino_desc";
+            this.ciudad_destino_desc.HeaderText = "Ciudad Destino";
+            this.ciudad_destino_desc.Name = "ciudad_destino_desc";
+            this.ciudad_destino_desc.ReadOnly = true;
             // 
             // rutpreciobasekgDataGridViewTextBoxColumn
             // 
@@ -235,9 +255,9 @@
             this.Load += new System.EventHandler(this.RutasForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rutasBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.data)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rutasBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -259,7 +279,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn rutidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn rutcodigoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ciudadorigenidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ciudad_origen_desc;
         private System.Windows.Forms.DataGridViewTextBoxColumn ciudaddestinoidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ciudad_destino_desc;
         private System.Windows.Forms.DataGridViewTextBoxColumn rutpreciobasekgDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn rutpreciobasepasajeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn rut_activo;

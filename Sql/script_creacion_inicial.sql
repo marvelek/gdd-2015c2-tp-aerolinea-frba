@@ -772,8 +772,10 @@ CREATE PROCEDURE [MILANESA].[rutaBuscar]
 )
 AS
 	SET NOCOUNT ON;
-SELECT        rut_id, rut_codigo, ciudad_origen_id, ciudad_destino_id, rut_precio_base_kg, rut_precio_base_pasaje, rut_activo
+SELECT        rut_id, rut_codigo, ciudad_origen_id, co.ciu_descripcion AS ciudad_origen_desc, ciudad_destino_id, cd.ciu_descripcion AS ciudad_destino_desc, rut_precio_base_kg, rut_precio_base_pasaje, rut_activo
 FROM            MILANESA.Rutas
+JOIN [MILANESA].[Ciudades] co on co.ciu_id = ciudad_origen_id
+JOIN [MILANESA].[Ciudades] cd on cd.ciu_id = ciudad_destino_id
 WHERE        (CAST(rut_codigo as varchar(18)) LIKE '%' + @param1 + '%')
 GO
 

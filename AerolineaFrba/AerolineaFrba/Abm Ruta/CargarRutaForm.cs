@@ -168,6 +168,25 @@ namespace AerolineaFrba.Abm_Ruta
 
         }
 
+        private void textBox1_KeyPress(object sender,  KeyPressEventArgs e)
+        {
+            //Para obligar a que sólo se introduzcan números 
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+                if (Char.IsControl(e.KeyChar)) //permitir teclas de control como retroceso 
+                {
+                    e.Handled = false;
+                }
+                else
+                {
+                    //el resto de teclas pulsadas se desactivan 
+                    e.Handled = true;
+                }
+        } 
+
         private void ciudadOrigen_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -177,5 +196,87 @@ namespace AerolineaFrba.Abm_Ruta
         {
 
         }
+
+        private void precioKg_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void precioKg_KeyPress(object sender, KeyPressEventArgs e)
+        {
+                //MessageBox.Show(Convert.ToInt16(e.KeyChar).ToString());
+       
+               if (e.KeyChar ==8 ) {
+                 e.Handled = false;
+                 return;
+               }
+
+
+               bool IsDec = false;
+                int nroDec = 0;
+
+                for (int i = 0; i < precioKg.Text.Length; i++)
+                {
+                    if (precioKg.Text[i] == '.')
+                    IsDec = true;
+
+                 if ( IsDec && nroDec++ >=2) {
+                    e.Handled = true;
+                    return;
+                 }
+
+
+               }
+
+               if ( e.KeyChar>=48 && e.KeyChar<=57)
+                 e.Handled = false;
+               else if (e.KeyChar==46)         
+                 e.Handled = (IsDec) ? true:false;
+               else
+                 e.Handled = true;
+          
+        }
+
+        private void precioBase_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void precioBase_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //MessageBox.Show(Convert.ToInt16(e.KeyChar).ToString());
+
+            if (e.KeyChar == 8)
+            {
+                e.Handled = false;
+                return;
+            }
+
+
+            bool IsDec = false;
+            int nroDec = 0;
+
+            for (int i = 0; i < precioBase.Text.Length; i++)
+            {
+                if (precioBase.Text[i] == '.')
+                    IsDec = true;
+
+                if (IsDec && nroDec++ >= 2)
+                {
+                    e.Handled = true;
+                    return;
+                }
+
+
+            }
+
+            if (e.KeyChar >= 48 && e.KeyChar <= 57)
+                e.Handled = false;
+            else if (e.KeyChar == 46)
+                e.Handled = (IsDec) ? true : false;
+            else
+                e.Handled = true;
+        } 
+
     }
 }
