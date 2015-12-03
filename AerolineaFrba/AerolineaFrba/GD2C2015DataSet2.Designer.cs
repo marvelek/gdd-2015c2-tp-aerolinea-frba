@@ -6065,6 +6065,10 @@ namespace AerolineaFrba {
             
             private global::System.Data.DataColumn columnrut_activo;
             
+            private global::System.Data.DataColumn columnciudad_origen_desc;
+            
+            private global::System.Data.DataColumn columnciudad_destino_desc;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public RutasDataTable() {
@@ -6156,6 +6160,22 @@ namespace AerolineaFrba {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ciudad_origen_descColumn {
+                get {
+                    return this.columnciudad_origen_desc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ciudad_destino_descColumn {
+                get {
+                    return this.columnciudad_destino_desc;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -6191,7 +6211,7 @@ namespace AerolineaFrba {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public RutasRow AddRutasRow(CiudadesRow parentCiudadesRowByFK__Rutas__ciudad_or__6B79F03D, CiudadesRow parentCiudadesRowByFK__Rutas__ciudad_de__6C6E1476, decimal rut_codigo, decimal rut_precio_base_kg, decimal rut_precio_base_pasaje, bool rut_activo) {
+            public RutasRow AddRutasRow(CiudadesRow parentCiudadesRowByFK__Rutas__ciudad_or__6B79F03D, CiudadesRow parentCiudadesRowByFK__Rutas__ciudad_de__6C6E1476, decimal rut_codigo, decimal rut_precio_base_kg, decimal rut_precio_base_pasaje, bool rut_activo, string ciudad_origen_desc, string ciudad_destino_desc) {
                 RutasRow rowRutasRow = ((RutasRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -6200,7 +6220,9 @@ namespace AerolineaFrba {
                         rut_codigo,
                         rut_precio_base_kg,
                         rut_precio_base_pasaje,
-                        rut_activo};
+                        rut_activo,
+                        ciudad_origen_desc,
+                        ciudad_destino_desc};
                 if ((parentCiudadesRowByFK__Rutas__ciudad_or__6B79F03D != null)) {
                     columnValuesArray[1] = parentCiudadesRowByFK__Rutas__ciudad_or__6B79F03D[0];
                 }
@@ -6243,6 +6265,8 @@ namespace AerolineaFrba {
                 this.columnrut_precio_base_kg = base.Columns["rut_precio_base_kg"];
                 this.columnrut_precio_base_pasaje = base.Columns["rut_precio_base_pasaje"];
                 this.columnrut_activo = base.Columns["rut_activo"];
+                this.columnciudad_origen_desc = base.Columns["ciudad_origen_desc"];
+                this.columnciudad_destino_desc = base.Columns["ciudad_destino_desc"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6262,6 +6286,10 @@ namespace AerolineaFrba {
                 base.Columns.Add(this.columnrut_precio_base_pasaje);
                 this.columnrut_activo = new global::System.Data.DataColumn("rut_activo", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnrut_activo);
+                this.columnciudad_origen_desc = new global::System.Data.DataColumn("ciudad_origen_desc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnciudad_origen_desc);
+                this.columnciudad_destino_desc = new global::System.Data.DataColumn("ciudad_destino_desc", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnciudad_destino_desc);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnrut_id}, true));
                 this.columnrut_id.AutoIncrement = true;
@@ -6276,6 +6304,10 @@ namespace AerolineaFrba {
                 this.columnrut_precio_base_kg.AllowDBNull = false;
                 this.columnrut_precio_base_pasaje.AllowDBNull = false;
                 this.columnrut_activo.AllowDBNull = false;
+                this.columnciudad_origen_desc.AllowDBNull = false;
+                this.columnciudad_origen_desc.MaxLength = 255;
+                this.columnciudad_destino_desc.AllowDBNull = false;
+                this.columnciudad_destino_desc.MaxLength = 255;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9729,6 +9761,28 @@ namespace AerolineaFrba {
                 }
                 set {
                     this[this.tableRutas.rut_activoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ciudad_origen_desc {
+                get {
+                    return ((string)(this[this.tableRutas.ciudad_origen_descColumn]));
+                }
+                set {
+                    this[this.tableRutas.ciudad_origen_descColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ciudad_destino_desc {
+                get {
+                    return ((string)(this[this.tableRutas.ciudad_destino_descColumn]));
+                }
+                set {
+                    this[this.tableRutas.ciudad_destino_descColumn] = value;
                 }
             }
             
@@ -17066,6 +17120,8 @@ SELECT rol_id, rol_descripcion, rol_activo FROM MILANESA.Roles WHERE (rol_id = @
             tableMapping.ColumnMappings.Add("rut_precio_base_kg", "rut_precio_base_kg");
             tableMapping.ColumnMappings.Add("rut_precio_base_pasaje", "rut_precio_base_pasaje");
             tableMapping.ColumnMappings.Add("rut_activo", "rut_activo");
+            tableMapping.ColumnMappings.Add("ciudad_origen_desc", "ciudad_origen_desc");
+            tableMapping.ColumnMappings.Add("ciudad_destino_desc", "ciudad_destino_desc");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
@@ -17123,8 +17179,12 @@ SELECT rut_id, ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[5];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT rut_id, ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_k" +
-                "g, rut_precio_base_pasaje, rut_activo FROM MILANESA.Rutas";
+            this._commandCollection[0].CommandText = @"SELECT        MILANESA.Rutas.rut_id, MILANESA.Rutas.ciudad_origen_id, co.ciu_descripcion AS ciudad_origen_desc, MILANESA.Rutas.ciudad_destino_id, 
+                         cd.ciu_descripcion AS ciudad_destino_desc, MILANESA.Rutas.rut_codigo, MILANESA.Rutas.rut_precio_base_kg, MILANESA.Rutas.rut_precio_base_pasaje, 
+                         MILANESA.Rutas.rut_activo
+FROM            MILANESA.Rutas INNER JOIN
+                         MILANESA.Ciudades AS co ON co.ciu_id = MILANESA.Rutas.ciudad_origen_id INNER JOIN
+                         MILANESA.Ciudades AS cd ON cd.ciu_id = MILANESA.Rutas.ciudad_destino_id";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;

@@ -40,20 +40,20 @@
             this.ciudadesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
             this.ciudadDestino = new System.Windows.Forms.ComboBox();
+            this.ciudadesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tiposServicioBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.codigo = new System.Windows.Forms.TextBox();
             this.precioKg = new System.Windows.Forms.TextBox();
             this.precioBase = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            this.ciudadesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tipos_ServicioTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.Tipos_ServicioTableAdapter();
             this.rutasTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.RutasTableAdapter();
             this.ciudadesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.CiudadesTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tiposServicioBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tiposServicioBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -157,6 +157,11 @@
             this.ciudadDestino.TabIndex = 8;
             this.ciudadDestino.ValueMember = "ciu_id";
             // 
+            // ciudadesBindingSource1
+            // 
+            this.ciudadesBindingSource1.DataMember = "Ciudades";
+            this.ciudadesBindingSource1.DataSource = this.gD2C2015DataSet;
+            // 
             // tiposServicioBindingSource
             // 
             this.tiposServicioBindingSource.DataMember = "Tipos_Servicio";
@@ -169,6 +174,7 @@
             this.codigo.Size = new System.Drawing.Size(100, 20);
             this.codigo.TabIndex = 10;
             this.codigo.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.codigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // precioKg
             // 
@@ -176,6 +182,8 @@
             this.precioKg.Name = "precioKg";
             this.precioKg.Size = new System.Drawing.Size(100, 20);
             this.precioKg.TabIndex = 11;
+            this.precioKg.TextChanged += new System.EventHandler(this.precioKg_TextChanged);
+            this.precioKg.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.precioKg_KeyPress);
             // 
             // precioBase
             // 
@@ -183,6 +191,8 @@
             this.precioBase.Name = "precioBase";
             this.precioBase.Size = new System.Drawing.Size(100, 20);
             this.precioBase.TabIndex = 12;
+            this.precioBase.TextChanged += new System.EventHandler(this.precioBase_TextChanged);
+            this.precioBase.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.precioBase_KeyPress);
             // 
             // button1
             // 
@@ -201,11 +211,6 @@
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(120, 94);
             this.checkedListBox1.TabIndex = 3;
-            // 
-            // ciudadesBindingSource1
-            // 
-            this.ciudadesBindingSource1.DataMember = "Ciudades";
-            this.ciudadesBindingSource1.DataSource = this.gD2C2015DataSet;
             // 
             // tipos_ServicioTableAdapter
             // 
@@ -243,8 +248,8 @@
             this.Load += new System.EventHandler(this.CargarRutaForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tiposServicioBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tiposServicioBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

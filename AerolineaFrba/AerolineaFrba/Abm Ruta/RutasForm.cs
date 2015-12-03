@@ -35,10 +35,10 @@ namespace AerolineaFrba.Abm_Ruta
             ruta.Id = Convert.ToInt16(data.Rows[data.CurrentRow.Index].Cells[0].Value);
             ruta.Codigo = Convert.ToDecimal(data.Rows[data.CurrentRow.Index].Cells[1].Value);
             ruta.CiudadOrigen = Convert.ToInt16(data.Rows[data.CurrentRow.Index].Cells[2].Value);
-            ruta.CiudadDestino = Convert.ToInt16(data.Rows[data.CurrentRow.Index].Cells[3].Value);
-            ruta.PrecioKg = Convert.ToDecimal(data.Rows[data.CurrentRow.Index].Cells[4].Value);
-            ruta.PrecioBase = Convert.ToDecimal(data.Rows[data.CurrentRow.Index].Cells[5].Value);
-            ruta.Activo = Convert.ToBoolean(data.Rows[data.CurrentRow.Index].Cells[6].Value);
+            ruta.CiudadDestino = Convert.ToInt16(data.Rows[data.CurrentRow.Index].Cells[4].Value);
+            ruta.PrecioKg = Convert.ToDecimal(data.Rows[data.CurrentRow.Index].Cells[6].Value);
+            ruta.PrecioBase = Convert.ToDecimal(data.Rows[data.CurrentRow.Index].Cells[7].Value);
+            ruta.Activo = Convert.ToBoolean(data.Rows[data.CurrentRow.Index].Cells[8].Value);
             new CargarRutaForm(ruta).ShowDialog();
 
             this.rutasTableAdapter.Fill(this.gD2C2015DataSet.Rutas);
