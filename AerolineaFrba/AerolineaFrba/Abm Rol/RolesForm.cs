@@ -26,6 +26,7 @@ namespace AerolineaFrba.Abm_Rol
         private void carga_Click(object sender, EventArgs e)
         {
             new CargarRolForm(null).ShowDialog();
+            this.buscar_Click(this, null);
         }
 
         private void buscar_Click(object sender, EventArgs e)
@@ -64,6 +65,7 @@ namespace AerolineaFrba.Abm_Rol
             rol.Descripcion = Convert.ToString(data.Rows[data.CurrentRow.Index].Cells[1].Value);
             rol.Activo = Convert.ToBoolean(data.Rows[data.CurrentRow.Index].Cells[2].Value);
             new CargarRolForm(rol).ShowDialog();
+            this.buscar_Click(this, null);
         }
 
         private void eliminar_Click(object sender, EventArgs e)
