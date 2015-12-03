@@ -35,7 +35,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.activo = new System.Windows.Forms.CheckBox();
             this.ciudadOrigen = new System.Windows.Forms.ComboBox();
             this.ciudadesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
@@ -50,6 +49,7 @@
             this.tipos_ServicioTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.Tipos_ServicioTableAdapter();
             this.rutasTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.RutasTableAdapter();
             this.ciudadesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.CiudadesTableAdapter();
+            this.activo = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ciudadesBindingSource1)).BeginInit();
@@ -112,16 +112,6 @@
             this.label6.TabIndex = 5;
             this.label6.Text = "Precio Base por Pasaje";
             // 
-            // activo
-            // 
-            this.activo.AutoSize = true;
-            this.activo.Location = new System.Drawing.Point(296, 12);
-            this.activo.Name = "activo";
-            this.activo.Size = new System.Drawing.Size(56, 17);
-            this.activo.TabIndex = 6;
-            this.activo.Text = "Activo";
-            this.activo.UseVisualStyleBackColor = true;
-            // 
             // ciudadOrigen
             // 
             this.ciudadOrigen.DataSource = this.ciudadesBindingSource;
@@ -131,7 +121,7 @@
             this.ciudadOrigen.Location = new System.Drawing.Point(180, 80);
             this.ciudadOrigen.Name = "ciudadOrigen";
             this.ciudadOrigen.Size = new System.Drawing.Size(121, 21);
-            this.ciudadOrigen.TabIndex = 7;
+            this.ciudadOrigen.TabIndex = 2;
             this.ciudadOrigen.ValueMember = "ciu_id";
             this.ciudadOrigen.SelectedIndexChanged += new System.EventHandler(this.ciudadOrigen_SelectedIndexChanged);
             // 
@@ -154,7 +144,7 @@
             this.ciudadDestino.Location = new System.Drawing.Point(180, 117);
             this.ciudadDestino.Name = "ciudadDestino";
             this.ciudadDestino.Size = new System.Drawing.Size(121, 21);
-            this.ciudadDestino.TabIndex = 8;
+            this.ciudadDestino.TabIndex = 3;
             this.ciudadDestino.ValueMember = "ciu_id";
             // 
             // ciudadesBindingSource1
@@ -172,7 +162,7 @@
             this.codigo.Location = new System.Drawing.Point(180, 45);
             this.codigo.Name = "codigo";
             this.codigo.Size = new System.Drawing.Size(100, 20);
-            this.codigo.TabIndex = 10;
+            this.codigo.TabIndex = 1;
             this.codigo.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.codigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -181,7 +171,7 @@
             this.precioKg.Location = new System.Drawing.Point(180, 269);
             this.precioKg.Name = "precioKg";
             this.precioKg.Size = new System.Drawing.Size(100, 20);
-            this.precioKg.TabIndex = 11;
+            this.precioKg.TabIndex = 5;
             this.precioKg.TextChanged += new System.EventHandler(this.precioKg_TextChanged);
             this.precioKg.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.precioKg_KeyPress);
             // 
@@ -190,7 +180,7 @@
             this.precioBase.Location = new System.Drawing.Point(180, 300);
             this.precioBase.Name = "precioBase";
             this.precioBase.Size = new System.Drawing.Size(100, 20);
-            this.precioBase.TabIndex = 12;
+            this.precioBase.TabIndex = 6;
             this.precioBase.TextChanged += new System.EventHandler(this.precioBase_TextChanged);
             this.precioBase.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.precioBase_KeyPress);
             // 
@@ -199,7 +189,7 @@
             this.button1.Location = new System.Drawing.Point(277, 333);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 13;
+            this.button1.TabIndex = 7;
             this.button1.Text = "Guardar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -210,7 +200,7 @@
             this.checkedListBox1.Location = new System.Drawing.Point(180, 154);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(120, 94);
-            this.checkedListBox1.TabIndex = 3;
+            this.checkedListBox1.TabIndex = 4;
             // 
             // tipos_ServicioTableAdapter
             // 
@@ -224,8 +214,20 @@
             // 
             this.ciudadesTableAdapter.ClearBeforeFill = true;
             // 
+            // activo
+            // 
+            this.activo.AutoSize = true;
+            this.activo.Enabled = false;
+            this.activo.Location = new System.Drawing.Point(296, 12);
+            this.activo.Name = "activo";
+            this.activo.Size = new System.Drawing.Size(56, 17);
+            this.activo.TabIndex = 6;
+            this.activo.Text = "Activo";
+            this.activo.UseVisualStyleBackColor = true;
+            // 
             // CargarRutaForm
             // 
+            this.AcceptButton = this.button1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(409, 382);
@@ -263,7 +265,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.CheckBox activo;
         private System.Windows.Forms.ComboBox ciudadOrigen;
         private GD2C2015DataSet gD2C2015DataSet;
         private System.Windows.Forms.BindingSource ciudadesBindingSource;
@@ -278,5 +279,6 @@
         private GD2C2015DataSetTableAdapters.Tipos_ServicioTableAdapter tipos_ServicioTableAdapter;
         private GD2C2015DataSetTableAdapters.RutasTableAdapter rutasTableAdapter1;
         private GD2C2015DataSetTableAdapters.CiudadesTableAdapter ciudadesTableAdapter;
+        private System.Windows.Forms.CheckBox activo;
     }
 }
