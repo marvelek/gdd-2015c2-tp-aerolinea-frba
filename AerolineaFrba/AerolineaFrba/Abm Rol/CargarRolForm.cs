@@ -88,10 +88,15 @@ namespace AerolineaFrba.Abm_Rol
         {
             Utiles validador = new Utiles();
             string error = null;
-
             if (this.descripcion.Text == "")
             {
                 error = "El nombre del Rol no puede ser nulo\n";
+            }
+            this.rolesTableAdapter.Fill(this.dataSet.Roles);
+            GD2C2015DataSet.RolesRow[] result = (GD2C2015DataSet.RolesRow[])this.dataSet.Roles.Select("rol_descripcion='" + this.descripcion.Text + "'");
+            if (result.Length > 0)
+            {
+                error = error + "Ya existe el rol con esa descripción\n";
             }
             if (this.checkedListBox1.CheckedItems.Count < 1)
             {

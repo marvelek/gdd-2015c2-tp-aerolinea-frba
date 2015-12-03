@@ -58,7 +58,7 @@
             this.usuario.Location = new System.Drawing.Point(137, 62);
             this.usuario.Name = "usuario";
             this.usuario.Size = new System.Drawing.Size(100, 20);
-            this.usuario.TabIndex = 2;
+            this.usuario.TabIndex = 1;
             // 
             // password
             // 
@@ -66,20 +66,21 @@
             this.password.Name = "password";
             this.password.PasswordChar = '*';
             this.password.Size = new System.Drawing.Size(100, 20);
-            this.password.TabIndex = 3;
+            this.password.TabIndex = 2;
             // 
             // entrar
             // 
             this.entrar.Location = new System.Drawing.Point(197, 206);
             this.entrar.Name = "entrar";
             this.entrar.Size = new System.Drawing.Size(75, 23);
-            this.entrar.TabIndex = 4;
+            this.entrar.TabIndex = 3;
             this.entrar.Text = "Entrar";
             this.entrar.UseVisualStyleBackColor = true;
             this.entrar.Click += new System.EventHandler(this.entrar_Click);
             // 
             // LoginForm
             // 
+            this.AcceptButton = this.entrar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 237);
