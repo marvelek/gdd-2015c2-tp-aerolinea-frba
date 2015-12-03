@@ -768,7 +768,14 @@ GO
 
 CREATE PROCEDURE [MILANESA].[rutaBuscar]
 (
-	@param1 nvarchar(255)
+	@codigo nvarchar(255),
+	@activo Varchar(10),
+	@ciudadOrigen nvarchar(255),
+	@ciudadDestino nvarchar(255),
+	@precioKgDesde numeric(18,2),
+	@precioKgHasta numeric(18,2),
+	@precioBaseDesde numeric(18,2),
+	@precioBaseHasta numeric(18,2)
 )
 AS
 	SET NOCOUNT ON;
@@ -776,7 +783,7 @@ SELECT        rut_id, rut_codigo, ciudad_origen_id, co.ciu_descripcion AS ciudad
 FROM            MILANESA.Rutas
 JOIN [MILANESA].[Ciudades] co on co.ciu_id = ciudad_origen_id
 JOIN [MILANESA].[Ciudades] cd on cd.ciu_id = ciudad_destino_id
-WHERE        (CAST(rut_codigo as varchar(18)) LIKE '%' + @param1 + '%')
+WHERE        (CAST(rut_codigo as varchar(18)) LIKE '%' + @codigo + '%') AND ((@activo = 'TODOS') or (@activo = 'ACTIVO' AND rut_activo = 1) or (@activo = 'INACTIVO' and rut_activo = 0)) AND ( co.ciu_descripcion LIKE '%' + @ciudadOrigen + '%') AND ( cd.ciu_descripcion LIKE '%' + @ciudadDestino + '%') AND ((@precioKgDesde = 0 OR rut_precio_base_kg >= @precioKgDesde ) AND ( @precioKgHasta = 0 OR rut_precio_base_kg <= @precioKgHasta )  AND ( (@precioBaseDesde = 0 or rut_precio_base_pasaje >= @precioBaseDesde) AND ( @precioBaseHasta = 0 OR rut_precio_base_pasaje <= @precioBaseHasta)))
 GO
 
 CREATE PROCEDURE [MILANESA].[rutaInsertar]
