@@ -4,7 +4,6 @@ GO
 
 -- INDICES ---------------------------------------------------------
 
-
 CREATE NONCLUSTERED INDEX [ix_maestra_ruta]
 ON [gd_esquema].[Maestra] ([Ruta_Precio_BasePasaje])
 INCLUDE ([Ruta_Codigo],[Ruta_Ciudad_Origen],[Ruta_Ciudad_Destino],[Tipo_Servicio])
@@ -24,6 +23,10 @@ CREATE NONCLUSTERED INDEX [ix_maestra_pasaje_fecha]
 ON [gd_esquema].[Maestra] ([FechaSalida],[Fecha_LLegada_Estimada],[FechaLLegada])
 INCLUDE ([Cli_Nombre],[Cli_Apellido],[Cli_Dni],[Cli_Fecha_Nac],[Pasaje_Codigo],[Pasaje_Precio],[Pasaje_FechaCompra],[Ruta_Codigo],[Ruta_Ciudad_Origen],[Ruta_Ciudad_Destino],[Aeronave_Matricula],[Tipo_Servicio])
 GO
+
+CREATE NONCLUSTERED INDEX [ix_maestra_pasaje_butacas]
+ON [gd_esquema].[Maestra] ([Pasaje_Codigo])
+INCLUDE ([Cli_Nombre],[Cli_Apellido],[Cli_Dni],[Cli_Fecha_Nac],[Pasaje_Precio],[Pasaje_FechaCompra],[Butaca_Nro],[Butaca_Tipo],[Butaca_Piso],[FechaSalida],[Fecha_LLegada_Estimada],[FechaLLegada],[Ruta_Codigo],[Ruta_Ciudad_Origen],[Ruta_Ciudad_Destino],[Aeronave_Matricula])
 
 CREATE NONCLUSTERED INDEX [ix_maestra_paquete]
 ON [gd_esquema].[Maestra] ([Paquete_Codigo])
@@ -398,6 +401,7 @@ BEGIN
 		 FROM MILANESA.Aeronaves
 		 WHERE aer_matricula = M.Aeronave_Matricula)
 	FROM gd_esquema.Maestra M
+	WHERE M.Butaca_Piso = 1
 END
 GO
 
@@ -488,15 +492,21 @@ CREATE PROCEDURE MILANESA.sp_migracion_pasajes AS
 BEGIN
 	SET NOCOUNT ON;
 
-	INSERT INTO Pasajes(pas_codigo, pas_precio, pasajero_id, venta_id)
+	INSERT INTO Pasajes(pas_codigo, pas_precio, pasajero_id, venta_id, butaca_id)
 	SELECT DISTINCT 
 			M.Pasaje_Codigo, 
 			M.Pasaje_Precio,
 			C.cli_id,
-			Ven.ven_id
+			Ven.ven_id,
+			B.but_id
 		FROM
-			gd_esquema.Maestra M, MILANESA.Clientes C, MILANESA.Vuelos V, MILANESA.Ventas Ven
+			gd_esquema.Maestra M, MILANESA.Clientes C, MILANESA.Vuelos V, MILANESA.Ventas Ven, MILANESA.Butacas B, MILANESA.Aeronaves A
 		WHERE
+			M.Butaca_Nro = B.but_numero AND
+			M.Butaca_Piso = B.but_piso AND
+			M.Butaca_Tipo = B.but_tipo AND
+			A.aer_id = V.aeronave_id AND
+			A.aer_id = B.aeronave_id AND
 			M.Pasaje_Codigo != 0 AND
 			C.cli_nombre = M.Cli_Nombre AND
 			C.cli_apellido = M.Cli_Apellido AND
