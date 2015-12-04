@@ -127,8 +127,9 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Millas' AND xtype='U')
 	CREATE TABLE MILANESA.Millas (
 		mil_id int identity(1,1) Primary Key,
 		cliente_id int REFERENCES MILANESA.Clientes NOT NULL,
-		canje_id int REFERENCES MILANESA.Canjes,
 		mil_cantidad numeric(18,0) NOT NULL,
+		mil_fecha_acreditacion datetime,
+		mil_canjeadas numeric(18,0) DEFAULT 0,
 	)
 GO
 	
@@ -958,5 +959,81 @@ VALUES        (@aeronave_id,@ciudad_origen_id,@ciudad_destino_id,@fecha_llegada,
 SELECT arr_id FROM MILANESA.Arribos WHERE (arr_id = SCOPE_IDENTITY())
 GO
 
+-- PROCEDURES PARA MILLAS --
 
+CREATE PROCEDURE MILANESA.acreditarMillasCliente 
+(
+	@cliente_id int,
+	@pesos_gastados int
+)
 
+AS
+	SET NOCOUNT OFF;
+
+	DECLARE @cantidad_acreditar int
+
+	SELECT @cantidad_acreditar = @pesos_gastados / 10 
+
+	INSERT INTO MILANESA.Millas(cliente_id, mil_cantidad, mil_fecha_acreditacion) VALUES (@cliente_id, @cantidad_acreditar, SYSDATETIME())
+
+GO
+
+CREATE PROCEDURE MILANESA.acreditarMillas
+(
+	@vuelo_id int
+)
+AS
+	SET NOCOUNT OFF;
+
+	DECLARE @cliente_id int, @pesos_gastados int
+
+	DECLARE cr_cliente_gastado CURSOR
+	FOR
+		SELECT QUERY.cli_id, SUM(QUERY.pesos_gastados) 
+		FROM
+			(SELECT
+				C.cli_id,
+				P.pas_precio as pesos_gastados
+			FROM
+				MILANESA.Ventas VE,
+				MILANESA.Vuelos VU,
+				MILANESA.Pasajes P,
+				MILANESA.Clientes C
+			WHERE
+				VE.ven_id = P.venta_id AND
+				VE.vuelo_id = VU.vue_id AND
+				C.cli_id = P.pasajero_id AND
+				VU.vue_id = @vuelo_id
+			UNION
+			SELECT
+				C.cli_id,
+				P.paq_precio as pesos_gastados
+			FROM
+				MILANESA.Ventas VE,
+				MILANESA.Vuelos VU,
+				MILANESA.Paquetes P,
+				MILANESA.Clientes C
+			WHERE
+				VE.ven_id = P.venta_id AND
+				VE.vuelo_id = VU.vue_id AND
+				C.cli_id = VE.comprador_id AND
+				VU.vue_id = @vuelo_id) QUERY
+		GROUP BY QUERY.cli_id;
+
+	OPEN cr_cliente_gastado
+
+	FETCH cr_cliente_gastado INTO @cliente_id, @pesos_gastados
+
+	WHILE(@@FETCH_STATUS = 0)
+
+	BEGIN
+		EXEC MILANESA.acreditarMillasCliente @cliente_id, @pesos_gastados
+
+		FETCH NEXT FROM cr_cliente_gastado INTO @cliente_id, @pesos_gastados
+
+	END
+
+	CLOSE cr_cliente_gastado
+
+	DEALLOCATE cr_cliente_gastado
+GO

@@ -69,6 +69,8 @@ BEGIN
 	DROP PROCEDURE [MILANESA].[tipos_Servicio_RutasBorrar]
 	DROP PROCEDURE [MILANESA].[vuelos_disponibles]
 	DROP PROCEDURE MILANESA.arribosInsertar
+	DROP PROCEDURE MILANESA.acreditarMillas
+	DROP PROCEDURE MILANESA.acreditarMillasCliente 
 
 END
 

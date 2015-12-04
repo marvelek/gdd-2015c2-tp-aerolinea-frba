@@ -81,6 +81,8 @@ namespace AerolineaFrba.Registro_Llegada_Destino
                     vuelo.vue_fecha_llegada = fechaLlegada;
                     vuelo.arribo_id = arribo_id;
                     vuelosTableAdapter.Update(vuelo);
+                    
+                    arribosTableAdapter.acreditarMillas(vuelo.vue_id);
 
                     if (destino_correcto == 1)
                     {
