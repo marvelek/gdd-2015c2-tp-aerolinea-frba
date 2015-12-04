@@ -305,10 +305,10 @@ BEGIN
 	SET NOCOUNT ON;
 
 	INSERT INTO Ciudades (ciu_descripcion)
-	SELECT DISTINCT Ruta_Ciudad_Destino
+	SELECT DISTINCT LTRIM(RTRIM(Ruta_Ciudad_Destino))
 	FROM gd_esquema.Maestra
 	UNION
-	SELECT DISTINCT Ruta_Ciudad_Origen
+	SELECT DISTINCT LTRIM(RTRIM(Ruta_Ciudad_Origen))
 	FROM gd_esquema.Maestra
 
 END

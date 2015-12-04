@@ -11379,7 +11379,7 @@ SELECT aer_id, tipo_servicio_id, aer_matricula, aer_modelo, aer_kg_disponibles, 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT aer_id, tipo_servicio_id, aer_matricula, aer_modelo, aer_kg_disponibles, a" +
@@ -11403,6 +11403,14 @@ SELECT aer_id, tipo_servicio_id, aer_matricula, aer_modelo, aer_kg_disponibles, 
             this._commandCollection[2].CommandType = global::System.Data.CommandType.StoredProcedure;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@param1", global::System.Data.SqlDbType.NVarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "SELECT aer_id, tipo_servicio_id, aer_matricula, aer_modelo, aer_kg_disponibles, a" +
+                "er_fabricante, aer_fecha_fuera_servicio, aer_fecha_reinicio_servicio, aer_fecha_" +
+                "baja_definitiva, aer_activo FROM MILANESA.Aeronaves\r\nWHERE aer_matricula = @matr" +
+                "icula";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@matricula", global::System.Data.SqlDbType.NVarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "aer_matricula", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11463,6 +11471,25 @@ SELECT aer_id, tipo_servicio_id, aer_matricula, aer_modelo, aer_kg_disponibles, 
             GD2C2015DataSet.AeronavesDataTable dataTable = new GD2C2015DataSet.AeronavesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByMatricula1(GD2C2015DataSet.AeronavesDataTable dataTable, string matricula) {
+            this.Adapter.SelectCommand = this.CommandCollection[3];
+            if ((matricula == null)) {
+                throw new global::System.ArgumentNullException("matricula");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(matricula));
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13093,11 +13120,17 @@ SELECT ciu_id, ciu_descripcion, ciu_activo FROM MILANESA.Ciudades WHERE (ciu_id 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ciu_id, ciu_descripcion, ciu_activo FROM MILANESA.Ciudades";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT ciu_id, ciu_descripcion, ciu_activo FROM MILANESA.Ciudades\r\nWHERE LOWER(ci" +
+                "u_descripcion) LIKE LOWER(\'%\' + @descripcion + \'%\')";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@descripcion", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13119,6 +13152,42 @@ SELECT ciu_id, ciu_descripcion, ciu_activo FROM MILANESA.Ciudades WHERE (ciu_id 
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual GD2C2015DataSet.CiudadesDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            GD2C2015DataSet.CiudadesDataTable dataTable = new GD2C2015DataSet.CiudadesDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByDescripcionLower(GD2C2015DataSet.CiudadesDataTable dataTable, string descripcion) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((descripcion == null)) {
+                throw new global::System.ArgumentNullException("descripcion");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(descripcion));
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual GD2C2015DataSet.CiudadesDataTable GetDataByDescripcionLower(string descripcion) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((descripcion == null)) {
+                throw new global::System.ArgumentNullException("descripcion");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(descripcion));
+            }
             GD2C2015DataSet.CiudadesDataTable dataTable = new GD2C2015DataSet.CiudadesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
