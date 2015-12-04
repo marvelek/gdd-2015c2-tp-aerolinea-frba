@@ -190,12 +190,40 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Aeronaves' AND xtype='U')
 	)
 GO
 
+/*Estados_Arribos*/
+IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Estados_Arribos' AND xtype='U')
+	CREATE TABLE MILANESA.Estados_Arribos (
+		ear_id int identity(1,1) Primary Key,
+		ear_descripcion nvarchar(255) NOT NULL,
+	)
+GO
+
+INSERT INTO MILANESA.Estados_Arribos (ear_descripcion) VALUES ('OK')
+GO
+INSERT INTO MILANESA.Estados_Arribos (ear_descripcion) VALUES ('ERROR: Debería haber llegado a otro aeropuerto')
+GO
+INSERT INTO MILANESA.Estados_Arribos (ear_descripcion) VALUES ('ERROR: No se encontró vuelo cargado')
+GO
+
+/*Arribos*/
+IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Arribos' AND xtype='U')
+	CREATE TABLE MILANESA.Arribos (
+		arr_id int identity(1,1) Primary Key,
+		aeronave_id int REFERENCES MILANESA.Aeronaves NOT NULL,
+		ciudad_origen_id int REFERENCES MILANESA.Ciudades NOT NULL,
+		ciudad_destino_id int REFERENCES MILANESA.Ciudades NOT NULL,
+		arr_destino_correcto int REFERENCES MILANESA.Estados_Arribos NOT NULL,
+		arr_fecha datetime NOT NULL
+	)
+GO
+
 /*Vuelos*/
 IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Vuelos' AND xtype='U')
 	CREATE TABLE MILANESA.Vuelos (
 		vue_id int identity(1,1) Primary Key,
 		ruta_id int REFERENCES MILANESA.Rutas NOT NULL,
 		aeronave_id int REFERENCES MILANESA.Aeronaves NOT NULL,
+		arribo_id int REFERENCES MILANESA.Arribos,
 		vue_fecha_salida datetime NOT NULL,
 		vue_fecha_llegada_estimada datetime NOT NULL,
 		vue_fecha_llegada datetime,
@@ -209,7 +237,6 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Ventas' AND xtype='U')
 		ven_id int identity(1,1) Primary Key,
 		comprador_id int REFERENCES MILANESA.Clientes NOT NULL,
 		vuelo_id int REFERENCES MILANESA.Vuelos NOT NULL,
-		vendedor_id int REFERENCES MILANESA.Usuarios,
 		ven_fecha datetime NOT NULL,
 		ven_activo bit NOT NULL DEFAULT 1
 	)
@@ -262,18 +289,6 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Periodos_Fuera_Servicio' AND
 		pfs_motivo nvarchar(255) NOT NULL,
 		pfs_fecha_inicio datetime NOT NULL,
 		pfs_fecha_fin datetime
-	)
-GO
-
-/*Arribos*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Arribos' AND xtype='U')
-	CREATE TABLE MILANESA.Arribos (
-		arr_id int identity(1,1) Primary Key,
-		aeronave_id int REFERENCES MILANESA.Aeronaves NOT NULL,
-		ciudad_origen_id int REFERENCES MILANESA.Ciudades NOT NULL,
-		ciudad_destino_id int REFERENCES MILANESA.Ciudades NOT NULL,
-		arr_destino_correcto int NOT NULL,
-		arr_fecha datetime NOT NULL
 	)
 GO
 
@@ -646,7 +661,7 @@ GO
 
 USE [GD2C2015]
 GO
-CREATE NONCLUSTERED INDEX [<Name of Missing Index, sysname,>]
+CREATE NONCLUSTERED INDEX ix_ventas_vuelo
 ON [MILANESA].[Ventas] ([vuelo_id])
 GO
 
@@ -924,5 +939,24 @@ AS
 	and query.butacas_disponibles > 0
 	order by vue_id
 GO
+
+-- PROCEDURES DE ARRIBOS --
+CREATE PROCEDURE MILANESA.arribosInsertar
+(
+	@aeronave_id int,
+	@ciudad_origen_id int,
+	@ciudad_destino_id int,
+	@fecha_llegada datetime,
+	@destino_correcto_id int
+)
+AS
+	SET NOCOUNT OFF;
+INSERT INTO MILANESA.Arribos (aeronave_id, ciudad_origen_id, ciudad_destino_id, arr_fecha, arr_destino_correcto)
+VALUES        (@aeronave_id,@ciudad_origen_id,@ciudad_destino_id,@fecha_llegada,@destino_correcto_id);
+	 
+	 
+SELECT arr_id FROM MILANESA.Arribos WHERE (arr_id = SCOPE_IDENTITY())
+GO
+
 
 

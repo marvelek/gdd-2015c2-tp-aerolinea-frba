@@ -74,11 +74,13 @@ namespace AerolineaFrba.Registro_Llegada_Destino
                     if (vuelo == null)
                     {
                         vuelo = vuelos.Last();
+                        destino_correcto = 2;
                     }
 
+                    int arribo_id = (int)arribosTableAdapter.arribosInsertar(aeronave_id, ciudad_origen_id, ciudad_destino_id, fechaLlegada, destino_correcto);
                     vuelo.vue_fecha_llegada = fechaLlegada;
+                    vuelo.arribo_id = arribo_id;
                     vuelosTableAdapter.Update(vuelo);
-                    arribosTableAdapter.Insert(aeronave_id, ciudad_origen_id, ciudad_destino_id, fechaLlegada, destino_correcto);
 
                     if (destino_correcto == 1)
                     {
@@ -90,6 +92,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
                     }
                 } else if (vuelos.Count() == 0)
                 {
+                    destino_correcto = 3;
                     arribosTableAdapter.Insert(aeronave_id, ciudad_origen_id, ciudad_destino_id, fechaLlegada, destino_correcto);
                     MessageBox.Show("Se registró la llegada pero no se encontró un vuelo registrado");
                 }

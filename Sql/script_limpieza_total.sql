@@ -24,6 +24,18 @@ BEGIN
 	DROP TABLE MILANESA.Butacas
 	DROP TABLE MILANESA.Aeronaves
 	DROP TABLE MILANESA.Tipos_Servicio
+	DROP TABLE MILANESA.Estados_Arribos
+END
+
+/*Drop Indices de Maestra*/
+BEGIN
+	DROP INDEX [ix_maestra_ruta] ON [gd_esquema].[Maestra] 
+	DROP INDEX [ix_maestra_venta] ON [gd_esquema].[Maestra] 
+	DROP INDEX [ix_maestra_pasaje_codigo] ON [gd_esquema].[Maestra]
+	DROP INDEX [ix_maestra_pasaje_fecha] ON [gd_esquema].[Maestra]
+	DROP INDEX [ix_maestra_pasaje_butacas] ON [gd_esquema].[Maestra] 
+	DROP INDEX [ix_maestra_paquete] ON [gd_esquema].[Maestra] 
+	DROP INDEX [ix_maestra_paquete_fecha] ON [gd_esquema].[Maestra]
 END
 
 /*Drop Stored Procedures*/
@@ -39,6 +51,25 @@ BEGIN
 	DROP PROCEDURE MILANESA.sp_migracion_ventas
 	DROP PROCEDURE MILANESA.sp_migracion_pasajes
 	DROP PROCEDURE MILANESA.sp_migracion_paquetes
+	DROP PROCEDURE MILANESA.rolBajaLogica
+	DROP PROCEDURE MILANESA.funcionesRolesBorrar
+	DROP PROCEDURE MILANESA.rolBuscar
+	DROP PROCEDURE MILANESA.rolInsertar
+	DROP PROCEDURE MILANESA.funcionesRolesInsertar
+	DROP PROCEDURE MILANESA.rolModificar
+	DROP PROCEDURE [MILANESA].[paqueteBajaPorVenta]
+	DROP PROCEDURE [MILANESA].[pasajeBajaPorVenta]
+	DROP PROCEDURE [MILANESA].[ventaBajaPorVuelo]
+	DROP PROCEDURE [MILANESA].[vueloBajaPorRuta]
+	DROP PROCEDURE [MILANESA].[rutaBajaLogica]
+	DROP PROCEDURE [MILANESA].[rutaBuscar]
+	DROP PROCEDURE [MILANESA].[rutaInsertar]
+	DROP PROCEDURE [MILANESA].[rutaModificar]
+	DROP PROCEDURE [MILANESA].[tipo_Servicio_RutaInsertar]
+	DROP PROCEDURE [MILANESA].[tipos_Servicio_RutasBorrar]
+	DROP PROCEDURE [MILANESA].[vuelos_disponibles]
+	DROP PROCEDURE MILANESA.arribosInsertar
+
 END
 
 /* Drop Schema*/

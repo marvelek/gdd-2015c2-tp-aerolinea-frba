@@ -77,7 +77,7 @@ namespace AerolineaFrba.Generacion_Viaje
             {
                 int aeronaveId = this.aeronavesArray[this.aeronaves.SelectedIndex];
                 int rutaId = this.rutasArray[this.rutas.SelectedIndex];
-                this.vuelosTableAdapter.Insert(rutaId, aeronaveId, this.fechaSalida.Value, this.fechaLlegadaEstimada.Value, null, true);
+                this.vuelosTableAdapter.Insert(rutaId, aeronaveId, this.fechaSalida.Value, this.fechaLlegadaEstimada.Value, null, true, null);
                 this.vuelosTableAdapter.Fill(this.dataSet.Vuelos);
                 MessageBox.Show("El viaje ha sido guardado correctamente");
                 this.Close();
