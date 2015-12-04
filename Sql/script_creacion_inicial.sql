@@ -643,6 +643,24 @@ INSERT INTO [MILANESA].[Usuarios]
            ,1)
 GO
 
+-- INDICES PARA LA APP -----------------------------------------------------------------
+
+
+USE [GD2C2015]
+GO
+CREATE NONCLUSTERED INDEX ix_pasajes_venta
+ON [MILANESA].[Pasajes] ([venta_id])
+
+GO
+
+
+USE [GD2C2015]
+GO
+CREATE NONCLUSTERED INDEX ix_paquetes_venta_kg
+ON [MILANESA].[Paquetes] ([venta_id])
+INCLUDE ([paq_kg])
+GO
+
 
 -- PROCEDURES NECESARIOS PARA LA APP ---------------------------------------------------
 

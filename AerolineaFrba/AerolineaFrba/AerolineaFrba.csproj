@@ -110,6 +110,12 @@
     <Compile Include="Compra\CompraForm.Designer.cs">
       <DependentUpon>CompraForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compra\DatosPasajerosForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\DatosPasajerosForm.Designer.cs">
+      <DependentUpon>DatosPasajerosForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConexionSQL.cs" />
     <Compile Include="Consulta Millas\ConsultaMillasForm.cs">
       <SubType>Form</SubType>
@@ -118,6 +124,7 @@
       <DependentUpon>ConsultaMillasForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Contenido\Aeronave.cs" />
+    <Compile Include="Contenido\Pasajero.cs" />
     <Compile Include="Contenido\Tipo_Servicio.cs" />
     <Compile Include="Contenido\Ruta.cs" />
     <Compile Include="Contenido\Funcionalidad.cs" />
@@ -201,6 +208,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Ruta\RutasForm.resx">
       <DependentUpon>RutasForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra\CompraForm.resx">
+      <DependentUpon>CompraForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra\DatosPasajerosForm.resx">
+      <DependentUpon>DatosPasajerosForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generacion Viaje\GenerarViajeForm.resx">
       <DependentUpon>GenerarViajeForm.cs</DependentUpon>
