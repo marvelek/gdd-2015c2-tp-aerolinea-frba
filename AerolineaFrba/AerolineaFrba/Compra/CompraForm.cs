@@ -15,7 +15,10 @@ namespace AerolineaFrba.Compra
     {
         private AeronavesTableAdapter aeronavesTableAdapter = new AeronavesTableAdapter();
         private CiudadesTableAdapter ciudadesTableAdapter = new CiudadesTableAdapter();
+        private PaquetesTableAdapter paquetesTableAdapter = new PaquetesTableAdapter();
+        private PasajesTableAdapter pasajesTableAdapter = new PasajesTableAdapter();
         private RutasTableAdapter rutasTableAdapter = new RutasTableAdapter();
+        private VentasTableAdapter ventasTableAdapter = new VentasTableAdapter();
         private VuelosTableAdapter vuelosTableAdapter = new VuelosTableAdapter();
         private GD2C2015DataSet dataSet = new GD2C2015DataSet();
         private GD2C2015DataSet.CiudadesRow[] origenRow;
@@ -32,6 +35,13 @@ namespace AerolineaFrba.Compra
         {
             if (this.valido())
             {
+                this.aeronavesTableAdapter.Fill(this.dataSet.Aeronaves);
+                this.ciudadesTableAdapter.Fill(this.dataSet.Ciudades);
+                this.paquetesTableAdapter.Fill(this.dataSet.Paquetes);
+                this.pasajesTableAdapter.Fill(this.dataSet.Pasajes);
+                this.rutasTableAdapter.Fill(this.dataSet.Rutas);
+                this.ventasTableAdapter.Fill(this.dataSet.Ventas);
+                this.vuelosTableAdapter.Fill(this.dataSet.Vuelos);
 
                 // Aca usar SP de super_mega_consulta !
                 this.dataGrid.Rows.Add();

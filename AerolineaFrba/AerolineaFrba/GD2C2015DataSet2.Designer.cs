@@ -19544,18 +19544,23 @@ SELECT vue_id, ruta_id, aeronave_id, vue_fecha_salida, vue_fecha_llegada_estimad
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
             this._commandCollection[1].CommandText = @"SELECT vue_id, ruta_id, aeronave_id, vue_fecha_salida, vue_fecha_llegada_estimada, vue_fecha_llegada, vue_activo FROM MILANESA.Vuelos v, MILANESA.Rutas r
-WHERE r.rut_id = ruta_id AND
-r.ciudad_origen_id = @ciudad_origen_id AND
-r.ciudad_destino_id = @ciudad_destino_id AND
-v.aeronave_id = @aeronave_id AND
-ABS(DATEDIFF(hour, vue_fecha_llegada_estimada ,@fecha_llegada)) < 24
-order by ABS(DATEDIFF(second, vue_fecha_llegada_estimada , @fecha_llegada)) asc
-";
+            WHERE r.rut_id = ruta_id AND
+            r.ciudad_origen_id = @ciudad_origen_id AND
+            r.ciudad_destino_id = @ciudad_destino_id AND
+            v.aeronave_id = @aeronave_id AND
+            ABS(DATEDIFF(hour, vue_fecha_llegada_estimada ,@fecha_llegada)) < 24
+            order by ABS(DATEDIFF(second, vue_fecha_llegada_estimada , @fecha_llegada)) asc";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ciudad_origen_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ciudad_origen_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ciudad_destino_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ciudad_destino_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@aeronave_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "aeronave_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fecha_llegada", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].CommandText = "MILANESA.vuelos_disponibles";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.StoredProcedure;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fecha_salida", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 23, 3, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ciudad_origen_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ciudad_destino_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -19586,12 +19591,39 @@ order by ABS(DATEDIFF(second, vue_fecha_llegada_estimada , @fecha_llegada)) asc
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+
         public virtual int FillByOrigenDestinoAeronave(GD2C2015DataSet.VuelosDataTable dataTable, int ciudad_origen_id, int ciudad_destino_id, int aeronave_id, System.DateTime fecha_llegada) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
             this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ciudad_origen_id));
             this.Adapter.SelectCommand.Parameters[1].Value = ((int)(ciudad_destino_id));
             this.Adapter.SelectCommand.Parameters[2].Value = ((int)(aeronave_id));
             this.Adapter.SelectCommand.Parameters[3].Value = ((System.DateTime)(fecha_llegada));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        public virtual int FillByDisponibles(GD2C2015DataSet.VuelosDataTable dataTable, global::System.Nullable<global::System.DateTime> fecha_salida, global::System.Nullable<int> ciudad_origen_id, global::System.Nullable<int> ciudad_destino_id) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((fecha_salida.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(fecha_salida.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((ciudad_origen_id.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((int)(ciudad_origen_id.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((ciudad_destino_id.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[3].Value = ((int)(ciudad_destino_id.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -19609,6 +19641,30 @@ order by ABS(DATEDIFF(second, vue_fecha_llegada_estimada , @fecha_llegada)) asc
             this.Adapter.SelectCommand.Parameters[1].Value = ((int)(ciudad_destino_id));
             this.Adapter.SelectCommand.Parameters[2].Value = ((int)(aeronave_id));
             this.Adapter.SelectCommand.Parameters[3].Value = ((System.DateTime)(fecha_llegada));
+            GD2C2015DataSet.VuelosDataTable dataTable = new GD2C2015DataSet.VuelosDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        public virtual GD2C2015DataSet.VuelosDataTable GetDataByDisponibles(global::System.Nullable<global::System.DateTime> fecha_salida, global::System.Nullable<int> ciudad_origen_id, global::System.Nullable<int> ciudad_destino_id) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((fecha_salida.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(fecha_salida.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((ciudad_origen_id.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((int)(ciudad_origen_id.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((ciudad_destino_id.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[3].Value = ((int)(ciudad_destino_id.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
             GD2C2015DataSet.VuelosDataTable dataTable = new GD2C2015DataSet.VuelosDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;

@@ -209,6 +209,9 @@
     <EmbeddedResource Include="Abm Ruta\RutasForm.resx">
       <DependentUpon>RutasForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Canje Millas\CanjeMillasForm.resx">
+      <DependentUpon>CanjeMillasForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Compra\CompraForm.resx">
       <DependentUpon>CompraForm.cs</DependentUpon>
     </EmbeddedResource>
