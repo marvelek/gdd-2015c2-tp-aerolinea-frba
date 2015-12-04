@@ -2,7 +2,7 @@ USE [GD2C2015]
 GO
 
 
--- INDICES ---------------------------------------------------------
+-- INDICES PARA MIGRACION ---------------------------------------------------------
 
 CREATE NONCLUSTERED INDEX [ix_maestra_ruta]
 ON [gd_esquema].[Maestra] ([Ruta_Precio_BasePasaje])
@@ -661,6 +661,12 @@ ON [MILANESA].[Paquetes] ([venta_id])
 INCLUDE ([paq_kg])
 GO
 
+USE [GD2C2015]
+GO
+CREATE NONCLUSTERED INDEX [<Name of Missing Index, sysname,>]
+ON [MILANESA].[Ventas] ([vuelo_id])
+GO
+
 
 -- PROCEDURES NECESARIOS PARA LA APP ---------------------------------------------------
 
@@ -897,5 +903,43 @@ end
 GO
 
 
+-- PROCEDURES DE VUELOS --
+CREATE PROCEDURE [MILANESA].[vuelos_disponibles]
+(
+	@fecha_salida datetime,
+	@ciudad_origen_id int,
+	@ciudad_destino_id int
+)
+AS
+	SET NOCOUNT OFF;
+
+	select * from (
+	SELECT v.vue_id, 
+	(select aer_kg_disponibles -
+	(select sum(p.paq_kg) from MILANESA.Ventas v1 
+	join MILANESA.Paquetes p ON p.venta_id = v1.ven_id
+	where v1.vuelo_id = v.vue_id
+	and v1.ven_activo = 1
+	and p.paq_activo = 1) 
+	  from milanesa.aeronaves where aer_id = v.aeronave_id) as kg_disponibles,
+		(select count(1)-(select count(1) from MILANESA.Ventas v1 
+	join MILANESA.Pasajes pas ON v1.ven_id = pas.venta_id
+	where v1.vuelo_id = v.vue_id
+	and v1.ven_activo = 1
+	and pas.pas_activo = 1
+	and pas.devolucion_id is null) from milanesa.butacas b where
+	  b.aeronave_id = v.aeronave_id) as butacas_disponibles
+
+	 from MILANESA.Vuelos v 
+	join MILANESA.Rutas r ON v.ruta_id = r.rut_id 
+	where v.vue_activo = 1
+	and r.ciudad_origen_id = @ciudad_origen_id
+	and r.ciudad_destino_id = @ciudad_destino_id
+	and CAST(v.vue_fecha_salida AS DATE) = CAST(@fecha_salida AS DATE)
+	) as query 
+	where query.kg_disponibles > 0
+	and query.butacas_disponibles > 0
+	order by vue_id
+GO
 
 
