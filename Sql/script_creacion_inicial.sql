@@ -272,6 +272,7 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Arribos' AND xtype='U')
 		aeronave_id int REFERENCES MILANESA.Aeronaves NOT NULL,
 		ciudad_origen_id int REFERENCES MILANESA.Ciudades NOT NULL,
 		ciudad_destino_id int REFERENCES MILANESA.Ciudades NOT NULL,
+		arr_destino_correcto int NOT NULL,
 		arr_fecha datetime NOT NULL
 	)
 GO
@@ -597,50 +598,32 @@ GO
 -- CREACION ADMIN ----------------------------------------------------------------------
 
 
-INSERT INTO [MILANESA].[Roles]
-           ([rol_descripcion]
-           ,[rol_activo])
-     VALUES
-           ('Administrador General'
-           ,1)
+INSERT INTO [MILANESA].[Roles] ([rol_descripcion],[rol_activo]) VALUES ('Administrador General', 1)
 GO
 
-INSERT INTO [MILANESA].[Funciones]
-           ([fun_descripcion]
-           ,[fun_activo])
-     VALUES
-           ('Administrar'
-           ,1)
+INSERT INTO [MILANESA].[Funciones] ([fun_descripcion], [fun_activo]) VALUES ('Administrar', 1)
 GO
 
-INSERT INTO [MILANESA].[Funciones]
-           ([fun_descripcion]
-           ,[fun_activo])
-     VALUES
-           ('Vender'
-           ,1)
+INSERT INTO [MILANESA].[Funciones] ([fun_descripcion], [fun_activo]) VALUES ('Vender', 1)
 GO
 
-INSERT INTO [MILANESA].[Funciones_Roles]
-           ([funcion_id]
-           ,[rol_id])
-     VALUES
-           (1
-           ,1)
+INSERT INTO [MILANESA].[Funciones_Roles] ([funcion_id], [rol_id]) VALUES (1,1)
 GO
 
-INSERT INTO [MILANESA].[Usuarios]
-           ([usu_nombre]
-           ,[usu_password]
-           ,[rol_id]
-           ,[usu_intentos_logueo_fallidos]
-           ,[usu_activo])
-     VALUES
-           ('admin'
-           ,HASHBYTES('SHA2_256', 'w23e')
-           ,1
-           ,0
-           ,1)
+INSERT INTO [MILANESA].[Usuarios] ([usu_nombre], [usu_password], [rol_id], [usu_intentos_logueo_fallidos], [usu_activo])
+     VALUES ('admin', HASHBYTES('SHA2_256', 'w23e'), 1, 0, 1)
+GO
+
+INSERT INTO [MILANESA].[Productos] ([pro_descripcion], [pro_cantidad_millas], [pro_activo])
+	 VALUES ('Bicicleta', 400, 1)
+GO
+
+INSERT INTO [MILANESA].[Productos] ([pro_descripcion], [pro_cantidad_millas], [pro_activo])
+	 VALUES ('Celular', 1000, 1)
+GO
+
+INSERT INTO [MILANESA].[Productos] ([pro_descripcion], [pro_cantidad_millas], [pro_activo])
+	 VALUES ('TV LED', 2000, 1)
 GO
 
 -- INDICES PARA LA APP -----------------------------------------------------------------

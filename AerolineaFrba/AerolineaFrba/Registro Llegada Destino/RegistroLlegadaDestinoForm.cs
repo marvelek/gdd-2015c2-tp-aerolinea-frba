@@ -17,6 +17,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
         private CiudadesTableAdapter ciudadesTableAdapter = new CiudadesTableAdapter();
         private RutasTableAdapter rutasTableAdapter = new RutasTableAdapter();
         private VuelosTableAdapter vuelosTableAdapter = new VuelosTableAdapter();
+        private ArribosTableAdapter arribosTableAdapter = new ArribosTableAdapter();
         private GD2C2015DataSet dataSet = new GD2C2015DataSet();
 
         public RegistroLlegadaDestinoForm()
@@ -40,14 +41,29 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             
             if (this.valido(aeronave, ciudadOrigen, ciudadDestino))
             {
+                arribosTableAdapter.Fill(dataSet.Arribos);
+                int ciudad_origen_id = ciudadOrigen.First().ciu_id;
+                int ciudad_destino_id = ciudadDestino.First().ciu_id;
+                int aeronave_id = aeronave.First().aer_id;
+                int destino_correcto = 0;
                 DateTime fechaLlegada = this.fechaLlegada.Value;
-
-                MessageBox.Show("Se registro la llegada del vuelo " + aeronave.First().aer_id + ciudadDestino.First().ciu_descripcion  + " correctamente");
+                this.vuelosTableAdapter.FillByOrigenDestinoAeronave(this.dataSet.Vuelos, ciudad_origen_id, ciudad_destino_id, aeronave_id, fechaLlegada);
+                GD2C2015DataSet.VuelosRow[] vuelos = (GD2C2015DataSet.VuelosRow[]) this.dataSet.Vuelos.Select();
+                GD2C2015DataSet.VuelosRow vuelo = null;
+                if(vuelos.Length >= 1) 
+                {
+                    vuelo = vuelos.First();
+                    vuelo.vue_fecha_llegada = fechaLlegada;
+                    vuelosTableAdapter.Update(vuelo);
+                    destino_correcto = 1;
+                    arribosTableAdapter.Insert(aeronave_id, ciudad_origen_id, ciudad_destino_id, fechaLlegada, destino_correcto);
+                    MessageBox.Show("Se registro la llegada correctamente");
+                } else if (vuelos.Length == 0)
+                {
+                    arribosTableAdapter.Insert(aeronave_id, ciudad_origen_id, ciudad_destino_id, fechaLlegada, destino_correcto);
+                    MessageBox.Show("Se registro la llegada pero el vuelo no debería haber llegado a este aeropuerto");
+                }
                 this.Close();
-            }
-            else
-            {
-                return;
             }
         }
 
