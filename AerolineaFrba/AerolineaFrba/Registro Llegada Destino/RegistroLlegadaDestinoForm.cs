@@ -33,41 +33,71 @@ namespace AerolineaFrba.Registro_Llegada_Destino
 
             GD2C2015DataSet.AeronavesRow[] aeronave = (GD2C2015DataSet.AeronavesRow[])this.dataSet.Aeronaves.Select("aer_matricula='"+ matricula.Text + "'");
             
-            this.ciudadesTableAdapter.FillByDescripcionLower(this.dataSet.Ciudades, origen.Text);
-            GD2C2015DataSet.CiudadesRow[] ciudadOrigen = (GD2C2015DataSet.CiudadesRow[])this.dataSet.Ciudades.Select();
+            GD2C2015DataSet.CiudadesDataTable ciudadOrigen =  this.ciudadesTableAdapter.GetDataByDescripcionLower(origen.Text);
 
-            this.ciudadesTableAdapter.FillByDescripcionLower(this.dataSet.Ciudades, destino.Text);
-            GD2C2015DataSet.CiudadesRow[] ciudadDestino = (GD2C2015DataSet.CiudadesRow[])this.dataSet.Ciudades.Select();
+            GD2C2015DataSet.CiudadesDataTable ciudadDestino = this.ciudadesTableAdapter.GetDataByDescripcionLower(destino.Text);
             
             if (this.valido(aeronave, ciudadOrigen, ciudadDestino))
             {
+                this.origen.Text = ciudadOrigen.First().ciu_descripcion;
+                this.destino.Text = ciudadDestino.First().ciu_descripcion;
                 arribosTableAdapter.Fill(dataSet.Arribos);
                 int ciudad_origen_id = ciudadOrigen.First().ciu_id;
                 int ciudad_destino_id = ciudadDestino.First().ciu_id;
+
+                GD2C2015DataSet.RutasDataTable ruta = this.rutasTableAdapter.GetDataByOrigenDestino(ciudad_origen_id, ciudad_destino_id);
+
+                int ruta_id = 0;
+                   
+                if (ruta.Count() > 0) 
+                {
+                    ruta_id = ruta.First().rut_id;
+                }
+
                 int aeronave_id = aeronave.First().aer_id;
                 int destino_correcto = 0;
                 DateTime fechaLlegada = this.fechaLlegada.Value;
-                this.vuelosTableAdapter.FillByOrigenDestinoAeronave(this.dataSet.Vuelos, ciudad_origen_id, ciudad_destino_id, aeronave_id, fechaLlegada);
-                GD2C2015DataSet.VuelosRow[] vuelos = (GD2C2015DataSet.VuelosRow[]) this.dataSet.Vuelos.Select();
+
+                GD2C2015DataSet.VuelosDataTable vuelos = this.vuelosTableAdapter.GetDataByOrigenDestinoAeronave(ciudad_origen_id, aeronave_id, fechaLlegada);
                 GD2C2015DataSet.VuelosRow vuelo = null;
-                if(vuelos.Length >= 1) 
+                if(vuelos.Count() >= 1) 
                 {
-                    vuelo = vuelos.First();
+                    foreach (GD2C2015DataSet.VuelosRow row in vuelos) 
+                    {
+                        if (row.ruta_id == ruta_id)
+                        {
+                            vuelo = row;
+                            destino_correcto = 1;
+                        }
+                    }
+
+                    if (vuelo == null)
+                    {
+                        vuelo = vuelos.Last();
+                    }
+
                     vuelo.vue_fecha_llegada = fechaLlegada;
                     vuelosTableAdapter.Update(vuelo);
-                    destino_correcto = 1;
                     arribosTableAdapter.Insert(aeronave_id, ciudad_origen_id, ciudad_destino_id, fechaLlegada, destino_correcto);
-                    MessageBox.Show("Se registro la llegada correctamente");
-                } else if (vuelos.Length == 0)
+
+                    if (destino_correcto == 1)
+                    {
+                        MessageBox.Show("Se registró la llegada correctamente");
+                    }
+                    else 
+                    {
+                        MessageBox.Show("Se registró la llegada pero el vuelo no debería haber llegado a este aeropuerto");
+                    }
+                } else if (vuelos.Count() == 0)
                 {
                     arribosTableAdapter.Insert(aeronave_id, ciudad_origen_id, ciudad_destino_id, fechaLlegada, destino_correcto);
-                    MessageBox.Show("Se registro la llegada pero el vuelo no debería haber llegado a este aeropuerto");
+                    MessageBox.Show("Se registró la llegada pero no se encontró un vuelo registrado");
                 }
-                this.Close();
+                this.limpiar_Click(this, null);
             }
         }
 
-        private bool valido(GD2C2015DataSet.AeronavesRow[] aeronave,  GD2C2015DataSet.CiudadesRow[] origen,  GD2C2015DataSet.CiudadesRow[] destino)
+        private bool valido(GD2C2015DataSet.AeronavesRow[] aeronave, GD2C2015DataSet.CiudadesDataTable origen, GD2C2015DataSet.CiudadesDataTable destino)
         {
             string error = null;
 
@@ -84,7 +114,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             {
                 error = error + "Debe seleccionar una ciudad origen\n";
             }
-            else if (origen.Length == 0) 
+            else if (origen.Count == 0) 
             {
                 error = error + "No existe la ciudad de origen\n";
             }
@@ -93,7 +123,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             {
                 error = error + "Debe seleccionar una ciudad destino\n";
             }
-            else if (destino.Length == 0)
+            else if (destino.Count == 0)
             {
                 error = error + "No existe la ciudad de destino\n";
             }
@@ -119,9 +149,6 @@ namespace AerolineaFrba.Registro_Llegada_Destino
 
         private void RegistroLlegadaDestinoForm_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Aeronaves' Puede moverla o quitarla según sea necesario.
-            this.aeronavesTableAdapter1.Fill(this.gD2C2015DataSet.Aeronaves);
-
         }
     }
 }
