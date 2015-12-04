@@ -18,65 +18,31 @@ namespace AerolineaFrba.Registro_Llegada_Destino
         private RutasTableAdapter rutasTableAdapter = new RutasTableAdapter();
         private VuelosTableAdapter vuelosTableAdapter = new VuelosTableAdapter();
         private GD2C2015DataSet dataSet = new GD2C2015DataSet();
-        private int[] matriculasArray;
-        private int[] ciudadesArray;
 
         public RegistroLlegadaDestinoForm()
         {
             InitializeComponent();
             this.fechaLlegada.Value = DateTime.Today;
-            this.fillMatriculas();
-            this.fillCiudades();
-        }
-
-        private void fillCiudades()
-        {
-            this.ciudadOrigen.Items.Clear();
-            this.ciudadDestino.Items.Clear();
-            this.ciudadesTableAdapter.Fill(this.dataSet.Ciudades);
-            GD2C2015DataSet.CiudadesRow[] rows = (GD2C2015DataSet.CiudadesRow[])dataSet.Ciudades.Select("ciu_activo=1");
-            ciudadesArray = new int[rows.Count()];
-            int index = 0;
-            foreach (GD2C2015DataSet.CiudadesRow row in rows)
-            {
-                string aux = row.ciu_descripcion;
-                this.ciudadOrigen.Items.Insert(index, aux);
-                this.ciudadDestino.Items.Insert(index, aux);
-                ciudadesArray[index] = row.ciu_id;
-                index = index + 1;
-            }
-        }
-
-        private void fillMatriculas()
-        {
-            this.matricula.Items.Clear();
-            this.aeronavesTableAdapter.Fill(this.dataSet.Aeronaves);
-            GD2C2015DataSet.AeronavesRow[] rows = (GD2C2015DataSet.AeronavesRow[])dataSet.Aeronaves.Select("aer_activo=1");
-            matriculasArray = new int[rows.Count()];
-            int index = 0;
-            foreach (GD2C2015DataSet.AeronavesRow row in rows)
-            {
-                string aux = row.aer_matricula;
-                this.matricula.Items.Insert(index, aux);
-                matriculasArray[index] = row.aer_id;
-                index = index + 1;
-            }
         }
 
         private void registrar_Click(object sender, EventArgs e)
         {
-            if (this.valido())
+            this.aeronavesTableAdapter.Fill(this.dataSet.Aeronaves);
+            this.rutasTableAdapter.Fill(this.dataSet.Rutas);
+
+            GD2C2015DataSet.AeronavesRow[] aeronave = (GD2C2015DataSet.AeronavesRow[])this.dataSet.Aeronaves.Select("aer_matricula='"+ matricula.Text + "'");
+            
+            this.ciudadesTableAdapter.FillByDescripcionLower(this.dataSet.Ciudades, origen.Text);
+            GD2C2015DataSet.CiudadesRow[] ciudadOrigen = (GD2C2015DataSet.CiudadesRow[])this.dataSet.Ciudades.Select();
+
+            this.ciudadesTableAdapter.FillByDescripcionLower(this.dataSet.Ciudades, destino.Text);
+            GD2C2015DataSet.CiudadesRow[] ciudadDestino = (GD2C2015DataSet.CiudadesRow[])this.dataSet.Ciudades.Select();
+            
+            if (this.valido(aeronave, ciudadOrigen, ciudadDestino))
             {
-                int vueloId = this.obtenerVueloId();
                 DateTime fechaLlegada = this.fechaLlegada.Value;
 
-                this.vuelosTableAdapter.Fill(this.dataSet.Vuelos);
-                GD2C2015DataSet.VuelosRow row = (GD2C2015DataSet.VuelosRow)this.dataSet.Vuelos.Select("vue_id='" + vueloId + "'").First();
-
-                this.vuelosTableAdapter.Update(row.ruta_id, row.aeronave_id, row.vue_fecha_salida, row.vue_fecha_llegada_estimada, fechaLlegada, row.vue_id, row.ruta_id, row.aeronave_id, row.vue_fecha_salida, row.vue_fecha_llegada_estimada, null, vueloId);
-                this.vuelosTableAdapter.Fill(this.dataSet.Vuelos);
-
-                MessageBox.Show("Se registro la llegada del vuelo " + vueloId + " correctamente");
+                MessageBox.Show("Se registro la llegada del vuelo " + aeronave.First().aer_id + ciudadDestino.First().ciu_descripcion  + " correctamente");
                 this.Close();
             }
             else
@@ -85,22 +51,37 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             }
         }
 
-        private bool valido()
+        private bool valido(GD2C2015DataSet.AeronavesRow[] aeronave,  GD2C2015DataSet.CiudadesRow[] origen,  GD2C2015DataSet.CiudadesRow[] destino)
         {
             string error = null;
 
-            if (this.matricula.Text == "" || this.matricula.SelectedIndex == -1)
+            if (this.matricula.Text == "")
             {
                 error = "La matricula no puede ser nula\n";
+            } 
+            else if (aeronave.Length == 0)
+            {
+                error = error + "No existe el aeronave con esa matrícula\n";
             }
-            if (this.ciudadOrigen.Text == "" || this.ciudadOrigen.SelectedIndex == -1)
+
+            if (this.origen.Text == "")
             {
                 error = error + "Debe seleccionar una ciudad origen\n";
             }
-            if (this.ciudadDestino.Text == "" || this.ciudadDestino.SelectedIndex == -1)
+            else if (origen.Length == 0) 
+            {
+                error = error + "No existe la ciudad de origen\n";
+            }
+
+            if (this.destino.Text == "")
             {
                 error = error + "Debe seleccionar una ciudad destino\n";
             }
+            else if (destino.Length == 0)
+            {
+                error = error + "No existe la ciudad de destino\n";
+            }
+
             if (error != null)
             {
                 MessageBox.Show(error);
@@ -108,73 +89,23 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             }
             else
             {
-                if (this.aeronaveNoTeniaQueLlegar())
-                {
-                    error = error + "La aeronave ingresada no tiene un viaje asignado para llegar a la ciudad ingresada\n";
-                }
-                if (error != null)
-                {
-                    MessageBox.Show(error);
-                    return false;
-                }
+                return true;
             }
-            return true;
-        }
-
-        private bool aeronaveNoTeniaQueLlegar()
-        {
-            bool result = false;
-            if (this.obtenerVueloId() == 0)
-            {
-                result = true;
-            }
-            return result;
-        }
-
-        private int obtenerVueloId()
-        {
-            int result = 0;
-            int rutaId = 0;
-            int aeronaveId = this.matriculasArray[this.matricula.SelectedIndex];
-            int ciudadOrigenId = this.ciudadesArray[this.ciudadOrigen.SelectedIndex];
-            int ciudadDestinoId = this.ciudadesArray[this.ciudadDestino.SelectedIndex];
-
-            this.rutasTableAdapter.Fill(this.dataSet.Rutas);
-            GD2C2015DataSet.RutasRow[] rows1 = (GD2C2015DataSet.RutasRow[])this.dataSet.Rutas.Select("ciudad_origen_id='" + ciudadOrigenId + "' AND ciudad_destino_id='" + ciudadDestinoId + "'");
-            if (rows1.Length > 0)
-            {
-                rutaId = rows1.First().rut_id;
-                this.vuelosTableAdapter.Fill(this.dataSet.Vuelos);
-                GD2C2015DataSet.VuelosRow[] rows2 = (GD2C2015DataSet.VuelosRow[])this.dataSet.Vuelos.Select("ruta_id='" + rutaId + "' AND aeronave_id='" + aeronaveId + "' AND vue_fecha_llegada IS NULL");
-                if (rows2.Length > 1)
-                {
-                    foreach (GD2C2015DataSet.VuelosRow row in rows2)
-                    {
-                        if (this.fechaLlegada.Value.Subtract(row.vue_fecha_llegada_estimada).Hours > 24)
-                        {
-                            result = row.vue_id;
-                        }
-                    }
-                    if (result == 0)
-                    {
-                        result = rows2.Last().vue_id;
-                    }
-                }
-                else if (rows2.Length == 1)
-                {
-                    result = rows2.First().vue_id;
-                }
-            }
-
-            return result;
         }
 
         private void limpiar_Click(object sender, EventArgs e)
         {
             this.fechaLlegada.Value = DateTime.Today;
             this.matricula.ResetText();
-            this.ciudadOrigen.ResetText();
-            this.ciudadDestino.ResetText();
+            this.origen.ResetText();
+            this.destino.ResetText();
+        }
+
+        private void RegistroLlegadaDestinoForm_Load(object sender, EventArgs e)
+        {
+            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Aeronaves' Puede moverla o quitarla según sea necesario.
+            this.aeronavesTableAdapter1.Fill(this.gD2C2015DataSet.Aeronaves);
+
         }
     }
 }

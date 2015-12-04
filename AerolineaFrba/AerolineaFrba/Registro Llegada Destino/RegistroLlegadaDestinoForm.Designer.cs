@@ -28,16 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.fechaLlegada = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.matricula = new System.Windows.Forms.ComboBox();
-            this.ciudadOrigen = new System.Windows.Forms.ComboBox();
-            this.ciudadDestino = new System.Windows.Forms.ComboBox();
             this.limpiar = new System.Windows.Forms.Button();
             this.registrar = new System.Windows.Forms.Button();
+            this.matricula = new System.Windows.Forms.TextBox();
+            this.origen = new System.Windows.Forms.TextBox();
+            this.destino = new System.Windows.Forms.TextBox();
+            this.aeronavesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
+            this.aeronavesTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.AeronavesTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.aeronavesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -81,35 +87,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(45, 153);
+            this.label4.Location = new System.Drawing.Point(42, 153);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 13);
             this.label4.TabIndex = 11;
             this.label4.Text = "Ciudad destino:";
-            // 
-            // matricula
-            // 
-            this.matricula.FormattingEnabled = true;
-            this.matricula.Location = new System.Drawing.Point(203, 76);
-            this.matricula.Name = "matricula";
-            this.matricula.Size = new System.Drawing.Size(150, 21);
-            this.matricula.TabIndex = 12;
-            // 
-            // ciudadOrigen
-            // 
-            this.ciudadOrigen.FormattingEnabled = true;
-            this.ciudadOrigen.Location = new System.Drawing.Point(203, 113);
-            this.ciudadOrigen.Name = "ciudadOrigen";
-            this.ciudadOrigen.Size = new System.Drawing.Size(150, 21);
-            this.ciudadOrigen.TabIndex = 13;
-            // 
-            // ciudadDestino
-            // 
-            this.ciudadDestino.FormattingEnabled = true;
-            this.ciudadDestino.Location = new System.Drawing.Point(203, 150);
-            this.ciudadDestino.Name = "ciudadDestino";
-            this.ciudadDestino.Size = new System.Drawing.Size(150, 21);
-            this.ciudadDestino.TabIndex = 14;
             // 
             // limpiar
             // 
@@ -131,16 +113,51 @@
             this.registrar.UseVisualStyleBackColor = true;
             this.registrar.Click += new System.EventHandler(this.registrar_Click);
             // 
+            // matricula
+            // 
+            this.matricula.Location = new System.Drawing.Point(203, 76);
+            this.matricula.Name = "matricula";
+            this.matricula.Size = new System.Drawing.Size(150, 20);
+            this.matricula.TabIndex = 17;
+            // 
+            // origen
+            // 
+            this.origen.Location = new System.Drawing.Point(203, 113);
+            this.origen.Name = "origen";
+            this.origen.Size = new System.Drawing.Size(150, 20);
+            this.origen.TabIndex = 18;
+            // 
+            // destino
+            // 
+            this.destino.Location = new System.Drawing.Point(203, 150);
+            this.destino.Name = "destino";
+            this.destino.Size = new System.Drawing.Size(150, 20);
+            this.destino.TabIndex = 19;
+            // 
+            // aeronavesBindingSource
+            // 
+            this.aeronavesBindingSource.DataMember = "Aeronaves";
+            this.aeronavesBindingSource.DataSource = this.gD2C2015DataSet;
+            // 
+            // gD2C2015DataSet
+            // 
+            this.gD2C2015DataSet.DataSetName = "GD2C2015DataSet";
+            this.gD2C2015DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // aeronavesTableAdapter1
+            // 
+            this.aeronavesTableAdapter1.ClearBeforeFill = true;
+            // 
             // RegistroLlegadaDestinoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(420, 262);
+            this.ClientSize = new System.Drawing.Size(428, 270);
+            this.Controls.Add(this.destino);
+            this.Controls.Add(this.origen);
+            this.Controls.Add(this.matricula);
             this.Controls.Add(this.registrar);
             this.Controls.Add(this.limpiar);
-            this.Controls.Add(this.ciudadDestino);
-            this.Controls.Add(this.ciudadOrigen);
-            this.Controls.Add(this.matricula);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -148,6 +165,9 @@
             this.Controls.Add(this.label1);
             this.Name = "RegistroLlegadaDestinoForm";
             this.Text = "Registro llegada destino";
+            this.Load += new System.EventHandler(this.RegistroLlegadaDestinoForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.aeronavesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,10 +180,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox matricula;
-        private System.Windows.Forms.ComboBox ciudadOrigen;
-        private System.Windows.Forms.ComboBox ciudadDestino;
         private System.Windows.Forms.Button limpiar;
         private System.Windows.Forms.Button registrar;
+        private System.Windows.Forms.TextBox matricula;
+        private System.Windows.Forms.TextBox origen;
+        private System.Windows.Forms.TextBox destino;
+        private GD2C2015DataSet gD2C2015DataSet;
+        private System.Windows.Forms.BindingSource aeronavesBindingSource;
+        private GD2C2015DataSetTableAdapters.AeronavesTableAdapter aeronavesTableAdapter1;
     }
 }
