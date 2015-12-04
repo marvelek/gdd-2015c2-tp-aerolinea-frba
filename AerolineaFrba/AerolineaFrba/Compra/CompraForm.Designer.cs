@@ -42,10 +42,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dataGrid = new System.Windows.Forms.DataGridView();
             this.Vuelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Aeronave = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Servicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ButacasLibres = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KgDisponibles = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ButacasLibres = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
@@ -167,10 +166,9 @@
             this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Vuelo,
-            this.Aeronave,
             this.Servicio,
-            this.ButacasLibres,
             this.KgDisponibles,
+            this.ButacasLibres,
             this.Seleccionar});
             this.dataGrid.Location = new System.Drawing.Point(12, 167);
             this.dataGrid.Name = "dataGrid";
@@ -185,29 +183,23 @@
             this.Vuelo.Name = "Vuelo";
             this.Vuelo.ReadOnly = true;
             // 
-            // Aeronave
-            // 
-            this.Aeronave.HeaderText = "Aeronave";
-            this.Aeronave.Name = "Aeronave";
-            this.Aeronave.ReadOnly = true;
-            // 
             // Servicio
             // 
             this.Servicio.HeaderText = "Servicio";
             this.Servicio.Name = "Servicio";
             this.Servicio.ReadOnly = true;
             // 
-            // ButacasLibres
-            // 
-            this.ButacasLibres.HeaderText = "ButacasLibres";
-            this.ButacasLibres.Name = "ButacasLibres";
-            this.ButacasLibres.ReadOnly = true;
-            // 
             // KgDisponibles
             // 
             this.KgDisponibles.HeaderText = "KgDisponibles";
             this.KgDisponibles.Name = "KgDisponibles";
             this.KgDisponibles.ReadOnly = true;
+            // 
+            // ButacasLibres
+            // 
+            this.ButacasLibres.HeaderText = "ButacasLibres";
+            this.ButacasLibres.Name = "ButacasLibres";
+            this.ButacasLibres.ReadOnly = true;
             // 
             // Seleccionar
             // 
@@ -247,10 +239,9 @@
         private System.Windows.Forms.TextBox destinoViaje;
         private System.Windows.Forms.TextBox origenViaje;
         private System.Windows.Forms.DataGridViewTextBoxColumn Vuelo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Aeronave;
         private System.Windows.Forms.DataGridViewTextBoxColumn Servicio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ButacasLibres;
         private System.Windows.Forms.DataGridViewTextBoxColumn KgDisponibles;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ButacasLibres;
         private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
     }
 }
