@@ -38,15 +38,15 @@
             this.limpiar = new System.Windows.Forms.Button();
             this.buscar = new System.Windows.Forms.Button();
             this.data = new System.Windows.Forms.DataGridView();
+            this.rolidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.roldescripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rol_activo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.rolesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
             this.carga = new System.Windows.Forms.Button();
             this.modificar = new System.Windows.Forms.Button();
             this.eliminar = new System.Windows.Forms.Button();
             this.rolesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.RolesTableAdapter();
-            this.rolidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.roldescripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rol_activo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rolesBindingSource)).BeginInit();
@@ -149,6 +149,28 @@
             this.data.Size = new System.Drawing.Size(543, 134);
             this.data.TabIndex = 6;
             // 
+            // rolidDataGridViewTextBoxColumn
+            // 
+            this.rolidDataGridViewTextBoxColumn.DataPropertyName = "rol_id";
+            this.rolidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.rolidDataGridViewTextBoxColumn.Name = "rolidDataGridViewTextBoxColumn";
+            this.rolidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // roldescripcionDataGridViewTextBoxColumn
+            // 
+            this.roldescripcionDataGridViewTextBoxColumn.DataPropertyName = "rol_descripcion";
+            this.roldescripcionDataGridViewTextBoxColumn.HeaderText = "Descripción";
+            this.roldescripcionDataGridViewTextBoxColumn.Name = "roldescripcionDataGridViewTextBoxColumn";
+            this.roldescripcionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.roldescripcionDataGridViewTextBoxColumn.Width = 300;
+            // 
+            // rol_activo
+            // 
+            this.rol_activo.DataPropertyName = "rol_activo";
+            this.rol_activo.HeaderText = "Activo";
+            this.rol_activo.Name = "rol_activo";
+            this.rol_activo.ReadOnly = true;
+            // 
             // rolesBindingSource
             // 
             this.rolesBindingSource.DataMember = "Roles";
@@ -192,28 +214,6 @@
             // rolesTableAdapter
             // 
             this.rolesTableAdapter.ClearBeforeFill = true;
-            // 
-            // rolidDataGridViewTextBoxColumn
-            // 
-            this.rolidDataGridViewTextBoxColumn.DataPropertyName = "rol_id";
-            this.rolidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.rolidDataGridViewTextBoxColumn.Name = "rolidDataGridViewTextBoxColumn";
-            this.rolidDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // roldescripcionDataGridViewTextBoxColumn
-            // 
-            this.roldescripcionDataGridViewTextBoxColumn.DataPropertyName = "rol_descripcion";
-            this.roldescripcionDataGridViewTextBoxColumn.HeaderText = "Descripción";
-            this.roldescripcionDataGridViewTextBoxColumn.Name = "roldescripcionDataGridViewTextBoxColumn";
-            this.roldescripcionDataGridViewTextBoxColumn.ReadOnly = true;
-            this.roldescripcionDataGridViewTextBoxColumn.Width = 300;
-            // 
-            // rol_activo
-            // 
-            this.rol_activo.DataPropertyName = "rol_activo";
-            this.rol_activo.HeaderText = "Activo";
-            this.rol_activo.Name = "rol_activo";
-            this.rol_activo.ReadOnly = true;
             // 
             // RolesForm
             // 

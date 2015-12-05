@@ -74,7 +74,7 @@ namespace AerolineaFrba.Abm_Aeronave
             }
             else { errores = errores + "Butacas Ventanilla. "; }
             
-            if (this.ComboTipoServicio.SelectedIndex == null)
+            if (this.ComboTipoServicio.SelectedIndex == -1)
             {
                 errores = errores + "Tipo de Servicio. ";
             }

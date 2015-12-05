@@ -12,7 +12,7 @@ namespace AerolineaFrba.Compra
 {
     public partial class CobroForm : Form
     {
-        private Contenido.Pasajero[] pasajeros;
+        public Contenido.Pasajero[] pasajeros;
 
         public CobroForm()
         {

@@ -28,6 +28,7 @@ namespace AerolineaFrba
         public MenuForm()
         {
             InitializeComponent();
+            this.IsMdiContainer = true;
         }
 
         public void setPermisos(int value)
@@ -76,61 +77,71 @@ namespace AerolineaFrba
         private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RolesForm form = new RolesForm();
-            form.ShowDialog();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void rutaAereaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RutasForm form = new RutasForm();
-            form.ShowDialog();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void aeronavesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AltaAeronave form = new AltaAeronave();
-            form.ShowDialog();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void generarViajeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GenerarViajeForm form = new GenerarViajeForm();
-            form.ShowDialog();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void registroDeLlegadaADestinoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RegistroLlegadaDestinoForm form = new RegistroLlegadaDestinoForm();
-            form.ShowDialog();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void compraToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CompraForm form = new CompraForm();
-            form.ShowDialog();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void cancelacionDevolucionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DevolucionForm form = new DevolucionForm();
-            form.ShowDialog();
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void consultaDeMillasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ConsultaMillasForm form = new ConsultaMillasForm();
-            form.ShowDialog();
+            ConsultaMillasForm form = new ConsultaMillasForm(0, 0);
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void canjeDeMillasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CanjeMillasForm form = new CanjeMillasForm();
-            form.ShowDialog();
+            CanjeMillasForm form = new CanjeMillasForm(0, 0);
+            form.MdiParent = this;
+            form.Show();
         }
 
         private void listadoEstadisticoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ListadoEstadisticoForm form = new ListadoEstadisticoForm();
-            form.ShowDialog();
+            form.MdiParent = this;
+            form.Show();
         }
 
     }

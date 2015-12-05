@@ -281,7 +281,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(560, 508);
+            this.ClientSize = new System.Drawing.Size(554, 382);
             this.Controls.Add(this.FabricateTextBox);
             this.Controls.Add(this.buttonLimpiar);
             this.Controls.Add(this.buttonVolver);

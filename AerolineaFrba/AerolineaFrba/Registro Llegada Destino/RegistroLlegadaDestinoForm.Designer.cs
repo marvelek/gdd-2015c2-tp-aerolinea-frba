@@ -63,7 +63,7 @@
             this.fechaLlegada.MinDate = new System.DateTime(2015, 11, 28, 0, 0, 0, 0);
             this.fechaLlegada.Name = "fechaLlegada";
             this.fechaLlegada.Size = new System.Drawing.Size(150, 20);
-            this.fechaLlegada.TabIndex = 8;
+            this.fechaLlegada.TabIndex = 1;
             this.fechaLlegada.Value = new System.DateTime(2015, 11, 28, 12, 16, 57, 0);
             // 
             // label2
@@ -98,7 +98,7 @@
             this.limpiar.Location = new System.Drawing.Point(12, 227);
             this.limpiar.Name = "limpiar";
             this.limpiar.Size = new System.Drawing.Size(75, 23);
-            this.limpiar.TabIndex = 15;
+            this.limpiar.TabIndex = 6;
             this.limpiar.Text = "Limpiar";
             this.limpiar.UseVisualStyleBackColor = true;
             this.limpiar.Click += new System.EventHandler(this.limpiar_Click);
@@ -108,7 +108,7 @@
             this.registrar.Location = new System.Drawing.Point(333, 227);
             this.registrar.Name = "registrar";
             this.registrar.Size = new System.Drawing.Size(75, 23);
-            this.registrar.TabIndex = 16;
+            this.registrar.TabIndex = 7;
             this.registrar.Text = "Registrar";
             this.registrar.UseVisualStyleBackColor = true;
             this.registrar.Click += new System.EventHandler(this.registrar_Click);
@@ -118,21 +118,21 @@
             this.matricula.Location = new System.Drawing.Point(203, 76);
             this.matricula.Name = "matricula";
             this.matricula.Size = new System.Drawing.Size(150, 20);
-            this.matricula.TabIndex = 17;
+            this.matricula.TabIndex = 3;
             // 
             // origen
             // 
             this.origen.Location = new System.Drawing.Point(203, 113);
             this.origen.Name = "origen";
             this.origen.Size = new System.Drawing.Size(150, 20);
-            this.origen.TabIndex = 18;
+            this.origen.TabIndex = 4;
             // 
             // destino
             // 
             this.destino.Location = new System.Drawing.Point(203, 150);
             this.destino.Name = "destino";
             this.destino.Size = new System.Drawing.Size(150, 20);
-            this.destino.TabIndex = 19;
+            this.destino.TabIndex = 5;
             // 
             // aeronavesBindingSource
             // 
@@ -150,6 +150,7 @@
             // 
             // RegistroLlegadaDestinoForm
             // 
+            this.AcceptButton = this.registrar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(428, 270);

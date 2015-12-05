@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AerolineaFrba.Contenido
 {
-    class Pasajero
+    public class Pasajero
     {
         private int id;
         public int Id

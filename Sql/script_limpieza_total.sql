@@ -70,7 +70,8 @@ BEGIN
 	DROP PROCEDURE [MILANESA].[vuelos_disponibles]
 	DROP PROCEDURE MILANESA.arribosInsertar
 	DROP PROCEDURE MILANESA.acreditarMillas
-	DROP PROCEDURE MILANESA.acreditarMillasCliente 
+	DROP PROCEDURE MILANESA.acreditarMillasCliente
+	DROP PROCEDURE MILANESA.historialMillas
 
 END
 

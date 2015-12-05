@@ -135,12 +135,12 @@ namespace AerolineaFrba.Abm_Ruta
                 error = error + "Debe seleccionar por lo menos un tipo de servicio.\n";
             }
 
-            if (this.ciudadOrigen.SelectedValue == "")
+            if (this.ciudadOrigen.SelectedValue.ToString() == "")
             {
                 error = error + "Debe seleccionar una ciudad de origen.\n";
             }
 
-            if (this.ciudadDestino.SelectedValue == "")
+            if (this.ciudadDestino.SelectedValue.ToString() == "")
             {
                 error = error + "Debe seleccionar una ciudad de destino.\n";
             }

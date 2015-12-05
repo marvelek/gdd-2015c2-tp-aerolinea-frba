@@ -93,17 +93,8 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Productos' AND xtype='U')
 		pro_id int identity(1,1) Primary Key,
 		pro_descripcion nvarchar(255) NOT NULL,
 		pro_cantidad_millas numeric(18,0) NOT NULL,
+		pro_stock numeric(18,0) NOT NULL,
 		pro_activo bit NOT NULL DEFAULT 1
-	)
-GO
-
-/*Canjes*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Canjes' AND xtype='U')
-	CREATE TABLE MILANESA.Canjes (
-		can_id int identity(1,1) Primary Key,
-		producto_id int REFERENCES MILANESA.Productos,
-		can_cantidad numeric(18,0) NOT NULL,
-		can_fecha datetime
 	)
 GO
 
@@ -119,6 +110,17 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Clientes' AND xtype='U')
 		cli_mail nvarchar(255),
 		cli_fecha_nacimiento datetime NOT NULL,
 		cli_activo bit NOT NULL DEFAULT 1
+	)
+GO
+
+/*Canjes*/
+IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Canjes' AND xtype='U')
+	CREATE TABLE MILANESA.Canjes (
+		can_id int identity(1,1) Primary Key,
+		cliente_id int REFERENCES MILANESA.Clientes NOT NULL,
+		producto_id int REFERENCES MILANESA.Productos,
+		can_cantidad numeric(18,0) NOT NULL,
+		can_fecha datetime
 	)
 GO
 
@@ -630,16 +632,16 @@ INSERT INTO [MILANESA].[Usuarios] ([usu_nombre], [usu_password], [rol_id], [usu_
      VALUES ('admin', HASHBYTES('SHA2_256', 'w23e'), 1, 0, 1)
 GO
 
-INSERT INTO [MILANESA].[Productos] ([pro_descripcion], [pro_cantidad_millas], [pro_activo])
-	 VALUES ('Bicicleta', 400, 1)
+INSERT INTO [MILANESA].[Productos] ([pro_descripcion], [pro_cantidad_millas], [pro_stock], [pro_activo])
+	 VALUES ('Bicicleta', 400, 10, 1)
 GO
 
-INSERT INTO [MILANESA].[Productos] ([pro_descripcion], [pro_cantidad_millas], [pro_activo])
-	 VALUES ('Celular', 1000, 1)
+INSERT INTO [MILANESA].[Productos] ([pro_descripcion], [pro_cantidad_millas], [pro_stock], [pro_activo])
+	 VALUES ('Celular', 1000, 200, 1)
 GO
 
-INSERT INTO [MILANESA].[Productos] ([pro_descripcion], [pro_cantidad_millas], [pro_activo])
-	 VALUES ('TV LED', 2000, 1)
+INSERT INTO [MILANESA].[Productos] ([pro_descripcion], [pro_cantidad_millas], [pro_stock], [pro_activo])
+	 VALUES ('TV LED', 2000, 50, 1)
 GO
 
 -- INDICES PARA LA APP -----------------------------------------------------------------
@@ -1037,3 +1039,38 @@ AS
 
 	DEALLOCATE cr_cliente_gastado
 GO
+
+CREATE PROCEDURE [MILANESA].historialMillas
+(
+	@cliente_id int
+)
+AS
+	SET NOCOUNT OFF;
+
+SELECT query.movimiento, query.concepto, query.fecha 
+FROM
+	(select
+		m.mil_cantidad as movimiento, 
+		'Vuelo' as concepto,
+		mil_fecha_acreditacion as fecha
+	from MILANESA.Millas m
+	where 
+		m.cliente_id = @cliente_id
+	UNION
+	select
+		(can_cantidad * p.pro_cantidad_millas) * -1 as movimiento,
+		'Canje por: ' + p.pro_descripcion as concepto,
+		c.can_fecha
+	 from MILANESA.Canjes c, MILANESA.Productos p
+	 where
+		p.pro_id = c.producto_id and
+		c.cliente_id = @cliente_id) query
+GROUP BY 
+	query.movimiento, query.concepto, query.fecha
+ORDER BY query.fecha desc
+
+GO
+
+
+
+

@@ -123,6 +123,12 @@
       <DependentUpon>DatosPasajerosForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ConexionSQL.cs" />
+    <Compile Include="Consulta Millas\BusquedaClienteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consulta Millas\BusquedaClienteForm.Designer.cs">
+      <DependentUpon>BusquedaClienteForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Consulta Millas\ConsultaMillasForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,6 +209,9 @@
     <EmbeddedResource Include="Abm Aeronave\AltaAeronave.resx">
       <DependentUpon>AltaAeronave.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ciudad\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\CargarRolForm.resx">
       <DependentUpon>CargarRolForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -224,8 +233,20 @@
     <EmbeddedResource Include="Compra\DatosPasajerosForm.resx">
       <DependentUpon>DatosPasajerosForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Consulta Millas\BusquedaClienteForm.resx">
+      <DependentUpon>BusquedaClienteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consulta Millas\ConsultaMillasForm.resx">
+      <DependentUpon>ConsultaMillasForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Devolucion\DevolucionForm.resx">
+      <DependentUpon>DevolucionForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Generacion Viaje\GenerarViajeForm.resx">
       <DependentUpon>GenerarViajeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\ListadoEstadisticoForm.resx">
+      <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

@@ -31,6 +31,20 @@
             this.components = new System.ComponentModel.Container();
             this.carga = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.precioBaseHasta = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.precioBaseDesde = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.precioKgHasta = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.precioKgDesde = new System.Windows.Forms.TextBox();
+            this.ciudadDestino = new System.Windows.Forms.TextBox();
+            this.ciudadOrigen = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.descripcion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.limpiar = new System.Windows.Forms.Button();
@@ -38,29 +52,15 @@
             this.eliminar = new System.Windows.Forms.Button();
             this.modificar = new System.Windows.Forms.Button();
             this.data = new System.Windows.Forms.DataGridView();
-            this.ciudad_origen_desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ciudad_destino_desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rut_activo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.ciudadOrigen = new System.Windows.Forms.TextBox();
-            this.ciudadDestino = new System.Windows.Forms.TextBox();
-            this.precioKgDesde = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.precioKgHasta = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.precioBaseDesde = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.precioBaseHasta = new System.Windows.Forms.TextBox();
             this.rutidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rutcodigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ciudadorigenidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ciudad_origen_desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ciudaddestinoidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ciudad_destino_desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rutpreciobasekgDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rutpreciobasepasajeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rut_activo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.rutasBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
             this.rutasTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.RutasTableAdapter();
@@ -111,6 +111,133 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de busqueda";
+            // 
+            // precioBaseHasta
+            // 
+            this.precioBaseHasta.Location = new System.Drawing.Point(266, 106);
+            this.precioBaseHasta.Name = "precioBaseHasta";
+            this.precioBaseHasta.Size = new System.Drawing.Size(100, 20);
+            this.precioBaseHasta.TabIndex = 9;
+            this.precioBaseHasta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.precioBaseHasta_KeyPress);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(239, 110);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(14, 13);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "Y";
+            // 
+            // precioBaseDesde
+            // 
+            this.precioBaseDesde.Location = new System.Drawing.Point(123, 109);
+            this.precioBaseDesde.Name = "precioBaseDesde";
+            this.precioBaseDesde.Size = new System.Drawing.Size(100, 20);
+            this.precioBaseDesde.TabIndex = 8;
+            this.precioBaseDesde.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.precioBaseDesde.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.precioBaseDesde_KeyPress);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(22, 113);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(92, 13);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Precio Base Entre";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // precioKgHasta
+            // 
+            this.precioKgHasta.Location = new System.Drawing.Point(266, 76);
+            this.precioKgHasta.Name = "precioKgHasta";
+            this.precioKgHasta.Size = new System.Drawing.Size(100, 20);
+            this.precioKgHasta.TabIndex = 7;
+            this.precioKgHasta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.precioKgHasta_KeyPress);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(239, 80);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(14, 13);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Y";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(22, 83);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(84, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Precio Kg Entre ";
+            // 
+            // precioKgDesde
+            // 
+            this.precioKgDesde.Location = new System.Drawing.Point(123, 79);
+            this.precioKgDesde.Name = "precioKgDesde";
+            this.precioKgDesde.Size = new System.Drawing.Size(100, 20);
+            this.precioKgDesde.TabIndex = 6;
+            this.precioKgDesde.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.precioKgDesde.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.precioKgDesde_KeyPress);
+            // 
+            // ciudadDestino
+            // 
+            this.ciudadDestino.Location = new System.Drawing.Point(351, 49);
+            this.ciudadDestino.Name = "ciudadDestino";
+            this.ciudadDestino.Size = new System.Drawing.Size(100, 20);
+            this.ciudadDestino.TabIndex = 5;
+            // 
+            // ciudadOrigen
+            // 
+            this.ciudadOrigen.Location = new System.Drawing.Point(123, 49);
+            this.ciudadOrigen.Name = "ciudadOrigen";
+            this.ciudadOrigen.Size = new System.Drawing.Size(100, 20);
+            this.ciudadOrigen.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(263, 53);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(82, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Ciudad Destino:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(22, 53);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Ciudad Origen:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "TODOS",
+            "ACTIVO",
+            "INACTIVO"});
+            this.comboBox1.Location = new System.Drawing.Point(351, 19);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 3;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(263, 23);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(43, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Estado:";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // descripcion
             // 
@@ -194,154 +321,6 @@
             this.data.TabIndex = 12;
             this.data.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.data_CellContentClick);
             // 
-            // ciudad_origen_desc
-            // 
-            this.ciudad_origen_desc.DataPropertyName = "ciudad_origen_desc";
-            this.ciudad_origen_desc.HeaderText = "Ciudad Origen";
-            this.ciudad_origen_desc.Name = "ciudad_origen_desc";
-            this.ciudad_origen_desc.ReadOnly = true;
-            // 
-            // ciudad_destino_desc
-            // 
-            this.ciudad_destino_desc.DataPropertyName = "ciudad_destino_desc";
-            this.ciudad_destino_desc.HeaderText = "Ciudad Destino";
-            this.ciudad_destino_desc.Name = "ciudad_destino_desc";
-            this.ciudad_destino_desc.ReadOnly = true;
-            // 
-            // rut_activo
-            // 
-            this.rut_activo.DataPropertyName = "rut_activo";
-            this.rut_activo.HeaderText = "Activo";
-            this.rut_activo.Name = "rut_activo";
-            this.rut_activo.ReadOnly = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(263, 23);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Estado:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "TODOS",
-            "ACTIVO",
-            "INACTIVO"});
-            this.comboBox1.Location = new System.Drawing.Point(351, 19);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 3;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(22, 53);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Ciudad Origen:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(263, 53);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Ciudad Destino:";
-            // 
-            // ciudadOrigen
-            // 
-            this.ciudadOrigen.Location = new System.Drawing.Point(123, 49);
-            this.ciudadOrigen.Name = "ciudadOrigen";
-            this.ciudadOrigen.Size = new System.Drawing.Size(100, 20);
-            this.ciudadOrigen.TabIndex = 4;
-            // 
-            // ciudadDestino
-            // 
-            this.ciudadDestino.Location = new System.Drawing.Point(351, 49);
-            this.ciudadDestino.Name = "ciudadDestino";
-            this.ciudadDestino.Size = new System.Drawing.Size(100, 20);
-            this.ciudadDestino.TabIndex = 5;
-            // 
-            // precioKgDesde
-            // 
-            this.precioKgDesde.Location = new System.Drawing.Point(123, 79);
-            this.precioKgDesde.Name = "precioKgDesde";
-            this.precioKgDesde.Size = new System.Drawing.Size(100, 20);
-            this.precioKgDesde.TabIndex = 6;
-            this.precioKgDesde.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            this.precioKgDesde.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.precioKgDesde_KeyPress);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(22, 83);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(84, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Precio Kg Entre ";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(239, 80);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(14, 13);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Y";
-            // 
-            // precioKgHasta
-            // 
-            this.precioKgHasta.Location = new System.Drawing.Point(266, 76);
-            this.precioKgHasta.Name = "precioKgHasta";
-            this.precioKgHasta.Size = new System.Drawing.Size(100, 20);
-            this.precioKgHasta.TabIndex = 7;
-            this.precioKgHasta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.precioKgHasta_KeyPress);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(22, 113);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(92, 13);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Precio Base Entre";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
-            // 
-            // precioBaseDesde
-            // 
-            this.precioBaseDesde.Location = new System.Drawing.Point(123, 109);
-            this.precioBaseDesde.Name = "precioBaseDesde";
-            this.precioBaseDesde.Size = new System.Drawing.Size(100, 20);
-            this.precioBaseDesde.TabIndex = 8;
-            this.precioBaseDesde.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
-            this.precioBaseDesde.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.precioBaseDesde_KeyPress);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(239, 110);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(14, 13);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "Y";
-            // 
-            // precioBaseHasta
-            // 
-            this.precioBaseHasta.Location = new System.Drawing.Point(266, 106);
-            this.precioBaseHasta.Name = "precioBaseHasta";
-            this.precioBaseHasta.Size = new System.Drawing.Size(100, 20);
-            this.precioBaseHasta.TabIndex = 9;
-            this.precioBaseHasta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.precioBaseHasta_KeyPress);
-            // 
             // rutidDataGridViewTextBoxColumn
             // 
             this.rutidDataGridViewTextBoxColumn.DataPropertyName = "rut_id";
@@ -364,6 +343,13 @@
             this.ciudadorigenidDataGridViewTextBoxColumn.ReadOnly = true;
             this.ciudadorigenidDataGridViewTextBoxColumn.Visible = false;
             // 
+            // ciudad_origen_desc
+            // 
+            this.ciudad_origen_desc.DataPropertyName = "ciudad_origen_desc";
+            this.ciudad_origen_desc.HeaderText = "Ciudad Origen";
+            this.ciudad_origen_desc.Name = "ciudad_origen_desc";
+            this.ciudad_origen_desc.ReadOnly = true;
+            // 
             // ciudaddestinoidDataGridViewTextBoxColumn
             // 
             this.ciudaddestinoidDataGridViewTextBoxColumn.DataPropertyName = "ciudad_destino_id";
@@ -371,6 +357,13 @@
             this.ciudaddestinoidDataGridViewTextBoxColumn.Name = "ciudaddestinoidDataGridViewTextBoxColumn";
             this.ciudaddestinoidDataGridViewTextBoxColumn.ReadOnly = true;
             this.ciudaddestinoidDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // ciudad_destino_desc
+            // 
+            this.ciudad_destino_desc.DataPropertyName = "ciudad_destino_desc";
+            this.ciudad_destino_desc.HeaderText = "Ciudad Destino";
+            this.ciudad_destino_desc.Name = "ciudad_destino_desc";
+            this.ciudad_destino_desc.ReadOnly = true;
             // 
             // rutpreciobasekgDataGridViewTextBoxColumn
             // 
@@ -385,6 +378,13 @@
             this.rutpreciobasepasajeDataGridViewTextBoxColumn.HeaderText = "Precio Base Pasaje";
             this.rutpreciobasepasajeDataGridViewTextBoxColumn.Name = "rutpreciobasepasajeDataGridViewTextBoxColumn";
             this.rutpreciobasepasajeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // rut_activo
+            // 
+            this.rut_activo.DataPropertyName = "rut_activo";
+            this.rut_activo.HeaderText = "Activo";
+            this.rut_activo.Name = "rut_activo";
+            this.rut_activo.ReadOnly = true;
             // 
             // rutasBindingSource
             // 

@@ -20,7 +20,7 @@ namespace AerolineaFrba.Compra
         private int pesoEncomienda;
         private int[] butacasArray;
         private int[] butacasElegidasArray;
-        private Pasajero[] pasajeros;
+        public Pasajero[] pasajeros;
 
         private ClientesTableAdapter clientesTableAdapter = new ClientesTableAdapter();
         private GD2C2015DataSet dataSet = new GD2C2015DataSet();
