@@ -745,33 +745,69 @@ GO
 
 ----------------------------- PROCEDURES DE RUTAS -----------------
 
+CREATE PROCEDURE [MILANESA].[devolucionInsertar]
+(
+	@dev_motivo nvarchar(255),
+	@dev_fecha datetime
+)
+AS
+	SET NOCOUNT OFF;
+	DECLARE @dev_id int
+INSERT INTO MILANESA.Devoluciones
+                         (dev_motivo, dev_fecha)
+VALUES        (@dev_motivo, @dev_fecha);
+	 
+	 
+SET @dev_id = (SELECT dev_id FROM MILANESA.Devoluciones WHERE (dev_id = SCOPE_IDENTITY()))
+return @dev_id
+GO
+
 
 CREATE PROCEDURE [MILANESA].[paqueteBajaPorVenta]
 (
-	@venta_id int
+	@venta_id int,
+	@devolucion_id int
 )
 AS
 UPDATE       MILANESA.Paquetes
-SET                paq_activo = 'false'
+SET                paq_activo = 'false', devolucion_id = @devolucion_id
 WHERE        (venta_id = @venta_id)
 GO
 
 CREATE PROCEDURE [MILANESA].[pasajeBajaPorVenta]
 (
-	@venta_id int
+	@venta_id int,
+	@devolucion_id int
 )
 AS
 UPDATE       MILANESA.Pasajes
-SET                pas_activo = 'false'
+SET                pas_activo = 'false', devolucion_id = @devolucion_id
 WHERE        (venta_id = @venta_id)
 GO
 
 CREATE PROCEDURE [MILANESA].[ventaBajaPorVuelo]
 (
-	@vuelo_id int
+	@vuelo_id int,
+	@devolucion_id int
 )
 AS
 	SET NOCOUNT OFF;	
+	DECLARE @venta int
+	SET NOCOUNT OFF;
+	DECLARE ventas CURSOR 
+	FOR SELECT ven_id from  MILANESA.Ventas where (vuelo_id = @vuelo_id)
+	OPEN ventas
+	FETCH ventas INTO @venta 
+
+		WHILE (@@FETCH_STATUS = 0)
+
+		BEGIN	
+			EXEC MILANESA.pasajeBajaPorVenta @venta,@devolucion_id;
+			EXEC MILANESA.paqueteBajaPorVenta @venta,@devolucion_id;
+			FETCH ventas INTO @venta 
+		END -- Fin del bucle WHILE	
+	CLOSE ventas
+	DEALLOCATE ventas
 UPDATE       MILANESA.Ventas
 SET                ven_activo = 'false'
 WHERE        (vuelo_id = @vuelo_id)
@@ -782,10 +818,27 @@ CREATE PROCEDURE [MILANESA].[vueloBajaPorRuta]
 	@ruta_id int
 )
 AS	
+	DECLARE @vuelo int, @devolucion int, @motivo nvarchar(255), @fecha datetime
+	SET @motivo = 'BAJA DE RUTA'
+	SET @fecha = SYSDATETIME()
+	EXEC @devolucion = MILANESA.devolucionInsertar @motivo,@fecha
 	SET NOCOUNT OFF;
+	DECLARE vuelos CURSOR 
+	FOR SELECT vue_id from  MILANESA.Vuelos where (ruta_id = @ruta_id) and vue_fecha_salida > SYSDATETIME()
+	OPEN vuelos
+	FETCH vuelos INTO @vuelo 
+
+		WHILE (@@FETCH_STATUS = 0)
+
+		BEGIN	
+			EXEC MILANESA.ventaBajaPorVuelo @vuelo,@devolucion;
+			FETCH vuelos INTO @vuelo 
+		END -- Fin del bucle WHILE	
+	CLOSE vuelos
+	DEALLOCATE vuelos			
 UPDATE       MILANESA.Vuelos
 SET                vue_activo = 'false'
-WHERE        (ruta_id = @ruta_id)
+WHERE        (ruta_id = @ruta_id) and  vue_fecha_salida > SYSDATETIME()
 GO
 
 
@@ -870,37 +923,6 @@ AS
 	SET NOCOUNT OFF;
 DELETE FROM MILANESA.Tipos_Servicio_Rutas
 WHERE        (rut_id = @rut_id)
-GO
-
-CREATE TRIGGER [MILANESA].[vueloBajaLogica] ON [MILANESA].[Vuelos]
-after Update
-AS
- if UPDATE(vue_Activo)
- begin
-	DECLARE @activo bit
-	DECLARE @Id int
-	SELECT @activo = vue_Activo, @Id = vue_id FROM inserted
-	IF @activo = 'false'
-	begin
-		EXEC MILANESA.ventaBajaPorVuelo @Id;
-	end
-end
-GO
-
-CREATE TRIGGER [MILANESA].[ventaBajaLogica] ON [MILANESA].[Ventas]
-after Update
-AS
- if UPDATE(ven_Activo)
- begin
-	DECLARE @activo bit
-	DECLARE @Id int
-	SELECT @activo = ven_Activo, @Id = ven_id FROM inserted	
-	IF @activo = 'false'
-	begin
-		EXEC MILANESA.pasajeBajaPorVenta @Id;
-		EXEC MILANESA.paqueteBajaPorVenta @Id;
-	end
-end
 GO
 
 

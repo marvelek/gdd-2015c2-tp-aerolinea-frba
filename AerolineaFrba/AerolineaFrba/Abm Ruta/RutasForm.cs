@@ -97,6 +97,7 @@ namespace AerolineaFrba.Abm_Ruta
             this.rutasTableAdapter.rutaBajaLogica(id);
             // Aca tendria que tener un trigger que se dispare y le saque este rol a los usuarios que lo tengan
             this.rutasTableAdapter.Fill(this.gD2C2015DataSet.Rutas);
+            MessageBox.Show("La ruta ha sido borrada correctamente");
 
         }
 
