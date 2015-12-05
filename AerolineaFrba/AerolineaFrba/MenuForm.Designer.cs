@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.rolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aBMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rutaAereaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aeronavesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viajesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generarViajeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registroDeLlegadaADestinoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +49,6 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rolesToolStripMenuItem,
             this.aBMToolStripMenuItem,
             this.viajesToolStripMenuItem,
             this.pasajesYEncomiendasToolStripMenuItem,
@@ -61,20 +60,12 @@
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // rolesToolStripMenuItem
-            // 
-            this.rolesToolStripMenuItem.Name = "rolesToolStripMenuItem";
-            this.rolesToolStripMenuItem.ShortcutKeyDisplayString = "R";
-            this.rolesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.R)));
-            this.rolesToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-            this.rolesToolStripMenuItem.Text = "&Roles";
-            this.rolesToolStripMenuItem.Click += new System.EventHandler(this.rolesToolStripMenuItem_Click);
-            // 
             // aBMToolStripMenuItem
             // 
             this.aBMToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rutaAereaToolStripMenuItem,
-            this.aeronavesToolStripMenuItem});
+            this.aeronavesToolStripMenuItem,
+            this.rolesToolStripMenuItem});
             this.aBMToolStripMenuItem.Name = "aBMToolStripMenuItem";
             this.aBMToolStripMenuItem.ShortcutKeyDisplayString = "";
             this.aBMToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.A)));
@@ -85,7 +76,7 @@
             // 
             this.rutaAereaToolStripMenuItem.Name = "rutaAereaToolStripMenuItem";
             this.rutaAereaToolStripMenuItem.ShowShortcutKeys = false;
-            this.rutaAereaToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.rutaAereaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rutaAereaToolStripMenuItem.Text = "&Rutas aereas";
             this.rutaAereaToolStripMenuItem.Click += new System.EventHandler(this.rutaAereaToolStripMenuItem_Click);
             // 
@@ -93,9 +84,16 @@
             // 
             this.aeronavesToolStripMenuItem.Name = "aeronavesToolStripMenuItem";
             this.aeronavesToolStripMenuItem.ShowShortcutKeys = false;
-            this.aeronavesToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.aeronavesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aeronavesToolStripMenuItem.Text = "A&eronaves";
             this.aeronavesToolStripMenuItem.Click += new System.EventHandler(this.aeronavesToolStripMenuItem_Click);
+            // 
+            // rolesToolStripMenuItem
+            // 
+            this.rolesToolStripMenuItem.Name = "rolesToolStripMenuItem";
+            this.rolesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rolesToolStripMenuItem.Text = "&Roles";
+            this.rolesToolStripMenuItem.Click += new System.EventHandler(this.rolesToolStripMenuItem1_Click);
             // 
             // viajesToolStripMenuItem
             // 
@@ -193,7 +191,6 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem rolesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aBMToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rutaAereaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aeronavesToolStripMenuItem;
@@ -207,6 +204,7 @@
         private System.Windows.Forms.ToolStripMenuItem consultaDeMillasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem canjeDeMillasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listadoEstadisticoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rolesToolStripMenuItem;
     }
 }
 

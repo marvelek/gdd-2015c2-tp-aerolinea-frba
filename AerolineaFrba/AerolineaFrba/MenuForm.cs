@@ -42,6 +42,8 @@ namespace AerolineaFrba
             this.ocultarMenus();
             if (this.permisos == 1) //ADMIN
             {
+                this.aBMToolStripMenuItem.Visible = true;
+                this.viajesToolStripMenuItem.Visible = true;
                 this.rolesToolStripMenuItem.Visible = true;
                 this.rutaAereaToolStripMenuItem.Visible = true;
                 this.aeronavesToolStripMenuItem.Visible = true;
@@ -55,6 +57,8 @@ namespace AerolineaFrba
             }
             else // CLIENTE
             {
+                ocultarMenus();
+                this.consultaDeMillasToolStripMenuItem.Visible = true;
                 this.compraToolStripMenuItem.Visible = true;
             }
         }
@@ -62,6 +66,8 @@ namespace AerolineaFrba
         private void ocultarMenus()
         {
             // ocultar todos los menus
+            this.aBMToolStripMenuItem.Visible = false;
+            this.viajesToolStripMenuItem.Visible = false;
             this.rolesToolStripMenuItem.Visible = false;
             this.rutaAereaToolStripMenuItem.Visible = false;
             this.aeronavesToolStripMenuItem.Visible = false;
@@ -140,6 +146,13 @@ namespace AerolineaFrba
         private void listadoEstadisticoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ListadoEstadisticoForm form = new ListadoEstadisticoForm();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void rolesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            RolesForm form = new RolesForm();
             form.MdiParent = this;
             form.Show();
         }
