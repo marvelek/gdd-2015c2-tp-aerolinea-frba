@@ -22,10 +22,23 @@ namespace AerolineaFrba.Contenido
        private DateTime fecha_fs;
        private DateTime fecha_reinicio;
        private decimal kg_disponibles;
-       private string matricula;
-       private string modelo;
-       private int Id 
        
+       private string matricula;
+       public string Matricula
+       {
+           get {
+               return matricula;
+           }
+           set
+           {
+               matricula = value;
+           }
+
+       }
+
+
+       private string modelo;
+       public int Id 
        {
            get {
                return id;
@@ -42,7 +55,7 @@ namespace AerolineaFrba.Contenido
            {
                Aeronave aer;
                this.aeronavesTableAdapter.Fill(this.dataSet.Aeronaves);
-               GD2C2015DataSet.AeronavesDataTable result = aeronavesTableAdapter.GetDataBy1(matricula);
+               GD2C2015DataSet.AeronavesDataTable result = aeronavesTableAdapter.GetDataBy4(matricula);
             
             if (result.Count != 0)
             {
@@ -51,10 +64,10 @@ namespace AerolineaFrba.Contenido
                aer.Id = aeronaveRow.aer_id;
                aer.activo = aeronaveRow.aer_activo;
                aer.fabricante= aeronaveRow.aer_fabricante;
-               aer.fecha_alta=aeronaveRow.aer_fecha_alta;
-               aer.fecha_baja_def=aeronaveRow.aer_fecha_baja_definitiva;
-               aer.fecha_fs=aeronaveRow.aer_fecha_fuera_servicio;
-               aer.fecha_reinicio=aeronaveRow.aer_fecha_reinicio_servicio;
+               //aer.fecha_alta=aeronaveRow.aer_fecha_alta;
+               //aer.fecha_baja_def=aeronaveRow.aer_fecha_baja_definitiva;
+               //aer.fecha_fs=aeronaveRow.aer_fecha_fuera_servicio;
+               //aer.fecha_reinicio=aeronaveRow.aer_fecha_reinicio_servicio;
                aer.kg_disponibles=aeronaveRow.aer_kg_disponibles;
                aer.matricula=aeronaveRow.aer_matricula;
                aer.modelo=aeronaveRow.aer_modelo;

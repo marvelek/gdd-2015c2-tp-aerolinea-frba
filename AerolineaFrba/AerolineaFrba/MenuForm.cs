@@ -87,7 +87,7 @@ namespace AerolineaFrba
 
         private void aeronavesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AltaAeronave form = new AltaAeronave();
+            AeronavesForm form = new AeronavesForm();
             form.ShowDialog();
         }
 

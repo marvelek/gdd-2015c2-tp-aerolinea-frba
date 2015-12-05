@@ -51,11 +51,11 @@
             this.aeronavesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gD2C2015DataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
-            this.aeronavesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.AeronavesTableAdapter();
             this.FabricateTextBox = new System.Windows.Forms.TextBox();
             this.butacasBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.butacasTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.ButacasTableAdapter();
             this.tiposServicioBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.aeronavesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.AeronavesTableAdapter();
+            this.butacasTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.ButacasTableAdapter();
             this.tipos_ServicioTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.Tipos_ServicioTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.aeronavesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSetBindingSource)).BeginInit();
@@ -147,25 +147,26 @@
             // 
             // ComboTipoServicio
             // 
+            this.ComboTipoServicio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboTipoServicio.FormattingEnabled = true;
             this.ComboTipoServicio.Location = new System.Drawing.Point(294, 155);
             this.ComboTipoServicio.Name = "ComboTipoServicio";
             this.ComboTipoServicio.Size = new System.Drawing.Size(222, 21);
-            this.ComboTipoServicio.TabIndex = 10;
+            this.ComboTipoServicio.TabIndex = 6;
             // 
             // modeloText
             // 
             this.modeloText.Location = new System.Drawing.Point(297, 44);
             this.modeloText.Name = "modeloText";
             this.modeloText.Size = new System.Drawing.Size(219, 20);
-            this.modeloText.TabIndex = 11;
+            this.modeloText.TabIndex = 2;
             // 
             // ButacasPasilloText
             // 
             this.ButacasPasilloText.Location = new System.Drawing.Point(44, 98);
             this.ButacasPasilloText.Name = "ButacasPasilloText";
             this.ButacasPasilloText.Size = new System.Drawing.Size(219, 20);
-            this.ButacasPasilloText.TabIndex = 12;
+            this.ButacasPasilloText.TabIndex = 3;
             this.ButacasPasilloText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ButacasPasilloText_KeyPress);
             // 
             // ButacasVentanillaText
@@ -173,7 +174,7 @@
             this.ButacasVentanillaText.Location = new System.Drawing.Point(297, 98);
             this.ButacasVentanillaText.Name = "ButacasVentanillaText";
             this.ButacasVentanillaText.Size = new System.Drawing.Size(219, 20);
-            this.ButacasVentanillaText.TabIndex = 13;
+            this.ButacasVentanillaText.TabIndex = 4;
             this.ButacasVentanillaText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ButacasVentanillaText_KeyPress);
             // 
             // kgEncomientasText
@@ -181,7 +182,7 @@
             this.kgEncomientasText.Location = new System.Drawing.Point(44, 207);
             this.kgEncomientasText.Name = "kgEncomientasText";
             this.kgEncomientasText.Size = new System.Drawing.Size(216, 20);
-            this.kgEncomientasText.TabIndex = 14;
+            this.kgEncomientasText.TabIndex = 7;
             this.kgEncomientasText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.kgEncomientasText_KeyPress);
             // 
             // dateTimePickerAlta
@@ -191,7 +192,7 @@
             this.dateTimePickerAlta.Location = new System.Drawing.Point(294, 207);
             this.dateTimePickerAlta.Name = "dateTimePickerAlta";
             this.dateTimePickerAlta.Size = new System.Drawing.Size(219, 20);
-            this.dateTimePickerAlta.TabIndex = 38;
+            this.dateTimePickerAlta.TabIndex = 8;
             // 
             // label8
             // 
@@ -208,7 +209,7 @@
             this.buttonGuardar.Location = new System.Drawing.Point(44, 283);
             this.buttonGuardar.Name = "buttonGuardar";
             this.buttonGuardar.Size = new System.Drawing.Size(216, 44);
-            this.buttonGuardar.TabIndex = 40;
+            this.buttonGuardar.TabIndex = 9;
             this.buttonGuardar.Text = "Guardar";
             this.buttonGuardar.UseVisualStyleBackColor = true;
             this.buttonGuardar.Click += new System.EventHandler(this.buttonGuardar_Click);
@@ -248,30 +249,30 @@
             this.gD2C2015DataSet.DataSetName = "GD2C2015DataSet";
             this.gD2C2015DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // aeronavesTableAdapter
-            // 
-            this.aeronavesTableAdapter.ClearBeforeFill = true;
-            // 
             // FabricateTextBox
             // 
             this.FabricateTextBox.Location = new System.Drawing.Point(44, 154);
             this.FabricateTextBox.Name = "FabricateTextBox";
             this.FabricateTextBox.Size = new System.Drawing.Size(219, 20);
-            this.FabricateTextBox.TabIndex = 44;
+            this.FabricateTextBox.TabIndex = 5;
             // 
             // butacasBindingSource
             // 
             this.butacasBindingSource.DataMember = "Butacas";
             this.butacasBindingSource.DataSource = this.gD2C2015DataSetBindingSource;
             // 
-            // butacasTableAdapter
-            // 
-            this.butacasTableAdapter.ClearBeforeFill = true;
-            // 
             // tiposServicioBindingSource
             // 
             this.tiposServicioBindingSource.DataMember = "Tipos_Servicio";
             this.tiposServicioBindingSource.DataSource = this.gD2C2015DataSetBindingSource;
+            // 
+            // aeronavesTableAdapter
+            // 
+            this.aeronavesTableAdapter.ClearBeforeFill = true;
+            // 
+            // butacasTableAdapter
+            // 
+            this.butacasTableAdapter.ClearBeforeFill = true;
             // 
             // tipos_ServicioTableAdapter
             // 
