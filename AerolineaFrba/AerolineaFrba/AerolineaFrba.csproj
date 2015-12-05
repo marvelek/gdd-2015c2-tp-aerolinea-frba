@@ -104,6 +104,12 @@
     <Compile Include="Canje Millas\CanjeMillasForm.Designer.cs">
       <DependentUpon>CanjeMillasForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compra\CobroForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\CobroForm.Designer.cs">
+      <DependentUpon>CobroForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Compra\CompraForm.cs">
       <SubType>Form</SubType>
     </Compile>
