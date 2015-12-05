@@ -2,6 +2,14 @@
     
     
     public partial class GD2C2015DataSet {
+        partial class estadisticaAeronavesFueraDeServicioDataTable
+        {
+        }
+    
+        partial class estadisticaDestinosPasajesDataTable
+        {
+        }
+    
         partial class AeronavesDataTable
         {
         }

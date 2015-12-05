@@ -72,6 +72,12 @@ BEGIN
 	DROP PROCEDURE MILANESA.acreditarMillas
 	DROP PROCEDURE MILANESA.acreditarMillasCliente
 	DROP PROCEDURE MILANESA.historialMillas
+	DROP PROCEDURE [MILANESA].[devolucionInsertar]
+	DROP PROCEDURE [MILANESA].[estadisticaDestinosPasajes]
+	DROP PROCEDURE [MILANESA].[estadisticaDestinosButacas]
+	DROP PROCEDURE [MILANESA].[estadisticaDestinosCancelados]
+	DROP PROCEDURE [MILANESA].[estadisticaAeronavesFueraDeServicio]
+	DROP PROCEDURE [MILANESA].[estadisticaClientesMillas]
 
 END
 

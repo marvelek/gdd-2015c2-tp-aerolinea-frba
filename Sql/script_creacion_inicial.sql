@@ -771,7 +771,7 @@ CREATE PROCEDURE [MILANESA].[paqueteBajaPorVenta]
 AS
 UPDATE       MILANESA.Paquetes
 SET                paq_activo = 'false', devolucion_id = @devolucion_id
-WHERE        (venta_id = @venta_id)
+WHERE        (venta_id = @venta_id) and paq_activo = 1
 GO
 
 CREATE PROCEDURE [MILANESA].[pasajeBajaPorVenta]
@@ -782,7 +782,7 @@ CREATE PROCEDURE [MILANESA].[pasajeBajaPorVenta]
 AS
 UPDATE       MILANESA.Pasajes
 SET                pas_activo = 'false', devolucion_id = @devolucion_id
-WHERE        (venta_id = @venta_id)
+WHERE        (venta_id = @venta_id) and pas_activo = 1
 GO
 
 CREATE PROCEDURE [MILANESA].[ventaBajaPorVuelo]
@@ -795,7 +795,7 @@ AS
 	DECLARE @venta int
 	SET NOCOUNT OFF;
 	DECLARE ventas CURSOR 
-	FOR SELECT ven_id from  MILANESA.Ventas where (vuelo_id = @vuelo_id)
+	FOR SELECT ven_id from  MILANESA.Ventas where (vuelo_id = @vuelo_id) and ven_activo = 1
 	OPEN ventas
 	FETCH ventas INTO @venta 
 
@@ -810,7 +810,7 @@ AS
 	DEALLOCATE ventas
 UPDATE       MILANESA.Ventas
 SET                ven_activo = 'false'
-WHERE        (vuelo_id = @vuelo_id)
+WHERE        (vuelo_id = @vuelo_id) and ven_activo = 1
 GO
 
 CREATE PROCEDURE [MILANESA].[vueloBajaPorRuta]
@@ -824,7 +824,7 @@ AS
 	EXEC @devolucion = MILANESA.devolucionInsertar @motivo,@fecha
 	SET NOCOUNT OFF;
 	DECLARE vuelos CURSOR 
-	FOR SELECT vue_id from  MILANESA.Vuelos where (ruta_id = @ruta_id) and vue_fecha_salida > SYSDATETIME()
+	FOR SELECT vue_id from  MILANESA.Vuelos where (ruta_id = @ruta_id) and vue_fecha_salida > SYSDATETIME() and vue_activo = 1
 	OPEN vuelos
 	FETCH vuelos INTO @vuelo 
 
@@ -838,7 +838,7 @@ AS
 	DEALLOCATE vuelos			
 UPDATE       MILANESA.Vuelos
 SET                vue_activo = 'false'
-WHERE        (ruta_id = @ruta_id) and  vue_fecha_salida > SYSDATETIME()
+WHERE        (ruta_id = @ruta_id) and  vue_fecha_salida > SYSDATETIME() and vue_activo = 1
 GO
 
 
@@ -1092,6 +1092,141 @@ GROUP BY
 ORDER BY query.fecha desc
 
 GO
+-------------------------------------------------ESTADISTICAS --------------------------------------------
+
+CREATE PROCEDURE [MILANESA].[estadisticaDestinosPasajes]
+(
+	@año int,
+	@mes1 int,
+	@mes2 int
+)
+AS
+	SET NOCOUNT ON;
+	SELECT TOP 5
+		cd.ciu_id,
+		cd.ciu_descripcion,
+		count(pa.pas_Id) as CANTIDAD_PASAJE
+	FROM MILANESA.Rutas ru
+	JOIN MILANESA.Ciudades cd on cd.ciu_id = ru.ciudad_destino_id
+	JOIN MILANESA.Vuelos vu on vu.ruta_id = ru.rut_id
+	JOIN MILANESA.Ventas ve on ve.vuelo_id = vu.vue_id
+	JOIN MILANESA.Pasajes pa on venta_id = ve.ven_id and devolucion_id is null
+	where YEAR(ve.ven_fecha) = @año and MONTH(ve.ven_fecha) between @mes1 and @mes2
+	group by 
+		cd.ciu_id,
+		cd.ciu_descripcion
+	order by CANTIDAD_PASAJE DESC
+GO
+
+CREATE PROCEDURE [MILANESA].[estadisticaDestinosButacas]
+(
+	@año int,
+	@mes1 int,
+	@mes2 int
+)
+AS
+	SET NOCOUNT ON;
+	SELECT TOP 5
+		cd.ciu_id,
+		cd.ciu_descripcion,
+		(count(bu.but_id) - count(pa.pas_Id)) as BUTACAS_DISPONIBLES
+	FROM MILANESA.Rutas ru
+	JOIN MILANESA.Ciudades cd on cd.ciu_id = ru.ciudad_destino_id
+	JOIN MILANESA.Vuelos vu on vu.ruta_id = ru.rut_id
+	JOIN MILANESA.Ventas ve on ve.vuelo_id = vu.vue_id
+	JOIN MILANESA.Pasajes pa on venta_id = ve.ven_id and devolucion_id is null
+	JOIN MILANESA.Aeronaves ae on ae.aer_id = vu.aeronave_id
+	JOIN MILANESA.Butacas bu on bu.aeronave_id = ae.aer_id
+	where YEAR(ve.ven_fecha) = @año and MONTH(ve.ven_fecha) between @mes1 and @mes2
+	group by 
+		cd.ciu_id,
+		cd.ciu_descripcion
+	order by BUTACAS_DISPONIBLES DESC
+GO	
+
+
+
+CREATE PROCEDURE [MILANESA].[estadisticaDestinosCancelados]
+(
+	@año int,
+	@mes1 int,
+	@mes2 int
+)
+AS
+	SET NOCOUNT ON;
+	SELECT TOP 5
+		cd.ciu_id,
+		cd.ciu_descripcion,
+		count(pa.pas_Id) as CANTIDAD_PASAJE
+	FROM MILANESA.Rutas ru
+	JOIN MILANESA.Ciudades cd on cd.ciu_id = ru.ciudad_destino_id
+	JOIN MILANESA.Vuelos vu on vu.ruta_id = ru.rut_id
+	JOIN MILANESA.Ventas ve on ve.vuelo_id = vu.vue_id
+	JOIN MILANESA.Pasajes pa on venta_id = ve.ven_id and devolucion_id is not null
+	where YEAR(ve.ven_fecha) = @año and MONTH(ve.ven_fecha) between @mes1 and @mes2
+	group by 
+		cd.ciu_id,
+		cd.ciu_descripcion
+	order by CANTIDAD_PASAJE DESC
+GO
+
+
+
+CREATE PROCEDURE [MILANESA].[estadisticaAeronavesFueraDeServicio]
+(
+	@año int,
+	@mes1 int,
+	@mes2 int
+)
+AS
+	SET NOCOUNT ON;
+	SELECT TOP 5
+		aer_id,
+		aer_matricula,
+		aer_modelo,
+		aer_kg_disponibles,
+		aer_fabricante,	
+		aer_fecha_fuera_servicio,
+		aer_fecha_reinicio_servicio,
+		DATEDIFF(MINUTE, aer_fecha_fuera_servicio, aer_fecha_reinicio_servicio) as días
+	FROM [MILANESA].[Aeronaves]
+	where YEAR(aer_fecha_fuera_servicio) = @año and MONTH(aer_fecha_fuera_servicio) between @mes1 and @mes2
+	group by 
+		aer_id,
+		aer_matricula,
+		aer_modelo,
+		aer_kg_disponibles,
+		aer_fabricante,	
+		aer_fecha_fuera_servicio,
+		aer_fecha_reinicio_servicio
+	order by días desc
+GO
+
+CREATE PROCEDURE [MILANESA].[estadisticaClientesMillas]
+AS
+	SET NOCOUNT ON;
+	SELECT TOP 5
+		cl.cli_id,
+		cl.cli_nombre,
+		cl.cli_apellido,
+		cl.cli_dni,
+		cl.cli_direccion,
+		cl.cli_telefono,
+		cl.cli_mail,
+		sum(mi.mil_cantidad-mi.mil_canjeadas) as Puntos
+	FROM MILANESA.Clientes cl
+	JOIN MILANESA.Millas mi on  mi.cliente_id = cl.cli_id
+	group by 
+		cl.cli_id,
+		cl.cli_nombre,
+		cl.cli_apellido,
+		cl.cli_dni,
+		cl.cli_direccion,
+		cl.cli_telefono,
+		cl.cli_mail
+	order by Puntos desc 
+GO
+
 
 
 
