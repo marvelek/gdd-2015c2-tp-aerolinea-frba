@@ -51,7 +51,7 @@ namespace AerolineaFrba.Canje_Millas
 
                     if (this.validarSeleccion(cantidadACanjear, millas, stock))
                     {
-                        //TODO: hacer el canje> productosTableAdapter.realizarCanje(clienteId, productoId, cantidadACanjear);
+                        productosTableAdapter.canjearProducto(clienteId, productoId, cantidadACanjear);
                         MessageBox.Show("Se hizo el canje correctamente");
                         this.productosTableAdapter.Fill(this.gD2C2015DataSet.Productos);
                     }

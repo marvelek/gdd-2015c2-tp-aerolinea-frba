@@ -71,13 +71,20 @@ BEGIN
 	DROP PROCEDURE [MILANESA].[tipos_Servicio_RutasBorrar]
 	DROP PROCEDURE [MILANESA].[vuelos_disponibles]
 	DROP PROCEDURE [MILANESA].[arribosInsertar]
-	DROP PROCEDURE [MILANESA].[[acreditarMillas]
+	DROP PROCEDURE [MILANESA].[acreditarMillas]
 	DROP PROCEDURE [MILANESA].[acreditarMillasCliente]
 	DROP PROCEDURE [MILANESA].[historialMillas]
 	DROP PROCEDURE [MILANESA].[devolucionInsertar]
 	DROP PROCEDURE [MILANESA].[millasDisponibles]
 	DROP PROCEDURE [MILANESA].[debitoMillas]
 	DROP PROCEDURE [MILANESA].[canjearProducto]
+	DROP PROCEDURE [MILANESA].[estadisticaDestinosPasajes]
+	DROP PROCEDURE [MILANESA].[estadisticaDestinosButacas]
+	DROP PROCEDURE [MILANESA].[estadisticaDestinosCancelados]
+	DROP PROCEDURE [MILANESA].[estadisticaAeronavesFueraDeServicio]
+	DROP PROCEDURE [MILANESA].[estadisticaClientesMillas]
+
+END
 
 /* Drop Schema*/
 BEGIN
