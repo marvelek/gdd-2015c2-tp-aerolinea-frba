@@ -9,6 +9,8 @@ BEGIN
 	DROP TABLE MILANESA.Paquetes
 	DROP TABLE MILANESA.Pasajes
 	DROP TABLE MILANESA.Ventas
+	DROP TABLE MILANESA.Pagos_Tarjeta
+	DROP TABLE MILANESA.Tarjetas_Credito
 	DROP TABLE MILANESA.Canjes
 	DROP TABLE MILANESA.Productos
 	DROP TABLE MILANESA.Usuarios
@@ -68,12 +70,14 @@ BEGIN
 	DROP PROCEDURE [MILANESA].[tipo_Servicio_RutaInsertar]
 	DROP PROCEDURE [MILANESA].[tipos_Servicio_RutasBorrar]
 	DROP PROCEDURE [MILANESA].[vuelos_disponibles]
-	DROP PROCEDURE MILANESA.arribosInsertar
-	DROP PROCEDURE MILANESA.acreditarMillas
-	DROP PROCEDURE MILANESA.acreditarMillasCliente
-	DROP PROCEDURE MILANESA.historialMillas
-
-END
+	DROP PROCEDURE [MILANESA].[arribosInsertar]
+	DROP PROCEDURE [MILANESA].[[acreditarMillas]
+	DROP PROCEDURE [MILANESA].[acreditarMillasCliente]
+	DROP PROCEDURE [MILANESA].[historialMillas]
+	DROP PROCEDURE [MILANESA].[devolucionInsertar]
+	DROP PROCEDURE [MILANESA].[millasDisponibles]
+	DROP PROCEDURE [MILANESA].[debitoMillas]
+	DROP PROCEDURE [MILANESA].[canjearProducto]
 
 /* Drop Schema*/
 BEGIN

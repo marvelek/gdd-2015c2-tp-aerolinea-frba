@@ -35,13 +35,6 @@
             this.productosBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
             this.productosTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.ProductosTableAdapter();
-            this.proidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prodescripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.procantidadmillasDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prostockDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.canjear = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cantidad = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -51,6 +44,12 @@
             this.nombreLabel = new System.Windows.Forms.Label();
             this.apellidoLabel = new System.Windows.Forms.Label();
             this.millasLabel = new System.Windows.Forms.Label();
+            this.proidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prodescripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.procantidadmillasDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prostockDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidadACanjear = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.canjear = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.productosGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productosBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
@@ -83,11 +82,12 @@
             this.prodescripcionDataGridViewTextBoxColumn,
             this.procantidadmillasDataGridViewTextBoxColumn,
             this.prostockDataGridViewTextBoxColumn,
+            this.cantidadACanjear,
             this.canjear});
             this.productosGrid.DataSource = this.productosBindingSource;
             this.productosGrid.Location = new System.Drawing.Point(33, 153);
             this.productosGrid.Name = "productosGrid";
-            this.productosGrid.Size = new System.Drawing.Size(545, 150);
+            this.productosGrid.Size = new System.Drawing.Size(643, 150);
             this.productosGrid.TabIndex = 4;
             this.productosGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -104,52 +104,6 @@
             // productosTableAdapter
             // 
             this.productosTableAdapter.ClearBeforeFill = true;
-            // 
-            // proidDataGridViewTextBoxColumn
-            // 
-            this.proidDataGridViewTextBoxColumn.DataPropertyName = "pro_id";
-            this.proidDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.proidDataGridViewTextBoxColumn.Name = "proidDataGridViewTextBoxColumn";
-            this.proidDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // prodescripcionDataGridViewTextBoxColumn
-            // 
-            this.prodescripcionDataGridViewTextBoxColumn.DataPropertyName = "pro_descripcion";
-            this.prodescripcionDataGridViewTextBoxColumn.HeaderText = "Descripción";
-            this.prodescripcionDataGridViewTextBoxColumn.Name = "prodescripcionDataGridViewTextBoxColumn";
-            // 
-            // procantidadmillasDataGridViewTextBoxColumn
-            // 
-            this.procantidadmillasDataGridViewTextBoxColumn.DataPropertyName = "pro_cantidad_millas";
-            this.procantidadmillasDataGridViewTextBoxColumn.HeaderText = "Millas requeridas";
-            this.procantidadmillasDataGridViewTextBoxColumn.Name = "procantidadmillasDataGridViewTextBoxColumn";
-            // 
-            // prostockDataGridViewTextBoxColumn
-            // 
-            this.prostockDataGridViewTextBoxColumn.DataPropertyName = "pro_stock";
-            this.prostockDataGridViewTextBoxColumn.HeaderText = "Stock";
-            this.prostockDataGridViewTextBoxColumn.Name = "prostockDataGridViewTextBoxColumn";
-            // 
-            // canjear
-            // 
-            this.canjear.HeaderText = "Canjear";
-            this.canjear.Name = "canjear";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(476, 110);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Cantidad:";
-            // 
-            // cantidad
-            // 
-            this.cantidad.Location = new System.Drawing.Point(534, 107);
-            this.cantidad.Name = "cantidad";
-            this.cantidad.Size = new System.Drawing.Size(35, 20);
-            this.cantidad.TabIndex = 6;
             // 
             // button1
             // 
@@ -220,11 +174,60 @@
             this.millasLabel.Size = new System.Drawing.Size(0, 13);
             this.millasLabel.TabIndex = 15;
             // 
+            // proidDataGridViewTextBoxColumn
+            // 
+            this.proidDataGridViewTextBoxColumn.DataPropertyName = "pro_id";
+            this.proidDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.proidDataGridViewTextBoxColumn.Name = "proidDataGridViewTextBoxColumn";
+            this.proidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // prodescripcionDataGridViewTextBoxColumn
+            // 
+            this.prodescripcionDataGridViewTextBoxColumn.DataPropertyName = "pro_descripcion";
+            this.prodescripcionDataGridViewTextBoxColumn.HeaderText = "Descripción";
+            this.prodescripcionDataGridViewTextBoxColumn.Name = "prodescripcionDataGridViewTextBoxColumn";
+            this.prodescripcionDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // procantidadmillasDataGridViewTextBoxColumn
+            // 
+            this.procantidadmillasDataGridViewTextBoxColumn.DataPropertyName = "pro_cantidad_millas";
+            this.procantidadmillasDataGridViewTextBoxColumn.HeaderText = "Millas requeridas";
+            this.procantidadmillasDataGridViewTextBoxColumn.Name = "procantidadmillasDataGridViewTextBoxColumn";
+            this.procantidadmillasDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // prostockDataGridViewTextBoxColumn
+            // 
+            this.prostockDataGridViewTextBoxColumn.DataPropertyName = "pro_stock";
+            this.prostockDataGridViewTextBoxColumn.HeaderText = "Stock";
+            this.prostockDataGridViewTextBoxColumn.Name = "prostockDataGridViewTextBoxColumn";
+            this.prostockDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // cantidadACanjear
+            // 
+            this.cantidadACanjear.HeaderText = "Cantidad";
+            this.cantidadACanjear.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.cantidadACanjear.Name = "cantidadACanjear";
+            // 
+            // canjear
+            // 
+            this.canjear.HeaderText = "Canjear";
+            this.canjear.Name = "canjear";
+            // 
             // CanjeMillasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(630, 354);
+            this.ClientSize = new System.Drawing.Size(735, 354);
             this.Controls.Add(this.millasLabel);
             this.Controls.Add(this.apellidoLabel);
             this.Controls.Add(this.nombreLabel);
@@ -232,8 +235,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.cantidad);
             this.Controls.Add(this.productosGrid);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dni);
@@ -256,13 +257,6 @@
         private GD2C2015DataSet gD2C2015DataSet;
         private System.Windows.Forms.BindingSource productosBindingSource;
         private GD2C2015DataSetTableAdapters.ProductosTableAdapter productosTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn proidDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn prodescripcionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn procantidadmillasDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn prostockDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewButtonColumn canjear;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox cantidad;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -272,5 +266,11 @@
         private System.Windows.Forms.Label nombreLabel;
         private System.Windows.Forms.Label apellidoLabel;
         private System.Windows.Forms.Label millasLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn prodescripcionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn procantidadmillasDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn prostockDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn cantidadACanjear;
+        private System.Windows.Forms.DataGridViewButtonColumn canjear;
     }
 }

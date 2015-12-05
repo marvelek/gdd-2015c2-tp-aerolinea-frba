@@ -7,14 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba.Canje_Millas;
 
 namespace AerolineaFrba.Consulta_Millas
 {
     public partial class BusquedaClienteForm : Form
     {
-        public BusquedaClienteForm(string dni)
+
+        private string retorno;
+        public BusquedaClienteForm(string dni, string retornoParam)
         {
             InitializeComponent();
+            retorno = retornoParam;
             this.dni.Text = dni;
             this.dni.Enabled = false;
         }
@@ -41,10 +45,20 @@ namespace AerolineaFrba.Consulta_Millas
                 {
                     int clienteId = cliente.First().cli_id;
                     int clienteDni = cliente.First().cli_dni;
-                    ConsultaMillasForm form = new ConsultaMillasForm(clienteId, clienteDni);
-                    form.MdiParent = this.MdiParent;
-                    form.Show();
-                    this.Close();
+
+                    if (retorno == "Consulta")
+                    {
+                        ConsultaMillasForm form = new ConsultaMillasForm(clienteId, clienteDni);
+                        form.MdiParent = this.MdiParent;
+                        form.Show();
+                        this.Close();
+                    }
+                    else {
+                        CanjeMillasForm form = new CanjeMillasForm(clienteId, clienteDni);
+                        form.MdiParent = this.MdiParent;
+                        form.Show();
+                        this.Close();
+                    }
                 }
             }
         }

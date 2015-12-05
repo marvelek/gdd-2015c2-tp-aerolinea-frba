@@ -234,12 +234,39 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Vuelos' AND xtype='U')
 	)
 GO
 
+/*Tarjetas_Credito*/
+IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Tarjetas_Credito' AND xtype='U')
+	CREATE TABLE MILANESA.Tarjetas_Credito (
+		tac_id int identity(1,1) Primary Key,
+		tac_descripcion nvarchar(255) NOT NULL,
+		tac_admite_cuotas BIT DEFAULT 1,
+		tac_activo BIT DEFAULT 1
+	)
+GO
+
+INSERT INTO MILANESA.Tarjetas_Credito (tac_descripcion) VALUES ('Visa')
+GO
+INSERT INTO MILANESA.Tarjetas_Credito (tac_descripcion, tac_admite_cuotas) VALUES ('Master Card', 0)
+GO
+INSERT INTO MILANESA.Tarjetas_Credito (tac_descripcion) VALUES ('American Express')
+GO
+
+/*Pagos_Tarjeta*/
+IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Pagos_Tarjeta' AND xtype='U')
+	CREATE TABLE MILANESA.Pagos_Tarjeta (
+		pat_id int identity(1,1) Primary Key,
+		pat_numero_tarjeta numeric(12,0),
+		tarjeta_credito_id int REFERENCES MILANESA.Tarjetas_Credito
+	)
+GO
+
 /*Ventas*/
 IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Ventas' AND xtype='U')
 	CREATE TABLE MILANESA.Ventas (
 		ven_id int identity(1,1) Primary Key,
 		comprador_id int REFERENCES MILANESA.Clientes NOT NULL,
 		vuelo_id int REFERENCES MILANESA.Vuelos NOT NULL,
+		pago_tarjeta_id int REFERENCES MILANESA.Pagos_Tarjeta,
 		ven_fecha datetime NOT NULL,
 		ven_activo bit NOT NULL DEFAULT 1
 	)
@@ -943,7 +970,8 @@ AS
 	join MILANESA.Paquetes p ON p.venta_id = v1.ven_id
 	where v1.vuelo_id = v.vue_id
 	and v1.ven_activo = 1
-	and p.paq_activo = 1) 
+	and p.paq_activo = 1
+	and p.devolucion_id is null) 
 	  from milanesa.aeronaves where aer_id = v.aeronave_id) as kg_disponibles,
 		(select count(1)-(select count(1) from MILANESA.Ventas v1 
 	join MILANESA.Pasajes pas ON v1.ven_id = pas.venta_id
@@ -1017,7 +1045,7 @@ AS
 		FROM
 			(SELECT
 				C.cli_id,
-				P.pas_precio as pesos_gastados
+				SUM(P.pas_precio) as pesos_gastados
 			FROM
 				MILANESA.Ventas VE,
 				MILANESA.Vuelos VU,
@@ -1027,11 +1055,14 @@ AS
 				VE.ven_id = P.venta_id AND
 				VE.vuelo_id = VU.vue_id AND
 				C.cli_id = P.pasajero_id AND
-				VU.vue_id = @vuelo_id
+				VU.vue_id = @vuelo_id AND
+				P.pas_activo = 1 AND
+				P.devolucion_id IS NULL
+			GROUP BY C.cli_id
 			UNION
 			SELECT
 				C.cli_id,
-				P.paq_precio as pesos_gastados
+				SUM(P.paq_precio) as pesos_gastados
 			FROM
 				MILANESA.Ventas VE,
 				MILANESA.Vuelos VU,
@@ -1041,7 +1072,10 @@ AS
 				VE.ven_id = P.venta_id AND
 				VE.vuelo_id = VU.vue_id AND
 				C.cli_id = VE.comprador_id AND
-				VU.vue_id = @vuelo_id) QUERY
+				VU.vue_id = @vuelo_id AND
+				P.paq_activo = 1 AND
+				P.devolucion_id IS NULL
+			GROUP BY C.cli_id ) QUERY
 		GROUP BY QUERY.cli_id;
 
 	OPEN cr_cliente_gastado
@@ -1093,6 +1127,105 @@ ORDER BY query.fecha desc
 
 GO
 
+CREATE PROCEDURE MILANESA.millasDisponibles
+(
+	@clienteId int
+)
+AS
+	SET NOCOUNT OFF;
+	DECLARE
+		@return int
+SELECT
+	@return = ISNULL(SUM(m.mil_cantidad - m.mil_canjeadas), 0)
+FROM
+	MILANESA.Millas m
+WHERE
+	m.cliente_id = @clienteId AND
+	DATEDIFF(day, SYSDATETIME(), m.mil_fecha_acreditacion) < 365
 
+	RETURN(@return)
+GO
+
+CREATE PROCEDURE MILANESA.debitoMillas
+(
+	@costoEnMillas int,
+	@clienteId int
+)
+AS
+	SET NOCOUNT OFF;
+
+DECLARE @idMillaActual int, @totales int, @canjeadas int, @diferencia int, @costoEnMillasRestante int, @costoEnMillasRestanteActual int
+	
+	SET @costoEnMillasRestante = @costoEnMillas
+
+	DECLARE cr_millas_disponibles CURSOR
+	FOR
+		SELECT
+			m.mil_id as id,
+ 			m.mil_cantidad as totales,
+			m.mil_canjeadas as canjeadas
+		FROM MILANESA.Millas m
+		WHERE 
+			m.cliente_id = @clienteId AND
+			DATEDIFF(day, SYSDATETIME(), m.mil_fecha_acreditacion) < 365
+		ORDER BY m.mil_fecha_acreditacion asc
+
+	OPEN cr_millas_disponibles
+
+	FETCH cr_millas_disponibles INTO @idMillaActual, @totales, @canjeadas
+
+	WHILE(@@FETCH_STATUS = 0 AND @costoEnMillasRestante > 0)
+
+	BEGIN
+
+		SET @costoEnMillasRestanteActual = @costoEnMillasRestante - @totales + @canjeadas
+
+		IF @costoEnMillasRestanteActual > 0
+			UPDATE MILANESA.Millas SET mil_canjeadas = @costoEnMillasRestante - @costoEnMillasRestanteActual + @canjeadas WHERE mil_id = @idMillaActual	
+		ELSE
+			UPDATE MILANESA.Millas SET mil_canjeadas = @costoEnMillasRestante + @canjeadas WHERE mil_id = @idMillaActual	
+
+		SET @costoEnMillasRestante = @costoEnMillasRestanteActual
+		FETCH NEXT FROM cr_millas_disponibles INTO @idMillaActual, @totales, @canjeadas
+
+	END
+
+	CLOSE cr_millas_disponibles
+
+	DEALLOCATE cr_millas_disponibles
+
+GO
+
+CREATE PROCEDURE MILANESA.canjearProducto
+(
+	@clienteId int,
+	@productoId int,
+	@cantidad int
+)
+AS
+	SET NOCOUNT OFF;
+
+	DECLARE @millasDisponibles int, @costoEnMillas int, @stockDisponible int
+
+	EXEC @millasDisponibles = MILANESA.millasDisponibles @clienteId
+
+	SELECT 
+		@costoEnMillas = p.pro_cantidad_millas * @cantidad,
+		@stockDisponible = p.pro_stock
+	 FROM MILANESA.Productos p 
+	 WHERE p.pro_id = @productoId
+
+	if @costoEnMillas > @millasDisponibles
+		THROW 60601,'Las millas acumuladas no son suficientes para el canje', 1;
+	else if @cantidad > @stockDisponible
+		THROW 60602,'No alcanza el stock para la cantidad seleccionada', 1;
+
+	EXEC MILANESA.debitoMillas @costoEnMillas, @clienteId
+
+	INSERT INTO MILANESA.Canjes (cliente_id, producto_id, can_cantidad, can_fecha) VALUES (@clienteId, @productoId, @cantidad, SYSDATETIME())
+
+	UPDATE MILANESA.Productos SET pro_stock = @stockDisponible - @cantidad WHERE pro_id = @productoId
+
+GO
 
 

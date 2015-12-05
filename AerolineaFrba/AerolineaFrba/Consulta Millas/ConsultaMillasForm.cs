@@ -40,7 +40,7 @@ namespace AerolineaFrba.Consulta_Millas
                 }
                 else if (result.Length > 1)
                 {
-                    BusquedaClienteForm form = new BusquedaClienteForm(this.dni.Text);
+                    BusquedaClienteForm form = new BusquedaClienteForm(this.dni.Text, "Consulta");
                     form.MdiParent = this.MdiParent;
                     form.Show();
                     this.Close();

@@ -15,10 +15,13 @@ namespace AerolineaFrba.Canje_Millas
     {
         int clienteId;
         int millasAcumuladas;
+        bool volverABuscar = false;
 
         public CanjeMillasForm(int clienteIdParam, int dni)
         {
             InitializeComponent();
+            this.productosTableAdapter.Fill(this.gD2C2015DataSet.Productos);
+            this.clientesTableAdapter1.Fill(this.gD2C2015DataSet.Clientes);
             clienteId = clienteIdParam;
             if (clienteId != 0)
             {
@@ -29,36 +32,26 @@ namespace AerolineaFrba.Canje_Millas
 
         private void CanjeMillasForm_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Productos' Puede moverla o quitarla según sea necesario.
-            this.productosTableAdapter.Fill(this.gD2C2015DataSet.Productos);
-            this.clientesTableAdapter1.Fill(this.gD2C2015DataSet.Clientes);
 
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 4)
+            if (e.ColumnIndex == 5)
             {
                 if (this.valido())
                 {
                     DataGridViewRow row = productosGrid.Rows[e.RowIndex];
-                    DataGridViewCell productoIdCell = row.Cells[0];
-                    int cantidadACanjear = Convert.ToInt32(this.cantidad.Text);
+                    int productoId = Convert.ToInt32(row.Cells[0].Value);
+                    int cantidadACanjear = Convert.ToInt32(row.Cells[4].Value);
+                    System.Diagnostics.Debug.Write(cantidadACanjear);
                     int millas = Convert.ToInt32(row.Cells[2].Value);
                     int stock = Convert.ToInt32(row.Cells[3].Value);
                     int cantidadMillasTotal = cantidadACanjear * millas;
-                    
-                    if (cantidadACanjear > stock)
+
+                    if (this.validarSeleccion(cantidadACanjear, millas, stock))
                     {
-                        MessageBox.Show("No hay stock suficiente del producto");
-                    }
-                    else if (cantidadACanjear*millas > millasAcumuladas)
-                    {
-                        MessageBox.Show("Las millas acumuladas no alcanzan para realizar el canje");
-                    }
-                    else
-                    {
-                        //TODO: hacer el canje
+                        //TODO: hacer el canje> productosTableAdapter.realizarCanje(clienteId, productoId, cantidadACanjear);
                         MessageBox.Show("Se hizo el canje correctamente");
                         this.productosTableAdapter.Fill(this.gD2C2015DataSet.Productos);
                     }
@@ -74,9 +67,29 @@ namespace AerolineaFrba.Canje_Millas
             {
                 error = "El DNI no puede ser nulo y solo debe contener numeros\n";
             }
-            if (this.cantidad.Text == "" || !validador.IsNumber(this.cantidad.Text))
+            if (error != null)
             {
-                error = error + "La cantidad no puede ser nulo y solo debe contener numeros\n";
+                MessageBox.Show(error);
+                return false;
+            }
+            return true;
+        }
+
+        private Boolean validarSeleccion(int cantidadACanjear, int millas, int stock)
+        {
+            Utiles validador = new Utiles();
+            string error = null;
+            if (cantidadACanjear == 0)
+            {
+                error = "Seleccione una cantidad a canjear\n";
+            }
+            if (cantidadACanjear * millas > millasAcumuladas)
+            {
+                error = error + ("Las millas acumuladas no alcanzan para realizar el canje\n");
+            }
+            if (cantidadACanjear > stock)
+            {
+                error = error + ("No hay stock suficiente del producto para la cantidad seleccionada\n");
             }
             if (error != null)
             {
@@ -88,7 +101,18 @@ namespace AerolineaFrba.Canje_Millas
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (clienteId == 0 && this.valido())
+            if (this.clienteId != 0 && !this.volverABuscar)
+            {
+                GD2C2015DataSet.ClientesRow[] result = (GD2C2015DataSet.ClientesRow[])this.gD2C2015DataSet.Clientes.Select("cli_id='" + clienteId + "'");
+                GD2C2015DataSet.ClientesRow row = result.First();
+                clienteId = row.cli_id;
+                this.nombreLabel.Text = row.cli_nombre;
+                this.apellidoLabel.Text = row.cli_apellido;
+                millasAcumuladas = Convert.ToInt32(this.historialMillasTableAdapter1.millasDisponibles(clienteId));
+                millasLabel.Text = millasAcumuladas.ToString();
+                this.volverABuscar = true;
+            } 
+            else if (this.valido())
             {
                 GD2C2015DataSet.ClientesRow[] result = (GD2C2015DataSet.ClientesRow[])this.gD2C2015DataSet.Clientes.Select("cli_dni='" + this.dni.Text + "' AND cli_activo=1");
                 if (result.Length == 0)
@@ -98,7 +122,7 @@ namespace AerolineaFrba.Canje_Millas
                 }
                 else if (result.Length > 1)
                 {
-                    BusquedaClienteForm form = new BusquedaClienteForm(this.dni.Text);
+                    BusquedaClienteForm form = new BusquedaClienteForm(this.dni.Text, "Canje");
                     form.MdiParent = this.MdiParent;
                     form.Show();
                     this.Close();
@@ -111,6 +135,7 @@ namespace AerolineaFrba.Canje_Millas
                     this.apellidoLabel.Text = row.cli_apellido;
                     millasAcumuladas = Convert.ToInt32(this.historialMillasTableAdapter1.millasDisponibles(clienteId));
                     millasLabel.Text = millasAcumuladas.ToString();
+                    this.volverABuscar = true;
                 }
             }
         }
