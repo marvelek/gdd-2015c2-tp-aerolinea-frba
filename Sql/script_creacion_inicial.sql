@@ -1264,6 +1264,39 @@ AS
 	order by Puntos desc 
 GO
 
+CREATE PROCEDURE [MILANESA].[AeronavesBuscar]
+(
+	@matricula nvarchar(255)
+)
+AS
+	SET NOCOUNT ON;
+SELECT aer_id, tipo_servicio_id, aer_matricula, aer_modelo, aer_kg_disponibles, aer_fabricante, aer_fecha_fuera_servicio, aer_fecha_reinicio_servicio, aer_fecha_baja_definitiva, aer_activo FROM MILANESA.Aeronaves
+WHERE (CAST(aer_matricula as varchar(18)) LIKE '%' + @matricula + '%')
+GO
+
+ CREATE PROCEDURE [MILANESA].[AeronavesInsert]
+(
+	@tipo_servicio_id int,
+	@aer_matricula nvarchar(255),
+	@aer_modelo nvarchar(255),
+	@aer_kg_disponibles numeric(18, 0),
+	@aer_fabricante nvarchar(255)
+)
+AS
+	SET NOCOUNT OFF;
+INSERT INTO [MILANESA].[Aeronaves] ([tipo_servicio_id], [aer_matricula],[aer_fecha_alta], [aer_modelo], [aer_kg_disponibles], [aer_fabricante], [aer_activo]) VALUES (@tipo_servicio_id, @aer_matricula,GETDATE(), @aer_modelo, @aer_kg_disponibles, @aer_fabricante, 1)
+GO
+
+CREATE PROCEDURE [MILANESA].[ButacasInsert]
+(
+	@aeronave_id int,
+	@but_numero numeric(18, 0),
+	@but_tipo nvarchar(255)
+)
+AS
+	SET NOCOUNT OFF;
+INSERT INTO [MILANESA].[Butacas] ([aeronave_id], [but_numero], [but_tipo], [but_piso], [but_activo]) VALUES (@aeronave_id, @but_numero, @but_tipo, 1, 1)
+GO
 
 CREATE PROCEDURE MILANESA.millasDisponibles
 (

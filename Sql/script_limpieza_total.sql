@@ -83,8 +83,10 @@ BEGIN
 	DROP PROCEDURE [MILANESA].[estadisticaDestinosCancelados]
 	DROP PROCEDURE [MILANESA].[estadisticaAeronavesFueraDeServicio]
 	DROP PROCEDURE [MILANESA].[estadisticaClientesMillas]
-
-END	
+	DROP PROCEDURE MILANESA.ButacasInsert
+	DROP PROCEDURE MILANESA.AeronavesBuscar
+	DROP PROCEDURE MILANESA.AeronavesInsert
+END
 
 /* Drop Schema*/
 BEGIN
