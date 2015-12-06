@@ -39,6 +39,9 @@ BEGIN
 	DROP PROCEDURE MILANESA.sp_migracion_ventas
 	DROP PROCEDURE MILANESA.sp_migracion_pasajes
 	DROP PROCEDURE MILANESA.sp_migracion_paquetes
+	DROP PROCEDURE MILANESA.ButacasInsert
+	DROP PROCEDURE MILANESA.AeronavesBuscar
+	DROP PROCEDURE MILANESA.AeronavesInsert
 END
 
 /* Drop Schema*/
