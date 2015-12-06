@@ -41,19 +41,7 @@ namespace AerolineaFrba.Compra
                 int ciudad_origen_id = ciudadOrigen.First().ciu_id;
                 int ciudad_destino_id = ciudadDestino.First().ciu_id;
 
-                this.aeronavesTableAdapter.Fill(this.dataSet.Aeronaves);
-                this.ciudadesTableAdapter.Fill(this.dataSet.Ciudades);
-                this.paquetesTableAdapter.Fill(this.dataSet.Paquetes);
-                this.pasajesTableAdapter.Fill(this.dataSet.Pasajes);
-                this.rutasTableAdapter.Fill(this.dataSet.Rutas);
-                this.ventasTableAdapter.Fill(this.dataSet.Ventas);
-                this.vuelosTableAdapter.Fill(this.dataSet.Vuelos);
-
-                GD2C2015DataSet.vuelos_disponiblesDataTable data = this.vuelosDisponiblesTableAdapter.GetData(this.fechaViaje.Value, ciudad_origen_id, ciudad_destino_id);
-                foreach (GD2C2015DataSet.vuelos_disponiblesRow row in data)
-                {
-                    this.dataGrid.Rows.Add(row.vue_id, row.VuelosRow.AeronavesRow.Tipos_ServicioRow.tip_descripcion, row.kg_disponibles, row.butacas_disponibles);
-                }
+                this.vuelos_disponiblesTableAdapter.Fill(gD2C2015DataSet.vuelos_disponibles, this.fechaViaje.Value, ciudad_origen_id, ciudad_destino_id);
             }
             else
             {
@@ -102,7 +90,7 @@ namespace AerolineaFrba.Compra
                 if (e.ColumnIndex == 4)
                 {
                     DataGridViewRow row = dataGrid.Rows[e.RowIndex];
-                    DataGridViewCell cell = row.Cells["Vuelo"];
+                    DataGridViewCell cell = row.Cells[0];
                     int cantPasajeros = 0;
                     if (this.cantidadPasajeros.Text != "")
                     {
@@ -113,7 +101,7 @@ namespace AerolineaFrba.Compra
                     {
                         peso = Convert.ToInt32(this.pesoEncomienda.Text);
                     }
-                    if (Convert.ToInt32(row.Cells["KgDisponibles"]) >= peso && Convert.ToInt32(row.Cells["ButacasLibres"]) >= cantPasajeros)
+                    if (Convert.ToInt32(row.Cells[2].Value) >= peso && Convert.ToInt32(row.Cells[3].Value) >= cantPasajeros)
                     {
                         DatosPasajerosForm form = new DatosPasajerosForm((int)cell.Value, cantPasajeros, peso);
                         form.ShowDialog();

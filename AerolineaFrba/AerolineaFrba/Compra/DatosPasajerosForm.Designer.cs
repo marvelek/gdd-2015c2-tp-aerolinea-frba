@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.dni = new System.Windows.Forms.TextBox();
+            this.clientesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
             this.label2 = new System.Windows.Forms.Label();
             this.nombre = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,7 +47,13 @@
             this.fechaNacimiento = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
             this.butacas = new System.Windows.Forms.ComboBox();
+            this.butacasDisponiblesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label8 = new System.Windows.Forms.Label();
+            this.butacasDisponiblesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.ButacasDisponiblesTableAdapter();
+            this.clientesTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.ClientesTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.clientesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.butacasDisponiblesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -59,10 +68,21 @@
             // dni
             // 
             this.dni.Location = new System.Drawing.Point(170, 36);
+            this.dni.MaxLength = 10;
             this.dni.Name = "dni";
             this.dni.Size = new System.Drawing.Size(100, 20);
             this.dni.TabIndex = 1;
             this.dni.TextChanged += new System.EventHandler(this.dni_TextChanged);
+            // 
+            // clientesBindingSource
+            // 
+            this.clientesBindingSource.DataMember = "Clientes";
+            this.clientesBindingSource.DataSource = this.gD2C2015DataSet;
+            // 
+            // gD2C2015DataSet
+            // 
+            this.gD2C2015DataSet.DataSetName = "GD2C2015DataSet";
+            this.gD2C2015DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label2
             // 
@@ -172,11 +192,19 @@
             // 
             // butacas
             // 
+            this.butacas.DataSource = this.butacasDisponiblesBindingSource;
+            this.butacas.DisplayMember = "butaca";
             this.butacas.FormattingEnabled = true;
             this.butacas.Location = new System.Drawing.Point(170, 365);
             this.butacas.Name = "butacas";
             this.butacas.Size = new System.Drawing.Size(121, 21);
             this.butacas.TabIndex = 15;
+            this.butacas.ValueMember = "but_id";
+            // 
+            // butacasDisponiblesBindingSource
+            // 
+            this.butacasDisponiblesBindingSource.DataMember = "ButacasDisponibles";
+            this.butacasDisponiblesBindingSource.DataSource = this.gD2C2015DataSet;
             // 
             // label8
             // 
@@ -186,6 +214,14 @@
             this.label8.Size = new System.Drawing.Size(44, 13);
             this.label8.TabIndex = 16;
             this.label8.Text = "Butaca:";
+            // 
+            // butacasDisponiblesTableAdapter
+            // 
+            this.butacasDisponiblesTableAdapter.ClearBeforeFill = true;
+            // 
+            // clientesTableAdapter1
+            // 
+            this.clientesTableAdapter1.ClearBeforeFill = true;
             // 
             // DatosPasajerosForm
             // 
@@ -211,6 +247,10 @@
             this.Controls.Add(this.label1);
             this.Name = "DatosPasajerosForm";
             this.Text = "Carga de datos pasajeros";
+            this.Load += new System.EventHandler(this.DatosPasajerosForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.clientesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.butacasDisponiblesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,5 +275,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox butacas;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.BindingSource butacasDisponiblesBindingSource;
+        private GD2C2015DataSet gD2C2015DataSet;
+        private GD2C2015DataSetTableAdapters.ButacasDisponiblesTableAdapter butacasDisponiblesTableAdapter;
+        private System.Windows.Forms.BindingSource clientesBindingSource;
+        private GD2C2015DataSetTableAdapters.ClientesTableAdapter clientesTableAdapter1;
     }
 }

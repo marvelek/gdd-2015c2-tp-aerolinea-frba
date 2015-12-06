@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.destinoViaje = new System.Windows.Forms.TextBox();
             this.origenViaje = new System.Windows.Forms.TextBox();
@@ -37,19 +38,24 @@
             this.fechaViaje = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGrid = new System.Windows.Forms.DataGridView();
-            this.Vuelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Servicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.KgDisponibles = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ButacasLibres = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pesoEncomienda = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cantidadPasajeros = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
+            this.vuelosdisponiblesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.vuelos_disponiblesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.vuelos_disponiblesTableAdapter();
+            this.vueidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tipdescripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kgdisponiblesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.butacasdisponiblesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vuelosdisponiblesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -130,49 +136,21 @@
             // 
             this.dataGrid.AllowUserToAddRows = false;
             this.dataGrid.AllowUserToDeleteRows = false;
+            this.dataGrid.AutoGenerateColumns = false;
             this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Vuelo,
-            this.Servicio,
-            this.KgDisponibles,
-            this.ButacasLibres,
+            this.vueidDataGridViewTextBoxColumn,
+            this.tipdescripcionDataGridViewTextBoxColumn,
+            this.kgdisponiblesDataGridViewTextBoxColumn,
+            this.butacasdisponiblesDataGridViewTextBoxColumn,
             this.Seleccionar});
-            this.dataGrid.Location = new System.Drawing.Point(12, 161);
+            this.dataGrid.DataSource = this.vuelosdisponiblesBindingSource;
+            this.dataGrid.Location = new System.Drawing.Point(84, 161);
             this.dataGrid.Name = "dataGrid";
             this.dataGrid.ReadOnly = true;
-            this.dataGrid.Size = new System.Drawing.Size(695, 229);
+            this.dataGrid.Size = new System.Drawing.Size(544, 229);
             this.dataGrid.TabIndex = 1;
             this.dataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGrid_CellContentClick);
-            // 
-            // Vuelo
-            // 
-            this.Vuelo.HeaderText = "Vuelo";
-            this.Vuelo.Name = "Vuelo";
-            this.Vuelo.ReadOnly = true;
-            // 
-            // Servicio
-            // 
-            this.Servicio.HeaderText = "Servicio";
-            this.Servicio.Name = "Servicio";
-            this.Servicio.ReadOnly = true;
-            // 
-            // KgDisponibles
-            // 
-            this.KgDisponibles.HeaderText = "KgDisponibles";
-            this.KgDisponibles.Name = "KgDisponibles";
-            this.KgDisponibles.ReadOnly = true;
-            // 
-            // ButacasLibres
-            // 
-            this.ButacasLibres.HeaderText = "ButacasLibres";
-            this.ButacasLibres.Name = "ButacasLibres";
-            this.ButacasLibres.ReadOnly = true;
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "Seleccionar";
-            this.Seleccionar.Name = "Seleccionar";
-            this.Seleccionar.ReadOnly = true;
             // 
             // groupBox2
             // 
@@ -218,6 +196,54 @@
             this.label4.TabIndex = 12;
             this.label4.Text = "Cantidad pasajeros";
             // 
+            // gD2C2015DataSet
+            // 
+            this.gD2C2015DataSet.DataSetName = "GD2C2015DataSet";
+            this.gD2C2015DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // vuelosdisponiblesBindingSource
+            // 
+            this.vuelosdisponiblesBindingSource.DataMember = "vuelos_disponibles";
+            this.vuelosdisponiblesBindingSource.DataSource = this.gD2C2015DataSet;
+            // 
+            // vuelos_disponiblesTableAdapter
+            // 
+            this.vuelos_disponiblesTableAdapter.ClearBeforeFill = true;
+            // 
+            // vueidDataGridViewTextBoxColumn
+            // 
+            this.vueidDataGridViewTextBoxColumn.DataPropertyName = "vue_id";
+            this.vueidDataGridViewTextBoxColumn.HeaderText = "Vuelo";
+            this.vueidDataGridViewTextBoxColumn.Name = "vueidDataGridViewTextBoxColumn";
+            this.vueidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // tipdescripcionDataGridViewTextBoxColumn
+            // 
+            this.tipdescripcionDataGridViewTextBoxColumn.DataPropertyName = "tip_descripcion";
+            this.tipdescripcionDataGridViewTextBoxColumn.HeaderText = "Servicio";
+            this.tipdescripcionDataGridViewTextBoxColumn.Name = "tipdescripcionDataGridViewTextBoxColumn";
+            this.tipdescripcionDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // kgdisponiblesDataGridViewTextBoxColumn
+            // 
+            this.kgdisponiblesDataGridViewTextBoxColumn.DataPropertyName = "kg_disponibles";
+            this.kgdisponiblesDataGridViewTextBoxColumn.HeaderText = "Kg Libres";
+            this.kgdisponiblesDataGridViewTextBoxColumn.Name = "kgdisponiblesDataGridViewTextBoxColumn";
+            this.kgdisponiblesDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // butacasdisponiblesDataGridViewTextBoxColumn
+            // 
+            this.butacasdisponiblesDataGridViewTextBoxColumn.DataPropertyName = "butacas_disponibles";
+            this.butacasdisponiblesDataGridViewTextBoxColumn.HeaderText = "Butacas disponibles";
+            this.butacasdisponiblesDataGridViewTextBoxColumn.Name = "butacasdisponiblesDataGridViewTextBoxColumn";
+            this.butacasdisponiblesDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
+            this.Seleccionar.ReadOnly = true;
+            // 
             // CompraForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -233,6 +259,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vuelosdisponiblesBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -248,15 +276,18 @@
         private System.Windows.Forms.DataGridView dataGrid;
         private System.Windows.Forms.TextBox destinoViaje;
         private System.Windows.Forms.TextBox origenViaje;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Vuelo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Servicio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn KgDisponibles;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ButacasLibres;
-        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox pesoEncomienda;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox cantidadPasajeros;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.BindingSource vuelosdisponiblesBindingSource;
+        private GD2C2015DataSet gD2C2015DataSet;
+        private GD2C2015DataSetTableAdapters.vuelos_disponiblesTableAdapter vuelos_disponiblesTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn vueidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tipdescripcionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kgdisponiblesDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn butacasdisponiblesDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
     }
 }

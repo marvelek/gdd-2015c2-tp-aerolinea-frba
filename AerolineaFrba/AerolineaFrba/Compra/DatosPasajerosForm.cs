@@ -18,8 +18,6 @@ namespace AerolineaFrba.Compra
         private int vueloId;
         private int cantidadPasajeros;
         private int pesoEncomienda;
-        private int[] butacasArray;
-        private int[] butacasElegidasArray;
         public Pasajero[] pasajeros;
 
         private ClientesTableAdapter clientesTableAdapter = new ClientesTableAdapter();
@@ -39,24 +37,7 @@ namespace AerolineaFrba.Compra
             this.pasajeros = new Pasajero[cantidad_pasajeros];
             this.pesoEncomienda = peso_encomienda;
             this.clientesTableAdapter.Fill(this.dataSet.Clientes);
-            this.fillButacas();
-        }
-
-        private void fillButacas()
-        {
-            this.butacas.Items.Clear();
-            // ACA VA LA CONSULTA Q DEVUELVE LAS BUTACAS LIBRES PARA EL VUELO con vueloId
-
-            //GD2C2015DataSet.Row[] rows = (GD2C2015DataSet.Row[])dataSet.consulta;
-            //butacasArray = new int[rows.Count()];
-            //int index = 0;
-            //foreach (GD2C2015DataSet.Row row in rows)
-            //{
-            //    string aux = row.nro_butaca + " - " + row.tipo_butaca;
-            //    this.butacas.Items.Insert(index, aux);
-            //    butacasArray[index] = row.aer_id;
-            //    index = index + 1;
-            //}
+            this.butacasDisponiblesTableAdapter.Fill(this.gD2C2015DataSet.ButacasDisponibles, vuelo_id);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -79,11 +60,12 @@ namespace AerolineaFrba.Compra
                 {
                     pasajero.PesoEncomienda = 0;
                 }
-                int butacaId = this.butacasArray[this.butacas.SelectedIndex];
+                int butacaId = (int)this.butacas.SelectedValue;
                 pasajero.ButacaId = butacaId;
-                butacasElegidasArray[butacasElegidasArray.Count()] = butacaId;
+                gD2C2015DataSet.ButacasDisponibles.RemoveButacasDisponiblesRow(gD2C2015DataSet.ButacasDisponibles.FindBybut_id(butacaId));
 
-                pasajeros[pasajeros.Count()] = pasajero;
+                int posicion = pasajeros.Count();
+                pasajeros[posicion] = pasajero;
 
                 if (this.pasajeros.Length.Equals(this.cantidadPasajeros))
                 {
@@ -93,14 +75,7 @@ namespace AerolineaFrba.Compra
                 else
                 {
                     MessageBox.Show("Pasajero cargado");
-                    this.dni.Clear();
-                    this.nombre.Clear();
-                    this.apellido.Clear();
-                    this.direccion.Clear();
-                    this.telefono.Clear();
-                    this.mail.Clear();
-                    this.fechaNacimiento.ResetText();
-                    this.clienteId = 0;
+                    limpiarDatos();
                     this.butacas.SelectedIndex = 0;
                 }
             }
@@ -134,11 +109,6 @@ namespace AerolineaFrba.Compra
             {
                 error = error + "Debe seleccionar una butaca\n";
             }
-            int butacaId = this.butacasArray[this.butacas.SelectedIndex];
-            if (butacasElegidasArray.Contains(butacaId))
-            {
-                error = error + "La butaca ya fue seleccionada por otro pasajero, elija una distinta\n";
-            }
             if (error != null)
             {
                 MessageBox.Show(error);
@@ -149,18 +119,72 @@ namespace AerolineaFrba.Compra
 
         private void dni_TextChanged(object sender, EventArgs e)
         {
-            GD2C2015DataSet.ClientesRow[] result = (GD2C2015DataSet.ClientesRow[])this.dataSet.Clientes.Select("cli_dni='" + this.dni.Text + "' AND cli_activo=1");
-            if (result.Length > 0)
+            try {
+                Utiles validador = new Utiles();
+                if (this.dni.Text != "" && validador.IsNumber(this.dni.Text))
+                {
+                    GD2C2015DataSet.ClientesRow[] result = (GD2C2015DataSet.ClientesRow[])this.dataSet.Clientes.Select("cli_dni='" + Convert.ToInt32(this.dni.Text) + "' AND cli_activo=1");
+                    if (result.Length > 0)
+                    {
+                        GD2C2015DataSet.ClientesRow row = result.First();
+                        this.nombre.Text = row.cli_nombre;
+                        this.apellido.Text = row.cli_apellido;
+                        this.direccion.Text = row.cli_direccion;
+                        this.telefono.Text = row.cli_telefono.ToString();
+                        this.mail.Text = row.cli_mail;
+                        this.fechaNacimiento.Value = row.cli_fecha_nacimiento;
+                        this.clienteId = row.cli_id;
+                    }
+                    else
+                    {
+                        limpiarDatos();
+                    }
+                }
+                else
+                {
+                    limpiarDatos();
+                }
+            } 
+            catch (System.OverflowException)
             {
-                GD2C2015DataSet.ClientesRow row = result.First();
-                this.nombre.Text = row.cli_nombre;
-                this.apellido.Text = row.cli_apellido;
-                this.direccion.Text = row.cli_direccion;
-                this.telefono.Text = row.cli_telefono.ToString();
-                this.mail.Text = row.cli_mail;
-                this.fechaNacimiento.Value = row.cli_fecha_nacimiento;
-                this.clienteId = row.cli_id;
+
             }
+        }
+
+        private void limpiarDatos() {
+            this.nombre.Clear();
+            this.apellido.Clear();
+            this.direccion.Clear();
+            this.telefono.Clear();
+            this.mail.Clear();
+            this.fechaNacimiento.ResetText();
+            this.clienteId = 0;
+        }
+
+        private void dni_TextChanged(object sender, KeyPressEventArgs e)
+        {
+            //Para obligar a que sólo se introduzcan números 
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+                if (Char.IsControl(e.KeyChar)) //permitir teclas de control como retroceso 
+                {
+                    e.Handled = false;
+                }
+                else
+                {
+                    //el resto de teclas pulsadas se desactivan 
+                    e.Handled = true;
+                }
+        } 
+
+        private void DatosPasajerosForm_Load(object sender, EventArgs e)
+        {
+            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Clientes' Puede moverla o quitarla según sea necesario.
+            this.clientesTableAdapter1.Fill(this.gD2C2015DataSet.Clientes);
+
         }
     }
 }

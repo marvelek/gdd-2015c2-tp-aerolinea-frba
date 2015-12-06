@@ -2,6 +2,10 @@
     
     
     public partial class GD2C2015DataSet {
+        partial class ButacasDisponiblesDataTable
+        {
+        }
+    
         partial class estadisticaAeronavesFueraDeServicioDataTable
         {
         }

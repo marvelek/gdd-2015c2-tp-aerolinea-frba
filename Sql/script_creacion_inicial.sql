@@ -964,7 +964,8 @@ AS
 	SET NOCOUNT OFF;
 
 	select * from (
-	SELECT v.vue_id, 
+	SELECT v.vue_id,
+	t.tip_descripcion,
 	(select aer_kg_disponibles -
 	(select sum(p.paq_kg) from MILANESA.Ventas v1 
 	join MILANESA.Paquetes p ON p.venta_id = v1.ven_id
@@ -980,13 +981,14 @@ AS
 	and pas.pas_activo = 1
 	and pas.devolucion_id is null) from milanesa.butacas b where
 	  b.aeronave_id = v.aeronave_id) as butacas_disponibles
-
 	 from MILANESA.Vuelos v 
-	join MILANESA.Rutas r ON v.ruta_id = r.rut_id 
+	join MILANESA.Rutas r ON v.ruta_id = r.rut_id
+	join MILANESA.Aeronaves a ON v.aeronave_id = a.aer_id
+	join MILANESA.Tipos_Servicio t ON a.tipo_servicio_id = t.tip_id
 	where v.vue_activo = 1
 	and r.ciudad_origen_id = @ciudad_origen_id
 	and r.ciudad_destino_id = @ciudad_destino_id
-	and CAST(v.vue_fecha_salida AS DATE) = CAST(@fecha_salida AS DATE)
+	and convert(date, v.vue_fecha_salida,121) = convert(date, @fecha_salida, 121)
 	) as query 
 	where query.kg_disponibles > 0
 	and query.butacas_disponibles > 0
