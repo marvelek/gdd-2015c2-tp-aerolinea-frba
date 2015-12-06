@@ -421,7 +421,7 @@ CREATE PROCEDURE MILANESA.sp_migracion_aeronaves AS
 BEGIN
 	SET NOCOUNT ON;
 
-	INSERT INTO Aeronaves(aer_matricula, aer_modelo, aer_kg_disponibles, aer_fabricante, tipo_servicio_id)
+	INSERT INTO Aeronaves(aer_matricula, aer_modelo, aer_kg_disponibles, aer_fabricante, tipo_servicio_id, aer_fecha_alta)
 	SELECT DISTINCT 
 		Aeronave_Matricula, 
 		Aeronave_Modelo, 
@@ -429,7 +429,8 @@ BEGIN
 		Aeronave_Fabricante,
 		(SELECT tip_id
 		 FROM MILANESA.Tipos_Servicio
-		 WHERE tip_descripcion = M.Tipo_Servicio)
+		 WHERE tip_descripcion = M.Tipo_Servicio),
+		 GETDATE()
 	FROM gd_esquema.Maestra M
 END
 GO

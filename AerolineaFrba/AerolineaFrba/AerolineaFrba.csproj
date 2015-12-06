@@ -62,6 +62,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abm Aeronave\AeronavesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Aeronave\AeronavesForm.Designer.cs">
+      <DependentUpon>AeronavesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Aeronave\AltaAeronave.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +212,9 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Utiles.cs" />
+    <EmbeddedResource Include="Abm Aeronave\AeronavesForm.resx">
+      <DependentUpon>AeronavesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Aeronave\AltaAeronave.resx">
       <DependentUpon>AltaAeronave.cs</DependentUpon>
     </EmbeddedResource>

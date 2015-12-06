@@ -111,19 +111,19 @@ namespace AerolineaFrba.Abm_Aeronave
             }
             else {
 
-                aeronavesTableAdapter.AeronavesInsert(tipoServicio, matricula, modelo, Convert.ToDecimal(kgEncomiendas), fabricante, true);
+                aeronavesTableAdapter.AeronavesInsert(tipoServicio, matricula, modelo, Convert.ToDecimal(kgEncomiendas), fabricante);
 
-                DataTable dt = new DataTable();
-                dt = ConexionSQL.getTablaPorConsulta(@"select AER_ID from " + ConexionSQL.getSchema() + @".aeronaves where 
-                UPPER(AER_MATRICULA) = UPPER('" + matricula + "')");
-
-                Int32 idAeronave = 0;
-                if (dt.Rows.Count != 0)
+                Aeronave aer = new Aeronave();
+                aer = aer.buscarByMatricula(matricula);
+                if (aer != null)
                 {
-                   idAeronave = Convert.ToInt32( dt.Rows[0].ItemArray[0]);
-                   crearButacas(idAeronave, butacasPasillo, butacasVentanilla);
+                   
+                   crearButacas(aer.Id, butacasPasillo, butacasVentanilla);
                    MessageBox.Show("La Aeronave se guardo exitosamente");
                    limpiarCampos();
+                   AeronavesForm form = new AeronavesForm();
+                   form.ShowDialog();
+                   this.Close();
                 }
                 else {
                     MessageBox.Show("Error al guardar la Aeronave.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -165,7 +165,8 @@ namespace AerolineaFrba.Abm_Aeronave
         }
         private void buttonVolver_Click(object sender, EventArgs e)
         {
-            FormsUtils.backLastForm();
+            limpiarCampos();
+            this.Close();
         }
 
         private void buttonLimpiar_Click(object sender, EventArgs e)
