@@ -22,10 +22,12 @@ namespace AerolineaFrba.Compra
         private VuelosTableAdapter vuelosTableAdapter = new VuelosTableAdapter();
         private vuelos_disponiblesTableAdapter vuelosDisponiblesTableAdapter = new vuelos_disponiblesTableAdapter();
         private GD2C2015DataSet dataSet = new GD2C2015DataSet();
+        public bool administrador;
 
-        public CompraForm()
+        public CompraForm(bool administrador)
         {
             InitializeComponent();
+            this.administrador = administrador;
             this.fechaViaje.Value = DateTime.Today;
         }
 
@@ -103,8 +105,10 @@ namespace AerolineaFrba.Compra
                     }
                     if (Convert.ToInt32(row.Cells[2].Value) >= peso && Convert.ToInt32(row.Cells[3].Value) >= cantPasajeros)
                     {
-                        DatosPasajerosForm form = new DatosPasajerosForm((int)cell.Value, cantPasajeros, peso);
-                        form.ShowDialog();
+                        DatosPasajerosForm form = new DatosPasajerosForm((int)cell.Value, cantPasajeros, peso, administrador);
+                        form.MdiParent = this.MdiParent;
+                        form.Show();
+                        this.Close();
                     }
                     else
                     {

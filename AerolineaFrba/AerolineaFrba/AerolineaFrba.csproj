@@ -236,6 +236,9 @@
     <EmbeddedResource Include="Canje Millas\CanjeMillasForm.resx">
       <DependentUpon>CanjeMillasForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Compra\CobroForm.resx">
+      <DependentUpon>CobroForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Compra\CompraForm.resx">
       <DependentUpon>CompraForm.cs</DependentUpon>
     </EmbeddedResource>

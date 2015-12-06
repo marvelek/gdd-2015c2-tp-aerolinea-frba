@@ -38,24 +38,24 @@
             this.fechaViaje = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGrid = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.pesoEncomienda = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cantidadPasajeros = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
-            this.vuelosdisponiblesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.vuelos_disponiblesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.vuelos_disponiblesTableAdapter();
             this.vueidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipdescripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kgdisponiblesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.butacasdisponiblesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.vuelosdisponiblesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.pesoEncomienda = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cantidadPasajeros = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.vuelos_disponiblesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.vuelos_disponiblesTableAdapter();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vuelosdisponiblesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -93,7 +93,7 @@
             this.buscar.Location = new System.Drawing.Point(614, 61);
             this.buscar.Name = "buscar";
             this.buscar.Size = new System.Drawing.Size(75, 23);
-            this.buscar.TabIndex = 6;
+            this.buscar.TabIndex = 3;
             this.buscar.Text = "Buscar";
             this.buscar.UseVisualStyleBackColor = true;
             this.buscar.Click += new System.EventHandler(this.buscar_Click);
@@ -134,7 +134,6 @@
             // 
             // dataGrid
             // 
-            this.dataGrid.AllowUserToAddRows = false;
             this.dataGrid.AllowUserToDeleteRows = false;
             this.dataGrid.AutoGenerateColumns = false;
             this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -149,66 +148,8 @@
             this.dataGrid.Name = "dataGrid";
             this.dataGrid.ReadOnly = true;
             this.dataGrid.Size = new System.Drawing.Size(544, 229);
-            this.dataGrid.TabIndex = 1;
+            this.dataGrid.TabIndex = 7;
             this.dataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGrid_CellContentClick);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.pesoEncomienda);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.cantidadPasajeros);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(12, 111);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(695, 44);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            // 
-            // pesoEncomienda
-            // 
-            this.pesoEncomienda.Location = new System.Drawing.Point(437, 18);
-            this.pesoEncomienda.Name = "pesoEncomienda";
-            this.pesoEncomienda.Size = new System.Drawing.Size(100, 20);
-            this.pesoEncomienda.TabIndex = 11;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(340, 21);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(81, 13);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Kg encomienda";
-            // 
-            // cantidadPasajeros
-            // 
-            this.cantidadPasajeros.Location = new System.Drawing.Point(112, 18);
-            this.cantidadPasajeros.Name = "cantidadPasajeros";
-            this.cantidadPasajeros.Size = new System.Drawing.Size(100, 20);
-            this.cantidadPasajeros.TabIndex = 10;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 21);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Cantidad pasajeros";
-            // 
-            // gD2C2015DataSet
-            // 
-            this.gD2C2015DataSet.DataSetName = "GD2C2015DataSet";
-            this.gD2C2015DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // vuelosdisponiblesBindingSource
-            // 
-            this.vuelosdisponiblesBindingSource.DataMember = "vuelos_disponibles";
-            this.vuelosdisponiblesBindingSource.DataSource = this.gD2C2015DataSet;
-            // 
-            // vuelos_disponiblesTableAdapter
-            // 
-            this.vuelos_disponiblesTableAdapter.ClearBeforeFill = true;
             // 
             // vueidDataGridViewTextBoxColumn
             // 
@@ -244,8 +185,67 @@
             this.Seleccionar.Name = "Seleccionar";
             this.Seleccionar.ReadOnly = true;
             // 
+            // vuelosdisponiblesBindingSource
+            // 
+            this.vuelosdisponiblesBindingSource.DataMember = "vuelos_disponibles";
+            this.vuelosdisponiblesBindingSource.DataSource = this.gD2C2015DataSet;
+            // 
+            // gD2C2015DataSet
+            // 
+            this.gD2C2015DataSet.DataSetName = "GD2C2015DataSet";
+            this.gD2C2015DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.pesoEncomienda);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.cantidadPasajeros);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Location = new System.Drawing.Point(12, 111);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(695, 44);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            // 
+            // pesoEncomienda
+            // 
+            this.pesoEncomienda.Location = new System.Drawing.Point(437, 18);
+            this.pesoEncomienda.Name = "pesoEncomienda";
+            this.pesoEncomienda.Size = new System.Drawing.Size(100, 20);
+            this.pesoEncomienda.TabIndex = 6;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(340, 21);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(81, 13);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Kg encomienda";
+            // 
+            // cantidadPasajeros
+            // 
+            this.cantidadPasajeros.Location = new System.Drawing.Point(112, 18);
+            this.cantidadPasajeros.Name = "cantidadPasajeros";
+            this.cantidadPasajeros.Size = new System.Drawing.Size(100, 20);
+            this.cantidadPasajeros.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 21);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(97, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Cantidad pasajeros";
+            // 
+            // vuelos_disponiblesTableAdapter
+            // 
+            this.vuelos_disponiblesTableAdapter.ClearBeforeFill = true;
+            // 
             // CompraForm
             // 
+            this.AcceptButton = this.buscar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(719, 402);
@@ -257,10 +257,10 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vuelosdisponiblesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vuelosdisponiblesBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

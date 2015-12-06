@@ -117,7 +117,12 @@ namespace AerolineaFrba
 
         private void compraToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CompraForm form = new CompraForm();
+            bool administrador = false;
+            if (this.permisos == 1) {
+                administrador = true;
+            }
+
+            CompraForm form = new CompraForm(administrador);
             form.MdiParent = this;
             form.Show();
         }

@@ -150,10 +150,10 @@ namespace AerolineaFrba.Listado_Estadistico
             {
                 error = "Debe seleccionar un listado para consultar.\n";
             }            
-            if (Convert.ToInt16(this.año.Text) > Convert.ToInt16(DateTime.Today.Year))
-            {
-                error = error + "El año no puede ser mayor al día de la fecha.\n";
-            }
+            //if (Convert.ToInt16(this.año.Text) > Convert.ToInt16(DateTime.Today.Year))
+            //{
+             //   error = error + "El año no puede ser mayor al día de la fecha.\n";
+            //}
 
             if (Convert.ToInt16(this.año.Text) < (Convert.ToInt16(DateTime.Today.Year) - 10))
             {

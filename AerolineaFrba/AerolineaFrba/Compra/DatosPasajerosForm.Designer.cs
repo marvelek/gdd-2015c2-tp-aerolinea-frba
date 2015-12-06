@@ -48,7 +48,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.butacas = new System.Windows.Forms.ComboBox();
             this.butacasDisponiblesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label8 = new System.Windows.Forms.Label();
+            this.butacaLabel = new System.Windows.Forms.Label();
             this.butacasDisponiblesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.ButacasDisponiblesTableAdapter();
             this.clientesTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.ClientesTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.clientesBindingSource)).BeginInit();
@@ -98,7 +98,7 @@
             this.nombre.Location = new System.Drawing.Point(170, 77);
             this.nombre.Name = "nombre";
             this.nombre.Size = new System.Drawing.Size(100, 20);
-            this.nombre.TabIndex = 3;
+            this.nombre.TabIndex = 2;
             // 
             // label3
             // 
@@ -150,42 +150,42 @@
             this.apellido.Location = new System.Drawing.Point(170, 122);
             this.apellido.Name = "apellido";
             this.apellido.Size = new System.Drawing.Size(100, 20);
-            this.apellido.TabIndex = 9;
+            this.apellido.TabIndex = 3;
             // 
             // direccion
             // 
             this.direccion.Location = new System.Drawing.Point(170, 172);
             this.direccion.Name = "direccion";
             this.direccion.Size = new System.Drawing.Size(100, 20);
-            this.direccion.TabIndex = 10;
+            this.direccion.TabIndex = 4;
             // 
             // telefono
             // 
             this.telefono.Location = new System.Drawing.Point(170, 223);
             this.telefono.Name = "telefono";
             this.telefono.Size = new System.Drawing.Size(100, 20);
-            this.telefono.TabIndex = 11;
+            this.telefono.TabIndex = 5;
             // 
             // mail
             // 
             this.mail.Location = new System.Drawing.Point(170, 268);
             this.mail.Name = "mail";
             this.mail.Size = new System.Drawing.Size(100, 20);
-            this.mail.TabIndex = 12;
+            this.mail.TabIndex = 6;
             // 
             // fechaNacimiento
             // 
             this.fechaNacimiento.Location = new System.Drawing.Point(170, 317);
             this.fechaNacimiento.Name = "fechaNacimiento";
             this.fechaNacimiento.Size = new System.Drawing.Size(200, 20);
-            this.fechaNacimiento.TabIndex = 13;
+            this.fechaNacimiento.TabIndex = 7;
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(295, 411);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 14;
+            this.button1.TabIndex = 9;
             this.button1.Text = "Cargar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -198,7 +198,7 @@
             this.butacas.Location = new System.Drawing.Point(170, 365);
             this.butacas.Name = "butacas";
             this.butacas.Size = new System.Drawing.Size(121, 21);
-            this.butacas.TabIndex = 15;
+            this.butacas.TabIndex = 8;
             this.butacas.ValueMember = "but_id";
             // 
             // butacasDisponiblesBindingSource
@@ -206,14 +206,14 @@
             this.butacasDisponiblesBindingSource.DataMember = "ButacasDisponibles";
             this.butacasDisponiblesBindingSource.DataSource = this.gD2C2015DataSet;
             // 
-            // label8
+            // butacaLabel
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(50, 368);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(44, 13);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "Butaca:";
+            this.butacaLabel.AutoSize = true;
+            this.butacaLabel.Location = new System.Drawing.Point(50, 368);
+            this.butacaLabel.Name = "butacaLabel";
+            this.butacaLabel.Size = new System.Drawing.Size(44, 13);
+            this.butacaLabel.TabIndex = 16;
+            this.butacaLabel.Text = "Butaca:";
             // 
             // butacasDisponiblesTableAdapter
             // 
@@ -225,10 +225,11 @@
             // 
             // DatosPasajerosForm
             // 
+            this.AcceptButton = this.button1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(386, 446);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.butacaLabel);
             this.Controls.Add(this.butacas);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.fechaNacimiento);
@@ -274,7 +275,7 @@
         private System.Windows.Forms.DateTimePicker fechaNacimiento;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox butacas;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label butacaLabel;
         private System.Windows.Forms.BindingSource butacasDisponiblesBindingSource;
         private GD2C2015DataSet gD2C2015DataSet;
         private GD2C2015DataSetTableAdapters.ButacasDisponiblesTableAdapter butacasDisponiblesTableAdapter;

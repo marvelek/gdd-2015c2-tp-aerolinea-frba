@@ -39,28 +39,22 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.dataGridView5 = new System.Windows.Forms.DataGridView();
-            this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
-            this.estadisticaDestinosPasajesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.estadisticaDestinosPasajesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.estadisticaDestinosPasajesTableAdapter();
             this.ciuidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ciudescripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cANTIDADPASAJEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.estadisticaAeronavesFueraDeServicioBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.estadisticaAeronavesFueraDeServicioTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.estadisticaAeronavesFueraDeServicioTableAdapter();
-            this.aeridDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aermatriculaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aermodeloDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aerkgdisponiblesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aerfabricanteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aerfechafueraservicioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aerfechareinicioservicioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.díasDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.estadisticaClientesMillasBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.estadisticaClientesMillasTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.estadisticaClientesMillasTableAdapter();
+            this.estadisticaDestinosPasajesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.ciuidDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ciudescripcionDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cANTIDADPASAJEDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.estadisticaDestinosCanceladosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.ciuidDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ciudescripcionDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bUTACASDISPONIBLESDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.estadisticaDestinosButacasBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.cliidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clinombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cliapellidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,29 +63,35 @@
             this.clitelefonoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.climailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.puntosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.estadisticaDestinosButacasBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.estadisticaClientesMillasBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.aeridDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aermatriculaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aermodeloDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aerkgdisponiblesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aerfabricanteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aerfechafueraservicioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aerfechareinicioservicioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.díasDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.estadisticaAeronavesFueraDeServicioBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.estadisticaDestinosPasajesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.estadisticaDestinosPasajesTableAdapter();
+            this.estadisticaAeronavesFueraDeServicioTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.estadisticaAeronavesFueraDeServicioTableAdapter();
+            this.estadisticaClientesMillasTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.estadisticaClientesMillasTableAdapter();
             this.estadisticaDestinosButacasTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.estadisticaDestinosButacasTableAdapter();
-            this.ciuidDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ciudescripcionDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bUTACASDISPONIBLESDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.estadisticaDestinosCanceladosBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.estadisticaDestinosCanceladosTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.estadisticaDestinosCanceladosTableAdapter();
-            this.ciuidDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ciudescripcionDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cANTIDADPASAJEDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.estadisticaDestinosPasajesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.estadisticaAeronavesFueraDeServicioBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.estadisticaClientesMillasBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.estadisticaDestinosButacasBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.estadisticaDestinosCanceladosBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.estadisticaDestinosButacasBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.estadisticaClientesMillasBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.estadisticaAeronavesFueraDeServicioBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -213,97 +213,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(343, 150);
             this.dataGridView1.TabIndex = 1;
             // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AutoGenerateColumns = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ciuidDataGridViewTextBoxColumn2,
-            this.ciudescripcionDataGridViewTextBoxColumn2,
-            this.cANTIDADPASAJEDataGridViewTextBoxColumn1});
-            this.dataGridView2.DataSource = this.estadisticaDestinosCanceladosBindingSource;
-            this.dataGridView2.Location = new System.Drawing.Point(116, 193);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.Size = new System.Drawing.Size(343, 150);
-            this.dataGridView2.TabIndex = 2;
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.AllowUserToAddRows = false;
-            this.dataGridView3.AllowUserToDeleteRows = false;
-            this.dataGridView3.AutoGenerateColumns = false;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ciuidDataGridViewTextBoxColumn1,
-            this.ciudescripcionDataGridViewTextBoxColumn1,
-            this.bUTACASDISPONIBLESDataGridViewTextBoxColumn});
-            this.dataGridView3.DataSource = this.estadisticaDestinosButacasBindingSource;
-            this.dataGridView3.Location = new System.Drawing.Point(116, 193);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.ReadOnly = true;
-            this.dataGridView3.Size = new System.Drawing.Size(343, 150);
-            this.dataGridView3.TabIndex = 3;
-            // 
-            // dataGridView4
-            // 
-            this.dataGridView4.AllowUserToAddRows = false;
-            this.dataGridView4.AllowUserToDeleteRows = false;
-            this.dataGridView4.AutoGenerateColumns = false;
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.cliidDataGridViewTextBoxColumn,
-            this.clinombreDataGridViewTextBoxColumn,
-            this.cliapellidoDataGridViewTextBoxColumn,
-            this.clidniDataGridViewTextBoxColumn,
-            this.clidireccionDataGridViewTextBoxColumn,
-            this.clitelefonoDataGridViewTextBoxColumn,
-            this.climailDataGridViewTextBoxColumn,
-            this.puntosDataGridViewTextBoxColumn});
-            this.dataGridView4.DataSource = this.estadisticaClientesMillasBindingSource;
-            this.dataGridView4.Location = new System.Drawing.Point(12, 193);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(554, 150);
-            this.dataGridView4.TabIndex = 4;
-            // 
-            // dataGridView5
-            // 
-            this.dataGridView5.AllowUserToAddRows = false;
-            this.dataGridView5.AllowUserToDeleteRows = false;
-            this.dataGridView5.AutoGenerateColumns = false;
-            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView5.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.aeridDataGridViewTextBoxColumn,
-            this.aermatriculaDataGridViewTextBoxColumn,
-            this.aermodeloDataGridViewTextBoxColumn,
-            this.aerkgdisponiblesDataGridViewTextBoxColumn,
-            this.aerfabricanteDataGridViewTextBoxColumn,
-            this.aerfechafueraservicioDataGridViewTextBoxColumn,
-            this.aerfechareinicioservicioDataGridViewTextBoxColumn,
-            this.díasDataGridViewTextBoxColumn});
-            this.dataGridView5.DataSource = this.estadisticaAeronavesFueraDeServicioBindingSource;
-            this.dataGridView5.Location = new System.Drawing.Point(13, 193);
-            this.dataGridView5.Name = "dataGridView5";
-            this.dataGridView5.ReadOnly = true;
-            this.dataGridView5.Size = new System.Drawing.Size(553, 150);
-            this.dataGridView5.TabIndex = 5;
-            // 
-            // gD2C2015DataSet
-            // 
-            this.gD2C2015DataSet.DataSetName = "GD2C2015DataSet";
-            this.gD2C2015DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // estadisticaDestinosPasajesBindingSource
-            // 
-            this.estadisticaDestinosPasajesBindingSource.DataMember = "estadisticaDestinosPasajes";
-            this.estadisticaDestinosPasajesBindingSource.DataSource = this.gD2C2015DataSet;
-            // 
-            // estadisticaDestinosPasajesTableAdapter
-            // 
-            this.estadisticaDestinosPasajesTableAdapter.ClearBeforeFill = true;
-            // 
             // ciuidDataGridViewTextBoxColumn
             // 
             this.ciuidDataGridViewTextBoxColumn.DataPropertyName = "ciu_id";
@@ -325,73 +234,122 @@
             this.cANTIDADPASAJEDataGridViewTextBoxColumn.Name = "cANTIDADPASAJEDataGridViewTextBoxColumn";
             this.cANTIDADPASAJEDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // estadisticaAeronavesFueraDeServicioBindingSource
+            // estadisticaDestinosPasajesBindingSource
             // 
-            this.estadisticaAeronavesFueraDeServicioBindingSource.DataMember = "estadisticaAeronavesFueraDeServicio";
-            this.estadisticaAeronavesFueraDeServicioBindingSource.DataSource = this.gD2C2015DataSet;
+            this.estadisticaDestinosPasajesBindingSource.DataMember = "estadisticaDestinosPasajes";
+            this.estadisticaDestinosPasajesBindingSource.DataSource = this.gD2C2015DataSet;
             // 
-            // estadisticaAeronavesFueraDeServicioTableAdapter
+            // gD2C2015DataSet
             // 
-            this.estadisticaAeronavesFueraDeServicioTableAdapter.ClearBeforeFill = true;
+            this.gD2C2015DataSet.DataSetName = "GD2C2015DataSet";
+            this.gD2C2015DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // aeridDataGridViewTextBoxColumn
+            // dataGridView2
             // 
-            this.aeridDataGridViewTextBoxColumn.DataPropertyName = "aer_id";
-            this.aeridDataGridViewTextBoxColumn.HeaderText = "AERONAVE";
-            this.aeridDataGridViewTextBoxColumn.Name = "aeridDataGridViewTextBoxColumn";
-            this.aeridDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.AutoGenerateColumns = false;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ciuidDataGridViewTextBoxColumn2,
+            this.ciudescripcionDataGridViewTextBoxColumn2,
+            this.cANTIDADPASAJEDataGridViewTextBoxColumn1});
+            this.dataGridView2.DataSource = this.estadisticaDestinosCanceladosBindingSource;
+            this.dataGridView2.Location = new System.Drawing.Point(116, 193);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.ReadOnly = true;
+            this.dataGridView2.Size = new System.Drawing.Size(343, 150);
+            this.dataGridView2.TabIndex = 2;
             // 
-            // aermatriculaDataGridViewTextBoxColumn
+            // ciuidDataGridViewTextBoxColumn2
             // 
-            this.aermatriculaDataGridViewTextBoxColumn.DataPropertyName = "aer_matricula";
-            this.aermatriculaDataGridViewTextBoxColumn.HeaderText = "MATRICULA";
-            this.aermatriculaDataGridViewTextBoxColumn.Name = "aermatriculaDataGridViewTextBoxColumn";
+            this.ciuidDataGridViewTextBoxColumn2.DataPropertyName = "ciu_id";
+            this.ciuidDataGridViewTextBoxColumn2.HeaderText = "ID";
+            this.ciuidDataGridViewTextBoxColumn2.Name = "ciuidDataGridViewTextBoxColumn2";
+            this.ciuidDataGridViewTextBoxColumn2.ReadOnly = true;
             // 
-            // aermodeloDataGridViewTextBoxColumn
+            // ciudescripcionDataGridViewTextBoxColumn2
             // 
-            this.aermodeloDataGridViewTextBoxColumn.DataPropertyName = "aer_modelo";
-            this.aermodeloDataGridViewTextBoxColumn.HeaderText = "MODELO";
-            this.aermodeloDataGridViewTextBoxColumn.Name = "aermodeloDataGridViewTextBoxColumn";
+            this.ciudescripcionDataGridViewTextBoxColumn2.DataPropertyName = "ciu_descripcion";
+            this.ciudescripcionDataGridViewTextBoxColumn2.HeaderText = "CIUDAD";
+            this.ciudescripcionDataGridViewTextBoxColumn2.Name = "ciudescripcionDataGridViewTextBoxColumn2";
+            this.ciudescripcionDataGridViewTextBoxColumn2.ReadOnly = true;
             // 
-            // aerkgdisponiblesDataGridViewTextBoxColumn
+            // cANTIDADPASAJEDataGridViewTextBoxColumn1
             // 
-            this.aerkgdisponiblesDataGridViewTextBoxColumn.DataPropertyName = "aer_kg_disponibles";
-            this.aerkgdisponiblesDataGridViewTextBoxColumn.HeaderText = "KG DISPONIBLES";
-            this.aerkgdisponiblesDataGridViewTextBoxColumn.Name = "aerkgdisponiblesDataGridViewTextBoxColumn";
+            this.cANTIDADPASAJEDataGridViewTextBoxColumn1.DataPropertyName = "CANTIDAD_PASAJE";
+            this.cANTIDADPASAJEDataGridViewTextBoxColumn1.HeaderText = "CANTIDAD DE PASAJES CANCELADOS";
+            this.cANTIDADPASAJEDataGridViewTextBoxColumn1.Name = "cANTIDADPASAJEDataGridViewTextBoxColumn1";
+            this.cANTIDADPASAJEDataGridViewTextBoxColumn1.ReadOnly = true;
             // 
-            // aerfabricanteDataGridViewTextBoxColumn
+            // estadisticaDestinosCanceladosBindingSource
             // 
-            this.aerfabricanteDataGridViewTextBoxColumn.DataPropertyName = "aer_fabricante";
-            this.aerfabricanteDataGridViewTextBoxColumn.HeaderText = "FABRICANTE";
-            this.aerfabricanteDataGridViewTextBoxColumn.Name = "aerfabricanteDataGridViewTextBoxColumn";
+            this.estadisticaDestinosCanceladosBindingSource.DataMember = "estadisticaDestinosCancelados";
+            this.estadisticaDestinosCanceladosBindingSource.DataSource = this.gD2C2015DataSet;
             // 
-            // aerfechafueraservicioDataGridViewTextBoxColumn
+            // dataGridView3
             // 
-            this.aerfechafueraservicioDataGridViewTextBoxColumn.DataPropertyName = "aer_fecha_fuera_servicio";
-            this.aerfechafueraservicioDataGridViewTextBoxColumn.HeaderText = "FECHA FUERA DE SERVICIO";
-            this.aerfechafueraservicioDataGridViewTextBoxColumn.Name = "aerfechafueraservicioDataGridViewTextBoxColumn";
+            this.dataGridView3.AllowUserToAddRows = false;
+            this.dataGridView3.AllowUserToDeleteRows = false;
+            this.dataGridView3.AutoGenerateColumns = false;
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ciuidDataGridViewTextBoxColumn1,
+            this.ciudescripcionDataGridViewTextBoxColumn1,
+            this.bUTACASDISPONIBLESDataGridViewTextBoxColumn});
+            this.dataGridView3.DataSource = this.estadisticaDestinosButacasBindingSource;
+            this.dataGridView3.Location = new System.Drawing.Point(116, 193);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.ReadOnly = true;
+            this.dataGridView3.Size = new System.Drawing.Size(343, 150);
+            this.dataGridView3.TabIndex = 3;
             // 
-            // aerfechareinicioservicioDataGridViewTextBoxColumn
+            // ciuidDataGridViewTextBoxColumn1
             // 
-            this.aerfechareinicioservicioDataGridViewTextBoxColumn.DataPropertyName = "aer_fecha_reinicio_servicio";
-            this.aerfechareinicioservicioDataGridViewTextBoxColumn.HeaderText = "FECHA DE REINCIO DE SERVICIO";
-            this.aerfechareinicioservicioDataGridViewTextBoxColumn.Name = "aerfechareinicioservicioDataGridViewTextBoxColumn";
+            this.ciuidDataGridViewTextBoxColumn1.DataPropertyName = "ciu_id";
+            this.ciuidDataGridViewTextBoxColumn1.HeaderText = "ID";
+            this.ciuidDataGridViewTextBoxColumn1.Name = "ciuidDataGridViewTextBoxColumn1";
+            this.ciuidDataGridViewTextBoxColumn1.ReadOnly = true;
             // 
-            // díasDataGridViewTextBoxColumn
+            // ciudescripcionDataGridViewTextBoxColumn1
             // 
-            this.díasDataGridViewTextBoxColumn.DataPropertyName = "días";
-            this.díasDataGridViewTextBoxColumn.HeaderText = "TOTAL DIAS";
-            this.díasDataGridViewTextBoxColumn.Name = "díasDataGridViewTextBoxColumn";
-            this.díasDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ciudescripcionDataGridViewTextBoxColumn1.DataPropertyName = "ciu_descripcion";
+            this.ciudescripcionDataGridViewTextBoxColumn1.HeaderText = "CIUDAD";
+            this.ciudescripcionDataGridViewTextBoxColumn1.Name = "ciudescripcionDataGridViewTextBoxColumn1";
+            this.ciudescripcionDataGridViewTextBoxColumn1.ReadOnly = true;
             // 
-            // estadisticaClientesMillasBindingSource
+            // bUTACASDISPONIBLESDataGridViewTextBoxColumn
             // 
-            this.estadisticaClientesMillasBindingSource.DataMember = "estadisticaClientesMillas";
-            this.estadisticaClientesMillasBindingSource.DataSource = this.gD2C2015DataSet;
+            this.bUTACASDISPONIBLESDataGridViewTextBoxColumn.DataPropertyName = "BUTACAS_DISPONIBLES";
+            this.bUTACASDISPONIBLESDataGridViewTextBoxColumn.HeaderText = "BUTACAS DISPONIBLES";
+            this.bUTACASDISPONIBLESDataGridViewTextBoxColumn.Name = "bUTACASDISPONIBLESDataGridViewTextBoxColumn";
+            this.bUTACASDISPONIBLESDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // estadisticaClientesMillasTableAdapter
+            // estadisticaDestinosButacasBindingSource
             // 
-            this.estadisticaClientesMillasTableAdapter.ClearBeforeFill = true;
+            this.estadisticaDestinosButacasBindingSource.DataMember = "estadisticaDestinosButacas";
+            this.estadisticaDestinosButacasBindingSource.DataSource = this.gD2C2015DataSet;
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.AllowUserToAddRows = false;
+            this.dataGridView4.AllowUserToDeleteRows = false;
+            this.dataGridView4.AutoGenerateColumns = false;
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cliidDataGridViewTextBoxColumn,
+            this.clinombreDataGridViewTextBoxColumn,
+            this.cliapellidoDataGridViewTextBoxColumn,
+            this.clidniDataGridViewTextBoxColumn,
+            this.clidireccionDataGridViewTextBoxColumn,
+            this.clitelefonoDataGridViewTextBoxColumn,
+            this.climailDataGridViewTextBoxColumn,
+            this.puntosDataGridViewTextBoxColumn});
+            this.dataGridView4.DataSource = this.estadisticaClientesMillasBindingSource;
+            this.dataGridView4.Location = new System.Drawing.Point(12, 193);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.Size = new System.Drawing.Size(554, 150);
+            this.dataGridView4.TabIndex = 4;
             // 
             // cliidDataGridViewTextBoxColumn
             // 
@@ -443,65 +401,113 @@
             this.puntosDataGridViewTextBoxColumn.Name = "puntosDataGridViewTextBoxColumn";
             this.puntosDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // estadisticaDestinosButacasBindingSource
+            // estadisticaClientesMillasBindingSource
             // 
-            this.estadisticaDestinosButacasBindingSource.DataMember = "estadisticaDestinosButacas";
-            this.estadisticaDestinosButacasBindingSource.DataSource = this.gD2C2015DataSet;
+            this.estadisticaClientesMillasBindingSource.DataMember = "estadisticaClientesMillas";
+            this.estadisticaClientesMillasBindingSource.DataSource = this.gD2C2015DataSet;
+            // 
+            // dataGridView5
+            // 
+            this.dataGridView5.AllowUserToAddRows = false;
+            this.dataGridView5.AllowUserToDeleteRows = false;
+            this.dataGridView5.AutoGenerateColumns = false;
+            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView5.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.aeridDataGridViewTextBoxColumn,
+            this.aermatriculaDataGridViewTextBoxColumn,
+            this.aermodeloDataGridViewTextBoxColumn,
+            this.aerkgdisponiblesDataGridViewTextBoxColumn,
+            this.aerfabricanteDataGridViewTextBoxColumn,
+            this.aerfechafueraservicioDataGridViewTextBoxColumn,
+            this.aerfechareinicioservicioDataGridViewTextBoxColumn,
+            this.díasDataGridViewTextBoxColumn});
+            this.dataGridView5.DataSource = this.estadisticaAeronavesFueraDeServicioBindingSource;
+            this.dataGridView5.Location = new System.Drawing.Point(13, 193);
+            this.dataGridView5.Name = "dataGridView5";
+            this.dataGridView5.ReadOnly = true;
+            this.dataGridView5.Size = new System.Drawing.Size(553, 150);
+            this.dataGridView5.TabIndex = 6;
+            // 
+            // aeridDataGridViewTextBoxColumn
+            // 
+            this.aeridDataGridViewTextBoxColumn.DataPropertyName = "aer_id";
+            this.aeridDataGridViewTextBoxColumn.HeaderText = "AERONAVE";
+            this.aeridDataGridViewTextBoxColumn.Name = "aeridDataGridViewTextBoxColumn";
+            this.aeridDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // aermatriculaDataGridViewTextBoxColumn
+            // 
+            this.aermatriculaDataGridViewTextBoxColumn.DataPropertyName = "aer_matricula";
+            this.aermatriculaDataGridViewTextBoxColumn.HeaderText = "MATRICULA";
+            this.aermatriculaDataGridViewTextBoxColumn.Name = "aermatriculaDataGridViewTextBoxColumn";
+            this.aermatriculaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // aermodeloDataGridViewTextBoxColumn
+            // 
+            this.aermodeloDataGridViewTextBoxColumn.DataPropertyName = "aer_modelo";
+            this.aermodeloDataGridViewTextBoxColumn.HeaderText = "MODELO";
+            this.aermodeloDataGridViewTextBoxColumn.Name = "aermodeloDataGridViewTextBoxColumn";
+            this.aermodeloDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // aerkgdisponiblesDataGridViewTextBoxColumn
+            // 
+            this.aerkgdisponiblesDataGridViewTextBoxColumn.DataPropertyName = "aer_kg_disponibles";
+            this.aerkgdisponiblesDataGridViewTextBoxColumn.HeaderText = "KG DISPONIBLES";
+            this.aerkgdisponiblesDataGridViewTextBoxColumn.Name = "aerkgdisponiblesDataGridViewTextBoxColumn";
+            this.aerkgdisponiblesDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // aerfabricanteDataGridViewTextBoxColumn
+            // 
+            this.aerfabricanteDataGridViewTextBoxColumn.DataPropertyName = "aer_fabricante";
+            this.aerfabricanteDataGridViewTextBoxColumn.HeaderText = "FABRICANTE";
+            this.aerfabricanteDataGridViewTextBoxColumn.Name = "aerfabricanteDataGridViewTextBoxColumn";
+            this.aerfabricanteDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // aerfechafueraservicioDataGridViewTextBoxColumn
+            // 
+            this.aerfechafueraservicioDataGridViewTextBoxColumn.DataPropertyName = "aer_fecha_fuera_servicio";
+            this.aerfechafueraservicioDataGridViewTextBoxColumn.HeaderText = "FECHA FUERA DE SERVICIO";
+            this.aerfechafueraservicioDataGridViewTextBoxColumn.Name = "aerfechafueraservicioDataGridViewTextBoxColumn";
+            this.aerfechafueraservicioDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // aerfechareinicioservicioDataGridViewTextBoxColumn
+            // 
+            this.aerfechareinicioservicioDataGridViewTextBoxColumn.DataPropertyName = "aer_fecha_reinicio_servicio";
+            this.aerfechareinicioservicioDataGridViewTextBoxColumn.HeaderText = "FECHA DE REINCIO DE SERVICIO";
+            this.aerfechareinicioservicioDataGridViewTextBoxColumn.Name = "aerfechareinicioservicioDataGridViewTextBoxColumn";
+            this.aerfechareinicioservicioDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // díasDataGridViewTextBoxColumn
+            // 
+            this.díasDataGridViewTextBoxColumn.DataPropertyName = "días";
+            this.díasDataGridViewTextBoxColumn.HeaderText = "TOTAL DIAS";
+            this.díasDataGridViewTextBoxColumn.Name = "díasDataGridViewTextBoxColumn";
+            this.díasDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // estadisticaAeronavesFueraDeServicioBindingSource
+            // 
+            this.estadisticaAeronavesFueraDeServicioBindingSource.DataMember = "estadisticaAeronavesFueraDeServicio";
+            this.estadisticaAeronavesFueraDeServicioBindingSource.DataSource = this.gD2C2015DataSet;
+            // 
+            // estadisticaDestinosPasajesTableAdapter
+            // 
+            this.estadisticaDestinosPasajesTableAdapter.ClearBeforeFill = true;
+            // 
+            // estadisticaAeronavesFueraDeServicioTableAdapter
+            // 
+            this.estadisticaAeronavesFueraDeServicioTableAdapter.ClearBeforeFill = true;
+            // 
+            // estadisticaClientesMillasTableAdapter
+            // 
+            this.estadisticaClientesMillasTableAdapter.ClearBeforeFill = true;
             // 
             // estadisticaDestinosButacasTableAdapter
             // 
             this.estadisticaDestinosButacasTableAdapter.ClearBeforeFill = true;
             // 
-            // ciuidDataGridViewTextBoxColumn1
-            // 
-            this.ciuidDataGridViewTextBoxColumn1.DataPropertyName = "ciu_id";
-            this.ciuidDataGridViewTextBoxColumn1.HeaderText = "ID";
-            this.ciuidDataGridViewTextBoxColumn1.Name = "ciuidDataGridViewTextBoxColumn1";
-            this.ciuidDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // ciudescripcionDataGridViewTextBoxColumn1
-            // 
-            this.ciudescripcionDataGridViewTextBoxColumn1.DataPropertyName = "ciu_descripcion";
-            this.ciudescripcionDataGridViewTextBoxColumn1.HeaderText = "CIUDAD";
-            this.ciudescripcionDataGridViewTextBoxColumn1.Name = "ciudescripcionDataGridViewTextBoxColumn1";
-            this.ciudescripcionDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // bUTACASDISPONIBLESDataGridViewTextBoxColumn
-            // 
-            this.bUTACASDISPONIBLESDataGridViewTextBoxColumn.DataPropertyName = "BUTACAS_DISPONIBLES";
-            this.bUTACASDISPONIBLESDataGridViewTextBoxColumn.HeaderText = "BUTACAS DISPONIBLES";
-            this.bUTACASDISPONIBLESDataGridViewTextBoxColumn.Name = "bUTACASDISPONIBLESDataGridViewTextBoxColumn";
-            this.bUTACASDISPONIBLESDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // estadisticaDestinosCanceladosBindingSource
-            // 
-            this.estadisticaDestinosCanceladosBindingSource.DataMember = "estadisticaDestinosCancelados";
-            this.estadisticaDestinosCanceladosBindingSource.DataSource = this.gD2C2015DataSet;
-            // 
             // estadisticaDestinosCanceladosTableAdapter
             // 
             this.estadisticaDestinosCanceladosTableAdapter.ClearBeforeFill = true;
-            // 
-            // ciuidDataGridViewTextBoxColumn2
-            // 
-            this.ciuidDataGridViewTextBoxColumn2.DataPropertyName = "ciu_id";
-            this.ciuidDataGridViewTextBoxColumn2.HeaderText = "ID";
-            this.ciuidDataGridViewTextBoxColumn2.Name = "ciuidDataGridViewTextBoxColumn2";
-            this.ciuidDataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // ciudescripcionDataGridViewTextBoxColumn2
-            // 
-            this.ciudescripcionDataGridViewTextBoxColumn2.DataPropertyName = "ciu_descripcion";
-            this.ciudescripcionDataGridViewTextBoxColumn2.HeaderText = "CIUDAD";
-            this.ciudescripcionDataGridViewTextBoxColumn2.Name = "ciudescripcionDataGridViewTextBoxColumn2";
-            this.ciudescripcionDataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // cANTIDADPASAJEDataGridViewTextBoxColumn1
-            // 
-            this.cANTIDADPASAJEDataGridViewTextBoxColumn1.DataPropertyName = "CANTIDAD_PASAJE";
-            this.cANTIDADPASAJEDataGridViewTextBoxColumn1.HeaderText = "CANTIDAD DE PASAJES CANCELADOS";
-            this.cANTIDADPASAJEDataGridViewTextBoxColumn1.Name = "cANTIDADPASAJEDataGridViewTextBoxColumn1";
-            this.cANTIDADPASAJEDataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // ListadoEstadisticoForm
             // 
@@ -523,16 +529,16 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.estadisticaDestinosPasajesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.estadisticaAeronavesFueraDeServicioBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.estadisticaClientesMillasBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.estadisticaDestinosButacasBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.estadisticaDestinosCanceladosBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.estadisticaDestinosButacasBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.estadisticaClientesMillasBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.estadisticaAeronavesFueraDeServicioBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

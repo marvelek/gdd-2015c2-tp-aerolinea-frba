@@ -18,7 +18,8 @@ namespace AerolineaFrba.Compra
         private int vueloId;
         private int cantidadPasajeros;
         private int pesoEncomienda;
-        public Pasajero[] pasajeros;
+        public List<Pasajero> pasajeros;
+        public bool administrador;
 
         private ClientesTableAdapter clientesTableAdapter = new ClientesTableAdapter();
         private GD2C2015DataSet dataSet = new GD2C2015DataSet();
@@ -28,16 +29,23 @@ namespace AerolineaFrba.Compra
             InitializeComponent();
         }
 
-        public DatosPasajerosForm(int vuelo_id, int cantidad_pasajeros, int peso_encomienda)
+        public DatosPasajerosForm(int vuelo_id, int cantidad_pasajeros, int peso_encomienda, bool administrador)
         {
             InitializeComponent();
+            this.administrador = administrador;
             this.clienteId = 0;
             this.vueloId = vuelo_id;
+            this.pasajeros = new List<Pasajero>();
             this.cantidadPasajeros = cantidad_pasajeros;
-            this.pasajeros = new Pasajero[cantidad_pasajeros];
             this.pesoEncomienda = peso_encomienda;
             this.clientesTableAdapter.Fill(this.dataSet.Clientes);
             this.butacasDisponiblesTableAdapter.Fill(this.gD2C2015DataSet.ButacasDisponibles, vuelo_id);
+
+            if (cantidadPasajeros == 0 && peso_encomienda != 0)
+            {
+                this.butacaLabel.Hide();
+                this.butacas.Hide();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -52,7 +60,8 @@ namespace AerolineaFrba.Compra
                 pasajero.Mail = this.mail.Text;
                 pasajero.Telefono = Convert.ToInt32(this.telefono.Text);
                 pasajero.FechaNacimiento = this.fechaNacimiento.Value;
-                if (this.pasajeros.Length.Equals(0) && pesoEncomienda != 0)
+                pasajero.Id = this.clienteId;
+                if (this.pasajeros.Count == 0 && pesoEncomienda != 0)
                 {
                     pasajero.PesoEncomienda = this.pesoEncomienda;
                 }
@@ -63,14 +72,15 @@ namespace AerolineaFrba.Compra
                 int butacaId = (int)this.butacas.SelectedValue;
                 pasajero.ButacaId = butacaId;
                 gD2C2015DataSet.ButacasDisponibles.RemoveButacasDisponiblesRow(gD2C2015DataSet.ButacasDisponibles.FindBybut_id(butacaId));
+                
+                pasajeros.Add(pasajero);
 
-                int posicion = pasajeros.Count();
-                pasajeros[posicion] = pasajero;
-
-                if (this.pasajeros.Length.Equals(this.cantidadPasajeros))
+                if (this.pasajeros.Count >= this.cantidadPasajeros)
                 {
-                    CobroForm form = new CobroForm(this.pasajeros);
-                    form.ShowDialog();
+                    CobroForm form = new CobroForm(this.pasajeros, vueloId, administrador);
+                    form.MdiParent = this.MdiParent;
+                    form.Show();
+                    this.Close();
                 }
                 else
                 {
@@ -160,25 +170,6 @@ namespace AerolineaFrba.Compra
             this.fechaNacimiento.ResetText();
             this.clienteId = 0;
         }
-
-        private void dni_TextChanged(object sender, KeyPressEventArgs e)
-        {
-            //Para obligar a que sólo se introduzcan números 
-            if (Char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else
-                if (Char.IsControl(e.KeyChar)) //permitir teclas de control como retroceso 
-                {
-                    e.Handled = false;
-                }
-                else
-                {
-                    //el resto de teclas pulsadas se desactivan 
-                    e.Handled = true;
-                }
-        } 
 
         private void DatosPasajerosForm_Load(object sender, EventArgs e)
         {
