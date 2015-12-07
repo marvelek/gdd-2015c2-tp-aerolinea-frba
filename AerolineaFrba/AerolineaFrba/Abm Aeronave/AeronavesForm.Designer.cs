@@ -194,6 +194,7 @@
             this.MatriculaBox.Name = "MatriculaBox";
             this.MatriculaBox.Size = new System.Drawing.Size(100, 20);
             this.MatriculaBox.TabIndex = 2;
+            this.MatriculaBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MatriculaBox_KeyDown);
             // 
             // Buscar
             // 

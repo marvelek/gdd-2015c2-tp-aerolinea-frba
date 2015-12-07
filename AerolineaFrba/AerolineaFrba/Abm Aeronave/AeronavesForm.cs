@@ -72,5 +72,12 @@ namespace AerolineaFrba.Abm_Aeronave
 
             }
         }
+
+        private void MatriculaBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) {
+                Buscar_Click(sender, null);
+            } 
+        }
     }
 }
