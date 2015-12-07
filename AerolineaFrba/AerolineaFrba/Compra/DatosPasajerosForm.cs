@@ -40,12 +40,15 @@ namespace AerolineaFrba.Compra
             this.pesoEncomienda = peso_encomienda;
             this.clientesTableAdapter.Fill(this.dataSet.Clientes);
             this.butacasDisponiblesTableAdapter.Fill(this.gD2C2015DataSet.ButacasDisponibles, vuelo_id);
+            this.pasajeroGrupo.Text = "Pasajero 1";
 
             if (cantidadPasajeros == 0 && peso_encomienda != 0)
             {
                 this.butacaLabel.Hide();
                 this.butacas.Hide();
+                this.pasajeroGrupo.Text = "Responsable de Encomienda";
             }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -71,10 +74,9 @@ namespace AerolineaFrba.Compra
                 }
                 int butacaId = (int)this.butacas.SelectedValue;
                 pasajero.ButacaId = butacaId;
-                gD2C2015DataSet.ButacasDisponibles.RemoveButacasDisponiblesRow(gD2C2015DataSet.ButacasDisponibles.FindBybut_id(butacaId));
                 
                 pasajeros.Add(pasajero);
-
+                
                 if (this.pasajeros.Count >= this.cantidadPasajeros)
                 {
                     CobroForm form = new CobroForm(this.pasajeros, vueloId, administrador);
@@ -87,6 +89,9 @@ namespace AerolineaFrba.Compra
                     MessageBox.Show("Pasajero cargado");
                     limpiarDatos();
                     this.butacas.SelectedIndex = 0;
+                    int numeroDeProximoPasajero = this.pasajeros.Count() + 1;
+                    pasajeroGrupo.Text = "Pasajero " + numeroDeProximoPasajero;
+                    gD2C2015DataSet.ButacasDisponibles.RemoveButacasDisponiblesRow(gD2C2015DataSet.ButacasDisponibles.FindBybut_id(butacaId));
                 }
             }
         }
@@ -162,6 +167,7 @@ namespace AerolineaFrba.Compra
         }
 
         private void limpiarDatos() {
+            this.dni.Clear();
             this.nombre.Clear();
             this.apellido.Clear();
             this.direccion.Clear();
