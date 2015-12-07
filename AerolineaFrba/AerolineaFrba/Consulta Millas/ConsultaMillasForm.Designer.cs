@@ -89,10 +89,10 @@
             this.conceptoDataGridViewTextBoxColumn,
             this.fechaDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.historialMillasBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(56, 166);
+            this.dataGridView1.Location = new System.Drawing.Point(68, 166);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(377, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(344, 150);
             this.dataGridView1.TabIndex = 3;
             // 
             // movimientoDataGridViewTextBoxColumn

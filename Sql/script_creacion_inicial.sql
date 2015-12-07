@@ -1383,9 +1383,13 @@ AS
 	SET NOCOUNT OFF;
 
 	DECLARE @millasDisponibles int, @costoEnMillas int, @stockDisponible int
+	DECLARE @ResultSet table (retorno int)
 
 	EXEC @millasDisponibles = MILANESA.millasDisponibles @clienteId
-
+	INSERT INTO @ResultSet (retorno)
+		EXEC MILANESA.millasDisponibles @clienteId
+	SELECT @millasDisponibles = retorno FROM @ResultSet 
+		
 	SELECT 
 		@costoEnMillas = p.pro_cantidad_millas * @cantidad,
 		@stockDisponible = p.pro_stock
@@ -1518,3 +1522,8 @@ AS
 
 	SELECT SCOPE_IDENTITY();
 GO
+
+-- CONSTRAINTS --
+
+ALTER TABLE MILANESA.Aeronaves ADD 
+

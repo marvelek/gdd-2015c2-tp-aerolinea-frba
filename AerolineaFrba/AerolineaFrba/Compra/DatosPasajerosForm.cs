@@ -24,7 +24,6 @@ namespace AerolineaFrba.Compra
         public bool administrador;
 
         private ClientesTableAdapter clientesTableAdapter = new ClientesTableAdapter();
-        private GD2C2015DataSet dataSet = new GD2C2015DataSet();
 
         public DatosPasajerosForm()
         {
@@ -40,7 +39,7 @@ namespace AerolineaFrba.Compra
             this.pasajeros = new List<Pasajero>();
             this.cantidadPasajeros = cantidad_pasajeros;
             this.pesoEncomienda = peso_encomienda;
-            this.clientesTableAdapter.Fill(this.dataSet.Clientes);
+            this.clientesTableAdapter.Fill(this.gD2C2015DataSet.Clientes);
             this.butacasDisponiblesTableAdapter.Fill(this.gD2C2015DataSet.ButacasDisponibles, vuelo_id);
             this.pasajeroGrupo.Text = "Pasajero 1 de " + cantidadPasajeros;
 
@@ -69,6 +68,25 @@ namespace AerolineaFrba.Compra
                 int butacaId = (int)this.butacas.SelectedValue;
                 pasajero.ButacaId = butacaId;
                 pasajero.ButacaString = this.butacas.Text;
+
+                if (clienteId == 0)
+                {
+                    this.clientesTableAdapter1.Insert(nombre.Text, apellido.Text, Convert.ToInt32(dni.Text), direccion.Text, Convert.ToInt32(telefono.Text), mail.Text, fechaNacimiento.Value, true);
+                    this.clientesTableAdapter1.Fill(gD2C2015DataSet.Clientes);
+                    this.clienteId = gD2C2015DataSet.Clientes.Count();
+                }
+                else
+                {
+                    GD2C2015DataSet.ClientesRow cliente = (GD2C2015DataSet.ClientesRow)this.gD2C2015DataSet.Clientes.Select("cli_id='" + clienteId + "'").First();
+                    cliente.cli_apellido = apellido.Text;
+                    cliente.cli_nombre = nombre.Text;
+                    cliente.cli_dni = Convert.ToInt32(dni.Text);
+                    cliente.cli_direccion = direccion.Text;
+                    cliente.cli_mail = mail.Text;
+                    cliente.cli_telefono = Convert.ToInt32(telefono.Text);
+                    cliente.cli_fecha_nacimiento = fechaNacimiento.Value;
+                    clientesTableAdapter1.Update(cliente);
+                }
 
                 if (pesoEncomienda > 0 && responsableEncomienda == null)
                 {
@@ -144,7 +162,7 @@ namespace AerolineaFrba.Compra
                 Utiles validador = new Utiles();
                 if (this.dni.Text != "" && validador.IsNumber(this.dni.Text))
                 {
-                    GD2C2015DataSet.ClientesRow[] result = (GD2C2015DataSet.ClientesRow[])this.dataSet.Clientes.Select("cli_dni='" + Convert.ToInt32(this.dni.Text) + "' AND cli_activo=1");
+                    GD2C2015DataSet.ClientesRow[] result = (GD2C2015DataSet.ClientesRow[])this.gD2C2015DataSet.Clientes.Select("cli_dni='" + Convert.ToInt32(this.dni.Text) + "' AND cli_activo=1");
                     if (result.Length == 1)
                     {
                         GD2C2015DataSet.ClientesRow row = result.First();
