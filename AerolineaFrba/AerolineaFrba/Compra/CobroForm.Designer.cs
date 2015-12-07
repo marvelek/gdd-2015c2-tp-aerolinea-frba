@@ -72,6 +72,16 @@
             this.pasajerosGrid = new System.Windows.Forms.DataGridView();
             this.tarjetas_CreditoTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.Tarjetas_CreditoTableAdapter();
             this.clientesTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.ClientesTableAdapter();
+            this.ventasTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.VentasTableAdapter();
+            this.pasajesTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.PasajesTableAdapter();
+            this.paquetesTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.PaquetesTableAdapter();
+            this.tarjetas_CreditoTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.Tarjetas_CreditoTableAdapter();
+            this.pagos_TarjetaTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.Pagos_TarjetaTableAdapter();
+            this.pasajero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.butaca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.peso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioEncomienda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tarjetasCreditoBindingSource)).BeginInit();
@@ -177,6 +187,7 @@
             this.dni.Name = "dni";
             this.dni.Size = new System.Drawing.Size(100, 20);
             this.dni.TabIndex = 10;
+            this.dni.TextChanged += new System.EventHandler(this.dni_TextChanged);
             // 
             // fechaNacimiento
             // 
@@ -257,9 +268,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(20, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 13);
+            this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Pasajeros";
+            this.label1.Text = "Clientes";
             // 
             // pasajerosCombo
             // 
@@ -428,25 +439,32 @@
             // 
             // encomiendaGrid
             // 
+            this.encomiendaGrid.AllowUserToAddRows = false;
+            this.encomiendaGrid.AllowUserToDeleteRows = false;
             this.encomiendaGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.encomiendaGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.peso,
+            this.precioEncomienda});
             this.encomiendaGrid.Location = new System.Drawing.Point(17, 125);
             this.encomiendaGrid.Name = "encomiendaGrid";
-            this.encomiendaGrid.Size = new System.Drawing.Size(240, 72);
+            this.encomiendaGrid.ReadOnly = true;
+            this.encomiendaGrid.Size = new System.Drawing.Size(246, 72);
             this.encomiendaGrid.TabIndex = 4;
             // 
             // comprar
             // 
-            this.comprar.Location = new System.Drawing.Point(287, 91);
+            this.comprar.Location = new System.Drawing.Point(287, 134);
             this.comprar.Name = "comprar";
             this.comprar.Size = new System.Drawing.Size(183, 53);
             this.comprar.TabIndex = 3;
             this.comprar.Text = "Comprar";
             this.comprar.UseVisualStyleBackColor = true;
+            this.comprar.Click += new System.EventHandler(this.comprar_Click);
             // 
             // totalAPagar
             // 
             this.totalAPagar.AutoSize = true;
-            this.totalAPagar.Location = new System.Drawing.Point(337, 30);
+            this.totalAPagar.Location = new System.Drawing.Point(418, 66);
             this.totalAPagar.Name = "totalAPagar";
             this.totalAPagar.Size = new System.Drawing.Size(0, 13);
             this.totalAPagar.TabIndex = 2;
@@ -454,7 +472,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(297, 30);
+            this.label13.Location = new System.Drawing.Point(378, 66);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(34, 13);
             this.label13.TabIndex = 1;
@@ -462,10 +480,17 @@
             // 
             // pasajerosGrid
             // 
+            this.pasajerosGrid.AllowUserToAddRows = false;
+            this.pasajerosGrid.AllowUserToDeleteRows = false;
             this.pasajerosGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.pasajerosGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.pasajero,
+            this.butaca,
+            this.precio});
             this.pasajerosGrid.Location = new System.Drawing.Point(17, 30);
             this.pasajerosGrid.Name = "pasajerosGrid";
-            this.pasajerosGrid.Size = new System.Drawing.Size(240, 89);
+            this.pasajerosGrid.ReadOnly = true;
+            this.pasajerosGrid.Size = new System.Drawing.Size(343, 89);
             this.pasajerosGrid.TabIndex = 0;
             // 
             // tarjetas_CreditoTableAdapter
@@ -475,6 +500,56 @@
             // clientesTableAdapter1
             // 
             this.clientesTableAdapter1.ClearBeforeFill = true;
+            // 
+            // ventasTableAdapter1
+            // 
+            this.ventasTableAdapter1.ClearBeforeFill = true;
+            // 
+            // pasajesTableAdapter1
+            // 
+            this.pasajesTableAdapter1.ClearBeforeFill = true;
+            // 
+            // paquetesTableAdapter1
+            // 
+            this.paquetesTableAdapter1.ClearBeforeFill = true;
+            // 
+            // tarjetas_CreditoTableAdapter1
+            // 
+            this.tarjetas_CreditoTableAdapter1.ClearBeforeFill = true;
+            // 
+            // pagos_TarjetaTableAdapter1
+            // 
+            this.pagos_TarjetaTableAdapter1.ClearBeforeFill = true;
+            // 
+            // pasajero
+            // 
+            this.pasajero.HeaderText = "Pasajero";
+            this.pasajero.Name = "pasajero";
+            this.pasajero.ReadOnly = true;
+            // 
+            // butaca
+            // 
+            this.butaca.HeaderText = "Butaca";
+            this.butaca.Name = "butaca";
+            this.butaca.ReadOnly = true;
+            // 
+            // precio
+            // 
+            this.precio.HeaderText = "Precio";
+            this.precio.Name = "precio";
+            this.precio.ReadOnly = true;
+            // 
+            // peso
+            // 
+            this.peso.HeaderText = "Peso";
+            this.peso.Name = "peso";
+            this.peso.ReadOnly = true;
+            // 
+            // precioEncomienda
+            // 
+            this.precioEncomienda.HeaderText = "Precio";
+            this.precioEncomienda.Name = "precioEncomienda";
+            this.precioEncomienda.ReadOnly = true;
             // 
             // CobroForm
             // 
@@ -546,5 +621,15 @@
         private System.Windows.Forms.BindingSource tarjetasCreditoBindingSource;
         private GD2C2015DataSetTableAdapters.Tarjetas_CreditoTableAdapter tarjetas_CreditoTableAdapter;
         private GD2C2015DataSetTableAdapters.ClientesTableAdapter clientesTableAdapter1;
+        private GD2C2015DataSetTableAdapters.VentasTableAdapter ventasTableAdapter1;
+        private GD2C2015DataSetTableAdapters.PasajesTableAdapter pasajesTableAdapter1;
+        private GD2C2015DataSetTableAdapters.PaquetesTableAdapter paquetesTableAdapter1;
+        private GD2C2015DataSetTableAdapters.Tarjetas_CreditoTableAdapter tarjetas_CreditoTableAdapter1;
+        private GD2C2015DataSetTableAdapters.Pagos_TarjetaTableAdapter pagos_TarjetaTableAdapter1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn peso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precioEncomienda;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pasajero;
+        private System.Windows.Forms.DataGridViewTextBoxColumn butaca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn precio;
     }
 }

@@ -158,6 +158,7 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Tipos_Servicio' AND xtype='U
 	CREATE TABLE MILANESA.Tipos_Servicio (
 		tip_id int identity(1,1) Primary Key,
 		tip_descripcion nvarchar(255) NOT NULL,
+		tip_factor_precio numeric(18,2) DEFAULT 1,
 		tip_activo bit NOT NULL DEFAULT 1
 	)
 GO
@@ -411,9 +412,13 @@ CREATE PROCEDURE MILANESA.sp_migracion_tipos_servicio AS
 BEGIN
 	SET NOCOUNT ON;
 
-	INSERT INTO Tipos_Servicio (tip_descripcion)
-	SELECT DISTINCT Tipo_Servicio
-	FROM gd_esquema.Maestra
+	INSERT INTO MILANESA.Tipos_Servicio (tip_descripcion)
+	SELECT DISTINCT m.Tipo_Servicio
+	FROM gd_esquema.Maestra m
+
+	UPDATE MILANESA.Tipos_Servicio SET tip_factor_precio=1.5 WHERE tip_descripcion='Ejecutivo'
+	UPDATE MILANESA.Tipos_Servicio SET tip_factor_precio=2.0 WHERE tip_descripcion='Primera Clase'
+
 END
 GO
 
@@ -1399,4 +1404,95 @@ AS
 
 GO
 
+-- PROCEDURES COMPRA --
 
+CREATE PROCEDURE MILANESA.precioPasaje
+(
+	@vueloId int
+)
+AS
+	SET NOCOUNT OFF;
+
+	SELECT 
+		r.rut_precio_base_pasaje * ts.tip_factor_precio
+	FROM
+		MILANESA.Vuelos v
+		JOIN MILANESA.Rutas r 
+			ON r.rut_id = v.ruta_id
+		JOIN MILANESA.Aeronaves a
+			ON a.aer_id = v.aeronave_id
+		JOIN MILANESA.Tipos_Servicio ts
+			ON ts.tip_id = a.tipo_servicio_id
+	WHERE
+		v.vue_id = @vueloId
+GO
+
+CREATE PROCEDURE MILANESA.precioPaquete
+(
+	@vueloId int,
+	@peso int
+)
+AS
+	SET NOCOUNT OFF;
+
+	SELECT 
+		r.rut_precio_base_kg * @peso
+	FROM
+		MILANESA.Vuelos v
+		JOIN MILANESA.Rutas r 
+			ON r.rut_id = v.ruta_id
+	WHERE
+		v.vue_id = @vueloId
+GO
+
+CREATE PROCEDURE MILANESA.generarVenta
+(
+	@vueloId int,
+	@clienteId int,
+	@pagoTarjetaId int
+)
+AS
+	SET NOCOUNT OFF;
+
+	INSERT INTO MILANESA.Ventas (comprador_id, vuelo_id, pago_tarjeta_id, ven_fecha, ven_activo)
+		VALUES(@clienteId, @vueloId, @pagoTarjetaId, SYSDATETIME(), 1)
+
+	SELECT SCOPE_IDENTITY()
+GO
+
+CREATE PROCEDURE MILANESA.generarPasaje
+(
+	@ventaId int,
+	@clienteId int,
+	@butacaId int,
+	@precio decimal(18,2)
+)
+AS
+	SET NOCOUNT OFF;
+	DECLARE @codigoPasaje numeric(18,0)
+
+	SELECT @codigoPasaje = max(paq_codigo) + 1 FROM MILANESA.Paquetes
+
+	INSERT INTO MILANESA.Pasajes (pasajero_id, venta_id, butaca_id, pas_precio, pas_codigo, pas_activo)
+		VALUES(@clienteId, @ventaId, @butacaId, @precio, @codigoPasaje, 1)
+	
+	SELECT @codigoPasaje
+GO
+
+CREATE PROCEDURE MILANESA.generarPaquete
+(
+	@ventaId int,
+	@peso int,
+	@precio decimal(18,2)
+)
+AS
+	SET NOCOUNT OFF;
+	DECLARE @codigoPaquete numeric(18,0)
+
+	SELECT @codigoPaquete = max(paq_codigo) + 1 FROM MILANESA.Paquetes
+
+	INSERT INTO MILANESA.Paquetes(venta_id, paq_kg, paq_precio, paq_codigo, paq_activo)
+		VALUES(@ventaId, @peso, @precio, @codigoPaquete, 1)
+
+	SELECT @codigoPaquete
+GO

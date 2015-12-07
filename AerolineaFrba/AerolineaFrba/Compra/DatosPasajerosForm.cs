@@ -64,22 +64,15 @@ namespace AerolineaFrba.Compra
                 pasajero.Telefono = Convert.ToInt32(this.telefono.Text);
                 pasajero.FechaNacimiento = this.fechaNacimiento.Value;
                 pasajero.Id = this.clienteId;
-                if (this.pasajeros.Count == 0 && pesoEncomienda != 0)
-                {
-                    pasajero.PesoEncomienda = this.pesoEncomienda;
-                }
-                else
-                {
-                    pasajero.PesoEncomienda = 0;
-                }
                 int butacaId = (int)this.butacas.SelectedValue;
                 pasajero.ButacaId = butacaId;
+                pasajero.ButacaString = this.butacas.Text;
                 
                 pasajeros.Add(pasajero);
                 
                 if (this.pasajeros.Count >= this.cantidadPasajeros)
                 {
-                    CobroForm form = new CobroForm(this.pasajeros, vueloId, administrador);
+                    CobroForm form = new CobroForm(this.pasajeros, vueloId, administrador, pesoEncomienda);
                     form.MdiParent = this.MdiParent;
                     form.Show();
                     this.Close();
@@ -120,7 +113,7 @@ namespace AerolineaFrba.Compra
             {
                 error = error + "El telefono no puede ser nulo y solo debe contener numeros\n";
             }
-            if (this.butacas.Text == "" || this.butacas.SelectedIndex == -1)
+            if (this.cantidadPasajeros > 0 && this.butacas.Text == "" || this.butacas.SelectedIndex == -1)
             {
                 error = error + "Debe seleccionar una butaca\n";
             }

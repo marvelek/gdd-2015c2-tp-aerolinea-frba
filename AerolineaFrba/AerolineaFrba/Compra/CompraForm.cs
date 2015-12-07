@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.GD2C2015DataSetTableAdapters;
+using AerolineaFrba.Contenido;
 
 namespace AerolineaFrba.Compra
 {
@@ -92,8 +93,10 @@ namespace AerolineaFrba.Compra
                 if (e.ColumnIndex == 4)
                 {
                     DataGridViewRow row = dataGrid.Rows[e.RowIndex];
-                    DataGridViewCell cell = row.Cells[0];
+                    int vueloId = Convert.ToInt32(row.Cells[0].Value);
                     int cantPasajeros = 0;
+                    int kgLibres = Convert.ToInt32(row.Cells[2].Value);
+                    int butacasLibres = Convert.ToInt32(row.Cells[3].Value);
                     if (this.cantidadPasajeros.Text != "")
                     {
                         cantPasajeros = Convert.ToInt32(this.cantidadPasajeros.Text);
@@ -102,10 +105,19 @@ namespace AerolineaFrba.Compra
                     if (this.pesoEncomienda.Text != "")
                     {
                         peso = Convert.ToInt32(this.pesoEncomienda.Text);
+                        if (cantPasajeros == 0)
+                        {
+                            CobroForm form = new CobroForm(new List<Pasajero>(), vueloId, administrador, peso);
+                            form.MdiParent = this.MdiParent;
+                            form.Show();
+                            this.Close();
+                            return;
+                        }
+
                     }
-                    if (Convert.ToInt32(row.Cells[2].Value) >= peso && Convert.ToInt32(row.Cells[3].Value) >= cantPasajeros)
+                    if (kgLibres>= peso && butacasLibres >= cantPasajeros)
                     {
-                        DatosPasajerosForm form = new DatosPasajerosForm((int)cell.Value, cantPasajeros, peso, administrador);
+                        DatosPasajerosForm form = new DatosPasajerosForm(vueloId, cantPasajeros, peso, administrador);
                         form.MdiParent = this.MdiParent;
                         form.Show();
                         this.Close();

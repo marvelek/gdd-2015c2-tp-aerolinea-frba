@@ -147,18 +147,30 @@ namespace AerolineaFrba.Contenido
                 butacaId = value;
             }
         }
-
-        private int pesoEncomienda;
-        public int PesoEncomienda
+        private string butacaString;
+        public string ButacaString
         {
             get
             {
-                return pesoEncomienda;
+                return butacaString;
             }
 
             set
             {
-                pesoEncomienda = value;
+                butacaString = value;
+            }
+        }
+        private int codigoPasaje;
+        public int CodigoPasaje
+        {
+            get
+            {
+                return codigoPasaje;
+            }
+
+            set
+            {
+                codigoPasaje = value;
             }
         }
     }
