@@ -22,15 +22,17 @@ namespace AerolineaFrba.Compra
         public decimal precioTotal = 0;
         public decimal precioPasaje = 0;
         public decimal precioPaquete = 0;
+        public Pasajero responsableEncomienda;
 
         public CobroForm()
         {
             InitializeComponent();
         }
 
-        public CobroForm(List<Pasajero> pasajerosParams, int vueloIdParam, bool administrador, int pesoEncomienda)
+        public CobroForm(List<Pasajero> pasajerosParams, Pasajero responsableEncomienda, int vueloIdParam, bool administrador, int pesoEncomienda)
         {
             InitializeComponent();
+            this.responsableEncomienda = responsableEncomienda;
             this.pesoPaquete = pesoEncomienda;
             this.administrador = administrador;
             this.clientesTableAdapter1.Fill(gD2C2015DataSet.Clientes);
@@ -53,6 +55,8 @@ namespace AerolineaFrba.Compra
         { 
             int index = 0;
             this.pasajerosCombo.Items.Insert(index, "Otro");
+            index = index + 1;
+            this.pasajerosCombo.Items.Insert(index, responsableEncomienda.Nombre + ' ' + responsableEncomienda.Apellido);
             foreach(Pasajero pasajero in pasajeros) 
             {
                 index = index + 1;
@@ -127,20 +131,13 @@ namespace AerolineaFrba.Compra
         {
             // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Tarjetas_Credito' Puede moverla o quitarla según sea necesario.
             this.tarjetas_CreditoTableAdapter.Fill(this.gD2C2015DataSet.Tarjetas_Credito);
+            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Tarjetas_Credito' Puede moverla o quitarla según sea necesario.
+            this.tarjetas_CreditoTableAdapter.Fill(this.gD2C2015DataSet.Tarjetas_Credito);
 
         }
 
         private void modificar_Click(object sender, EventArgs e)
         {
-            this.habilitarInputsComprador();
-        }
-
-        private void otro_Click(object sender, EventArgs e)
-        {
-            this.pasajerosCombo.SelectedIndex = 0;
-            this.clienteId = 0;
-            this.clearInputsComprador();
-            this.dni.Clear();
             this.habilitarInputsComprador();
         }
 
@@ -161,9 +158,9 @@ namespace AerolineaFrba.Compra
 
         private void pasajerosCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.pasajerosCombo.SelectedIndex > 0)
+            if (this.pasajerosCombo.SelectedIndex > 1)
             {
-                Pasajero pasajero = pasajeros[pasajerosCombo.SelectedIndex - 1];
+                Pasajero pasajero = pasajeros[pasajerosCombo.SelectedIndex - 2];
 
                 this.dni.Text = pasajero.Dni.ToString();
                 this.nombre.Text = pasajero.Nombre;
@@ -175,13 +172,25 @@ namespace AerolineaFrba.Compra
                 this.clienteId = pasajero.Id;
                 this.deshabilitarInputsComprador();
             }
-            else 
+            else if (this.pasajerosCombo.SelectedIndex == 1)
             {
+                this.dni.Text = responsableEncomienda.Dni.ToString();
+                this.nombre.Text = responsableEncomienda.Nombre;
+                this.apellido.Text = responsableEncomienda.Apellido;
+                this.fechaNacimiento.Value = responsableEncomienda.FechaNacimiento;
+                this.direccion.Text = responsableEncomienda.Direccion;
+                this.telefono.Text = responsableEncomienda.Telefono.ToString();
+                this.mail.Text = responsableEncomienda.Mail;
+                this.clienteId = responsableEncomienda.Id;
+                this.deshabilitarInputsComprador();
+            }
+            else
+            {
+                this.clienteId = 0;
                 this.clearInputsComprador();
                 this.dni.Clear();
                 this.habilitarInputsComprador();
             }
-
         }
 
         private void Guardar_Click(object sender, EventArgs e)
@@ -249,7 +258,7 @@ namespace AerolineaFrba.Compra
                 if (this.dni.Text != "" && validador.IsNumber(this.dni.Text))
                 {
                     GD2C2015DataSet.ClientesRow[] result = (GD2C2015DataSet.ClientesRow[])this.gD2C2015DataSet.Clientes.Select("cli_dni='" + Convert.ToInt32(this.dni.Text) + "' AND cli_activo=1");
-                    if (result.Length > 0)
+                    if (result.Length == 1)
                     {
                         GD2C2015DataSet.ClientesRow row = result.First();
                         this.nombre.Text = row.cli_nombre;
@@ -261,6 +270,11 @@ namespace AerolineaFrba.Compra
                         this.clienteId = row.cli_id;
 
                         this.deshabilitarInputsComprador();
+                    }
+                    else if (result.Length > 1)
+                    {
+                        this.buscar.Show();
+                        MessageBox.Show("Ingrese el nombre y apellido y presione el botón Buscar");
                     }
                     else
                     {
@@ -299,7 +313,7 @@ namespace AerolineaFrba.Compra
 
             if (pesoPaquete != 0)
             {
-                encomiendaGrid.Rows.Add(pesoPaquete, precioPaquete);
+                encomiendaGrid.Rows.Add(responsableEncomienda.Nombre + ' ' + responsableEncomienda.Apellido, pesoPaquete, precioPaquete);
             }
 
             precioTotal = precioPasaje * pasajeros.Count() + precioPaquete;
@@ -336,7 +350,7 @@ namespace AerolineaFrba.Compra
 
                 if (pesoPaquete != 0)
                 {
-                    paquetesTableAdapter1.generarPaquete(ventaId, pesoPaquete, precioPaquete);
+                    paquetesTableAdapter1.generarPaquete(ventaId, responsableEncomienda.Id, pesoPaquete, precioPaquete);
                 }
             }
         }
@@ -375,6 +389,79 @@ namespace AerolineaFrba.Compra
                 {
                     error = error + "Debe seleccionar la tarjeta\n";
                 }
+            }
+            if (error != null)
+            {
+                MessageBox.Show(error);
+                return false;
+            }
+            return true;
+        }
+
+        private void tipoTarjeta_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.tipoTarjeta.SelectedIndex > 0)
+            {
+                GD2C2015DataSet.Tarjetas_CreditoRow tarjeta = (GD2C2015DataSet.Tarjetas_CreditoRow)gD2C2015DataSet.Tarjetas_Credito.Select("tac_id='" + tipoTarjeta.SelectedValue + "'").First();
+
+                if (tarjeta.tac_admite_cuotas)
+                {
+                    cuotas.Enabled = true;
+                }
+                else
+                {
+                    cuotas.SelectedIndex = 0;
+                    cuotas.Enabled = false;
+                }
+
+            }
+        }
+
+        private void buscar_Click(object sender, EventArgs e)
+        {
+            if (validoDniDuplicado())
+            {
+                GD2C2015DataSet.ClientesDataTable cliente = this.clientesTableAdapter1.GetDataByDniNombreApellido(Convert.ToInt32(dni.Text), nombre.Text, apellido.Text);
+
+                if (cliente.Count() == 0)
+                {
+                    MessageBox.Show("No se encontró el cliente");
+                }
+                else if (cliente.Count() > 1)
+                {
+                    MessageBox.Show("Error en el sistema, contacte a un administrador");
+                }
+                else
+                {
+                    GD2C2015DataSet.ClientesRow row = cliente.First();
+                    this.nombre.Text = row.cli_nombre;
+                    this.apellido.Text = row.cli_apellido;
+                    this.direccion.Text = row.cli_direccion;
+                    this.telefono.Text = row.cli_telefono.ToString();
+                    this.mail.Text = row.cli_mail;
+                    this.fechaNacimiento.Value = row.cli_fecha_nacimiento;
+                    this.clienteId = row.cli_id;
+
+                    this.deshabilitarInputsComprador();
+                }
+            }
+        }
+
+        private Boolean validoDniDuplicado()
+        {
+            Utiles validador = new Utiles();
+            string error = null;
+            if (this.dni.Text == "" || !validador.IsNumber(this.dni.Text))
+            {
+                error = "El DNI no puede ser nulo y solo debe contener numeros\n";
+            }
+            if (this.nombre.Text == "")
+            {
+                error = error + "El nombre no puede ser nulo\n";
+            }
+            if (this.apellido.Text == "")
+            {
+                error = error + "El apellido no puede ser vacio\n";
             }
             if (error != null)
             {

@@ -173,5 +173,18 @@ namespace AerolineaFrba.Contenido
                 codigoPasaje = value;
             }
         }
+        private bool responsableEncomienda;
+        public bool ResponsableEncomienda
+        {
+            get
+            {
+                return responsableEncomienda;
+            }
+
+            set
+            {
+                responsableEncomienda = value;
+            }
+        }
     }
 }

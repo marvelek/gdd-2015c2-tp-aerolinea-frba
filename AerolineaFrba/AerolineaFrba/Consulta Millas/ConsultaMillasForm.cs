@@ -51,7 +51,6 @@ namespace AerolineaFrba.Consulta_Millas
                     clienteId = row.cli_id;
                 }
             }
-            this.historialMillasTableAdapter.Fill(this.gD2C2015DataSet.historialMillas, clienteId);
             this.millas_acumuladas.Text = this.historialMillasTableAdapter.millasDisponibles(clienteId).ToString();
             this.clienteId = 0;
         }

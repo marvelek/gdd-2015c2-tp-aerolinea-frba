@@ -52,6 +52,7 @@
             this.butacasDisponiblesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.ButacasDisponiblesTableAdapter();
             this.clientesTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.ClientesTableAdapter();
             this.pasajeroGrupo = new System.Windows.Forms.GroupBox();
+            this.buscar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.clientesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.butacasDisponiblesBindingSource)).BeginInit();
@@ -185,9 +186,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(354, 127);
+            this.button1.Location = new System.Drawing.Point(448, 127);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 23);
+            this.button1.Size = new System.Drawing.Size(79, 23);
             this.button1.TabIndex = 9;
             this.button1.Text = "Cargar";
             this.button1.UseVisualStyleBackColor = true;
@@ -228,6 +229,7 @@
             // 
             // pasajeroGrupo
             // 
+            this.pasajeroGrupo.Controls.Add(this.buscar);
             this.pasajeroGrupo.Controls.Add(this.telefono);
             this.pasajeroGrupo.Controls.Add(this.butacaLabel);
             this.pasajeroGrupo.Controls.Add(this.butacas);
@@ -250,6 +252,16 @@
             this.pasajeroGrupo.Size = new System.Drawing.Size(589, 186);
             this.pasajeroGrupo.TabIndex = 17;
             this.pasajeroGrupo.TabStop = false;
+            // 
+            // buscar
+            // 
+            this.buscar.Location = new System.Drawing.Point(354, 127);
+            this.buscar.Name = "buscar";
+            this.buscar.Size = new System.Drawing.Size(79, 23);
+            this.buscar.TabIndex = 17;
+            this.buscar.Text = "Buscar";
+            this.buscar.UseVisualStyleBackColor = true;
+            this.buscar.Click += new System.EventHandler(this.buscar_Click);
             // 
             // DatosPasajerosForm
             // 
@@ -295,5 +307,6 @@
         private System.Windows.Forms.BindingSource clientesBindingSource;
         private GD2C2015DataSetTableAdapters.ClientesTableAdapter clientesTableAdapter1;
         private System.Windows.Forms.GroupBox pasajeroGrupo;
+        private System.Windows.Forms.Button buscar;
     }
 }

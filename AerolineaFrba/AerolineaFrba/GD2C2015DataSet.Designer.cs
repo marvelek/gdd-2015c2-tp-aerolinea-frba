@@ -21027,8 +21027,9 @@ SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_acti
             this._commandCollection[1].CommandType = global::System.Data.CommandType.StoredProcedure;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ventaId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@clienteId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@peso", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@precio", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 18, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@precio", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 18, 2, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
             this._commandCollection[2].CommandText = "MILANESA.precioPaquete";
@@ -21216,7 +21217,7 @@ SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_acti
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual object generarPaquete(global::System.Nullable<int> ventaId, global::System.Nullable<int> peso, global::System.Nullable<decimal> precio) {
+        public virtual object generarPaquete(global::System.Nullable<int> ventaId, global::System.Nullable<int> clienteId, global::System.Nullable<int> peso, global::System.Nullable<decimal> precio) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
             if ((ventaId.HasValue == true)) {
                 command.Parameters[1].Value = ((int)(ventaId.Value));
@@ -21224,17 +21225,23 @@ SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_acti
             else {
                 command.Parameters[1].Value = global::System.DBNull.Value;
             }
-            if ((peso.HasValue == true)) {
-                command.Parameters[2].Value = ((int)(peso.Value));
+            if ((clienteId.HasValue == true)) {
+                command.Parameters[2].Value = ((int)(clienteId.Value));
             }
             else {
                 command.Parameters[2].Value = global::System.DBNull.Value;
             }
-            if ((precio.HasValue == true)) {
-                command.Parameters[3].Value = ((decimal)(precio.Value));
+            if ((peso.HasValue == true)) {
+                command.Parameters[3].Value = ((int)(peso.Value));
             }
             else {
                 command.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((precio.HasValue == true)) {
+                command.Parameters[4].Value = ((decimal)(precio.Value));
+            }
+            else {
+                command.Parameters[4].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -26614,11 +26621,10 @@ SELECT vue_id, ruta_id, aeronave_id, vue_fecha_salida, vue_fecha_llegada_estimad
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@cliente_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT\r\n\tISNULL(SUM(m.mil_cantidad - m.mil_canjeadas), 0)\r\nFROM\r\n\tMILANESA.Millas" +
-                " m\r\nWHERE\r\n\tm.cliente_id = @cliente_id AND\r\n\tDATEDIFF(day, SYSDATETIME(), m.mil_" +
-                "fecha_acreditacion) < 365";
-            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@cliente_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "cliente_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].CommandText = "MILANESA.millasDisponibles";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.StoredProcedure;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@clienteId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -26660,9 +26666,14 @@ SELECT vue_id, ruta_id, aeronave_id, vue_fecha_salida, vue_fecha_llegada_estimad
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual object millasDisponibles(int cliente_id) {
+        public virtual object millasDisponibles(global::System.Nullable<int> clienteId) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
-            command.Parameters[0].Value = ((int)(cliente_id));
+            if ((clienteId.HasValue == true)) {
+                command.Parameters[1].Value = ((int)(clienteId.Value));
+            }
+            else {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {

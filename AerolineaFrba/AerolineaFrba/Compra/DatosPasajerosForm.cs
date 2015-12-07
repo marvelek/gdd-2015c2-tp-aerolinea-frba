@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Contenido;
 using AerolineaFrba.GD2C2015DataSetTableAdapters;
+using AerolineaFrba.Consulta_Millas;
 
 namespace AerolineaFrba.Compra
 {
@@ -19,6 +20,7 @@ namespace AerolineaFrba.Compra
         private int cantidadPasajeros;
         private int pesoEncomienda;
         public List<Pasajero> pasajeros;
+        public Pasajero responsableEncomienda;
         public bool administrador;
 
         private ClientesTableAdapter clientesTableAdapter = new ClientesTableAdapter();
@@ -40,9 +42,9 @@ namespace AerolineaFrba.Compra
             this.pesoEncomienda = peso_encomienda;
             this.clientesTableAdapter.Fill(this.dataSet.Clientes);
             this.butacasDisponiblesTableAdapter.Fill(this.gD2C2015DataSet.ButacasDisponibles, vuelo_id);
-            this.pasajeroGrupo.Text = "Pasajero 1";
+            this.pasajeroGrupo.Text = "Pasajero 1 de " + cantidadPasajeros;
 
-            if (cantidadPasajeros == 0 && peso_encomienda != 0)
+            if (peso_encomienda != 0)
             {
                 this.butacaLabel.Hide();
                 this.butacas.Hide();
@@ -67,23 +69,34 @@ namespace AerolineaFrba.Compra
                 int butacaId = (int)this.butacas.SelectedValue;
                 pasajero.ButacaId = butacaId;
                 pasajero.ButacaString = this.butacas.Text;
-                
-                pasajeros.Add(pasajero);
+
+                if (pesoEncomienda > 0 && responsableEncomienda == null)
+                {
+                    responsableEncomienda = pasajero;
+                    MessageBox.Show("Responsable de Encomienda cargado");
+                }
+                else
+                {
+                    pasajeros.Add(pasajero);
+                    MessageBox.Show("Pasajero " + pasajeros.Count() + " cargado");
+                }
                 
                 if (this.pasajeros.Count >= this.cantidadPasajeros)
                 {
-                    CobroForm form = new CobroForm(this.pasajeros, vueloId, administrador, pesoEncomienda);
+                    CobroForm form = new CobroForm(this.pasajeros, responsableEncomienda, vueloId, administrador, pesoEncomienda);
                     form.MdiParent = this.MdiParent;
                     form.Show();
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Pasajero cargado");
                     limpiarDatos();
+                    this.dni.Clear();
                     this.butacas.SelectedIndex = 0;
                     int numeroDeProximoPasajero = this.pasajeros.Count() + 1;
-                    pasajeroGrupo.Text = "Pasajero " + numeroDeProximoPasajero;
+                    pasajeroGrupo.Text = "Pasajero " + numeroDeProximoPasajero + " de " + cantidadPasajeros;
+                    this.butacaLabel.Show();
+                    this.butacas.Show();
                     gD2C2015DataSet.ButacasDisponibles.RemoveButacasDisponiblesRow(gD2C2015DataSet.ButacasDisponibles.FindBybut_id(butacaId));
                 }
             }
@@ -113,7 +126,7 @@ namespace AerolineaFrba.Compra
             {
                 error = error + "El telefono no puede ser nulo y solo debe contener numeros\n";
             }
-            if (this.cantidadPasajeros > 0 && this.butacas.Text == "" || this.butacas.SelectedIndex == -1)
+            if (responsableEncomienda != null && this.cantidadPasajeros > 0 && this.butacas.Text == "" || this.butacas.SelectedIndex == -1)
             {
                 error = error + "Debe seleccionar una butaca\n";
             }
@@ -132,7 +145,7 @@ namespace AerolineaFrba.Compra
                 if (this.dni.Text != "" && validador.IsNumber(this.dni.Text))
                 {
                     GD2C2015DataSet.ClientesRow[] result = (GD2C2015DataSet.ClientesRow[])this.dataSet.Clientes.Select("cli_dni='" + Convert.ToInt32(this.dni.Text) + "' AND cli_activo=1");
-                    if (result.Length > 0)
+                    if (result.Length == 1)
                     {
                         GD2C2015DataSet.ClientesRow row = result.First();
                         this.nombre.Text = row.cli_nombre;
@@ -142,6 +155,11 @@ namespace AerolineaFrba.Compra
                         this.mail.Text = row.cli_mail;
                         this.fechaNacimiento.Value = row.cli_fecha_nacimiento;
                         this.clienteId = row.cli_id;
+                    }
+                    else if (result.Length > 1)
+                    {
+                        this.buscar.Show();
+                        MessageBox.Show("Ingrese el nombre y apellido y presione el botón Buscar");
                     }
                     else
                     {
@@ -160,7 +178,6 @@ namespace AerolineaFrba.Compra
         }
 
         private void limpiarDatos() {
-            this.dni.Clear();
             this.nombre.Clear();
             this.apellido.Clear();
             this.direccion.Clear();
@@ -175,6 +192,58 @@ namespace AerolineaFrba.Compra
             // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Clientes' Puede moverla o quitarla según sea necesario.
             this.clientesTableAdapter1.Fill(this.gD2C2015DataSet.Clientes);
 
+        }
+
+        private void buscar_Click(object sender, EventArgs e)
+        {
+            if (validoDniDuplicado()) 
+            {
+                GD2C2015DataSet.ClientesDataTable cliente = this.clientesTableAdapter1.GetDataByDniNombreApellido(Convert.ToInt32(dni.Text), nombre.Text, apellido.Text);
+
+                if (cliente.Count() == 0)
+                {
+                    MessageBox.Show("No se encontró el cliente");
+                }
+                else if (cliente.Count() > 1)
+                {
+                    MessageBox.Show("Error en el sistema, contacte a un administrador");
+                }
+                else
+                {
+                    GD2C2015DataSet.ClientesRow row = cliente.First();
+                    this.nombre.Text = row.cli_nombre;
+                    this.apellido.Text = row.cli_apellido;
+                    this.direccion.Text = row.cli_direccion;
+                    this.telefono.Text = row.cli_telefono.ToString();
+                    this.mail.Text = row.cli_mail;
+                    this.fechaNacimiento.Value = row.cli_fecha_nacimiento;
+                    this.clienteId = row.cli_id;
+                }
+            }           
+        }
+
+        private Boolean validoDniDuplicado() 
+        {
+            Utiles validador = new Utiles();
+            string error = null;
+            if (this.dni.Text == "" || !validador.IsNumber(this.dni.Text))
+            {
+                error = "El DNI no puede ser nulo y solo debe contener numeros\n";
+            }
+            if (this.nombre.Text == "")
+            {
+                error = error + "El nombre no puede ser nulo\n";
+            }
+            if (this.apellido.Text == "")
+            {
+                error = error + "El apellido no puede ser vacio\n";
+            }
+            if (error != null)
+            {
+                MessageBox.Show(error);
+                return false;
+            }
+            return true;
         }
     }
 }

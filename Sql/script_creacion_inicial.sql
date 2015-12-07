@@ -305,6 +305,7 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Paquetes' AND xtype='U')
 		paq_id int identity(1,1) Primary Key,
 		devolucion_id int REFERENCES MILANESA.Devoluciones,
 		venta_id int REFERENCES MILANESA.Ventas NOT NULL,
+		cliente_id int REFERENCES MILANESA.Clientes NOT NULL,
 		paq_codigo numeric(18,0) NOT NULL,
 		paq_precio numeric(18,2) NOT NULL,
 		paq_kg numeric(18,0) NOT NULL,
@@ -587,10 +588,11 @@ CREATE PROCEDURE MILANESA.sp_migracion_paquetes AS
 BEGIN
 	SET NOCOUNT ON;
 
-	INSERT INTO Paquetes(paq_codigo, paq_precio, paq_kg, venta_id)
+	INSERT INTO Paquetes(paq_codigo, paq_precio, cliente_id, paq_kg, venta_id)
 	SELECT DISTINCT 
 		M.Paquete_Codigo, 
 		M.Paquete_Precio,
+		C.cli_id,
 		M.Paquete_Kg,
 		Ven.ven_id
 	FROM
@@ -602,6 +604,7 @@ BEGIN
 		C.cli_apellido = M.Cli_Apellido AND
 		C.cli_dni = M.Cli_Dni AND 
 		C.cli_fecha_nacimiento = M.Cli_Fecha_Nac AND
+		Ven.comprador_id = C.cli_id AND
 		Ven.ven_fecha = M.Paquete_FechaCompra AND
 		Ven.comprador_id = C.cli_id AND
 		V.ruta_id = (SELECT R.rut_id 
@@ -1079,7 +1082,7 @@ AS
 			WHERE
 				VE.ven_id = P.venta_id AND
 				VE.vuelo_id = VU.vue_id AND
-				C.cli_id = VE.comprador_id AND
+				C.cli_id = P.cliente_id AND
 				VU.vue_id = @vuelo_id AND
 				P.paq_activo = 1 AND
 				P.devolucion_id IS NULL
@@ -1482,6 +1485,7 @@ GO
 CREATE PROCEDURE MILANESA.generarPaquete
 (
 	@ventaId int,
+	@clienteId int,
 	@peso int,
 	@precio decimal(18,2)
 )
@@ -1491,8 +1495,8 @@ AS
 
 	SELECT @codigoPaquete = max(paq_codigo) + 1 FROM MILANESA.Paquetes
 
-	INSERT INTO MILANESA.Paquetes(venta_id, paq_kg, paq_precio, paq_codigo, paq_activo)
-		VALUES(@ventaId, @peso, @precio, @codigoPaquete, 1)
+	INSERT INTO MILANESA.Paquetes(venta_id, cliente_id, paq_kg, paq_precio, paq_codigo, paq_activo)
+		VALUES(@ventaId, @clienteId, @peso, @precio, @codigoPaquete, 1)
 
 	SELECT @codigoPaquete
 GO

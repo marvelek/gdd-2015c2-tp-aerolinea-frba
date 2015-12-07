@@ -105,15 +105,6 @@ namespace AerolineaFrba.Compra
                     if (this.pesoEncomienda.Text != "")
                     {
                         peso = Convert.ToInt32(this.pesoEncomienda.Text);
-                        if (cantPasajeros == 0)
-                        {
-                            CobroForm form = new CobroForm(new List<Pasajero>(), vueloId, administrador, peso);
-                            form.MdiParent = this.MdiParent;
-                            form.Show();
-                            this.Close();
-                            return;
-                        }
-
                     }
                     if (kgLibres>= peso && butacasLibres >= cantPasajeros)
                     {
