@@ -1312,17 +1312,15 @@ CREATE PROCEDURE MILANESA.millasDisponibles
 )
 AS
 	SET NOCOUNT OFF;
-	DECLARE
-		@return int
-SELECT
-	@return = ISNULL(SUM(m.mil_cantidad - m.mil_canjeadas), 0)
-FROM
-	MILANESA.Millas m
-WHERE
-	m.cliente_id = @clienteId AND
-	DATEDIFF(day, SYSDATETIME(), m.mil_fecha_acreditacion) < 365
+	
+	SELECT
+		ISNULL(SUM(m.mil_cantidad - m.mil_canjeadas), 0)
+	FROM
+		MILANESA.Millas m
+	WHERE
+		m.cliente_id = @clienteId AND
+		DATEDIFF(day, SYSDATETIME(), m.mil_fecha_acreditacion) < 365
 
-	RETURN(@return)
 GO
 
 CREATE PROCEDURE MILANESA.debitoMillas

@@ -15,6 +15,7 @@ namespace AerolineaFrba.Consulta_Millas
     public partial class ConsultaMillasForm : Form
     {
         public int clienteId;
+        public historialMillasTableAdapter historialMillasTableAdapter = new historialMillasTableAdapter();
         public ConsultaMillasForm(int clienteIdParam, int dni)
         {
             InitializeComponent();
@@ -51,6 +52,7 @@ namespace AerolineaFrba.Consulta_Millas
                     clienteId = row.cli_id;
                 }
             }
+            historialMillasTableAdapter.Fill(gD2C2015DataSet.historialMillas, clienteId);
             this.millas_acumuladas.Text = this.historialMillasTableAdapter.millasDisponibles(clienteId).ToString();
             this.clienteId = 0;
         }

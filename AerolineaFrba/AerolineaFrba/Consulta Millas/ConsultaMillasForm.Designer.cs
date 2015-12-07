@@ -42,8 +42,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.millas_acumuladas = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.historialMillasTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.historialMillasTableAdapter();
             this.clientesTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.ClientesTableAdapter();
+            this.historialMillasTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.historialMillasTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.historialMillasBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
@@ -165,13 +165,13 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Millas acumuladas:";
             // 
-            // historialMillasTableAdapter
-            // 
-            this.historialMillasTableAdapter.ClearBeforeFill = true;
-            // 
             // clientesTableAdapter1
             // 
             this.clientesTableAdapter1.ClearBeforeFill = true;
+            // 
+            // historialMillasTableAdapter1
+            // 
+            this.historialMillasTableAdapter1.ClearBeforeFill = true;
             // 
             // ConsultaMillasForm
             // 
@@ -183,7 +183,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "ConsultaMillasForm";
-            this.Text = "Form1";
+            this.Text = "Consulta Millas";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.historialMillasBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).EndInit();
@@ -206,11 +206,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource historialMillasBindingSource;
         private GD2C2015DataSet gD2C2015DataSet;
-        private GD2C2015DataSetTableAdapters.historialMillasTableAdapter historialMillasTableAdapter;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label millas_acumuladas;
         private System.Windows.Forms.Label label2;
         private GD2C2015DataSetTableAdapters.ClientesTableAdapter clientesTableAdapter1;
+        private GD2C2015DataSetTableAdapters.historialMillasTableAdapter historialMillasTableAdapter1;
     }
 }
