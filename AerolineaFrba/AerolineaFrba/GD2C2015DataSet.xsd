@@ -860,7 +860,7 @@ SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_acti
               <Mapping SourceColumn="paq_activo" DataSetColumn="paq_activo" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.generarPaquete" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="generarPaquete" Modifier="Public" Name="generarPaquete" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="generarPaquete">
+              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.generarPaquete" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="generarPaquete" Modifier="Public" Name="generarPaquete" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="generarPaquete">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>MILANESA.generarPaquete</CommandText>
@@ -873,7 +873,7 @@ SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_acti
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.precioPaquete" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="precioPaquete" Modifier="Public" Name="precioPaquete" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="precioPaquete">
+              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.precioPaquete" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="precioPaquete" Modifier="Public" Name="precioPaquete" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="precioPaquete">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>MILANESA.precioPaquete</CommandText>
@@ -967,7 +967,7 @@ SELECT pas_id, pasajero_id, devolucion_id, venta_id, butaca_id, pas_codigo, pas_
               <Mapping SourceColumn="pas_activo" DataSetColumn="pas_activo" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.generarPasaje" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="generarPasaje" Modifier="Public" Name="generarPasaje" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="generarPasaje">
+              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.generarPasaje" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="generarPasaje" Modifier="Public" Name="generarPasaje" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="generarPasaje">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>MILANESA.generarPasaje</CommandText>
@@ -981,7 +981,7 @@ SELECT pas_id, pasajero_id, devolucion_id, venta_id, butaca_id, pas_codigo, pas_
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.precioPasaje" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="precioPasaje" Modifier="Public" Name="precioPasaje" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="precioPasaje">
+              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.precioPasaje" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="precioPasaje" Modifier="Public" Name="precioPasaje" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="precioPasaje">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>MILANESA.precioPasaje</CommandText>
@@ -1415,40 +1415,46 @@ WHERE
               <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.Tipos_Servicio" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>DELETE FROM [MILANESA].[Tipos_Servicio] WHERE (([tip_id] = @Original_tip_id) AND ([tip_descripcion] = @Original_tip_descripcion) AND ([tip_activo] = @Original_tip_activo))</CommandText>
+                    <CommandText>DELETE FROM [MILANESA].[Tipos_Servicio] WHERE (([tip_id] = @Original_tip_id) AND ([tip_descripcion] = @Original_tip_descripcion) AND ([tip_activo] = @Original_tip_activo) AND ((@IsNull_tip_factor_precio = 1 AND [tip_factor_precio] IS NULL) OR ([tip_factor_precio] = @Original_tip_factor_precio)))</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_tip_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="tip_id" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_tip_descripcion" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="tip_descripcion" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Original_tip_activo" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="tip_activo" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_tip_factor_precio" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="tip_factor_precio" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_tip_factor_precio" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="tip_factor_precio" SourceColumnNullMapping="false" SourceVersion="Original" />
                     </Parameters>
                   </DbCommand>
                 </DeleteCommand>
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>INSERT INTO [MILANESA].[Tipos_Servicio] ([tip_descripcion], [tip_activo]) VALUES (@tip_descripcion, @tip_activo);
-SELECT tip_id, tip_descripcion, tip_activo FROM MILANESA.Tipos_Servicio WHERE (tip_id = SCOPE_IDENTITY())</CommandText>
+                    <CommandText>INSERT INTO [MILANESA].[Tipos_Servicio] ([tip_descripcion], [tip_activo], [tip_factor_precio]) VALUES (@tip_descripcion, @tip_activo, @tip_factor_precio);
+SELECT tip_id, tip_descripcion, tip_activo, tip_factor_precio FROM MILANESA.Tipos_Servicio WHERE (tip_id = SCOPE_IDENTITY())</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@tip_descripcion" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="tip_descripcion" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@tip_activo" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="tip_activo" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@tip_factor_precio" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="tip_factor_precio" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </InsertCommand>
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT tip_id, tip_descripcion, tip_activo FROM MILANESA.Tipos_Servicio</CommandText>
+                    <CommandText>SELECT tip_id, tip_descripcion, tip_activo, tip_factor_precio FROM MILANESA.Tipos_Servicio</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>UPDATE [MILANESA].[Tipos_Servicio] SET [tip_descripcion] = @tip_descripcion, [tip_activo] = @tip_activo WHERE (([tip_id] = @Original_tip_id) AND ([tip_descripcion] = @Original_tip_descripcion) AND ([tip_activo] = @Original_tip_activo));
-SELECT tip_id, tip_descripcion, tip_activo FROM MILANESA.Tipos_Servicio WHERE (tip_id = @tip_id)</CommandText>
+                    <CommandText>UPDATE [MILANESA].[Tipos_Servicio] SET [tip_descripcion] = @tip_descripcion, [tip_activo] = @tip_activo, [tip_factor_precio] = @tip_factor_precio WHERE (([tip_id] = @Original_tip_id) AND ([tip_descripcion] = @Original_tip_descripcion) AND ([tip_activo] = @Original_tip_activo) AND ((@IsNull_tip_factor_precio = 1 AND [tip_factor_precio] IS NULL) OR ([tip_factor_precio] = @Original_tip_factor_precio)));
+SELECT tip_id, tip_descripcion, tip_activo, tip_factor_precio FROM MILANESA.Tipos_Servicio WHERE (tip_id = @tip_id)</CommandText>
                     <Parameters>
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@tip_descripcion" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="tip_descripcion" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@tip_activo" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="tip_activo" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@tip_factor_precio" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="tip_factor_precio" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_tip_id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="tip_id" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="@Original_tip_descripcion" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="tip_descripcion" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Boolean" Direction="Input" ParameterName="@Original_tip_activo" Precision="0" ProviderType="Bit" Scale="0" Size="0" SourceColumn="tip_activo" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@IsNull_tip_factor_precio" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="tip_factor_precio" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Decimal" Direction="Input" ParameterName="@Original_tip_factor_precio" Precision="18" ProviderType="Decimal" Scale="2" Size="0" SourceColumn="tip_factor_precio" SourceColumnNullMapping="false" SourceVersion="Original" />
                       <Parameter AllowDbNull="false" AutogeneratedName="tip_id" ColumnName="tip_id" DataSourceName="GD2C2015.MILANESA.Tipos_Servicio" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@tip_id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="tip_id" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
@@ -1459,6 +1465,7 @@ SELECT tip_id, tip_descripcion, tip_activo FROM MILANESA.Tipos_Servicio WHERE (t
               <Mapping SourceColumn="tip_id" DataSetColumn="tip_id" />
               <Mapping SourceColumn="tip_descripcion" DataSetColumn="tip_descripcion" />
               <Mapping SourceColumn="tip_activo" DataSetColumn="tip_activo" />
+              <Mapping SourceColumn="tip_factor_precio" DataSetColumn="tip_factor_precio" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -2103,7 +2110,24 @@ SELECT pat_id, pat_numero_tarjeta, tarjeta_credito_id FROM MILANESA.Pagos_Tarjet
               <Mapping SourceColumn="pat_numero_tarjeta" DataSetColumn="pat_numero_tarjeta" />
               <Mapping SourceColumn="tarjeta_credito_id" DataSetColumn="tarjeta_credito_id" />
             </Mappings>
-            <Sources />
+            <Sources>
+              <DbSource ConnectionRef="DBurl (Settings)" DbObjectName="GD2C2015.MILANESA.pagoTarjeta" DbObjectType="StoredProcedure" GenerateShortCommands="true" GeneratorSourceName="pagoTarjeta" Modifier="Public" Name="pagoTarjeta" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="pagoTarjeta">
+                <SelectCommand>
+                  <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                    <CommandText>MILANESA.pagoTarjeta</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="numeric" DbType="Decimal" Direction="Input" ParameterName="@numeroTarjeta" Precision="18" ProviderType="Decimal" Scale="0" Size="9" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@tarjetaId" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@codigoSeguridad" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@añoVencimiento" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@mesVencimiento" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@cantidadCuotas" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Tarjetas_CreditoTableAdapter" GeneratorDataComponentClassName="Tarjetas_CreditoTableAdapter" Name="Tarjetas_Credito" UserDataComponentName="Tarjetas_CreditoTableAdapter">
             <MainSource>
@@ -2557,6 +2581,7 @@ order by but_numero</CommandText>
                 </xs:simpleType>
               </xs:element>
               <xs:element name="tip_activo" msprop:Generator_ColumnVarNameInTable="columntip_activo" msprop:Generator_ColumnPropNameInRow="tip_activo" msprop:Generator_ColumnPropNameInTable="tip_activoColumn" msprop:Generator_UserColumnName="tip_activo" type="xs:boolean" />
+              <xs:element name="tip_factor_precio" msprop:Generator_ColumnVarNameInTable="columntip_factor_precio" msprop:Generator_ColumnPropNameInRow="tip_factor_precio" msprop:Generator_ColumnPropNameInTable="tip_factor_precioColumn" msprop:Generator_UserColumnName="tip_factor_precio" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

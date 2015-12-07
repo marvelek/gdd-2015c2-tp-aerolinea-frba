@@ -50,12 +50,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pasajerosCombo = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.anioVencimiento = new System.Windows.Forms.ComboBox();
+            this.mesVenciemiento = new System.Windows.Forms.ComboBox();
             this.tarjetaLabel = new System.Windows.Forms.Label();
             this.tipoTarjeta = new System.Windows.Forms.ComboBox();
             this.tarjetasCreditoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
             this.cuotas = new System.Windows.Forms.ComboBox();
-            this.vencimiento = new System.Windows.Forms.TextBox();
             this.codigoSeguridad = new System.Windows.Forms.TextBox();
             this.numeroTarjeta = new System.Windows.Forms.TextBox();
             this.cuotasLabel = new System.Windows.Forms.Label();
@@ -66,10 +67,15 @@
             this.medioPago = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.encomiendaGrid = new System.Windows.Forms.DataGridView();
+            this.peso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioEncomienda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comprar = new System.Windows.Forms.Button();
             this.totalAPagar = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.pasajerosGrid = new System.Windows.Forms.DataGridView();
+            this.pasajero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.butaca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tarjetas_CreditoTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.Tarjetas_CreditoTableAdapter();
             this.clientesTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.ClientesTableAdapter();
             this.ventasTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.VentasTableAdapter();
@@ -77,11 +83,6 @@
             this.paquetesTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.PaquetesTableAdapter();
             this.tarjetas_CreditoTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.Tarjetas_CreditoTableAdapter();
             this.pagos_TarjetaTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.Pagos_TarjetaTableAdapter();
-            this.pasajero = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.butaca = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.peso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precioEncomienda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tarjetasCreditoBindingSource)).BeginInit();
@@ -124,7 +125,7 @@
             this.mail.Location = new System.Drawing.Point(277, 114);
             this.mail.Name = "mail";
             this.mail.Size = new System.Drawing.Size(100, 20);
-            this.mail.TabIndex = 19;
+            this.mail.TabIndex = 11;
             // 
             // label7
             // 
@@ -140,7 +141,7 @@
             this.telefono.Location = new System.Drawing.Point(277, 88);
             this.telefono.Name = "telefono";
             this.telefono.Size = new System.Drawing.Size(100, 20);
-            this.telefono.TabIndex = 17;
+            this.telefono.TabIndex = 10;
             // 
             // label6
             // 
@@ -156,7 +157,7 @@
             this.direccion.Location = new System.Drawing.Point(277, 62);
             this.direccion.Name = "direccion";
             this.direccion.Size = new System.Drawing.Size(100, 20);
-            this.direccion.TabIndex = 15;
+            this.direccion.TabIndex = 9;
             // 
             // label5
             // 
@@ -172,21 +173,21 @@
             this.apellido.Location = new System.Drawing.Point(86, 114);
             this.apellido.Name = "apellido";
             this.apellido.Size = new System.Drawing.Size(100, 20);
-            this.apellido.TabIndex = 12;
+            this.apellido.TabIndex = 7;
             // 
             // nombre
             // 
             this.nombre.Location = new System.Drawing.Point(86, 88);
             this.nombre.Name = "nombre";
             this.nombre.Size = new System.Drawing.Size(100, 20);
-            this.nombre.TabIndex = 11;
+            this.nombre.TabIndex = 6;
             // 
             // dni
             // 
             this.dni.Location = new System.Drawing.Point(86, 62);
             this.dni.Name = "dni";
             this.dni.Size = new System.Drawing.Size(100, 20);
-            this.dni.TabIndex = 10;
+            this.dni.TabIndex = 5;
             this.dni.TextChanged += new System.EventHandler(this.dni_TextChanged);
             // 
             // fechaNacimiento
@@ -195,7 +196,7 @@
             this.fechaNacimiento.Location = new System.Drawing.Point(86, 140);
             this.fechaNacimiento.Name = "fechaNacimiento";
             this.fechaNacimiento.Size = new System.Drawing.Size(100, 20);
-            this.fechaNacimiento.TabIndex = 9;
+            this.fechaNacimiento.TabIndex = 8;
             // 
             // label4
             // 
@@ -283,10 +284,11 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.anioVencimiento);
+            this.groupBox2.Controls.Add(this.mesVenciemiento);
             this.groupBox2.Controls.Add(this.tarjetaLabel);
             this.groupBox2.Controls.Add(this.tipoTarjeta);
             this.groupBox2.Controls.Add(this.cuotas);
-            this.groupBox2.Controls.Add(this.vencimiento);
             this.groupBox2.Controls.Add(this.codigoSeguridad);
             this.groupBox2.Controls.Add(this.numeroTarjeta);
             this.groupBox2.Controls.Add(this.cuotasLabel);
@@ -301,6 +303,48 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos Pago";
+            // 
+            // anioVencimiento
+            // 
+            this.anioVencimiento.FormattingEnabled = true;
+            this.anioVencimiento.Items.AddRange(new object[] {
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025",
+            "2026",
+            "2027"});
+            this.anioVencimiento.Location = new System.Drawing.Point(368, 75);
+            this.anioVencimiento.Name = "anioVencimiento";
+            this.anioVencimiento.Size = new System.Drawing.Size(50, 21);
+            this.anioVencimiento.TabIndex = 17;
+            // 
+            // mesVenciemiento
+            // 
+            this.mesVenciemiento.FormattingEnabled = true;
+            this.mesVenciemiento.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"});
+            this.mesVenciemiento.Location = new System.Drawing.Point(320, 75);
+            this.mesVenciemiento.Name = "mesVenciemiento";
+            this.mesVenciemiento.Size = new System.Drawing.Size(42, 21);
+            this.mesVenciemiento.TabIndex = 16;
             // 
             // tarjetaLabel
             // 
@@ -319,7 +363,7 @@
             this.tipoTarjeta.Location = new System.Drawing.Point(311, 22);
             this.tipoTarjeta.Name = "tipoTarjeta";
             this.tipoTarjeta.Size = new System.Drawing.Size(121, 21);
-            this.tipoTarjeta.TabIndex = 30;
+            this.tipoTarjeta.TabIndex = 13;
             this.tipoTarjeta.ValueMember = "tac_id";
             // 
             // tarjetasCreditoBindingSource
@@ -340,36 +384,31 @@
             "3",
             "6",
             "12"});
-            this.cuotas.Location = new System.Drawing.Point(400, 77);
+            this.cuotas.Location = new System.Drawing.Point(429, 75);
             this.cuotas.Name = "cuotas";
             this.cuotas.Size = new System.Drawing.Size(62, 21);
-            this.cuotas.TabIndex = 29;
-            // 
-            // vencimiento
-            // 
-            this.vencimiento.Location = new System.Drawing.Point(320, 76);
-            this.vencimiento.Name = "vencimiento";
-            this.vencimiento.Size = new System.Drawing.Size(40, 20);
-            this.vencimiento.TabIndex = 28;
+            this.cuotas.TabIndex = 18;
             // 
             // codigoSeguridad
             // 
             this.codigoSeguridad.Location = new System.Drawing.Point(208, 77);
+            this.codigoSeguridad.MaxLength = 3;
             this.codigoSeguridad.Name = "codigoSeguridad";
             this.codigoSeguridad.Size = new System.Drawing.Size(40, 20);
-            this.codigoSeguridad.TabIndex = 27;
+            this.codigoSeguridad.TabIndex = 15;
             // 
             // numeroTarjeta
             // 
             this.numeroTarjeta.Location = new System.Drawing.Point(17, 77);
+            this.numeroTarjeta.MaxLength = 12;
             this.numeroTarjeta.Name = "numeroTarjeta";
             this.numeroTarjeta.Size = new System.Drawing.Size(177, 20);
-            this.numeroTarjeta.TabIndex = 26;
+            this.numeroTarjeta.TabIndex = 14;
             // 
             // cuotasLabel
             // 
             this.cuotasLabel.AutoSize = true;
-            this.cuotasLabel.Location = new System.Drawing.Point(397, 60);
+            this.cuotasLabel.Location = new System.Drawing.Point(430, 60);
             this.cuotasLabel.Name = "cuotasLabel";
             this.cuotasLabel.Size = new System.Drawing.Size(40, 13);
             this.cuotasLabel.TabIndex = 25;
@@ -420,7 +459,7 @@
             this.medioPago.Location = new System.Drawing.Point(99, 22);
             this.medioPago.Name = "medioPago";
             this.medioPago.Size = new System.Drawing.Size(121, 21);
-            this.medioPago.TabIndex = 20;
+            this.medioPago.TabIndex = 12;
             this.medioPago.SelectedIndexChanged += new System.EventHandler(this.medioPago_SelectedIndexChanged);
             // 
             // groupBox3
@@ -451,12 +490,24 @@
             this.encomiendaGrid.Size = new System.Drawing.Size(246, 72);
             this.encomiendaGrid.TabIndex = 4;
             // 
+            // peso
+            // 
+            this.peso.HeaderText = "Peso";
+            this.peso.Name = "peso";
+            this.peso.ReadOnly = true;
+            // 
+            // precioEncomienda
+            // 
+            this.precioEncomienda.HeaderText = "Precio";
+            this.precioEncomienda.Name = "precioEncomienda";
+            this.precioEncomienda.ReadOnly = true;
+            // 
             // comprar
             // 
             this.comprar.Location = new System.Drawing.Point(287, 134);
             this.comprar.Name = "comprar";
             this.comprar.Size = new System.Drawing.Size(183, 53);
-            this.comprar.TabIndex = 3;
+            this.comprar.TabIndex = 19;
             this.comprar.Text = "Comprar";
             this.comprar.UseVisualStyleBackColor = true;
             this.comprar.Click += new System.EventHandler(this.comprar_Click);
@@ -493,6 +544,24 @@
             this.pasajerosGrid.Size = new System.Drawing.Size(343, 89);
             this.pasajerosGrid.TabIndex = 0;
             // 
+            // pasajero
+            // 
+            this.pasajero.HeaderText = "Pasajero";
+            this.pasajero.Name = "pasajero";
+            this.pasajero.ReadOnly = true;
+            // 
+            // butaca
+            // 
+            this.butaca.HeaderText = "Butaca";
+            this.butaca.Name = "butaca";
+            this.butaca.ReadOnly = true;
+            // 
+            // precio
+            // 
+            this.precio.HeaderText = "Precio";
+            this.precio.Name = "precio";
+            this.precio.ReadOnly = true;
+            // 
             // tarjetas_CreditoTableAdapter
             // 
             this.tarjetas_CreditoTableAdapter.ClearBeforeFill = true;
@@ -521,36 +590,6 @@
             // 
             this.pagos_TarjetaTableAdapter1.ClearBeforeFill = true;
             // 
-            // pasajero
-            // 
-            this.pasajero.HeaderText = "Pasajero";
-            this.pasajero.Name = "pasajero";
-            this.pasajero.ReadOnly = true;
-            // 
-            // butaca
-            // 
-            this.butaca.HeaderText = "Butaca";
-            this.butaca.Name = "butaca";
-            this.butaca.ReadOnly = true;
-            // 
-            // precio
-            // 
-            this.precio.HeaderText = "Precio";
-            this.precio.Name = "precio";
-            this.precio.ReadOnly = true;
-            // 
-            // peso
-            // 
-            this.peso.HeaderText = "Peso";
-            this.peso.Name = "peso";
-            this.peso.ReadOnly = true;
-            // 
-            // precioEncomienda
-            // 
-            this.precioEncomienda.HeaderText = "Precio";
-            this.precioEncomienda.Name = "precioEncomienda";
-            this.precioEncomienda.ReadOnly = true;
-            // 
             // CobroForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -560,7 +599,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "CobroForm";
-            this.Text = "CobroForm";
+            this.Text = "Pago";
             this.Load += new System.EventHandler(this.CobroForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -603,7 +642,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox medioPago;
         private System.Windows.Forms.ComboBox cuotas;
-        private System.Windows.Forms.TextBox vencimiento;
         private System.Windows.Forms.TextBox codigoSeguridad;
         private System.Windows.Forms.TextBox numeroTarjeta;
         private System.Windows.Forms.Label cuotasLabel;
@@ -631,5 +669,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn pasajero;
         private System.Windows.Forms.DataGridViewTextBoxColumn butaca;
         private System.Windows.Forms.DataGridViewTextBoxColumn precio;
+        private System.Windows.Forms.ComboBox anioVencimiento;
+        private System.Windows.Forms.ComboBox mesVenciemiento;
     }
 }

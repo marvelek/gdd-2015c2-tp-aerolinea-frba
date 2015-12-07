@@ -1496,3 +1496,23 @@ AS
 
 	SELECT @codigoPaquete
 GO
+
+CREATE PROCEDURE MILANESA.pagoTarjeta
+(
+	@numeroTarjeta numeric(18,0),
+	@tarjetaId int,
+	@codigoSeguridad int,
+	@añoVencimiento int,
+	@mesVencimiento int,
+	@cantidadCuotas int
+)
+AS
+	SET NOCOUNT OFF;
+
+	--Acá el sistema debe encargarse de realizar la compra con tarjeta usando
+
+	INSERT INTO MILANESA.Pagos_Tarjeta(pat_numero_tarjeta, tarjeta_credito_id)
+		VALUES(@numeroTarjeta, @tarjetaId)
+
+	SELECT SCOPE_IDENTITY();
+GO

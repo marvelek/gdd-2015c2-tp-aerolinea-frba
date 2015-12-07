@@ -69,7 +69,8 @@ namespace AerolineaFrba.Compra
             this.tarjetaLabel.Hide();
             this.codigoSeguridad.Hide();
             this.codigoSeguridadLabel.Hide();
-            this.vencimiento.Hide();
+            this.anioVencimiento.Hide();
+            this.mesVenciemiento.Hide();
             this.vencimientoLabel.Hide();
             this.cuotas.Hide();
             this.cuotasLabel.Hide();
@@ -83,7 +84,8 @@ namespace AerolineaFrba.Compra
             this.tarjetaLabel.Show();
             this.codigoSeguridad.Show();
             this.codigoSeguridadLabel.Show();
-            this.vencimiento.Show();
+            this.anioVencimiento.Show();
+            this.mesVenciemiento.Show();
             this.vencimientoLabel.Show();
             this.cuotas.Show();
             this.cuotasLabel.Show();
@@ -257,6 +259,8 @@ namespace AerolineaFrba.Compra
                         this.mail.Text = row.cli_mail;
                         this.fechaNacimiento.Value = row.cli_fecha_nacimiento;
                         this.clienteId = row.cli_id;
+
+                        this.deshabilitarInputsComprador();
                     }
                     else
                     {
@@ -304,9 +308,25 @@ namespace AerolineaFrba.Compra
 
         private void comprar_Click(object sender, EventArgs e)
         {
-            if (!pagaTarjeta) 
+            if (datosCompraValidos()) 
             {
-                int ventaId = Convert.ToInt32(ventasTableAdapter1.generarVenta(vueloId, clienteId, null));
+                int ventaId;
+                if (pagaTarjeta)
+                {
+                    decimal numeroTarjeta = Convert.ToDecimal(this.numeroTarjeta.Text);
+                    int tarjetaId = Convert.ToInt32(this.tipoTarjeta.SelectedValue);
+                    int codigoSeguridad = Convert.ToInt32(this.codigoSeguridad.Text);
+                    int añoVencimiento = Convert.ToInt32(this.anioVencimiento.Text);
+                    int mesVenciemiento = Convert.ToInt32(this.mesVenciemiento.Text);
+                    int cantidadCuotas = Convert.ToInt32(this.cuotas.Text);
+
+                    int pagoTarjetaId = Convert.ToInt32(pagos_TarjetaTableAdapter1.pagoTarjeta(numeroTarjeta, tarjetaId, codigoSeguridad, añoVencimiento, mesVenciemiento, cantidadCuotas));
+                    ventaId = Convert.ToInt32(ventasTableAdapter1.generarVenta(vueloId, clienteId, pagoTarjetaId));
+                }
+                else
+                {
+                    ventaId = Convert.ToInt32(ventasTableAdapter1.generarVenta(vueloId, clienteId, null));
+                }
 
                 foreach (Pasajero pasajero in pasajeros)
                 {
@@ -318,12 +338,49 @@ namespace AerolineaFrba.Compra
                 {
                     paquetesTableAdapter1.generarPaquete(ventaId, pesoPaquete, precioPaquete);
                 }
-
             }
         }
 
         private Boolean datosCompraValidos() 
         {
+            Utiles validador = new Utiles();
+            string error = null;
+            if (clienteId == 0)
+            {
+                error = "Debe seleccionar un comprador\n";
+            }
+            if (this.pagaTarjeta) 
+            {
+                if (this.numeroTarjeta.Text.Length < 12 || !validador.IsNumber(this.numeroTarjeta.Text))
+                {
+                    error = error + "El número de tarjeta debe tener 12 números\n";
+                }
+                if (this.codigoSeguridad.Text.Length < 3 || !validador.IsNumber(this.codigoSeguridad.Text))
+                {
+                    error = error + "El código de seguridad debe tener 3 números\n";
+                }
+                if (this.mesVenciemiento.SelectedIndex == -1)
+                {
+                    error = error + "Debe seleccionar un mes de vencimiento\n";
+                }
+                if (this.anioVencimiento.SelectedIndex == -1)
+                {
+                    error = error + "Debe seleccionar un año de vencimiento\n";
+                }
+                if (this.cuotas.SelectedIndex == -1)
+                {
+                    error = error + "Debe seleccionar la cantidad de cuotas\n";
+                }
+                if (this.tipoTarjeta.SelectedIndex == -1)
+                {
+                    error = error + "Debe seleccionar la tarjeta\n";
+                }
+            }
+            if (error != null)
+            {
+                MessageBox.Show(error);
+                return false;
+            }
             return true;
         }
     }
