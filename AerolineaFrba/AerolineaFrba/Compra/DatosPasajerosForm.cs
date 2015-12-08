@@ -75,7 +75,7 @@ namespace AerolineaFrba.Compra
                     {
                         this.clientesTableAdapter1.Insert(nombre.Text, apellido.Text, Convert.ToInt32(dni.Text), direccion.Text, Convert.ToInt32(telefono.Text), mail.Text, fechaNacimiento.Value, true);
                     }
-                    catch (System.Exception ex)
+                    catch (System.Exception)
                     {
                         MessageBox.Show("Ha ocurrido un error al intentar guardar el cliente.\nSi el problema persiste póngase en contacto con el administrador.");
                         return;
@@ -99,6 +99,7 @@ namespace AerolineaFrba.Compra
                 if (pesoEncomienda > 0 && responsableEncomienda == null)
                 {
                     responsableEncomienda = pasajero;
+                    responsableEncomienda.PesoPaquete = pesoEncomienda;
                     MessageBox.Show("Responsable de Encomienda cargado");
                 }
                 else
@@ -109,7 +110,7 @@ namespace AerolineaFrba.Compra
                 
                 if (this.pasajeros.Count >= this.cantidadPasajeros)
                 {
-                    CobroForm form = new CobroForm(this.pasajeros, responsableEncomienda, vueloId, administrador, pesoEncomienda);
+                    CobroForm form = new CobroForm(this.pasajeros, responsableEncomienda, vueloId, administrador);
                     form.MdiParent = this.MdiParent;
                     form.Show();
                     this.Close();

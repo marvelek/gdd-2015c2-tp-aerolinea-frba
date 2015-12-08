@@ -173,17 +173,30 @@ namespace AerolineaFrba.Contenido
                 codigoPasaje = value;
             }
         }
-        private bool responsableEncomienda;
-        public bool ResponsableEncomienda
+        private int pesoPaquete;
+        public int PesoPaquete
         {
             get
             {
-                return responsableEncomienda;
+                return pesoPaquete;
             }
 
             set
             {
-                responsableEncomienda = value;
+                pesoPaquete = value;
+            }
+        }
+        private decimal precio;
+        public decimal Precio
+        {
+            get
+            {
+                return precio;
+            }
+
+            set
+            {
+                precio = value;
             }
         }
     }

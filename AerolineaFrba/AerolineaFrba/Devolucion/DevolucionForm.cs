@@ -84,7 +84,6 @@ namespace AerolineaFrba.Devolucion
                     this.pasajesTableAdapter.Fill(this.gD2C2015DataSet.Pasajes);
                     MessageBox.Show("El pasaje ha sido cancelado correctamente");                     
                     break;
-                    break;
                 default:
                     int id = Convert.ToInt16(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value);
                     int activVenta = Convert.ToInt16(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[5].Value);

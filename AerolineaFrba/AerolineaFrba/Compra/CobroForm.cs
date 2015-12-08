@@ -19,7 +19,6 @@ namespace AerolineaFrba.Compra
         public bool pagaTarjeta = false;
         public int clienteId = 0;
         public bool administrador;
-        public int pesoPaquete;
         public decimal precioTotal = 0;
         public decimal precioPasaje = 0;
         public decimal precioPaquete = 0;
@@ -30,11 +29,10 @@ namespace AerolineaFrba.Compra
             InitializeComponent();
         }
 
-        public CobroForm(List<Pasajero> pasajerosParams, Pasajero responsableEncomienda, int vueloIdParam, bool administrador, int pesoEncomienda)
+        public CobroForm(List<Pasajero> pasajerosParams, Pasajero responsableEncomienda, int vueloIdParam, bool administrador)
         {
             InitializeComponent();
             this.responsableEncomienda = responsableEncomienda;
-            this.pesoPaquete = pesoEncomienda;
             this.administrador = administrador;
             this.clientesTableAdapter1.Fill(gD2C2015DataSet.Clientes);
             this.deshabilitarInputsComprador();
@@ -210,7 +208,7 @@ namespace AerolineaFrba.Compra
                     {
                         this.clientesTableAdapter1.Insert(nombre.Text, apellido.Text, Convert.ToInt32(dni.Text), direccion.Text, Convert.ToInt32(telefono.Text), mail.Text, fechaNacimiento.Value, true);
                     }
-                    catch (System.Exception ex)
+                    catch (System.Exception)
                     {
                         MessageBox.Show("Ha ocurrido un error al intentar guardar el cliente.\nSi el problema persiste póngase en contacto con el administrador.");
                         return;
@@ -312,7 +310,7 @@ namespace AerolineaFrba.Compra
             {
                 pasajerosGrid.Hide();
             }
-            if (pesoPaquete == 0)
+            if (responsableEncomienda == null)
             {
                 encomiendaGrid.Hide();
             }
@@ -321,14 +319,16 @@ namespace AerolineaFrba.Compra
 
             foreach (Pasajero pasajero in pasajeros) 
             {
+                pasajero.Precio = precioPasaje;
                 pasajerosGrid.Rows.Add(pasajero.Nombre + ' ' + pasajero.Apellido, pasajero.ButacaString, precioPasaje);
             }
 
-            precioPaquete = (decimal) paquetesTableAdapter1.precioPaquete(vueloId, pesoPaquete);
+            precioPaquete = (decimal) paquetesTableAdapter1.precioPaquete(vueloId, responsableEncomienda.PesoPaquete);
 
-            if (pesoPaquete != 0)
+            if (responsableEncomienda != null)
             {
-                encomiendaGrid.Rows.Add(responsableEncomienda.Nombre + ' ' + responsableEncomienda.Apellido, pesoPaquete, precioPaquete);
+                responsableEncomienda.Precio = precioPaquete;
+                encomiendaGrid.Rows.Add(responsableEncomienda.Nombre + ' ' + responsableEncomienda.Apellido, responsableEncomienda.PesoPaquete, precioPaquete);
             }
 
             precioTotal = precioPasaje * pasajeros.Count() + precioPaquete;
@@ -339,7 +339,9 @@ namespace AerolineaFrba.Compra
         {
             if (datosCompraValidos()) 
             {
+                ventasTableAdapter1.Connection.Open();
                 SqlTransaction transaccion = ventasTableAdapter1.Connection.BeginTransaction();
+                ventasTableAdapter1.Transaction = transaccion;
                 try
                 {
                     int ventaId;
@@ -351,7 +353,7 @@ namespace AerolineaFrba.Compra
                         int añoVencimiento = Convert.ToInt32(this.anioVencimiento.Text);
                         int mesVenciemiento = Convert.ToInt32(this.mesVenciemiento.Text);
                         int cantidadCuotas = Convert.ToInt32(this.cuotas.Text);
-                        
+
                         int pagoTarjetaId = Convert.ToInt32(ventasTableAdapter1.pagoTarjeta(numeroTarjeta, tarjetaId, codigoSeguridad, añoVencimiento, mesVenciemiento, cantidadCuotas));
                         ventaId = Convert.ToInt32(ventasTableAdapter1.generarVenta(vueloId, clienteId, pagoTarjetaId));
                     }
@@ -366,20 +368,31 @@ namespace AerolineaFrba.Compra
                         pasajero.CodigoPasaje = codigoPasaje;
                     }
 
-                    if (pesoPaquete != 0)
+                    if (responsableEncomienda != null)
                     {
-                        int codigoPaquete = Convert.ToInt32(ventasTableAdapter1.generarPaquete(ventaId, responsableEncomienda.Id, pesoPaquete, precioPaquete));
+                        int codigoPaquete = Convert.ToInt32(ventasTableAdapter1.generarPaquete(ventaId, responsableEncomienda.Id, responsableEncomienda.PesoPaquete, precioPaquete));
                         responsableEncomienda.CodigoPasaje = codigoPaquete;
                     }
                     transaccion.Commit();
                 }
-                catch (System.Exception)
+                catch (System.Exception ex)
                 {
                     transaccion.Rollback();
+                    MessageBox.Show(ex.Message);
                     MessageBox.Show("Ha ocurrido un error al intentar realizar la compra.\nSi el problema persiste póngase en contacto con el administrador.");
                     return;
                 }
-               
+                finally
+                {
+                    ventasTableAdapter1.Connection.Close();
+                }
+
+                MessageBox.Show("La compra fue realizada con éxito");
+
+                ResumenForm form = new ResumenForm(pasajeros, responsableEncomienda, vueloId, precioTotal);
+                form.MdiParent = this.MdiParent;
+                form.Show();
+                this.Close();
             }
         }
 

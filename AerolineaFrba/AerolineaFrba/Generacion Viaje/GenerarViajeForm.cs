@@ -83,7 +83,7 @@ namespace AerolineaFrba.Generacion_Viaje
                     this.vuelosTableAdapter.Insert(rutaId, aeronaveId, this.fechaSalida.Value, this.fechaLlegadaEstimada.Value, null, true, null);
                     MessageBox.Show("El viaje ha sido guardado correctamente");
                 }
-                catch (System.Exception ex)
+                catch (System.Exception)
                 {
                     MessageBox.Show("Ha ocurrido un error al intentar registrar el viaje.\nSi el problema persiste póngase en contacto con el administrador.");
                     return;

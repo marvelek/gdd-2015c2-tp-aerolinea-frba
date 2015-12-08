@@ -56,7 +56,7 @@ namespace AerolineaFrba.Canje_Millas
                             productosTableAdapter.canjearProducto(clienteId, productoId, cantidadACanjear);
                             MessageBox.Show("El canje se realizó correctamente.");
                         }
-                        catch (System.Exception ex)
+                        catch (System.Exception)
                         {
                             MessageBox.Show("Ha ocurrido un error al canjear el producto.\nSi el error persiste póngase en contacto con el Administrador.");
                         }

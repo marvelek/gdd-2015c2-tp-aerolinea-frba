@@ -1564,7 +1564,7 @@ AS
 	SET NOCOUNT OFF;
 	DECLARE @codigoPasaje numeric(18,0)
 
-	SELECT @codigoPasaje = max(paq_codigo) + 1 FROM MILANESA.Paquetes
+	SELECT @codigoPasaje = max(pas_codigo) + 1 FROM MILANESA.Pasajes
 
 	INSERT INTO MILANESA.Pasajes (pasajero_id, venta_id, butaca_id, pas_precio, pas_codigo, pas_activo)
 		VALUES(@clienteId, @ventaId, @butacaId, @precio, @codigoPasaje, 1)

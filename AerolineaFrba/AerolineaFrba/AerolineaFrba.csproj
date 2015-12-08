@@ -146,6 +146,12 @@
     <Compile Include="Compra\DatosPasajerosForm.Designer.cs">
       <DependentUpon>DatosPasajerosForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compra\ResumenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\ResumenForm.Designer.cs">
+      <DependentUpon>ResumenForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConexionSQL.cs" />
     <Compile Include="Consulta Millas\BusquedaClienteForm.cs">
       <SubType>Form</SubType>
@@ -267,6 +273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\DatosPasajerosForm.resx">
       <DependentUpon>DatosPasajerosForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra\ResumenForm.resx">
+      <DependentUpon>ResumenForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Consulta Millas\BusquedaClienteForm.resx">
       <DependentUpon>BusquedaClienteForm.cs</DependentUpon>
