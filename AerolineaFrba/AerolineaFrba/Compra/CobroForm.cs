@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Contenido;
+using System.Data.SqlClient;
 
 namespace AerolineaFrba.Compra
 {
@@ -134,9 +135,6 @@ namespace AerolineaFrba.Compra
         {
             // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Tarjetas_Credito' Puede moverla o quitarla según sea necesario.
             this.tarjetas_CreditoTableAdapter.Fill(this.gD2C2015DataSet.Tarjetas_Credito);
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Tarjetas_Credito' Puede moverla o quitarla según sea necesario.
-            this.tarjetas_CreditoTableAdapter.Fill(this.gD2C2015DataSet.Tarjetas_Credito);
-
         }
 
         private void modificar_Click(object sender, EventArgs e)
@@ -208,7 +206,15 @@ namespace AerolineaFrba.Compra
             {
                 if (clienteId == 0)
                 {
-                    this.clientesTableAdapter1.Insert(nombre.Text, apellido.Text, Convert.ToInt32(dni.Text), direccion.Text, Convert.ToInt32(telefono.Text), mail.Text, fechaNacimiento.Value, true);
+                    try
+                    {
+                        this.clientesTableAdapter1.Insert(nombre.Text, apellido.Text, Convert.ToInt32(dni.Text), direccion.Text, Convert.ToInt32(telefono.Text), mail.Text, fechaNacimiento.Value, true);
+                    }
+                    catch (System.Exception ex)
+                    {
+                        MessageBox.Show("Ha ocurrido un error al intentar guardar el cliente.\nSi el problema persiste póngase en contacto con el administrador.");
+                        return;
+                    }
                     this.clientesTableAdapter1.Fill(gD2C2015DataSet.Clientes);
                     this.clienteId = gD2C2015DataSet.Clientes.Count();
                 }
@@ -333,34 +339,47 @@ namespace AerolineaFrba.Compra
         {
             if (datosCompraValidos()) 
             {
-                int ventaId;
-                if (pagaTarjeta)
+                SqlTransaction transaccion = ventasTableAdapter1.Connection.BeginTransaction();
+                try
                 {
-                    decimal numeroTarjeta = Convert.ToDecimal(this.numeroTarjeta.Text);
-                    int tarjetaId = Convert.ToInt32(this.tipoTarjeta.SelectedValue);
-                    int codigoSeguridad = Convert.ToInt32(this.codigoSeguridad.Text);
-                    int añoVencimiento = Convert.ToInt32(this.anioVencimiento.Text);
-                    int mesVenciemiento = Convert.ToInt32(this.mesVenciemiento.Text);
-                    int cantidadCuotas = Convert.ToInt32(this.cuotas.Text);
+                    int ventaId;
+                    if (pagaTarjeta)
+                    {
+                        decimal numeroTarjeta = Convert.ToDecimal(this.numeroTarjeta.Text);
+                        int tarjetaId = Convert.ToInt32(this.tipoTarjeta.SelectedValue);
+                        int codigoSeguridad = Convert.ToInt32(this.codigoSeguridad.Text);
+                        int añoVencimiento = Convert.ToInt32(this.anioVencimiento.Text);
+                        int mesVenciemiento = Convert.ToInt32(this.mesVenciemiento.Text);
+                        int cantidadCuotas = Convert.ToInt32(this.cuotas.Text);
+                        
+                        int pagoTarjetaId = Convert.ToInt32(ventasTableAdapter1.pagoTarjeta(numeroTarjeta, tarjetaId, codigoSeguridad, añoVencimiento, mesVenciemiento, cantidadCuotas));
+                        ventaId = Convert.ToInt32(ventasTableAdapter1.generarVenta(vueloId, clienteId, pagoTarjetaId));
+                    }
+                    else
+                    {
+                        ventaId = Convert.ToInt32(ventasTableAdapter1.generarVenta(vueloId, clienteId, null));
+                    }
 
-                    int pagoTarjetaId = Convert.ToInt32(pagos_TarjetaTableAdapter1.pagoTarjeta(numeroTarjeta, tarjetaId, codigoSeguridad, añoVencimiento, mesVenciemiento, cantidadCuotas));
-                    ventaId = Convert.ToInt32(ventasTableAdapter1.generarVenta(vueloId, clienteId, pagoTarjetaId));
-                }
-                else
-                {
-                    ventaId = Convert.ToInt32(ventasTableAdapter1.generarVenta(vueloId, clienteId, null));
-                }
+                    foreach (Pasajero pasajero in pasajeros)
+                    {
+                        int codigoPasaje = Convert.ToInt32(ventasTableAdapter1.generarPasaje(ventaId, pasajero.Id, pasajero.ButacaId, precioPasaje));
+                        pasajero.CodigoPasaje = codigoPasaje;
+                    }
 
-                foreach (Pasajero pasajero in pasajeros)
-                {
-                    int codigoPasaje = Convert.ToInt32(pasajesTableAdapter1.generarPasaje(ventaId, pasajero.Id, pasajero.ButacaId, precioPasaje));
-                    pasajero.CodigoPasaje = codigoPasaje;
+                    if (pesoPaquete != 0)
+                    {
+                        int codigoPaquete = Convert.ToInt32(ventasTableAdapter1.generarPaquete(ventaId, responsableEncomienda.Id, pesoPaquete, precioPaquete));
+                        responsableEncomienda.CodigoPasaje = codigoPaquete;
+                    }
+                    transaccion.Commit();
                 }
-
-                if (pesoPaquete != 0)
+                catch (System.Exception)
                 {
-                    paquetesTableAdapter1.generarPaquete(ventaId, responsableEncomienda.Id, pesoPaquete, precioPaquete);
+                    transaccion.Rollback();
+                    MessageBox.Show("Ha ocurrido un error al intentar realizar la compra.\nSi el problema persiste póngase en contacto con el administrador.");
+                    return;
                 }
+               
             }
         }
 
