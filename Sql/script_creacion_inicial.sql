@@ -1243,9 +1243,10 @@ AS
 		aer_fabricante,	
 		aer_fecha_fuera_servicio,
 		aer_fecha_reinicio_servicio,
-		DATEDIFF(MINUTE, aer_fecha_fuera_servicio, aer_fecha_reinicio_servicio) as días
+		SUM(DATEDIFF(MINUTE, fs.pfs_fecha_inicio, fs.pfs_fecha_fin)) as días
 	FROM [MILANESA].[Aeronaves]
-	where YEAR(aer_fecha_fuera_servicio) = @año and MONTH(aer_fecha_fuera_servicio) between @mes1 and @mes2
+	JOIN [MILANESA].[Periodos_Fuera_Servicio] fs on fs.aeronave_id = aer_id and YEAR(fs.pfs_fecha_inicio) = @año and MONTH(fs.pfs_fecha_inicio) between @mes1 and @mes2
+	--where YEAR(aer_fecha_fuera_servicio) = @año and MONTH(aer_fecha_fuera_servicio) between @mes1 and @mes2
 	group by 
 		aer_id,
 		aer_matricula,
@@ -1254,7 +1255,7 @@ AS
 		aer_fabricante,	
 		aer_fecha_fuera_servicio,
 		aer_fecha_reinicio_servicio
-	order by días desc
+	order by días desc	
 GO
 
 CREATE PROCEDURE [MILANESA].[estadisticaClientesMillas]
