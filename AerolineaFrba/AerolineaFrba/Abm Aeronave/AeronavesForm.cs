@@ -8,11 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Abm_Aeronave;
+using AerolineaFrba.Contenido;
 
 namespace AerolineaFrba.Abm_Aeronave
 {
     public partial class AeronavesForm : Form
     {
+
         public AeronavesForm()
         {
             InitializeComponent();
@@ -51,13 +53,26 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void FueraServicio_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count == 0)
+            Int32 aer_id = Int32.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+            String aer_activa = dataGridView1.SelectedRows[0].Cells[9].Value.ToString();
+            if (aer_activa.Equals("True"))
             {
-                MessageBox.Show("Debe seleccionar una Aeronave", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                if (new Aeronave().aeronaveYaFS(aer_id))
+                {
+                    MessageBox.Show("Aeronave Fuera de Servicio. Debe esperar a que vuelva a estar activa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+           
+                }
+                else
+                {
+                    BajaAeronavesFSForm bajaForm = new BajaAeronavesFSForm(aer_id);
+                    bajaForm.ShowDialog();
+                    this.Close();
+                }
             }
-            else {
-                Int32 aer_id = Int32.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
-  
+            else
+            {
+                MessageBox.Show("Aeronave Inactiva.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -68,7 +83,25 @@ namespace AerolineaFrba.Abm_Aeronave
                 MessageBox.Show("Debe seleccionar una Aeronave", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else {
+
                 Int32 aer_id = Int32.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+                String aer_activa = dataGridView1.SelectedRows[0].Cells[9].Value.ToString();
+                if (aer_activa.Equals("True")) {
+                   
+                    Aeronave aer = new Aeronave();
+                    if (aer.tieneVuelosPendientes(aer_id))
+                    {
+                       BajaPendientesDefForm form =  new BajaPendientesDefForm(aer_id);
+                       form.ShowDialog();
+                       this.Close();
+                    }
+                    else
+                    {
+                        aer.bajaDefinitiva(aer_id);
+                    }
+                } else {
+                    MessageBox.Show("Aeronave inactiva.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
             }
         }

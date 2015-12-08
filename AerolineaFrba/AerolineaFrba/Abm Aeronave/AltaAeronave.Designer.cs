@@ -167,6 +167,7 @@
             this.ButacasPasilloText.Name = "ButacasPasilloText";
             this.ButacasPasilloText.Size = new System.Drawing.Size(219, 20);
             this.ButacasPasilloText.TabIndex = 3;
+            this.ButacasPasilloText.TextChanged += new System.EventHandler(this.ButacasPasilloText_TextChanged);
             this.ButacasPasilloText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ButacasPasilloText_KeyPress);
             // 
             // ButacasVentanillaText

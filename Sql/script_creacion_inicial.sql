@@ -1264,6 +1264,81 @@ AS
 	order by Puntos desc 
 GO
 
+
+////////////////////////// AERONAVES LUCAS//////////////////////////
+
+
+CREATE PROCEDURE [MILANESA].[VuelossFuturosByAer] (
+ @aer_id int
+)
+AS
+SET NOCOUNT ON;
+--FUTUROS VUELOS DE UNA AERONAVE CON VENTAS
+select * from MILANESA.VUELOS v where v.VUE_ACTIVO = 1 AND v.vue_fecha_salida >= GETDATE()
+AND v.AERONAVE_id = @aer_id
+AND EXISTS (
+select 1 from MILANESA.Ventas where vuelo_id = v.vue_id
+)
+
+GO
+
+CREATE PROCEDURE [MILANESA].[VuelossFuturosByAerFS] (
+ @aer_id int,
+ @fechaHasta datetime
+)
+AS
+SET NOCOUNT ON;
+--FUTUROS VUELOS ENTRE FECHAS DE FS CON VENTAS
+select * from MILANESA.VUELOS v where VUE_ACTIVO = 1 AND vue_fecha_salida BETWEEN GETDATE() AND @fechaHasta
+AND v.AERONAVE_id = @aer_id
+AND EXISTS (
+select 1 from MILANESA.Ventas where vuelo_id = v.vue_id
+)
+GO
+
+
+
+
+CREATE PROCEDURE [MILANESA].[AeronavesFueraServicioActualmente] (
+	 @aer_id int
+)
+AS
+SET NOCOUNT ON;
+	select * from MILANESA.Aeronaves 
+	where aer_id = @aer_id 
+	and aer_fecha_reinicio_servicio is not null 
+	and aer_fecha_reinicio_servicio > SYSDATETIME()
+GO
+
+CREATE PROCEDURE [MILANESA].[AeronavesIniciarFueraDeServicio]
+(
+	@aer_id int,
+	@motivo nvarchar(255),
+	@fechaHasta datetime
+
+)
+AS
+SET NOCOUNT ON;
+update MILANESA.Aeronaves
+set aer_fecha_fuera_servicio = SYSDATETIME(),
+aer_fecha_reinicio_servicio = @fechaHasta
+WHERE aer_id = @aer_id;
+Insert into MILANESA.Periodos_Fuera_Servicio (aeronave_id, pfs_motivo, pfs_fecha_inicio, pfs_fecha_fin) values (
+@aer_id, @motivo, SYSDATETIME(), @fechaHasta)
+GO
+
+CREATE PROCEDURE [MILANESA].[AeronavesBajaDefinitiva]
+(
+	@aer_id int
+)
+AS
+	SET NOCOUNT ON;
+update MILANESA.Aeronaves
+set aer_activo = 0, aer_fecha_baja_definitiva = SYSDATETIME()
+WHERE aer_id = @aer_id
+GO
+
+
 CREATE PROCEDURE [MILANESA].[AeronavesBuscar]
 (
 	@matricula nvarchar(255)
@@ -1298,6 +1373,7 @@ AS
 INSERT INTO [MILANESA].[Butacas] ([aeronave_id], [but_numero], [but_tipo], [but_piso], [but_activo]) VALUES (@aeronave_id, @but_numero, @but_tipo, 1, 1)
 GO
 
+/////////////////////////////////////////////////////////////////
 CREATE PROCEDURE MILANESA.millasDisponibles
 (
 	@clienteId int

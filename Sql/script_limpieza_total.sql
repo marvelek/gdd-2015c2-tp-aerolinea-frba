@@ -86,6 +86,12 @@ BEGIN
 	DROP PROCEDURE MILANESA.ButacasInsert
 	DROP PROCEDURE MILANESA.AeronavesBuscar
 	DROP PROCEDURE MILANESA.AeronavesInsert
+	DROP PROCEDURE MILANESA.AeronavesBajaDefinitiva
+	DROP PROCEDURE MILANESA.AeronavesIniciarFueraDeServicio
+	DROP PROCEDURE MILANESA.AeronavesFueraServicioActualmente
+	DROP PROCEDURE MILANESA.VuelossFuturosByAer
+	DROP PROCEDURE MILANESA.VuelossFuturosByAerFS
+END
 END
 
 /* Drop Schema*/
