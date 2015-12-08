@@ -55,8 +55,11 @@ namespace AerolineaFrba.Compra
         { 
             int index = 0;
             this.pasajerosCombo.Items.Insert(index, "Otro");
-            index = index + 1;
-            this.pasajerosCombo.Items.Insert(index, responsableEncomienda.Nombre + ' ' + responsableEncomienda.Apellido);
+            if (responsableEncomienda != null)
+            {
+                index = index + 1;
+                this.pasajerosCombo.Items.Insert(index, responsableEncomienda.Nombre + ' ' + responsableEncomienda.Apellido);
+            }
             foreach(Pasajero pasajero in pasajeros) 
             {
                 index = index + 1;
@@ -158,9 +161,15 @@ namespace AerolineaFrba.Compra
 
         private void pasajerosCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.pasajerosCombo.SelectedIndex > 1)
+            int offset = 1;
+            if (responsableEncomienda != null)
             {
-                Pasajero pasajero = pasajeros[pasajerosCombo.SelectedIndex - 2];
+                offset = 2;
+            }
+
+            if (this.pasajerosCombo.SelectedIndex > (offset - 1))
+            {
+                Pasajero pasajero = pasajeros[pasajerosCombo.SelectedIndex - offset];
 
                 this.dni.Text = pasajero.Dni.ToString();
                 this.nombre.Text = pasajero.Nombre;
@@ -172,7 +181,7 @@ namespace AerolineaFrba.Compra
                 this.clienteId = pasajero.Id;
                 this.deshabilitarInputsComprador();
             }
-            else if (this.pasajerosCombo.SelectedIndex == 1)
+            else if (this.pasajerosCombo.SelectedIndex == 1 && responsableEncomienda != null)
             {
                 this.dni.Text = responsableEncomienda.Dni.ToString();
                 this.nombre.Text = responsableEncomienda.Nombre;
