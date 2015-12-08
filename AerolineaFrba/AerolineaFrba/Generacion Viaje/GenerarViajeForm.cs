@@ -77,9 +77,19 @@ namespace AerolineaFrba.Generacion_Viaje
             {
                 int aeronaveId = this.aeronavesArray[this.aeronaves.SelectedIndex];
                 int rutaId = this.rutasArray[this.rutas.SelectedIndex];
-                this.vuelosTableAdapter.Insert(rutaId, aeronaveId, this.fechaSalida.Value, this.fechaLlegadaEstimada.Value, null, true, null);
+
+                try
+                {
+                    this.vuelosTableAdapter.Insert(rutaId, aeronaveId, this.fechaSalida.Value, this.fechaLlegadaEstimada.Value, null, true, null);
+                    MessageBox.Show("El viaje ha sido guardado correctamente");
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error al intentar registrar el viaje.\nSi el problema persiste póngase en contacto con el administrador.");
+                    return;
+                }
+                
                 this.vuelosTableAdapter.Fill(this.dataSet.Vuelos);
-                MessageBox.Show("El viaje ha sido guardado correctamente");
                 this.Close();
             }
             else

@@ -71,7 +71,15 @@ namespace AerolineaFrba.Compra
 
                 if (clienteId == 0)
                 {
-                    this.clientesTableAdapter1.Insert(nombre.Text, apellido.Text, Convert.ToInt32(dni.Text), direccion.Text, Convert.ToInt32(telefono.Text), mail.Text, fechaNacimiento.Value, true);
+                    try
+                    {
+                        this.clientesTableAdapter1.Insert(nombre.Text, apellido.Text, Convert.ToInt32(dni.Text), direccion.Text, Convert.ToInt32(telefono.Text), mail.Text, fechaNacimiento.Value, true);
+                    }
+                    catch (System.Exception ex)
+                    {
+                        MessageBox.Show("Ha ocurrido un error al intentar guardar el cliente.\nSi el problema persiste póngase en contacto con el administrador.");
+                        return;
+                    }
                     this.clientesTableAdapter1.Fill(gD2C2015DataSet.Clientes);
                     this.clienteId = gD2C2015DataSet.Clientes.Count();
                 }
