@@ -1548,6 +1548,7 @@ ALTER TABLE MILANESA.Ciudades ADD CONSTRAINT uc_ciudades_descripcion UNIQUE (ciu
 
 -- Clientes
 --ALTER TABLE MILANESA.Clientes ADD CONSTRAINT uc_clientes_nombre_apellido_dni UNIQUE (cli_nombre, cli_apellido, cli_dni)
+--Se lo reemplaza por Trigger io_update e io_insert
 
 -- Estados Arribos
 ALTER TABLE MILANESA.Estados_Arribos ADD CONSTRAINT uc_estados_arribos_descripcion UNIQUE (ear_descripcion)
@@ -1569,6 +1570,7 @@ ALTER TABLE MILANESA.Roles ADD CONSTRAINT uc_roles_descripcion UNIQUE (rol_descr
 
 -- Rutas
 --ALTER TABLE MILANESA.Rutas ADD CONSTRAINT uc_rutas_codigo UNIQUE (rut_codigo)
+--Se lo reemplaza por Trigger io_update e io_insert
 ALTER TABLE MILANESA.Rutas ADD CONSTRAINT uc_rutas_origen_destino UNIQUE (ciudad_origen_id, ciudad_destino_id)
 
 -- Tarjetas Credito
@@ -1579,3 +1581,86 @@ ALTER TABLE MILANESA.Tipos_Servicio ADD CONSTRAINT uc_tipos_servicio_descripcion
 
 -- Usuarios
 ALTER TABLE MILANESA.Usuarios ADD CONSTRAINT uc_usuarios_nombre UNIQUE (usu_nombre)
+
+--Triggers para validación de unique--
+
+CREATE TRIGGER tr_clientes_io_insert ON MILANESA.Clientes
+INSTEAD OF INSERT
+AS
+BEGIN
+SET NOCOUNT ON
+IF (NOT EXISTS (SELECT 1
+      FROM MILANESA.Clientes C, inserted I
+      WHERE c.cli_dni = i.cli_dni AND
+			c.cli_nombre = i.cli_nombre AND
+			c.cli_apellido = i.cli_apellido))
+   INSERT INTO MILANESA.Clientes
+      SELECT cli_nombre, cli_apellido, cli_dni, cli_direccion, cli_telefono, cli_mail, cli_fecha_nacimiento, cli_activo
+      FROM inserted
+ELSE
+	THROW 60500,'El cliente ya existe', 1;
+END
+
+CREATE TRIGGER tr_clientes_io_update ON MILANESA.Clientes
+INSTEAD OF UPDATE
+AS
+BEGIN
+SET NOCOUNT ON
+IF (NOT EXISTS (SELECT 1
+      FROM MILANESA.Clientes C, inserted I
+      WHERE c.cli_dni = i.cli_dni AND
+			c.cli_nombre = i.cli_nombre AND
+			c.cli_apellido = i.cli_apellido))
+	UPDATE MILANESA.Clientes 
+	SET
+		cli_nombre = i.cli_nombre,
+		cli_apellido = i.cli_apellido,
+		cli_dni = i.cli_dni,
+		cli_direccion = i.cli_direccion,
+		cli_telefono = i.cli_telefono,
+		cli_mail = i.cli_mail,
+		cli_fecha_nacimiento = i.cli_fecha_nacimiento,
+		cli_activo = i.cli_activo
+	FROM
+		inserted I
+	WHERE
+		MILANESA.Clientes.cli_id = i.cli_id
+ELSE
+	THROW 60500,'El cliente ya existe', 1;
+END
+
+CREATE TRIGGER tr_rutas_io_insert ON MILANESA.Rutas
+INSTEAD OF INSERT
+AS
+BEGIN
+SET NOCOUNT ON
+IF (NOT EXISTS (SELECT 1
+      FROM MILANESA.Rutas R, inserted I
+      WHERE r.rut_codigo = i.rut_codigo))
+   INSERT INTO MILANESA.Rutas
+      SELECT ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_kg, rut_precio_base_pasaje, rut_activo
+      FROM inserted
+ELSE
+	THROW 60501,'El código de ruta ya existe', 1;
+END
+
+CREATE TRIGGER tr_rutas_io_update ON MILANESA.Rutas
+INSTEAD OF UPDATE
+AS
+BEGIN
+SET NOCOUNT ON
+IF (NOT EXISTS (SELECT 1
+      FROM MILANESA.Rutas R, inserted I
+      WHERE r.rut_codigo = i.rut_codigo))
+   UPDATE MILANESA.Rutas
+   SET
+	ciudad_origen_id = i.ciudad_origen_id,
+	ciudad_destino_id = i.ciudad_destino_id,
+	rut_codigo = i.rut_codigo,
+	rut_precio_base_kg = i.rut_precio_base_kg,
+	rut_precio_base_pasaje = i.rut_precio_base_pasaje,
+	rut_activo = i.rut_activo
+   FROM inserted i
+ELSE
+	THROW 60501,'El código de ruta ya existe', 1;
+END
