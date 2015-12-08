@@ -1172,21 +1172,31 @@ CREATE PROCEDURE [MILANESA].[estadisticaDestinosButacas]
 AS
 	SET NOCOUNT ON;
 	SELECT TOP 5
-		cd.ciu_id,
-		cd.ciu_descripcion,
-		(count(bu.but_id) - count(pa.pas_Id)) as BUTACAS_DISPONIBLES
-	FROM MILANESA.Rutas ru
-	JOIN MILANESA.Ciudades cd on cd.ciu_id = ru.ciudad_destino_id
-	JOIN MILANESA.Vuelos vu on vu.ruta_id = ru.rut_id
-	JOIN MILANESA.Ventas ve on ve.vuelo_id = vu.vue_id
-	JOIN MILANESA.Pasajes pa on venta_id = ve.ven_id and devolucion_id is null
-	JOIN MILANESA.Aeronaves ae on ae.aer_id = vu.aeronave_id
-	JOIN MILANESA.Butacas bu on bu.aeronave_id = ae.aer_id
-	where YEAR(ve.ven_fecha) = @año and MONTH(ve.ven_fecha) between @mes1 and @mes2
-	group by 
-		cd.ciu_id,
-		cd.ciu_descripcion
-	order by BUTACAS_DISPONIBLES DESC
+		ciu_id,
+		ciu_descripcion,
+		sum(cantidad_butacas - butacas_ocupadas ) as BUTACAS_DISPONIBLES
+	FROM
+		(SELECT 
+			cd.ciu_id,
+			cd.ciu_descripcion,
+			vu.aeronave_id,
+			vu.vue_id,
+			(select count(but.but_id) 
+			from Milanesa.Aeronaves a
+			join MILANESA.Butacas but ON but.aeronave_id = a.aer_id
+			 where a.aer_id = vu.aeronave_id) as cantidad_butacas,
+			 (select count(1) 
+			 from  MILANESA.Ventas ve2 
+			 JOIN MILANESA.Pasajes pa on venta_id = ve2.ven_id and devolucion_id is null
+			where ve2.vuelo_id = vu.vue_id ) as butacas_ocupadas			
+		FROM MILANESA.Rutas ru
+		JOIN MILANESA.Ciudades cd on cd.ciu_id = ru.ciudad_destino_id
+		JOIN MILANESA.Vuelos vu on vu.ruta_id = ru.rut_id		
+		where YEAR(vu.vue_fecha_llegada) = 2016 and MONTH(vu.vue_fecha_llegada) between 1 and 6) as tablaAux
+		group by 
+			ciu_id,
+			ciu_descripcion
+		order by BUTACAS_DISPONIBLES DESC;
 GO	
 
 
@@ -1258,9 +1268,10 @@ AS
 		cl.cli_direccion,
 		cl.cli_telefono,
 		cl.cli_mail,
-		sum(mi.mil_cantidad-mi.mil_canjeadas) as Puntos
+		isnull(sum(mi.mil_cantidad-mi.mil_canjeadas),0) as Puntos
 	FROM MILANESA.Clientes cl
 	JOIN MILANESA.Millas mi on  mi.cliente_id = cl.cli_id
+	WHERE DATEDIFF(day, SYSDATETIME(), mi.mil_fecha_acreditacion) < 365
 	group by 
 		cl.cli_id,
 		cl.cli_nombre,
