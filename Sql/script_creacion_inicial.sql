@@ -1285,7 +1285,7 @@ AS
 GO
 
 
-////////////////////////// AERONAVES LUCAS//////////////////////////
+-- AERONAVES --
 
 
 CREATE PROCEDURE [MILANESA].[VuelossFuturosByAer] (
@@ -1393,7 +1393,6 @@ AS
 INSERT INTO [MILANESA].[Butacas] ([aeronave_id], [but_numero], [but_tipo], [but_piso], [but_activo]) VALUES (@aeronave_id, @but_numero, @but_tipo, 1, 1)
 GO
 
-/////////////////////////////////////////////////////////////////
 CREATE PROCEDURE MILANESA.millasDisponibles
 (
 	@clienteId int
@@ -1657,7 +1656,7 @@ ALTER TABLE MILANESA.Tipos_Servicio ADD CONSTRAINT uc_tipos_servicio_descripcion
 
 -- Usuarios
 ALTER TABLE MILANESA.Usuarios ADD CONSTRAINT uc_usuarios_nombre UNIQUE (usu_nombre)
-
+GO
 --Triggers para validación de unique--
 
 CREATE TRIGGER tr_clientes_io_insert ON MILANESA.Clientes
@@ -1676,6 +1675,8 @@ IF (NOT EXISTS (SELECT 1
 ELSE
 	THROW 60500,'El cliente ya existe', 1;
 END
+
+GO
 
 CREATE TRIGGER tr_clientes_io_update ON MILANESA.Clientes
 INSTEAD OF UPDATE
@@ -1705,6 +1706,8 @@ ELSE
 	THROW 60500,'El cliente ya existe', 1;
 END
 
+GO
+
 CREATE TRIGGER tr_rutas_io_insert ON MILANESA.Rutas
 INSTEAD OF INSERT
 AS
@@ -1719,6 +1722,8 @@ IF (NOT EXISTS (SELECT 1
 ELSE
 	THROW 60501,'El código de ruta ya existe', 1;
 END
+
+GO
 
 CREATE TRIGGER tr_rutas_io_update ON MILANESA.Rutas
 INSTEAD OF UPDATE
@@ -1740,3 +1745,5 @@ IF (NOT EXISTS (SELECT 1
 ELSE
 	THROW 60501,'El código de ruta ya existe', 1;
 END
+
+GO
