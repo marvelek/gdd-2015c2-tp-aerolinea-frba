@@ -840,6 +840,7 @@ AS
 		BEGIN	
 			EXEC MILANESA.pasajeBajaPorVenta @venta,@devolucion_id;
 			EXEC MILANESA.paqueteBajaPorVenta @venta,@devolucion_id;
+			EXEC MILANESA.devolucionPorVenta @venta, @devolucion_id;
 			FETCH ventas INTO @venta 
 		END -- Fin del bucle WHILE	
 	CLOSE ventas
@@ -1749,4 +1750,105 @@ ELSE
 	THROW 60501,'El código de ruta ya existe', 1;
 END
 
+GO
+
+---------------------------------------------- CANCELACION/DEVOLUCION ---------------------------------------------
+
+CREATE PROCEDURE [MILANESA].[pasajeBuscar]
+(
+	@codigo nvarchar(255)
+)
+AS
+	SET NOCOUNT ON;
+SELECT pas_id, pasajero_id, devolucion_id, venta_id, butaca_id, pas_codigo, pas_precio, pas_activo
+FROM            MILANESA.Pasajes
+WHERE        (CAST(pas_codigo as varchar(18)) LIKE '%' + @codigo + '%')
+GO
+
+CREATE PROCEDURE [MILANESA].[paqueteBuscar]
+(
+	@codigo nvarchar(255)
+)
+AS
+	SET NOCOUNT ON;
+SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_activo
+FROM            MILANESA.Paquetes
+WHERE        (CAST(paq_codigo as varchar(18)) LIKE '%' + @codigo + '%')
+GO
+
+CREATE PROCEDURE [MILANESA].[VentaBuscar]
+(
+	@codigo nvarchar(255)
+)
+AS
+	SET NOCOUNT ON;
+SELECT ven_id, comprador_id, vuelo_id, pago_tarjeta_id, ven_fecha, ven_activo
+FROM            MILANESA.Ventas
+WHERE        (CAST(ven_id as varchar(18)) LIKE '%' + @codigo + '%')
+GO
+
+CREATE PROCEDURE [MILANESA].[devolucionEfectivo]
+(
+	@devolucion int,
+	@mailCliente nvarchar(255)
+)
+AS
+	SET NOCOUNT OFF;
+
+	/* Acá se devolverá al cliente el dinero en efectivo y se le avisará por mail*/
+GO
+
+CREATE PROCEDURE [MILANESA].[devolucionTarjeta]
+(
+	@devolucion int,
+	@pago_tarjeta_id int
+)
+AS
+	SET NOCOUNT OFF;
+
+	/* Acá se devolverá al cliente el importe realizado con la tarjeta*/
+
+GO
+
+CREATE PROCEDURE [MILANESA].[devolucionPorVenta]
+(
+	@venta_id int,
+	@devolucion int
+)
+AS	
+	SET NOCOUNT OFF;
+	DECLARE @pago_tarjeta_id int, @mailCliente nvarchar(255)	
+
+	SELECT @pago_tarjeta_id	= ve.pago_tarjeta_id, @mailCliente = cl.cli_mail
+	FROM  MILANESA.Ventas ve
+	JOIN MILANESA.Clientes cl on cl.cli_id = comprador_id
+	WHERE (ven_id = @venta_id);
+
+	IF @pago_tarjeta_id is null
+	BEGIN
+		EXEC MILANESA.devolucionEfectivo @devolucion, @mailCliente;
+	END
+	ELSE
+	BEGIN
+		EXEC MILANESA.devolucionTarjeta @devolucion, @pago_tarjeta_id;
+	END
+GO
+
+CREATE PROCEDURE [MILANESA].[ventaCancelacion]
+(
+	@venta_id int
+)
+AS	
+	SET NOCOUNT OFF;	
+	DECLARE @devolucion int, @motivo nvarchar(255), @fecha datetime, @pago_tarjeta_id int, @mailCliente nvarchar(255)
+	SET @motivo = 'Cancelación de venta ' + CAST(@venta_id as varchar(18))
+	SET @fecha = SYSDATETIME()
+	EXEC @devolucion = MILANESA.devolucionInsertar @motivo, @fecha;
+	EXEC MILANESA.pasajeBajaPorVenta @venta_id, @devolucion;
+	EXEC MILANESA.paqueteBajaPorVenta @venta_id, @devolucion;
+	EXEC MILANESa.devolucionPorVenta @venta_id, @devolucion;
+
+UPDATE       MILANESA.Ventas
+SET                ven_activo = 'false'
+WHERE        (ven_id = @venta_id) and ven_activo = 1
 GO

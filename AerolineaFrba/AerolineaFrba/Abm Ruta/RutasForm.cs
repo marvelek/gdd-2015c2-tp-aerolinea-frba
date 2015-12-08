@@ -83,6 +83,13 @@ namespace AerolineaFrba.Abm_Ruta
         private void limpiar_Click_1(object sender, EventArgs e)
         {
             this.descripcion.Clear();
+            this.ciudadDestino.Clear();
+            this.ciudadOrigen.Clear();
+            this.precioKgDesde.Clear();
+            this.precioKgHasta.Clear();
+            this.precioBaseDesde.Clear();
+            this.precioBaseHasta.Clear();
+            this.comboBox1.SelectedIndex = 0;
             this.rutasTableAdapter.Fill(this.gD2C2015DataSet.Rutas);
         }
 
