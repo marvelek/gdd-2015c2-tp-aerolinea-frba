@@ -1687,7 +1687,8 @@ IF (NOT EXISTS (SELECT 1
       FROM MILANESA.Clientes C, inserted I
       WHERE c.cli_dni = i.cli_dni AND
 			c.cli_nombre = i.cli_nombre AND
-			c.cli_apellido = i.cli_apellido))
+			c.cli_apellido = i.cli_apellido AND
+			c.cli_id <> i.cli_id))
 	UPDATE MILANESA.Clientes 
 	SET
 		cli_nombre = i.cli_nombre,
@@ -1732,7 +1733,8 @@ BEGIN
 SET NOCOUNT ON
 IF (NOT EXISTS (SELECT 1
       FROM MILANESA.Rutas R, inserted I
-      WHERE r.rut_codigo = i.rut_codigo))
+      WHERE r.rut_codigo = i.rut_codigo AND
+	  r.rut_id <> i.rut_id))
    UPDATE MILANESA.Rutas
    SET
 	ciudad_origen_id = i.ciudad_origen_id,
@@ -1742,6 +1744,7 @@ IF (NOT EXISTS (SELECT 1
 	rut_precio_base_pasaje = i.rut_precio_base_pasaje,
 	rut_activo = i.rut_activo
    FROM inserted i
+   WHERE MILANESA.Rutas.rut_id = i.rut_id
 ELSE
 	THROW 60501,'El código de ruta ya existe', 1;
 END
