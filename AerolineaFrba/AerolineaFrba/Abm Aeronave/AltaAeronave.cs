@@ -201,5 +201,10 @@ namespace AerolineaFrba.Abm_Aeronave
             Funciones.numbersAndComa(kgEncomientasText, e);
         }
 
+        private void ButacasPasilloText_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

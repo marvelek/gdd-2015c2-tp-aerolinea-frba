@@ -8,83 +8,178 @@ using AerolineaFrba.Contenido;
 
 namespace AerolineaFrba.Contenido
 {
-   public class Aeronave
+    public class Aeronave
     {
-       private AeronavesTableAdapter aeronavesTableAdapter = new AeronavesTableAdapter();
-       private GD2C2015DataSet dataSet = new GD2C2015DataSet();
-       private GD2C2015DataSet.AeronavesRow aeronaveRow;
+        private AeronavesTableAdapter aeronavesTableAdapter = new AeronavesTableAdapter();
+        private VuelosTableAdapter vuelosTableAdapter = new VuelosTableAdapter();
+        private GD2C2015DataSet.VuelosRow vuelosRow;
+        private GD2C2015DataSet dataSet = new GD2C2015DataSet();
+        private GD2C2015DataSet.AeronavesRow aeronaveRow;
 
-       private int id;
-       private bool activo;
-       private string fabricante;
-       private DateTime fecha_alta;
-       private DateTime fecha_baja_def;
-       private DateTime fecha_fs;
-       private DateTime fecha_reinicio;
-       private decimal kg_disponibles;
-       
-       private string matricula;
-       public string Matricula
-       {
-           get {
-               return matricula;
-           }
-           set
-           {
-               matricula = value;
-           }
+        private int id;
+        private bool activo;
+        private string fabricante;
+        private DateTime fecha_alta;
+        private DateTime fecha_baja_def;
+        private DateTime fecha_fs;
+        private DateTime fecha_reinicio;
+        private decimal kg_disponibles;
 
-       }
-
-
-       private string modelo;
-       public int Id 
-       {
-           get {
-               return id;
-           }
-           set
-           {
-               id = value;
-           }
-
-       }
-
-       public Aeronave buscarByMatricula(String matricula) {
-           try
-           {
-               Aeronave aer;
-               this.aeronavesTableAdapter.Fill(this.dataSet.Aeronaves);
-               GD2C2015DataSet.AeronavesDataTable result = aeronavesTableAdapter.GetDataBy4(matricula);
-            
-            if (result.Count != 0)
+        private string matricula;
+        public string Matricula
+        {
+            get
             {
-                aeronaveRow = result.First();
-               aer = new Aeronave();
-               aer.Id = aeronaveRow.aer_id;
-               aer.activo = aeronaveRow.aer_activo;
-               aer.fabricante= aeronaveRow.aer_fabricante;
-               //aer.fecha_alta=aeronaveRow.aer_fecha_alta;
-               //aer.fecha_baja_def=aeronaveRow.aer_fecha_baja_definitiva;
-               //aer.fecha_fs=aeronaveRow.aer_fecha_fuera_servicio;
-               //aer.fecha_reinicio=aeronaveRow.aer_fecha_reinicio_servicio;
-               aer.kg_disponibles=aeronaveRow.aer_kg_disponibles;
-               aer.matricula=aeronaveRow.aer_matricula;
-               aer.modelo=aeronaveRow.aer_modelo;
-               
-              
-               return aer;
-           }
-           else
-           {
-               return null;
-           }
-           }
-           catch (Exception e)
-           {
-               e.ToString();
-           }
-           return null;
-       }
+                return matricula;
+            }
+            set
+            {
+                matricula = value;
+            }
+
+        }
+
+
+        private string modelo;
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
+
+        }
+
+        public Aeronave buscarByMatricula(String matricula)
+        {
+            try
+            {
+                Aeronave aer;
+                this.aeronavesTableAdapter.Fill(this.dataSet.Aeronaves);
+                GD2C2015DataSet.AeronavesDataTable result = aeronavesTableAdapter.GetDataBy4(matricula);
+
+                if (result.Count != 0)
+                {
+                    aeronaveRow = result.First();
+                    aer = new Aeronave();
+                    aer.Id = aeronaveRow.aer_id;
+                    aer.activo = aeronaveRow.aer_activo;
+                    aer.fabricante = aeronaveRow.aer_fabricante;
+                    aer.kg_disponibles = aeronaveRow.aer_kg_disponibles;
+                    aer.matricula = aeronaveRow.aer_matricula;
+                    aer.modelo = aeronaveRow.aer_modelo;
+
+
+                    return aer;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+            }
+            return null;
+        }
+
+
+        public void fueraDeServicioHasta(int aerId, String motivo, DateTime fechaHasta)
+        {
+            try
+            {
+                aeronavesTableAdapter.AeronavesIniciarFueraDeServicio(aerId, motivo, fechaHasta);
+            }
+            catch (Exception e)
+            {
+
+                e.ToString();
+            }
+
+        }
+
+        public void bajaDefinitiva(int aerId)
+        {
+            try
+            {
+                aeronavesTableAdapter.AeronavesBajaDefinitiva(aerId);
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+            }
+        }
+
+        public Boolean aeronaveYaFS(int aerId)
+        {
+            try
+            {
+                
+                this.aeronavesTableAdapter.Fill(this.dataSet.Aeronaves);
+                GD2C2015DataSet.AeronavesDataTable result = aeronavesTableAdapter.GetDataByAerFSActualmente(aerId);
+
+                if (result.Count != 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+            }
+            return false;
+        }
+
+        public bool tieneVuelosPendientes(int aerId) {
+            GD2C2015DataSet.VuelosDataTable result = obtenerVuelosFuturosAer(aerId);
+            if (result.Count == 0)
+            {
+                return false;
+            }
+            else {
+                return true;
+            }
+        
+        }
+
+        public bool tieneVuelosPendientesFS(int aerId, DateTime fechaHasta)
+        {
+            GD2C2015DataSet.VuelosDataTable result = obtenerVuelosFuturosAerFs(aerId, fechaHasta);
+            if (result.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
+        public GD2C2015DataSet.VuelosDataTable obtenerVuelosFuturosAer(int aerId)
+        {
+
+            this.vuelosTableAdapter.Fill(this.dataSet.Vuelos);
+            return vuelosTableAdapter.GetDataByVuelosFuturosVyAer(aerId);
+        }
+
+        public GD2C2015DataSet.VuelosDataTable obtenerVuelosFuturosAerFs(int aerId, DateTime fechaHasta)
+        {
+            this.vuelosTableAdapter.Fill(this.dataSet.Vuelos);
+            return vuelosTableAdapter.GetDataByVuelosFuturosByAerFS(aerId, fechaHasta);
+        }
+
     }
 }
+
+    
+

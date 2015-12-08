@@ -74,6 +74,24 @@
     <Compile Include="Abm Aeronave\AltaAeronave.Designer.cs">
       <DependentUpon>AltaAeronave.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Aeronave\BajaAeronavesFSForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Aeronave\BajaAeronavesFSForm.Designer.cs">
+      <DependentUpon>BajaAeronavesFSForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Aeronave\BajaPendientesDefForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Aeronave\BajaPendientesDefForm.Designer.cs">
+      <DependentUpon>BajaPendientesDefForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Aeronave\BajaPendientesFSForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Aeronave\BajaPendientesFSForm.Designer.cs">
+      <DependentUpon>BajaPendientesFSForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Ciudad\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -218,6 +236,15 @@
     <EmbeddedResource Include="Abm Aeronave\AltaAeronave.resx">
       <DependentUpon>AltaAeronave.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Aeronave\BajaAeronavesFSForm.resx">
+      <DependentUpon>BajaAeronavesFSForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Aeronave\BajaPendientesDefForm.resx">
+      <DependentUpon>BajaPendientesDefForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Aeronave\BajaPendientesFSForm.resx">
+      <DependentUpon>BajaPendientesFSForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Ciudad\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -281,16 +308,10 @@
     <EmbeddedResource Include="Registro Llegada Destino\RegistroLlegadaDestinoForm.resx">
       <DependentUpon>RegistroLlegadaDestinoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="GD2C2015DataSet.xsc">
-      <DependentUpon>GD2C2015DataSet.xsd</DependentUpon>
-    </None>
     <None Include="GD2C2015DataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>GD2C2015DataSet.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="GD2C2015DataSet.xss">
-      <DependentUpon>GD2C2015DataSet.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
