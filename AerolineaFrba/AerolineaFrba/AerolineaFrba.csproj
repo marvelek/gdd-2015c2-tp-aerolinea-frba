@@ -173,6 +173,12 @@
     <Compile Include="Devolucion\DevolucionForm.Designer.cs">
       <DependentUpon>DevolucionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Devolucion\VistaDevolucionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Devolucion\VistaDevolucionForm.Designer.cs">
+      <DependentUpon>VistaDevolucionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormsUtils.cs" />
     <Compile Include="Funciones.cs" />
     <Compile Include="GD2C2015DataSet.cs">
@@ -280,6 +286,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Devolucion\DevolucionForm.resx">
       <DependentUpon>DevolucionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Devolucion\VistaDevolucionForm.resx">
+      <DependentUpon>VistaDevolucionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generacion Viaje\GenerarViajeForm.resx">
       <DependentUpon>GenerarViajeForm.cs</DependentUpon>

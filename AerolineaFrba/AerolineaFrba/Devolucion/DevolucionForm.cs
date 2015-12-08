@@ -64,30 +64,25 @@ namespace AerolineaFrba.Devolucion
             switch (Convert.ToString(comboBox1.SelectedItem))
             {
                 case "VENTAS":                                       
-                    int idVenta = Convert.ToInt16(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value);
-                    int activoVenta = Convert.ToInt16(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[5].Value);
+                    int idVenta = Convert.ToInt16(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value);                    
                     this.ventasTableAdapter.ventaCancelacion(idVenta);                    
                     this.ventasTableAdapter.Fill(this.gD2C2015DataSet.Ventas);
                     MessageBox.Show("La venta ha sido cancelada correctamente");                    
                     break;
                 case "PAQUETES":                    
-                    int idPaquete = Convert.ToInt16(grillaPaquete.Rows[grillaPaquete.CurrentRow.Index].Cells[0].Value);
-                    int activoPaquete = Convert.ToInt16(grillaPaquete.Rows[grillaPaquete.CurrentRow.Index].Cells[6].Value);
-                    //this.paquetesTableAdapter.paqueteCancelacion(idPaquete);
+                    int idPaquete = Convert.ToInt16(grillaPaquete.Rows[grillaPaquete.CurrentRow.Index].Cells[0].Value);                    
+                    this.paquetesTableAdapter.paqueteCancelacion(idPaquete);
                     this.paquetesTableAdapter.Fill(this.gD2C2015DataSet.Paquetes);
                     MessageBox.Show("El paquete ha sido cancelado correctamente");                     
                     break;
                 case "PASAJES":                                        
-                    int idPasaje = Convert.ToInt16(grillaPasaje.Rows[grillaPasaje.CurrentRow.Index].Cells[0].Value);
-                    int activoPasaje = Convert.ToInt16(grillaPasaje.Rows[grillaPasaje.CurrentRow.Index].Cells[7].Value);
-                    //this.pasajesTableAdapter.pasajeCancelacion(idPasaje);
+                    int idPasaje = Convert.ToInt16(grillaPasaje.Rows[grillaPasaje.CurrentRow.Index].Cells[0].Value);                   
+                    this.pasajesTableAdapter.pasajeCancelacion(idPasaje);
                     this.pasajesTableAdapter.Fill(this.gD2C2015DataSet.Pasajes);
                     MessageBox.Show("El pasaje ha sido cancelado correctamente");                     
-                    break;
-                    break;
+                    break;                    
                 default:
-                    int id = Convert.ToInt16(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value);
-                    int activVenta = Convert.ToInt16(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[5].Value);
+                    int id = Convert.ToInt16(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value);                    
                     this.ventasTableAdapter.ventaCancelacion(id);                    
                     this.ventasTableAdapter.Fill(this.gD2C2015DataSet.Ventas);
                     MessageBox.Show("La venta ha sido cancelada correctamente");                    
@@ -172,7 +167,34 @@ namespace AerolineaFrba.Devolucion
 
         private void button1_Click(object sender, EventArgs e)
         {
+            int idVenta; 
+            string codigo = null;     
+            int devolucion;
+            switch (Convert.ToString(comboBox1.SelectedItem))
+            {
+                case "VENTAS":                                       
+                    //idVenta = Convert.ToInt16(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value);
+                    //devolucion = Convert.ToInt16(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value);                  
+                    MessageBox.Show("Para ver una cancelación debe seleccionar un paquete o un pasaje.");  
+                    break;
+                case "PAQUETES":
+                    idVenta = Convert.ToInt32(grillaPaquete.Rows[grillaPaquete.CurrentRow.Index].Cells[2].Value);
+                    codigo = Convert.ToString(grillaPaquete.Rows[grillaPaquete.CurrentRow.Index].Cells[3].Value);
+                    devolucion = Convert.ToInt16(grillaPaquete.Rows[grillaPaquete.CurrentRow.Index].Cells[1].Value);
+                    new VistaDevolucionForm(Convert.ToString(comboBox1.SelectedItem), idVenta, codigo, devolucion).ShowDialog();
+                    break;
+                case "PASAJES":
+                    idVenta = Convert.ToInt32(grillaPasaje.Rows[grillaPasaje.CurrentRow.Index].Cells[3].Value);
+                    codigo = Convert.ToString(grillaPasaje.Rows[grillaPasaje.CurrentRow.Index].Cells[5].Value);
+                    devolucion = Convert.ToInt16(grillaPasaje.Rows[grillaPasaje.CurrentRow.Index].Cells[2].Value);
+                    new VistaDevolucionForm(Convert.ToString(comboBox1.SelectedItem), idVenta, codigo, devolucion).ShowDialog();
+                    break;                    
+                default:
+                    //idVenta = Convert.ToInt16(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value); 
+                    MessageBox.Show("Para ver una cancelación debe seleccionar un paquete o un pasaje."); 
+                    break;
 
+            }                        
         }
     }
 }
