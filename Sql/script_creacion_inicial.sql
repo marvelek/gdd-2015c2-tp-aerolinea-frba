@@ -130,8 +130,8 @@ IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Millas' AND xtype='U')
 		mil_id int identity(1,1) Primary Key,
 		cliente_id int REFERENCES MILANESA.Clientes NOT NULL,
 		mil_cantidad numeric(18,0) NOT NULL,
-		mil_fecha_acreditacion datetime,
-		mil_canjeadas numeric(18,0) DEFAULT 0,
+		mil_fecha_acreditacion datetime NOT NULL,
+		mil_canjeadas numeric(18,0) NOT NULL DEFAULT 0,
 	)
 GO
 	
@@ -1525,5 +1525,45 @@ GO
 
 -- CONSTRAINTS --
 
-ALTER TABLE MILANESA.Aeronaves ADD 
+-- Aeronaves
+ALTER TABLE MILANESA.Aeronaves ADD CONSTRAINT uc_aeronaves_matricula UNIQUE (aer_matricula)
 
+-- Butacas
+ALTER TABLE MILANESA.Butacas ADD CONSTRAINT uc_butacas_aeronave_numero UNIQUE (aeronave_id, but_numero)
+
+-- Ciudades
+ALTER TABLE MILANESA.Ciudades ADD CONSTRAINT uc_ciudades_descripcion UNIQUE (ciu_descripcion)
+
+-- Clientes
+--ALTER TABLE MILANESA.Clientes ADD CONSTRAINT uc_clientes_nombre_apellido_dni UNIQUE (cli_nombre, cli_apellido, cli_dni)
+
+-- Estados Arribos
+ALTER TABLE MILANESA.Estados_Arribos ADD CONSTRAINT uc_estados_arribos_descripcion UNIQUE (ear_descripcion)
+
+-- Funciones 
+ALTER TABLE MILANESA.Funciones ADD CONSTRAINT uc_funciones_descripcion UNIQUE (fun_descripcion)
+
+-- Paquetes
+ALTER TABLE MILANESA.Paquetes ADD CONSTRAINT uc_paquetes_codigo UNIQUE (paq_codigo)
+
+-- Pasajes
+ALTER TABLE MILANESA.Pasajes ADD CONSTRAINT uc_pasajes_codigo UNIQUE (pas_codigo)
+
+-- Productos
+ALTER TABLE MILANESA.Productos ADD CONSTRAINT uc_productos_descripcion UNIQUE (pro_descripcion)
+
+-- Roles
+ALTER TABLE MILANESA.Roles ADD CONSTRAINT uc_roles_descripcion UNIQUE (rol_descripcion)
+
+-- Rutas
+--ALTER TABLE MILANESA.Rutas ADD CONSTRAINT uc_rutas_codigo UNIQUE (rut_codigo)
+ALTER TABLE MILANESA.Rutas ADD CONSTRAINT uc_rutas_origen_destino UNIQUE (ciudad_origen_id, ciudad_destino_id)
+
+-- Tarjetas Credito
+ALTER TABLE MILANESA.Tarjetas_Credito ADD CONSTRAINT uc_tarjetas_credito_descripcion UNIQUE (tac_descripcion)
+
+-- Tipos Servicio
+ALTER TABLE MILANESA.Tipos_Servicio ADD CONSTRAINT uc_tipos_servicio_descripcion UNIQUE (tip_descripcion)
+
+-- Usuarios
+ALTER TABLE MILANESA.Usuarios ADD CONSTRAINT uc_usuarios_nombre UNIQUE (usu_nombre)
