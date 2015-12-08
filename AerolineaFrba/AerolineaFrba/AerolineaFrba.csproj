@@ -175,10 +175,6 @@
     </Compile>
     <Compile Include="FormsUtils.cs" />
     <Compile Include="Funciones.cs" />
-    <Compile Include="GD2C2015DataSet.cs">
-      <DependentUpon>GD2C2015DataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="GD2C2015DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
