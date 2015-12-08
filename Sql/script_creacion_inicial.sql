@@ -1852,3 +1852,50 @@ UPDATE       MILANESA.Ventas
 SET                ven_activo = 'false'
 WHERE        (ven_id = @venta_id) and ven_activo = 1
 GO
+
+
+CREATE PROCEDURE [MILANESA].[devolucionBusca]
+(
+	@dev_id int
+)
+AS
+SELECT dev_fecha, dev_motivo FROM [MILANESA].[Devoluciones]       
+WHERE(dev_id = @dev_id)
+GO
+
+
+CREATE PROCEDURE [MILANESA].[paqueteCancelacion]
+(
+	@paquete_id int
+)
+AS	
+	SET NOCOUNT OFF;	
+	DECLARE @devolucion int, @motivo nvarchar(255), @fecha datetime, @paquete int, @venta_id int;
+	SELECT @paquete = paq_codigo, @venta_id = venta_id FROM  MILANESA.Paquetes where (paq_id = @paquete_id) and paq_activo = 1;
+	SET @motivo = 'Cancelación de paquete ' + CAST(@paquete as varchar(18))
+	SET @fecha = SYSDATETIME()
+	EXEC @devolucion = MILANESA.devolucionInsertar @motivo, @fecha;;
+	EXEC MILANESa.devolucionPorVenta @venta_id, @devolucion;
+
+UPDATE       MILANESA.Paquetes
+SET                paq_activo = 'false', devolucion_id = @devolucion
+WHERE        (paq_id = @paquete_id) and paq_activo = 1
+GO
+
+CREATE PROCEDURE [MILANESA].[pasajeCancelacion]
+(
+	@pasaje_id int
+)
+AS	
+	SET NOCOUNT OFF;	
+	DECLARE @devolucion int, @motivo nvarchar(255), @fecha datetime, @pasaje int, @venta_id int;
+	SELECT @pasaje = pas_codigo, @venta_id = venta_id FROM  MILANESA.Pasajes where (pas_id = @pasaje_id) and pas_activo = 1;
+	SET @motivo = 'Cancelación de paquete ' + CAST(@pasaje as varchar(18))
+	SET @fecha = SYSDATETIME()
+	EXEC @devolucion = MILANESA.devolucionInsertar @motivo, @fecha;;
+	EXEC MILANESa.devolucionPorVenta @venta_id, @devolucion;
+
+UPDATE       MILANESA.Pasajes
+SET                pas_activo = 'false', devolucion_id = @devolucion
+WHERE        (pas_id = @pasaje_id) and pas_activo = 1
+GO
