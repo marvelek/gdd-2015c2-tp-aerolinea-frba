@@ -80,7 +80,7 @@ namespace AerolineaFrba.Abm_Aeronave
             }
             else
             {
-                tipoServicio = (Int32)this.ComboTipoServicio.SelectedIndex;
+                tipoServicio = (Int32)this.ComboTipoServicio.SelectedIndex+1;
                 if (tipoServicio < 0)
                 {
                     errores = errores + "Tipo de Servicio.2 ";
@@ -139,14 +139,14 @@ namespace AerolineaFrba.Abm_Aeronave
 
             for (Int32 i = 1; i <= butacasPasillo; i++)
             {
-                this.butacasTableAdapter.ButacasInsert(idAeronave, butacaNumero,"Pasillo");
-                butacaNumero = butacaNumero++;
+                this.butacasTableAdapter.ButacasInsert(idAeronave, butacaNumero-1,"Pasillo");
+                butacaNumero = butacaNumero+1;
             }
 
             for (Int32 i = 1; i <= butacasVentana; i++)
             {
-                this.butacasTableAdapter.ButacasInsert(idAeronave, butacaNumero,"Ventanilla");
-                butacaNumero = butacaNumero++;
+                this.butacasTableAdapter.ButacasInsert(idAeronave, butacaNumero-1,"Ventanilla");
+                butacaNumero = butacaNumero+1;
             }
 
 

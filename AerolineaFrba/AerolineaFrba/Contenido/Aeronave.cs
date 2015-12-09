@@ -54,6 +54,12 @@ namespace AerolineaFrba.Contenido
 
         }
 
+        public GD2C2015DataSet.AeronavesDataTable buscarAeronavesDeReemplazo(int aerId, DateTime fechaHasta)
+        {
+            return this.aeronavesTableAdapter.GetDataByReemplazo(aerId, fechaHasta);
+        }
+
+
         public Aeronave buscarByMatricula(String matricula)
         {
             try
@@ -170,6 +176,15 @@ namespace AerolineaFrba.Contenido
 
             this.vuelosTableAdapter.Fill(this.dataSet.Vuelos);
             return vuelosTableAdapter.GetDataByVuelosFuturosVyAer(aerId);
+        }
+
+        public void cancelarVuelosDef(int aerId) {
+            this.aeronavesTableAdapter.AeronavesCancelacionBajaDef(aerId);
+        }
+
+        public void cancelarVuelosFs(int aerId, String motivo, DateTime fechaHasta)
+        {
+            this.aeronavesTableAdapter.AeronavesCancelacionBajaFS(aerId, motivo, fechaHasta);
         }
 
         public GD2C2015DataSet.VuelosDataTable obtenerVuelosFuturosAerFs(int aerId, DateTime fechaHasta)

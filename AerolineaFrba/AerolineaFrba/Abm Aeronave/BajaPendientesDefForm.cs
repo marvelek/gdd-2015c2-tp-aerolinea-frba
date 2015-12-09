@@ -14,6 +14,7 @@ namespace AerolineaFrba.Abm_Aeronave
     public partial class BajaPendientesDefForm : Form
     {
         private Aeronave aer;
+        private DateTime fechaHasta;
         public BajaPendientesDefForm(int aerId)
         {
             InitializeComponent();
@@ -23,14 +24,28 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void reemplazarBut_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("No hay Aeronaves disponibles. De de alta una nueva e intente nuevamente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-       
-       
+            fechaHasta = DateTime.MaxValue;
+            GD2C2015DataSet.AeronavesDataTable result = aer.buscarAeronavesDeReemplazo(aer.Id, fechaHasta);
+            if (result.Count == 0)
+            {
+                MessageBox.Show("No existen aeronaves de reemplazo. Por favor de de alta una nueva aeronave o cancele los vuelos pendientes.", "Info", MessageBoxButtons.OK);
+                this.Close();
+            }
+            else
+            {
+
+                AeronavesReemplazo form = new AeronavesReemplazo(aer.Id, "Baja Definitiva");
+                form.ShowDialog();
+               
+            }
+            this.Close();
         }
 
         private void CancelarVueBut_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("TODO. Cancelación de los vuelos de la aeronave.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            aer.cancelarVuelosDef(aer.Id);
+            this.Close();
+            MessageBox.Show("Todos los vuelos fueron cancelados. Se inactivó la aeronave.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
