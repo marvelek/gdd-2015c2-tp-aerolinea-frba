@@ -107,7 +107,6 @@ namespace AerolineaFrba.Abm_Ruta
                         // insert
                         this.ruta = new Ruta();
                         this.ruta.Id = Convert.ToInt32(this.rutasTableAdapter.rutaInsertar(Convert.ToInt32(this.ciudadOrigen.SelectedValue), Convert.ToInt32(this.ciudadDestino.SelectedValue), Convert.ToDecimal(this.codigo.Text), Convert.ToDecimal(this.precioKg.Text), Convert.ToDecimal(this.precioBase.Text)));
-                        MessageBox.Show(this.ruta.Id.ToString());
                     }
 
                     foreach (object itemChecked in this.checkedListBox1.CheckedItems)
@@ -122,9 +121,8 @@ namespace AerolineaFrba.Abm_Ruta
                     this.tipos_servicio_RutasTableAdapter.Fill(this.dataSet.Tipos_Servicio_Rutas);
                     transaccion.Commit();
                 }
-                catch (System.Exception ex)
+                catch (System.Exception)
                 {
-                    MessageBox.Show(ex.Message);
                     transaccion.Rollback();
                     MessageBox.Show("Ha ocurrido un error al intentar guardar la ruta.\nSi el problema persiste póngase en contacto con el administrador.");
                     return;
