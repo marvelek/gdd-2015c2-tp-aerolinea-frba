@@ -61,7 +61,7 @@ namespace AerolineaFrba.Abm_Rol
                 {
                     // insert
                     this.rol = new Rol();
-                    this.rol.Id = Convert.ToInt16(this.rolesTableAdapter.rolInsertar(this.descripcion.Text));
+                    this.rol.Id = Convert.ToInt32(this.rolesTableAdapter.rolInsertar(this.descripcion.Text));
                 }
 
                 foreach (object itemChecked in this.checkedListBox1.CheckedItems)

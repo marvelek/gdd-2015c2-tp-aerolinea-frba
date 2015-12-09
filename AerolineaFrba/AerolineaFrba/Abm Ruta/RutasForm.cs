@@ -35,10 +35,10 @@ namespace AerolineaFrba.Abm_Ruta
         private void modificar_Click(object sender, EventArgs e)
         {
             Ruta ruta = new Ruta();
-            ruta.Id = Convert.ToInt16(data.Rows[data.CurrentRow.Index].Cells[0].Value);
+            ruta.Id = Convert.ToInt32(data.Rows[data.CurrentRow.Index].Cells[0].Value);
             ruta.Codigo = Convert.ToDecimal(data.Rows[data.CurrentRow.Index].Cells[1].Value);
-            ruta.CiudadOrigen = Convert.ToInt16(data.Rows[data.CurrentRow.Index].Cells[2].Value);
-            ruta.CiudadDestino = Convert.ToInt16(data.Rows[data.CurrentRow.Index].Cells[4].Value);
+            ruta.CiudadOrigen = Convert.ToInt32(data.Rows[data.CurrentRow.Index].Cells[2].Value);
+            ruta.CiudadDestino = Convert.ToInt32(data.Rows[data.CurrentRow.Index].Cells[4].Value);
             ruta.PrecioKg = Convert.ToDecimal(data.Rows[data.CurrentRow.Index].Cells[6].Value);
             ruta.PrecioBase = Convert.ToDecimal(data.Rows[data.CurrentRow.Index].Cells[7].Value);
             ruta.Activo = Convert.ToBoolean(data.Rows[data.CurrentRow.Index].Cells[8].Value);
@@ -100,7 +100,7 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void eliminar_Click_1(object sender, EventArgs e)
         {
-            int id = Convert.ToInt16(data.Rows[data.CurrentRow.Index].Cells[0].Value);
+            int id = Convert.ToInt32(data.Rows[data.CurrentRow.Index].Cells[0].Value);
             this.rutasTableAdapter.rutaBajaLogica(id);
             // Aca tendria que tener un trigger que se dispare y le saque este rol a los usuarios que lo tengan
             this.rutasTableAdapter.Fill(this.gD2C2015DataSet.Rutas);
@@ -140,7 +140,7 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void precioKgDesde_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //MessageBox.Show(Convert.ToInt16(e.KeyChar).ToString());
+            //MessageBox.Show(Convert.ToInt32(e.KeyChar).ToString());
 
             if (e.KeyChar == 8)
             {
@@ -177,7 +177,7 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void precioKgHasta_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //MessageBox.Show(Convert.ToInt16(e.KeyChar).ToString());
+            //MessageBox.Show(Convert.ToInt32(e.KeyChar).ToString());
 
             if (e.KeyChar == 8)
             {
@@ -214,7 +214,7 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void precioBaseDesde_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //MessageBox.Show(Convert.ToInt16(e.KeyChar).ToString());
+            //MessageBox.Show(Convert.ToInt32(e.KeyChar).ToString());
 
             if (e.KeyChar == 8)
             {
@@ -251,7 +251,7 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void precioBaseHasta_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //MessageBox.Show(Convert.ToInt16(e.KeyChar).ToString());
+            //MessageBox.Show(Convert.ToInt(e.KeyChar).ToString());
 
             if (e.KeyChar == 8)
             {

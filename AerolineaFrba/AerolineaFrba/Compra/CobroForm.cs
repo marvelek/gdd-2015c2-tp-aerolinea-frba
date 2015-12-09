@@ -16,6 +16,7 @@ namespace AerolineaFrba.Compra
     {
         public List<Pasajero> pasajeros;
         public int vueloId;
+        public int ventaId;
         public bool pagaTarjeta = false;
         public int clienteId = 0;
         public bool administrador;
@@ -344,7 +345,6 @@ namespace AerolineaFrba.Compra
                 ventasTableAdapter1.Transaction = transaccion;
                 try
                 {
-                    int ventaId;
                     if (pagaTarjeta)
                     {
                         decimal numeroTarjeta = Convert.ToDecimal(this.numeroTarjeta.Text);
@@ -355,16 +355,16 @@ namespace AerolineaFrba.Compra
                         int cantidadCuotas = Convert.ToInt32(this.cuotas.Text);
 
                         int pagoTarjetaId = Convert.ToInt32(ventasTableAdapter1.pagoTarjeta(numeroTarjeta, tarjetaId, codigoSeguridad, añoVencimiento, mesVenciemiento, cantidadCuotas));
-                        ventaId = Convert.ToInt32(ventasTableAdapter1.generarVenta(vueloId, clienteId, pagoTarjetaId));
+                        this.ventaId = Convert.ToInt32(ventasTableAdapter1.generarVenta(vueloId, clienteId, pagoTarjetaId));
                     }
                     else
                     {
-                        ventaId = Convert.ToInt32(ventasTableAdapter1.generarVenta(vueloId, clienteId, null));
+                        this.ventaId = Convert.ToInt32(ventasTableAdapter1.generarVenta(vueloId, clienteId, null));
                     }
 
                     foreach (Pasajero pasajero in pasajeros)
                     {
-                        int codigoPasaje = Convert.ToInt32(ventasTableAdapter1.generarPasaje(ventaId, pasajero.Id, pasajero.ButacaId, precioPasaje));
+                        int codigoPasaje = Convert.ToInt32(ventasTableAdapter1.generarPasaje(this.ventaId, pasajero.Id, pasajero.ButacaId, precioPasaje));
                         pasajero.CodigoPasaje = codigoPasaje;
                     }
 
@@ -375,10 +375,9 @@ namespace AerolineaFrba.Compra
                     }
                     transaccion.Commit();
                 }
-                catch (System.Exception ex)
+                catch (System.Exception)
                 {
                     transaccion.Rollback();
-                    MessageBox.Show(ex.Message);
                     MessageBox.Show("Ha ocurrido un error al intentar realizar la compra.\nSi el problema persiste póngase en contacto con el administrador.");
                     return;
                 }
@@ -389,7 +388,7 @@ namespace AerolineaFrba.Compra
 
                 MessageBox.Show("La compra fue realizada con éxito");
 
-                ResumenForm form = new ResumenForm(pasajeros, responsableEncomienda, vueloId, precioTotal);
+                ResumenForm form = new ResumenForm(pasajeros, responsableEncomienda, ventaId, precioTotal);
                 form.MdiParent = this.MdiParent;
                 form.Show();
                 this.Close();

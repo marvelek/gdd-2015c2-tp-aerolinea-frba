@@ -117,22 +117,22 @@ namespace AerolineaFrba.Listado_Estadistico
                 switch (Convert.ToString(comboBox1.SelectedItem))
                 {
                     case "Top 5 de los destinos con más pasajes comprados.":                        
-                        this.estadisticaDestinosPasajesTableAdapter.Fill(this.gD2C2015DataSet.estadisticaDestinosPasajes, Convert.ToInt16(this.año.Text), this.mes1, this.mes2);
+                        this.estadisticaDestinosPasajesTableAdapter.Fill(this.gD2C2015DataSet.estadisticaDestinosPasajes, Convert.ToInt32(this.año.Text), this.mes1, this.mes2);
                         break;
                     case "Top 5 de los destinos con aeronaves más vacías.":
-                        this.estadisticaDestinosButacasTableAdapter.Fill(this.gD2C2015DataSet.estadisticaDestinosButacas, Convert.ToInt16(this.año.Text), this.mes1, this.mes2);                        
+                        this.estadisticaDestinosButacasTableAdapter.Fill(this.gD2C2015DataSet.estadisticaDestinosButacas, Convert.ToInt32(this.año.Text), this.mes1, this.mes2);                        
                         break;
                     case "Top 5 de los Clientes con más puntos acumulados a la fecha.":
                         this.estadisticaClientesMillasTableAdapter.Fill(this.gD2C2015DataSet.estadisticaClientesMillas);                        
                         break;
                     case "Top 5 de los destinos con pasajes cancelados.":
-                        this.estadisticaDestinosCanceladosTableAdapter.Fill(this.gD2C2015DataSet.estadisticaDestinosCancelados, Convert.ToInt16(this.año.Text), this.mes1, this.mes2);                        
+                        this.estadisticaDestinosCanceladosTableAdapter.Fill(this.gD2C2015DataSet.estadisticaDestinosCancelados, Convert.ToInt32(this.año.Text), this.mes1, this.mes2);                        
                         break;
                     case "Top 5 de las aeronaves con mayor cantidad de días fuera de servicio.":
-                        this.estadisticaAeronavesFueraDeServicioTableAdapter.Fill(this.gD2C2015DataSet.estadisticaAeronavesFueraDeServicio, Convert.ToInt16(this.año.Text), this.mes1, this.mes2);                        
+                        this.estadisticaAeronavesFueraDeServicioTableAdapter.Fill(this.gD2C2015DataSet.estadisticaAeronavesFueraDeServicio, Convert.ToInt32(this.año.Text), this.mes1, this.mes2);                        
                         break;
                     default:
-                        this.estadisticaDestinosPasajesTableAdapter.Fill(this.gD2C2015DataSet.estadisticaDestinosPasajes, Convert.ToInt16(this.año.Text), this.mes1, this.mes2);
+                        this.estadisticaDestinosPasajesTableAdapter.Fill(this.gD2C2015DataSet.estadisticaDestinosPasajes, Convert.ToInt32(this.año.Text), this.mes1, this.mes2);
                         break;
 
                 }                    
@@ -150,17 +150,17 @@ namespace AerolineaFrba.Listado_Estadistico
             {
                 error = "Debe seleccionar un listado para consultar.\n";
             }            
-            //if (Convert.ToInt16(this.año.Text) > Convert.ToInt16(DateTime.Today.Year))
+            //if (Convert.ToInt32(this.año.Text) > Convert.ToInt32(DateTime.Today.Year))
             //{
              //   error = error + "El año no puede ser mayor al día de la fecha.\n";
             //}
 
-            if (Convert.ToInt16(this.año.Text) < (Convert.ToInt16(DateTime.Today.Year) - 10))
+            if (Convert.ToInt32(this.año.Text) < (Convert.ToInt32(DateTime.Today.Year) - 10))
             {
                 error = error + "El año ingresado es inválido, no puede ser mayor a 10 años.\n";
             }
 
-            if ((Convert.ToInt16(this.año.Text) == Convert.ToInt16(DateTime.Today.Year)) && (Convert.ToInt16(this.mes1) > DateTime.Today.Month))
+            if ((Convert.ToInt32(this.año.Text) == Convert.ToInt32(DateTime.Today.Year)) && (Convert.ToInt32(this.mes1) > DateTime.Today.Month))
             {
                 error = error + "El semestre no puede ser mayor al día de la fecha.\n";
             }

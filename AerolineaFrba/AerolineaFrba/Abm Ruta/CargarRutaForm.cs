@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Contenido;
 using AerolineaFrba.GD2C2015DataSetTableAdapters;
+using System.Data.SqlClient;
 
 namespace AerolineaFrba.Abm_Ruta
 {
@@ -88,36 +89,52 @@ namespace AerolineaFrba.Abm_Ruta
         {
             if (this.valido())
             {
-                if (ruta != null)
-                {                    
-                    // update
-                    this.rutasTableAdapter.rutaModificar(Convert.ToInt16(this.ciudadDestino.SelectedValue), Convert.ToInt16(this.ciudadOrigen.SelectedValue), Convert.ToDecimal(this.codigo.Text), Convert.ToDecimal(this.precioKg.Text), Convert.ToDecimal(this.precioBase.Text), Convert.ToBoolean(this.activo.Checked), this.ruta.Id);
-                    this.tipos_servicio_RutasTableAdapter.tipos_Servicio_RutasBorrar(this.ruta.Id);
-                }
-                else
+                rutasTableAdapter.Connection.Open();
+                SqlTransaction transaccion = rutasTableAdapter.Connection.BeginTransaction();
+                tipos_servicio_RutasTableAdapter.Connection = rutasTableAdapter.Connection;
+                rutasTableAdapter.Transaction = transaccion;
+                tipos_servicio_RutasTableAdapter.Transaction = transaccion;
+                try
                 {
-                    // insert
-                    this.ruta = new Ruta();
-                    this.ruta.Id = Convert.ToInt16(this.rutasTableAdapter.rutaInsertar(Convert.ToInt16(this.ciudadOrigen.SelectedValue), Convert.ToInt16(this.ciudadDestino.SelectedValue), Convert.ToDecimal(this.codigo.Text), Convert.ToDecimal(this.precioKg.Text), Convert.ToDecimal(this.precioBase.Text)));
-                }
-
-                foreach (object itemChecked in this.checkedListBox1.CheckedItems)
-                {
-                    int tipo_servicio_id = this.checkedListBox1.Items.IndexOf(itemChecked) + 1;
-                    if (tipo_servicio_id != 0)
+                    if (ruta != null)
                     {
-                        this.tipos_servicio_RutasTableAdapter.tipo_Servicio_RutaInsertar(tipo_servicio_id, this.ruta.Id);
+                        // update
+                        this.rutasTableAdapter.rutaModificar(Convert.ToInt32(this.ciudadDestino.SelectedValue), Convert.ToInt32(this.ciudadOrigen.SelectedValue), Convert.ToDecimal(this.codigo.Text), Convert.ToDecimal(this.precioKg.Text), Convert.ToDecimal(this.precioBase.Text), Convert.ToBoolean(this.activo.Checked), this.ruta.Id);
+                        this.tipos_servicio_RutasTableAdapter.tipos_Servicio_RutasBorrar(this.ruta.Id);
                     }
-                }
-                this.rutasTableAdapter.Fill(this.dataSet.Rutas);
-                this.tipos_servicio_RutasTableAdapter.Fill(this.dataSet.Tipos_Servicio_Rutas);
+                    else
+                    {
+                        // insert
+                        this.ruta = new Ruta();
+                        this.ruta.Id = Convert.ToInt32(this.rutasTableAdapter.rutaInsertar(Convert.ToInt32(this.ciudadOrigen.SelectedValue), Convert.ToInt32(this.ciudadDestino.SelectedValue), Convert.ToDecimal(this.codigo.Text), Convert.ToDecimal(this.precioKg.Text), Convert.ToDecimal(this.precioBase.Text)));
+                        MessageBox.Show(this.ruta.Id.ToString());
+                    }
 
+                    foreach (object itemChecked in this.checkedListBox1.CheckedItems)
+                    {
+                        int tipo_servicio_id = this.checkedListBox1.Items.IndexOf(itemChecked) + 1;
+                        if (tipo_servicio_id != 0)
+                        {
+                            this.tipos_servicio_RutasTableAdapter.tipo_Servicio_RutaInsertar(tipo_servicio_id, this.ruta.Id);
+                        }
+                    }
+                    this.rutasTableAdapter.Fill(this.dataSet.Rutas);
+                    this.tipos_servicio_RutasTableAdapter.Fill(this.dataSet.Tipos_Servicio_Rutas);
+                    transaccion.Commit();
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    transaccion.Rollback();
+                    MessageBox.Show("Ha ocurrido un error al intentar guardar la ruta.\nSi el problema persiste póngase en contacto con el administrador.");
+                    return;
+                }
+                finally
+                {
+                    rutasTableAdapter.Connection.Close();
+                }
                 MessageBox.Show("La ruta ha sido guardado correctamente");
                 this.Close();
-            }
-            else
-            {
-                return;
             }
         }
 
@@ -204,7 +221,7 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void precioKg_KeyPress(object sender, KeyPressEventArgs e)
         {
-                //MessageBox.Show(Convert.ToInt16(e.KeyChar).ToString());
+                //MessageBox.Show(Convert.ToInt32(e.KeyChar).ToString());
        
                if (e.KeyChar ==8 ) {
                  e.Handled = false;
@@ -244,7 +261,7 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void precioBase_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //MessageBox.Show(Convert.ToInt16(e.KeyChar).ToString());
+            //MessageBox.Show(Convert.ToInt32(e.KeyChar).ToString());
 
             if (e.KeyChar == 8)
             {

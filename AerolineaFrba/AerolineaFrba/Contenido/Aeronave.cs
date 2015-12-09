@@ -66,7 +66,7 @@ namespace AerolineaFrba.Contenido
             {
                 Aeronave aer;
                 this.aeronavesTableAdapter.Fill(this.dataSet.Aeronaves);
-                GD2C2015DataSet.AeronavesDataTable result = aeronavesTableAdapter.GetDataBy4(matricula);
+                GD2C2015DataSet.AeronavesDataTable result = aeronavesTableAdapter.GetDataBy41(matricula);
 
                 if (result.Count != 0)
                 {

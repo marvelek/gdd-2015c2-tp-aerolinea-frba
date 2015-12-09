@@ -751,7 +751,7 @@ INSERT INTO MILANESA.Roles
 VALUES        (@rol_descripcion, 'true');
 	 
 	 
-SELECT rol_id FROM MILANESA.Roles WHERE (rol_id = SCOPE_IDENTITY())
+SELECT SCOPE_IDENTITY()
 GO
 
 CREATE PROCEDURE MILANESA.funcionesRolesInsertar
@@ -794,7 +794,7 @@ INSERT INTO MILANESA.Devoluciones
 VALUES        (@dev_motivo, @dev_fecha);
 	 
 	 
-SET @dev_id = (SELECT dev_id FROM MILANESA.Devoluciones WHERE (dev_id = SCOPE_IDENTITY()))
+SET @dev_id = SCOPE_IDENTITY()
 return @dev_id
 GO
 
@@ -891,7 +891,25 @@ SET                rut_activo = 'false'
 WHERE        (rut_id = @rut_id)
 GO
 
-
+CREATE PROCEDURE [MILANESA].[rutaBuscar]		
+(		
+	@codigo nvarchar(255),		
+	@activo Varchar(10),		
+	@ciudadOrigen nvarchar(255),		
+	@ciudadDestino nvarchar(255),		
+	@precioKgDesde numeric(18,2),		
+	@precioKgHasta numeric(18,2),		
+	@precioBaseDesde numeric(18,2),		
+	@precioBaseHasta numeric(18,2)		
+)		
+AS		
+	SET NOCOUNT ON;		
+SELECT        rut_id, rut_codigo, ciudad_origen_id, co.ciu_descripcion AS ciudad_origen_desc, ciudad_destino_id, cd.ciu_descripcion AS ciudad_destino_desc, rut_precio_base_kg, rut_precio_base_pasaje, rut_activo		
+FROM            MILANESA.Rutas		
+JOIN [MILANESA].[Ciudades] co on co.ciu_id = ciudad_origen_id		
+JOIN [MILANESA].[Ciudades] cd on cd.ciu_id = ciudad_destino_id		
+WHERE        (CAST(rut_codigo as varchar(18)) LIKE '%' + @codigo + '%') AND ((@activo = 'TODOS') or (@activo = 'ACTIVO' AND rut_activo = 1) or (@activo = 'INACTIVO' and rut_activo = 0)) AND ( co.ciu_descripcion LIKE '%' + @ciudadOrigen + '%') AND ( cd.ciu_descripcion LIKE '%' + @ciudadDestino + '%') AND ((@precioKgDesde = 0 OR rut_precio_base_kg >= @precioKgDesde ) AND ( @precioKgHasta = 0 OR rut_precio_base_kg <= @precioKgHasta )  AND ( (@precioBaseDesde = 0 or rut_precio_base_pasaje >= @precioBaseDesde) AND ( @precioBaseHasta = 0 OR rut_precio_base_pasaje <= @precioBaseHasta)))		
+GO
 
 CREATE PROCEDURE [MILANESA].[rutaInsertar]
 (
@@ -906,7 +924,7 @@ AS
 INSERT INTO [MILANESA].[Rutas] (ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_kg, rut_precio_base_pasaje, rut_activo) 
 VALUES (@ciudad_origen_id, @ciudad_destino_id, @rut_codigo, @rut_precio_base_kg, @rut_precio_base_pasaje, 'true')
 
-SELECT rut_id FROM MILANESA.Rutas WHERE (rut_id = SCOPE_IDENTITY())
+SELECT @@IDENTITY
 GO
 
 CREATE PROCEDURE [MILANESA].[rutaModificar]
@@ -1002,7 +1020,7 @@ INSERT INTO MILANESA.Arribos (aeronave_id, ciudad_origen_id, ciudad_destino_id, 
 VALUES        (@aeronave_id,@ciudad_origen_id,@ciudad_destino_id,@fecha_llegada,@destino_correcto_id);
 	 
 	 
-SELECT arr_id FROM MILANESA.Arribos WHERE (arr_id = SCOPE_IDENTITY())
+SELECT SCOPE_IDENTITY()
 GO
 
 -- PROCEDURES PARA MILLAS --
@@ -1931,6 +1949,9 @@ CREATE TRIGGER tr_rutas_io_insert ON MILANESA.Rutas
 INSTEAD OF INSERT
 AS
 BEGIN
+
+DECLARE @rutaId int
+
 SET NOCOUNT ON
 IF (NOT EXISTS (SELECT 1
       FROM MILANESA.Rutas R, inserted I
@@ -1940,6 +1961,11 @@ IF (NOT EXISTS (SELECT 1
       FROM inserted
 ELSE
 	THROW 60501,'El código de ruta ya existe', 1;
+
+	SET @rutaId = Scope_Identity()
+
+	SELECT rut_id INTO #Trash FROM MILANESA.Rutas WHERE rut_id = @rutaId
+
 END
 
 GO
