@@ -21,20 +21,33 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             InitializeComponent();
             aer = new Aeronave();
+            aer.Id = aerId;
             this.motivo = motivo;
             this.fechaHasta = fechaHasta;
         }
 
         private void reemplazarBut_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("No hay Aeronaves disponibles. Dé de alta una nueva para poder hacer un reemplazo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            
+
+            GD2C2015DataSet.AeronavesDataTable result = aer.buscarAeronavesDeReemplazo(aer.Id, fechaHasta);
+            if (result.Count == 0)
+            {
+                MessageBox.Show("No existen aeronaves de reemplazo. Por favor de de alta una nueva aeronave o cancele los vuelos pendientes.", "Info", MessageBoxButtons.OK);
+                this.Close();
+            }
+            else
+            {
+                AeronavesReemplazo form = new AeronavesReemplazo(aer.Id, motivo, fechaHasta);
+                form.ShowDialog();
+            }
+            this.Close();
         }
 
         private void CancelarVueBut_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("TODO. Cancelación de los vuelos de la aeronave.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-       
+            aer.cancelarVuelosFs(aer.Id, motivo,fechaHasta);
+            MessageBox.Show("Los vuelos fueron cancelados y inactivó la aeronave hasta la fecha indicada.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            this.Close();
         }
     }
 }

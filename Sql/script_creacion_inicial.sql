@@ -890,25 +890,7 @@ SET                rut_activo = 'false'
 WHERE        (rut_id = @rut_id)
 GO
 
-CREATE PROCEDURE [MILANESA].[rutaBuscar]
-(
-	@codigo nvarchar(255),
-	@activo Varchar(10),
-	@ciudadOrigen nvarchar(255),
-	@ciudadDestino nvarchar(255),
-	@precioKgDesde numeric(18,2),
-	@precioKgHasta numeric(18,2),
-	@precioBaseDesde numeric(18,2),
-	@precioBaseHasta numeric(18,2)
-)
-AS
-	SET NOCOUNT ON;
-SELECT        rut_id, rut_codigo, ciudad_origen_id, co.ciu_descripcion AS ciudad_origen_desc, ciudad_destino_id, cd.ciu_descripcion AS ciudad_destino_desc, rut_precio_base_kg, rut_precio_base_pasaje, rut_activo
-FROM            MILANESA.Rutas
-JOIN [MILANESA].[Ciudades] co on co.ciu_id = ciudad_origen_id
-JOIN [MILANESA].[Ciudades] cd on cd.ciu_id = ciudad_destino_id
-WHERE        (CAST(rut_codigo as varchar(18)) LIKE '%' + @codigo + '%') AND ((@activo = 'TODOS') or (@activo = 'ACTIVO' AND rut_activo = 1) or (@activo = 'INACTIVO' and rut_activo = 0)) AND ( co.ciu_descripcion LIKE '%' + @ciudadOrigen + '%') AND ( cd.ciu_descripcion LIKE '%' + @ciudadDestino + '%') AND ((@precioKgDesde = 0 OR rut_precio_base_kg >= @precioKgDesde ) AND ( @precioKgHasta = 0 OR rut_precio_base_kg <= @precioKgHasta )  AND ( (@precioBaseDesde = 0 or rut_precio_base_pasaje >= @precioBaseDesde) AND ( @precioBaseHasta = 0 OR rut_precio_base_pasaje <= @precioBaseHasta)))
-GO
+
 
 CREATE PROCEDURE [MILANESA].[rutaInsertar]
 (
@@ -1285,7 +1267,242 @@ AS
 GO
 
 
--- AERONAVES --
+-- AERONAVES --LUCAS
+
+CREATE PROCEDURE [MILANESA].[AeronavesReemplazo](
+@aer_id int,
+@fechaHasta datetime
+)
+AS
+SET NOCOUNT ON;
+
+--devuelve las aeronaves que..
+select a1.* from MILANESA.aeronaves A
+--tengan el mismo tipo de servicio y fabricante
+JOIN MILANESA.AERONAVES A1 ON A1.tipo_servicio_id = A.tipo_servicio_id AND a1.aer_fabricante = a.aer_fabricante 
+-- ID distinto a la Nave a reemplazar y este activa. 
+and a1.aer_id != a.aer_id
+and a1.aer_activo = 1
+--Tenga igual o + KG, butacas ventana y pasillo
+and a.aer_kg_disponibles <= a1.aer_kg_disponibles
+and (SELECT count(1) FROM MILANESA.Butacas WHERE aeronave_id = a.aer_id AND BUT_TIPO = 'Ventanilla') <= (SELECT count(1) FROM MILANESA.Butacas WHERE aeronave_id = a1.aer_id AND BUT_TIPO = 'Ventanilla')
+and (SELECT count(1) FROM MILANESA.Butacas WHERE aeronave_id = a.aer_id AND BUT_TIPO = 'Pasillo') <= (SELECT count(1) FROM MILANESA.Butacas WHERE aeronave_id = a1.aer_id AND BUT_TIPO = 'Pasillo')
+--Que no este fuera de servicio desde la fecha del primer vuelo activo con ventas de la aeronave a reemplazar
+and 
+(   (a1.aer_fecha_reinicio_servicio is null) or 
+	(a1.aer_fecha_reinicio_servicio < 
+			(select MIN(vue.vue_fecha_salida) from MILANESA.Vuelos vue 
+			where vue.aeronave_id = a.aer_id and vue.vue_fecha_salida > SYSDATETIME() 
+				and vue.vue_activo = 1
+				and exists (
+				select 1 from MILANESA.Ventas t where t.ven_activo = 1 and t.vuelo_id = vue.vue_id)
+				)
+	)
+)
+-- que no exista un solapamiento de fechas entre los vuelos de la aeronave a reemplazar con ventas activas y la reemplazante
+and not exists (
+	select 1 from MILANESA.VUELOS v where v.VUE_ACTIVO = 1 AND v.vue_fecha_salida >= GETDATE() AND (@fechaHasta = null OR v.vue_fecha_salida <= @fechaHasta)
+	AND v.AERONAVE_id = a1.aer_id
+	and exists (
+		select 1 from MILANESA.Vuelos v1 
+		where ((v.vue_fecha_salida between v1.vue_fecha_salida and v1.vue_fecha_llegada_estimada) OR (
+		v.vue_fecha_llegada between v1.vue_fecha_salida and v1.vue_fecha_llegada_estimada))
+		AND (@fechaHasta = null OR v1.vue_fecha_salida <= @fechaHasta)
+		and v1.aeronave_id = a.aer_id
+		and v1.VUE_ACTIVO = 1 AND v1.vue_fecha_salida >= GETDATE()
+		and exists (
+			select 1 from MILANESA.Ventas where ven_activo = 1 and vuelo_id = v1.vue_id
+		)
+	)
+)
+where a.AER_ID = @aer_id;
+GO
+
+CREATE PROCEDURE [MILANESA].[AeronavesCancelacionBajaFS]
+(
+	@aer_id int,
+	@motivo nvarchar(255),
+	@fechaHasta dateTime
+)
+AS	
+	DECLARE @vuelo int, @devolucion int, @fecha datetime
+	SET @fecha = SYSDATETIME()
+	EXEC @devolucion = MILANESA.devolucionInsertar @motivo,@fecha
+	SET NOCOUNT OFF;
+	DECLARE vuelos CURSOR 
+	FOR 
+--FUTUROS VUELOS ENTRE FECHAS DE FS CON VENTAS
+select v.vue_id from MILANESA.VUELOS v where VUE_ACTIVO = 1 AND vue_fecha_salida BETWEEN GETDATE() AND @fechaHasta
+AND v.AERONAVE_id = @aer_id
+AND EXISTS (
+select 1 from MILANESA.Ventas where vuelo_id = v.vue_id
+);
+	OPEN vuelos
+	FETCH vuelos INTO @vuelo 
+
+		WHILE (@@FETCH_STATUS = 0)
+
+		BEGIN	
+			EXEC MILANESA.ventaBajaPorVuelo @vuelo,@devolucion;
+			UPDATE MILANESA.Vuelos SET  vue_activo = 'false'
+				WHERE vue_id = @vuelo;
+			FETCH vuelos INTO @vuelo 
+		END -- Fin del bucle WHILE	
+	CLOSE vuelos
+	DEALLOCATE vuelos
+	EXEC MILANESA.AeronavesIniciarFueraDeServicio @aer_id,@motivo,@fechaHasta;	
+GO
+
+CREATE PROCEDURE [MILANESA].[AeronavesCancelacionBajaDef]
+(
+	@aer_id int
+)
+AS	
+	DECLARE @vuelo int, @devolucion int, @motivo nvarchar(255), @fecha datetime
+	SET @motivo = 'BAJA DE AERONAVE DEFINITIVA'
+	SET @fecha = SYSDATETIME()
+	EXEC @devolucion = MILANESA.devolucionInsertar @motivo,@fecha
+	SET NOCOUNT OFF;
+	DECLARE vuelos CURSOR 
+	FOR 
+	--FUTUROS VUELOS DE UNA AERONAVE CON VENTAS
+	select v.vue_id from MILANESA.VUELOS v where v.VUE_ACTIVO = 1 AND v.vue_fecha_salida >= GETDATE()
+	AND v.AERONAVE_id = @aer_id
+	AND EXISTS (
+	select 1 from MILANESA.Ventas where vuelo_id = v.vue_id
+	);
+	OPEN vuelos
+	FETCH vuelos INTO @vuelo 
+
+		WHILE (@@FETCH_STATUS = 0)
+
+		BEGIN	
+			EXEC MILANESA.ventaBajaPorVuelo @vuelo,@devolucion;
+			UPDATE MILANESA.Vuelos SET  vue_activo = 'false'
+				WHERE vue_id = @vuelo;
+			FETCH vuelos INTO @vuelo 
+		END -- Fin del bucle WHILE	
+	CLOSE vuelos
+	DEALLOCATE vuelos
+	EXEC MILANESA.AeronavesBajaDefinitiva @aer_id;		
+GO
+
+ CREATE PROCEDURE [MILANESA].[pasajesReemplazoButaca]
+(
+	@vuelo int,
+	@aer_id_reemplazo int
+)
+AS	
+	DECLARE @pasaje int, @count int
+	SET @count = 0;
+	SET NOCOUNT OFF;
+	DECLARE pasajes CURSOR 
+	FOR 
+ select p.pas_id from MILANESA.Pasajes p 
+ join MILANESA.Ventas v ON v.ven_id = p.venta_id
+ where p.pas_activo = 1 and v.vuelo_id = @vuelo;
+	OPEN pasajes
+	FETCH pasajes INTO @pasaje 
+
+		WHILE (@@FETCH_STATUS = 0)
+		BEGIN	
+			
+			UPDATE MILANESA.Pasajes set butaca_id = (SELECT but_id from MILANESA.Butacas b 
+			                                         where b.aeronave_id = @aer_id_reemplazo 
+													 and b.but_numero = @count) 
+						             where pas_id = @pasaje;
+            SET @count = @count+1;
+			FETCH pasajes INTO @pasaje 
+		END -- Fin del bucle WHILE	
+	CLOSE pasajes
+	DEALLOCATE pasajes
+GO
+
+
+ CREATE PROCEDURE [MILANESA].[AeronavesReemplazoVueloYButacas]
+(
+	@aer_id int,
+	@aer_id_reemplazo int,
+	@fechaHasta dateTime
+)
+AS	
+	DECLARE @vuelo int, @fecha datetime
+	SET @fecha = SYSDATETIME();
+	SET NOCOUNT OFF;
+	DECLARE vuelos CURSOR 
+	FOR 
+select vue_id from MILANESA.vuelos v where aeronave_id = @aer_id 
+ and vue_fecha_salida between SYSDATETIME() and @fechaHasta and vue_activo = 1  
+and exists (
+select 1 from MILANESA.Ventas t where t.ven_activo = 1 and t.vuelo_id = v.vue_id
+); 
+	OPEN vuelos
+	FETCH vuelos INTO @vuelo 
+
+		WHILE (@@FETCH_STATUS = 0)
+		BEGIN	
+			EXEC MILANESA.pasajesReemplazoButaca @vuelo,@aer_id_reemplazo;
+			UPDATE MILANESA.Vuelos SET  aeronave_id = @aer_id_reemplazo
+				WHERE vue_id = @vuelo;
+			FETCH vuelos INTO @vuelo 
+		END -- Fin del bucle WHILE	
+	CLOSE vuelos
+	DEALLOCATE vuelos
+GO
+
+CREATE PROCEDURE [MILANESA].[AeronavesReemplazoDef]
+(
+	@aer_id int,
+	@aer_id_reemplazo int,
+	@fechaHasta dateTime
+)
+AS	
+	DECLARE @vuelo int, @fecha datetime
+	SET @fecha = SYSDATETIME();
+	SET NOCOUNT OFF;
+	EXEC MILANESA.AeronavesReemplazoVueloYButacas @aer_id,@aer_id_reemplazo,@fechaHasta;
+	EXEC MILANESA.AeronavesBajaDefinitiva @aer_id;	
+GO
+
+ CREATE PROCEDURE [MILANESA].[AeronavesReemplazoFS]
+(
+	@aer_id int,
+	@aer_id_reemplazo int,
+	@motivo nvarchar(255),
+	@fechaHasta dateTime
+)
+AS	
+	DECLARE @vuelo int, @fecha datetime
+	SET @fecha = SYSDATETIME();
+	SET NOCOUNT OFF;
+	EXEC MILANESA.AeronavesReemplazoVueloYButacas @aer_id,@aer_id_reemplazo,@fechaHasta;
+	EXEC MILANESA.AeronavesIniciarFueraDeServicio @aer_id,@motivo,@fechaHasta;	
+GO
+
+
+CREATE PROCEDURE [MILANESA].[AeronavesBuscarMany]
+(
+@tipoServicioId nvarchar(255),
+@modelo nvarchar(255),
+@matricula nvarchar(255),
+@fabricante nvarchar(255),
+@precioKgDesde numeric(18,2),
+@precioKgHasta numeric(18,2),
+@activo Varchar(10)
+)
+AS
+SET NOCOUNT ON;
+select * from MILANESA.Aeronaves
+WHERE 
+((@tipoServicioId = '0') or (CAST(tipo_servicio_id as varchar(2)) LIKE '%' + @tipoServicioId + '%'))
+AND (CAST(aer_matricula as varchar(255)) LIKE '%' + @matricula + '%')
+AND (CAST(aer_modelo as varchar(255)) LIKE '%' + @modelo + '%')
+AND (aer_fabricante LIKE '%' + @fabricante + '%')
+AND (@precioKgDesde = 0 OR aer_kg_disponibles >= @precioKgDesde ) 
+AND (@precioKgHasta = 0 OR aer_kg_disponibles <= @precioKgHasta )
+AND ((@activo = 'TODOS') or (@activo = 'ACTIVO' AND aer_activo = 1) or (@activo = 'INACTIVO' and aer_activo = 0))    
+GO
+
 
 
 CREATE PROCEDURE [MILANESA].[VuelossFuturosByAer] (

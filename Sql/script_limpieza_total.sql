@@ -97,6 +97,14 @@ BEGIN
 	DROP PROCEDURE MILANESA.AeronavesFueraServicioActualmente
 	DROP PROCEDURE MILANESA.VuelossFuturosByAer
 	DROP PROCEDURE MILANESA.VuelossFuturosByAerFS
+	DROP PROCEDURE [MILANESA].[AeronavesBuscarMany]
+	DROP PROCEDURE [MILANESA].[AeronavesCancelacionBajaFS]
+	DROP PROCEDURE [MILANESA].[AeronavesCancelacionBajaDef]
+	DROP PROCEDURE [MILANESA].[AeronavesReemplazo]
+	DROP PROCEDURE [MILANESA].[AeronavesReemplazoDef]
+	DROP PROCEDURE [MILANESA].[AeronavesReemplazoFS]
+	DROP PROCEDURE [MILANESA].[AeronavesReemplazoVueloYButacas]
+	DROP PROCEDURE [MILANESA].[pasajesReemplazoButaca]
 
 END
 
