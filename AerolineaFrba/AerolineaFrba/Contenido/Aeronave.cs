@@ -12,17 +12,12 @@ namespace AerolineaFrba.Contenido
     {
         private AeronavesTableAdapter aeronavesTableAdapter = new AeronavesTableAdapter();
         private VuelosTableAdapter vuelosTableAdapter = new VuelosTableAdapter();
-        private GD2C2015DataSet.VuelosRow vuelosRow;
         private GD2C2015DataSet dataSet = new GD2C2015DataSet();
         private GD2C2015DataSet.AeronavesRow aeronaveRow;
 
         private int id;
         private bool activo;
         private string fabricante;
-        private DateTime fecha_alta;
-        private DateTime fecha_baja_def;
-        private DateTime fecha_fs;
-        private DateTime fecha_reinicio;
         private decimal kg_disponibles;
 
         private string matricula;

@@ -656,6 +656,14 @@ GO
 -- INDICES PARA LA APP -----------------------------------------------------------------
 
 
+--Vuelos -> ruta
+USE [GD2C2015]
+GO
+CREATE NONCLUSTERED INDEX ix_vuelos_ruta
+ON [MILANESA].[Vuelos] ([ruta_id])
+
+GO
+
 USE [GD2C2015]
 GO
 CREATE NONCLUSTERED INDEX ix_pasajes_venta
@@ -862,13 +870,16 @@ AS
 			EXEC MILANESA.pasajeBajaPorVenta @venta,@devolucion_id;
 			EXEC MILANESA.paqueteBajaPorVenta @venta,@devolucion_id;
 			EXEC MILANESA.devolucionPorVenta @venta, @devolucion_id;
+
+			UPDATE       MILANESA.Ventas
+			SET          ven_activo = 'false'
+			WHERE        ven_id = @venta;
+
 			FETCH ventas INTO @venta 
 		END -- Fin del bucle WHILE	
 	CLOSE ventas
 	DEALLOCATE ventas
-UPDATE       MILANESA.Ventas
-SET                ven_activo = 'false'
-WHERE        (vuelo_id = @vuelo_id) and ven_activo = 1
+
 GO
 
 CREATE PROCEDURE [MILANESA].[vueloBajaPorRuta]

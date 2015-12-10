@@ -36,7 +36,6 @@ namespace AerolineaFrba.Abm_Aeronave
 
                 AeronavesReemplazo form = new AeronavesReemplazo(aer.Id, "Baja Definitiva");
                 form.ShowDialog();
-               
             }
             this.Close();
         }

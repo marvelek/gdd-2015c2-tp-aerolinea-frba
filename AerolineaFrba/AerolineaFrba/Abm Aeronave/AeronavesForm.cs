@@ -27,7 +27,19 @@ namespace AerolineaFrba.Abm_Aeronave
             this.estadoCombo.SelectedIndex = 0;
             this.servicioCombo.SelectedIndex = 3;
             this.servicioCombo.Refresh();
-            
+
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.Columns[0].HeaderCell.Value = "ID Aeronave";
+            this.dataGridView1.Columns[1].HeaderCell.Value = "Tipo de servicio";
+            this.dataGridView1.Columns[2].HeaderCell.Value = "Matrícula";
+            this.dataGridView1.Columns[3].HeaderCell.Value = "Modelo";
+            this.dataGridView1.Columns[4].HeaderCell.Value = "Kg Disponibles";
+            this.dataGridView1.Columns[5].HeaderCell.Value = "Fabricante";
+            this.dataGridView1.Columns[6].HeaderCell.Value = "Fecha Desde FS";
+            this.dataGridView1.Columns[7].HeaderCell.Value = "Fecha Hasta FS";
+            this.dataGridView1.Columns[8].HeaderCell.Value = "Fecha Baja Definitiva";
+            this.dataGridView1.Columns[9].HeaderCell.Value = "Estado";
+            this.dataGridView1.Columns[10].HeaderCell.Value = "Fecha de Alta";
         }
 
         private void AeronavesForm_Load(object sender, EventArgs e)
@@ -40,17 +52,16 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+           
         }
 
         private void Alta_Click(object sender, EventArgs e)
         {
             AltaAeronave form = new AltaAeronave();
             form.ShowDialog();
-            this.Close();
+            AeronavesForm_Load(sender, e);
         }
 
-        //TODO ejemplo
         private void Buscar_Click(object sender, EventArgs e)
         {
             if ((this.MatriculaBox.Text != "") || (Convert.ToString(this.estadoCombo.SelectedItem) != "") ||
@@ -87,18 +98,6 @@ namespace AerolineaFrba.Abm_Aeronave
         }
 
 
-        private void Buscar_Click_old(object sender, EventArgs e)
-        {
-            if (this.MatriculaBox.Text != "")
-            {
-                this.aeronavesTableAdapter.FillBy1(this.gD2C2015DataSet.Aeronaves, MatriculaBox.Text);
-            }
-            else
-            {
-                this.aeronavesTableAdapter.Fill(this.gD2C2015DataSet.Aeronaves);
-            }
-        }
-
         private void FueraServicio_Click(object sender, EventArgs e)
         {
             Int32 aer_id = Int32.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
@@ -115,7 +114,7 @@ namespace AerolineaFrba.Abm_Aeronave
                 {
                     BajaAeronavesFSForm bajaForm = new BajaAeronavesFSForm(aer_id);
                     bajaForm.ShowDialog();
-                    this.Close();
+                    AeronavesForm_Load(null, null);
                 }
             }
             else
@@ -141,7 +140,7 @@ namespace AerolineaFrba.Abm_Aeronave
                     {
                        BajaPendientesDefForm form =  new BajaPendientesDefForm(aer_id);
                        form.ShowDialog();
-                       this.Close();
+                       AeronavesForm_Load(null, null);
                     }
                     else
                     {

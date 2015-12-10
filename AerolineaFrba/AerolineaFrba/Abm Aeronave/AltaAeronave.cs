@@ -121,8 +121,6 @@ namespace AerolineaFrba.Abm_Aeronave
                    crearButacas(aer.Id, butacasPasillo, butacasVentanilla);
                    MessageBox.Show("La Aeronave se guardo exitosamente");
                    limpiarCampos();
-                   AeronavesForm form = new AeronavesForm();
-                   form.ShowDialog();
                    this.Close();
                 }
                 else {

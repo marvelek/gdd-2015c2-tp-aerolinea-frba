@@ -47,6 +47,7 @@ namespace AerolineaFrba.Abm_Aeronave
             else
             {
                 aer.fueraDeServicioHasta(aer.Id, motivo, this.fechaHastaPicker.Value);
+                MessageBox.Show("La operación se realizó correctamente.", "Info", MessageBoxButtons.OK);
                 this.Close();
             }
         }
