@@ -17765,7 +17765,7 @@ SELECT aer_id, tipo_servicio_id, aer_matricula, aer_modelo, aer_kg_disponibles, 
             }
             if ((fechaHasta.HasValue == true)) {
                 command.Parameters[4].Value = ((System.DateTime)(fechaHasta.Value));
-    }
+            }
             else {
                 command.Parameters[4].Value = global::System.DBNull.Value;
             }
@@ -20113,6 +20113,42 @@ SELECT dev_id, dev_motivo, dev_fecha FROM MILANESA.Devoluciones WHERE (dev_id = 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int devolucionBusca(GD2C2015DataSet.DevolucionesDataTable dataTable, global::System.Nullable<int> dev_id) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((dev_id.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((int)(dev_id.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual GD2C2015DataSet.DevolucionesDataTable GetDevolucionBusca(global::System.Nullable<int> dev_id) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((dev_id.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((int)(dev_id.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            GD2C2015DataSet.DevolucionesDataTable dataTable = new GD2C2015DataSet.DevolucionesDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual int Update(GD2C2015DataSet.DevolucionesDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
@@ -20239,40 +20275,6 @@ SELECT dev_id, dev_motivo, dev_fecha FROM MILANESA.Devoluciones WHERE (dev_id = 
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(string dev_motivo, System.DateTime dev_fecha, int Original_dev_id, string Original_dev_motivo, System.DateTime Original_dev_fecha) {
             return this.Update(dev_motivo, dev_fecha, Original_dev_id, Original_dev_motivo, Original_dev_fecha, Original_dev_id);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual object devolucionBusca(global::System.Nullable<int> dev_id) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
-            if ((dev_id.HasValue == true)) {
-                command.Parameters[1].Value = ((int)(dev_id.Value));
-            }
-            else {
-                command.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
-            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                command.Connection.Open();
-            }
-            object returnValue;
-            try {
-                returnValue = command.ExecuteScalar();
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    command.Connection.Close();
-                }
-    }
-            if (((returnValue == null) 
-                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
-                return null;
-            }
-            else {
-                return ((object)(returnValue));
-            }
         }
     }
     

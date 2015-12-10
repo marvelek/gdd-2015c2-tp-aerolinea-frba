@@ -37,10 +37,10 @@
             this.compra = new System.Windows.Forms.TextBox();
             this.codigo = new System.Windows.Forms.TextBox();
             this.motivoData = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.fecha = new System.Windows.Forms.TextBox();
             this.devolucionesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
+            this.label4 = new System.Windows.Forms.Label();
+            this.fecha = new System.Windows.Forms.TextBox();
             this.devolucionesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.DevolucionesTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.devolucionesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
@@ -110,7 +110,7 @@
             // 
             // motivoData
             // 
-            this.motivoData.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.devolucionesBindingSource, "dev_motivo", true));
+            this.motivoData.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.devolucionesBindingSource, "dev_motivo", true));
             this.motivoData.Enabled = false;
             this.motivoData.Location = new System.Drawing.Point(147, 209);
             this.motivoData.Multiline = true;
@@ -118,6 +118,16 @@
             this.motivoData.Size = new System.Drawing.Size(180, 93);
             this.motivoData.TabIndex = 7;
             this.motivoData.TextChanged += new System.EventHandler(this.motivoData_TextChanged);
+            // 
+            // devolucionesBindingSource
+            // 
+            this.devolucionesBindingSource.DataMember = "Devoluciones";
+            this.devolucionesBindingSource.DataSource = this.gD2C2015DataSet;
+            // 
+            // gD2C2015DataSet
+            // 
+            this.gD2C2015DataSet.DataSetName = "GD2C2015DataSet";
+            this.gD2C2015DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label4
             // 
@@ -136,16 +146,6 @@
             this.fecha.Name = "fecha";
             this.fecha.Size = new System.Drawing.Size(100, 20);
             this.fecha.TabIndex = 9;
-            // 
-            // devolucionesBindingSource
-            // 
-            this.devolucionesBindingSource.DataMember = "Devoluciones";
-            this.devolucionesBindingSource.DataSource = this.gD2C2015DataSet;
-            // 
-            // gD2C2015DataSet
-            // 
-            this.gD2C2015DataSet.DataSetName = "GD2C2015DataSet";
-            this.gD2C2015DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // devolucionesTableAdapter
             // 

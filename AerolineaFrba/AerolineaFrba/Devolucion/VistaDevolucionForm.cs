@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Contenido;
 using AerolineaFrba.GD2C2015DataSetTableAdapters;
+using System.Data.SqlClient;
 
 namespace AerolineaFrba.Devolucion
 {
@@ -26,6 +27,12 @@ namespace AerolineaFrba.Devolucion
             this.venta = venta;
             this.pasaje = pasaje;
             this.devolucion = devolucion;
+
+            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Devoluciones' Puede moverla o quitarla según sea necesario.
+            this.compra.Text = this.venta.ToString();
+            this.codigo.Text = this.pasaje.ToString();
+            this.Id.Text = this.devolucion.ToString();
+            this.devolucionesTableAdapter.devolucionBusca(this.gD2C2015DataSet.Devoluciones, Convert.ToInt32(this.devolucion.ToString()));                      
         }
 
         private void Id_TextChanged(object sender, EventArgs e)
@@ -73,11 +80,11 @@ namespace AerolineaFrba.Devolucion
 
         private void VistaDevolucionForm_Load_1(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Devoluciones' Puede moverla o quitarla según sea necesario.
+         /*   // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Devoluciones' Puede moverla o quitarla según sea necesario.
             this.compra.Text = this.venta.ToString();
             this.codigo.Text = this.pasaje.ToString();
             this.Id.Text = this.devolucion.ToString();
-            this.devolucionesTableAdapter.devolucionBusca(Convert.ToInt32(this.devolucion.ToString()));           
+            this.devolucionesTableAdapter.devolucionBusca(Convert.ToInt32(this.devolucion.ToString()));  */         
         }
     }
 }

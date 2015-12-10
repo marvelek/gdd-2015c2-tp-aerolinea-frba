@@ -93,7 +93,13 @@ namespace AerolineaFrba.Devolucion
 
         private void grillaPasaje_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (grillaPasaje.Rows[grillaPasaje.CurrentRow.Index].Cells[2].Value == null)
+            {
+                button1.Enabled = false;
+            }
+            else {
+                button1.Enabled = true;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -181,12 +187,22 @@ namespace AerolineaFrba.Devolucion
                 case "PAQUETES":
                     idVenta = Convert.ToInt32(grillaPaquete.Rows[grillaPaquete.CurrentRow.Index].Cells[2].Value);
                     codigo = Convert.ToString(grillaPaquete.Rows[grillaPaquete.CurrentRow.Index].Cells[3].Value);
+                    if (Convert.ToString(grillaPaquete.Rows[grillaPaquete.CurrentRow.Index].Cells[1].Value) == "")
+                    {
+                        MessageBox.Show("Debe seleccionar un paquete cancelado.");    
+                        break;
+                    }
                     devolucion = Convert.ToInt32(grillaPaquete.Rows[grillaPaquete.CurrentRow.Index].Cells[1].Value);
                     new VistaDevolucionForm(Convert.ToString(comboBox1.SelectedItem), idVenta, codigo, devolucion).ShowDialog();
                     break;
                 case "PASAJES":
                     idVenta = Convert.ToInt32(grillaPasaje.Rows[grillaPasaje.CurrentRow.Index].Cells[3].Value);
                     codigo = Convert.ToString(grillaPasaje.Rows[grillaPasaje.CurrentRow.Index].Cells[5].Value);
+                    if (Convert.ToString(grillaPasaje.Rows[grillaPasaje.CurrentRow.Index].Cells[2].Value) == "")                    
+                    {
+                        MessageBox.Show("Debe seleccionar un pasaje cancelado.");
+                        break;
+                    }
                     devolucion = Convert.ToInt32(grillaPasaje.Rows[grillaPasaje.CurrentRow.Index].Cells[2].Value);
                     new VistaDevolucionForm(Convert.ToString(comboBox1.SelectedItem), idVenta, codigo, devolucion).ShowDialog();
                     break;                    
@@ -196,6 +212,17 @@ namespace AerolineaFrba.Devolucion
                     break;
 
             }                        
+        }
+
+        private void grillaPaquete_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (grillaPaquete.Rows[grillaPaquete.CurrentRow.Index].Cells[1].Value == null)
+            {
+                button1.Enabled = false;
+            }
+            else {
+                button1.Enabled = true;
+            }       
         }
     }
 }

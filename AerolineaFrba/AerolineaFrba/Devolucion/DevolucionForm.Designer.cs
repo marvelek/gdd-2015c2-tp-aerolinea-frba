@@ -30,11 +30,19 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.codigo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.grillaVenta = new System.Windows.Forms.DataGridView();
+            this.venidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.compradoridDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vueloidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.venfechaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pagotarjetaidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.venactivoDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ventasBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
             this.ventasTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.VentasTableAdapter();
@@ -49,26 +57,18 @@
             this.paquetesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.paquetesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.PaquetesTableAdapter();
             this.grillaPasaje = new System.Windows.Forms.DataGridView();
+            this.pasidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pasajeroidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.devolucionidDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ventaidDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.butacaidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pascodigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pasprecioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pasactivoDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.pasajesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.pasajesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.PasajesTableAdapter();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.pasactivoDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.pasprecioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pascodigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.butacaidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ventaidDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.devolucionidDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pasajeroidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pasidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.venidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.compradoridDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vueloidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.venfechaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pagotarjetaidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.venactivoDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grillaVenta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ventasBindingSource)).BeginInit();
@@ -93,6 +93,26 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(489, 111);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 5;
+            this.button4.Text = "Limpiar";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(23, 111);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "Buscar";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // codigo
             // 
@@ -153,6 +173,49 @@
             this.grillaVenta.Size = new System.Drawing.Size(541, 150);
             this.grillaVenta.TabIndex = 5;
             // 
+            // venidDataGridViewTextBoxColumn
+            // 
+            this.venidDataGridViewTextBoxColumn.DataPropertyName = "ven_id";
+            this.venidDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.venidDataGridViewTextBoxColumn.Name = "venidDataGridViewTextBoxColumn";
+            this.venidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // compradoridDataGridViewTextBoxColumn
+            // 
+            this.compradoridDataGridViewTextBoxColumn.DataPropertyName = "comprador_id";
+            this.compradoridDataGridViewTextBoxColumn.HeaderText = "Comprador Id";
+            this.compradoridDataGridViewTextBoxColumn.Name = "compradoridDataGridViewTextBoxColumn";
+            this.compradoridDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // vueloidDataGridViewTextBoxColumn
+            // 
+            this.vueloidDataGridViewTextBoxColumn.DataPropertyName = "vuelo_id";
+            this.vueloidDataGridViewTextBoxColumn.HeaderText = "Vuelo ID";
+            this.vueloidDataGridViewTextBoxColumn.Name = "vueloidDataGridViewTextBoxColumn";
+            this.vueloidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // venfechaDataGridViewTextBoxColumn
+            // 
+            this.venfechaDataGridViewTextBoxColumn.DataPropertyName = "ven_fecha";
+            this.venfechaDataGridViewTextBoxColumn.HeaderText = "Fecha de Venta";
+            this.venfechaDataGridViewTextBoxColumn.Name = "venfechaDataGridViewTextBoxColumn";
+            this.venfechaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // pagotarjetaidDataGridViewTextBoxColumn
+            // 
+            this.pagotarjetaidDataGridViewTextBoxColumn.DataPropertyName = "pago_tarjeta_id";
+            this.pagotarjetaidDataGridViewTextBoxColumn.HeaderText = "pago_tarjeta_id";
+            this.pagotarjetaidDataGridViewTextBoxColumn.Name = "pagotarjetaidDataGridViewTextBoxColumn";
+            this.pagotarjetaidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.pagotarjetaidDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // venactivoDataGridViewCheckBoxColumn
+            // 
+            this.venactivoDataGridViewCheckBoxColumn.DataPropertyName = "ven_activo";
+            this.venactivoDataGridViewCheckBoxColumn.HeaderText = "Activo";
+            this.venactivoDataGridViewCheckBoxColumn.Name = "venactivoDataGridViewCheckBoxColumn";
+            this.venactivoDataGridViewCheckBoxColumn.ReadOnly = true;
+            // 
             // ventasBindingSource
             // 
             this.ventasBindingSource.DataMember = "Ventas";
@@ -200,36 +263,42 @@
             this.devolucionidDataGridViewTextBoxColumn.DataPropertyName = "devolucion_id";
             this.devolucionidDataGridViewTextBoxColumn.HeaderText = "Devolucion";
             this.devolucionidDataGridViewTextBoxColumn.Name = "devolucionidDataGridViewTextBoxColumn";
+            this.devolucionidDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // ventaidDataGridViewTextBoxColumn
             // 
             this.ventaidDataGridViewTextBoxColumn.DataPropertyName = "venta_id";
             this.ventaidDataGridViewTextBoxColumn.HeaderText = "Id Venta";
             this.ventaidDataGridViewTextBoxColumn.Name = "ventaidDataGridViewTextBoxColumn";
+            this.ventaidDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // paqcodigoDataGridViewTextBoxColumn
             // 
             this.paqcodigoDataGridViewTextBoxColumn.DataPropertyName = "paq_codigo";
             this.paqcodigoDataGridViewTextBoxColumn.HeaderText = "Código";
             this.paqcodigoDataGridViewTextBoxColumn.Name = "paqcodigoDataGridViewTextBoxColumn";
+            this.paqcodigoDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // paqprecioDataGridViewTextBoxColumn
             // 
             this.paqprecioDataGridViewTextBoxColumn.DataPropertyName = "paq_precio";
             this.paqprecioDataGridViewTextBoxColumn.HeaderText = "Precio";
             this.paqprecioDataGridViewTextBoxColumn.Name = "paqprecioDataGridViewTextBoxColumn";
+            this.paqprecioDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // paqkgDataGridViewTextBoxColumn
             // 
             this.paqkgDataGridViewTextBoxColumn.DataPropertyName = "paq_kg";
             this.paqkgDataGridViewTextBoxColumn.HeaderText = "Kg";
             this.paqkgDataGridViewTextBoxColumn.Name = "paqkgDataGridViewTextBoxColumn";
+            this.paqkgDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // paqactivoDataGridViewCheckBoxColumn
             // 
             this.paqactivoDataGridViewCheckBoxColumn.DataPropertyName = "paq_activo";
             this.paqactivoDataGridViewCheckBoxColumn.HeaderText = "Activo";
             this.paqactivoDataGridViewCheckBoxColumn.Name = "paqactivoDataGridViewCheckBoxColumn";
+            this.paqactivoDataGridViewCheckBoxColumn.ReadOnly = true;
             // 
             // paquetesBindingSource
             // 
@@ -263,6 +332,62 @@
             this.grillaPasaje.TabIndex = 5;
             this.grillaPasaje.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaPasaje_CellContentClick);
             // 
+            // pasidDataGridViewTextBoxColumn
+            // 
+            this.pasidDataGridViewTextBoxColumn.DataPropertyName = "pas_id";
+            this.pasidDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.pasidDataGridViewTextBoxColumn.Name = "pasidDataGridViewTextBoxColumn";
+            this.pasidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // pasajeroidDataGridViewTextBoxColumn
+            // 
+            this.pasajeroidDataGridViewTextBoxColumn.DataPropertyName = "pasajero_id";
+            this.pasajeroidDataGridViewTextBoxColumn.HeaderText = "Pasajero";
+            this.pasajeroidDataGridViewTextBoxColumn.Name = "pasajeroidDataGridViewTextBoxColumn";
+            this.pasajeroidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // devolucionidDataGridViewTextBoxColumn1
+            // 
+            this.devolucionidDataGridViewTextBoxColumn1.DataPropertyName = "devolucion_id";
+            this.devolucionidDataGridViewTextBoxColumn1.HeaderText = "Devolucion";
+            this.devolucionidDataGridViewTextBoxColumn1.Name = "devolucionidDataGridViewTextBoxColumn1";
+            this.devolucionidDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // ventaidDataGridViewTextBoxColumn1
+            // 
+            this.ventaidDataGridViewTextBoxColumn1.DataPropertyName = "venta_id";
+            this.ventaidDataGridViewTextBoxColumn1.HeaderText = "Venta";
+            this.ventaidDataGridViewTextBoxColumn1.Name = "ventaidDataGridViewTextBoxColumn1";
+            this.ventaidDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // butacaidDataGridViewTextBoxColumn
+            // 
+            this.butacaidDataGridViewTextBoxColumn.DataPropertyName = "butaca_id";
+            this.butacaidDataGridViewTextBoxColumn.HeaderText = "Butaca";
+            this.butacaidDataGridViewTextBoxColumn.Name = "butacaidDataGridViewTextBoxColumn";
+            this.butacaidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // pascodigoDataGridViewTextBoxColumn
+            // 
+            this.pascodigoDataGridViewTextBoxColumn.DataPropertyName = "pas_codigo";
+            this.pascodigoDataGridViewTextBoxColumn.HeaderText = "Codigo";
+            this.pascodigoDataGridViewTextBoxColumn.Name = "pascodigoDataGridViewTextBoxColumn";
+            this.pascodigoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // pasprecioDataGridViewTextBoxColumn
+            // 
+            this.pasprecioDataGridViewTextBoxColumn.DataPropertyName = "pas_precio";
+            this.pasprecioDataGridViewTextBoxColumn.HeaderText = "Precio";
+            this.pasprecioDataGridViewTextBoxColumn.Name = "pasprecioDataGridViewTextBoxColumn";
+            this.pasprecioDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // pasactivoDataGridViewCheckBoxColumn
+            // 
+            this.pasactivoDataGridViewCheckBoxColumn.DataPropertyName = "pas_activo";
+            this.pasactivoDataGridViewCheckBoxColumn.HeaderText = "Activo";
+            this.pasactivoDataGridViewCheckBoxColumn.Name = "pasactivoDataGridViewCheckBoxColumn";
+            this.pasactivoDataGridViewCheckBoxColumn.ReadOnly = true;
+            // 
             // pasajesBindingSource
             // 
             this.pasajesBindingSource.DataMember = "Pasajes";
@@ -291,125 +416,6 @@
             this.button2.Text = "Cancelar / Devolver";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(23, 111);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Buscar";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(489, 111);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "Limpiar";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // pasactivoDataGridViewCheckBoxColumn
-            // 
-            this.pasactivoDataGridViewCheckBoxColumn.DataPropertyName = "pas_activo";
-            this.pasactivoDataGridViewCheckBoxColumn.HeaderText = "Activo";
-            this.pasactivoDataGridViewCheckBoxColumn.Name = "pasactivoDataGridViewCheckBoxColumn";
-            this.pasactivoDataGridViewCheckBoxColumn.ReadOnly = true;
-            // 
-            // pasprecioDataGridViewTextBoxColumn
-            // 
-            this.pasprecioDataGridViewTextBoxColumn.DataPropertyName = "pas_precio";
-            this.pasprecioDataGridViewTextBoxColumn.HeaderText = "Precio";
-            this.pasprecioDataGridViewTextBoxColumn.Name = "pasprecioDataGridViewTextBoxColumn";
-            this.pasprecioDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // pascodigoDataGridViewTextBoxColumn
-            // 
-            this.pascodigoDataGridViewTextBoxColumn.DataPropertyName = "pas_codigo";
-            this.pascodigoDataGridViewTextBoxColumn.HeaderText = "Codigo";
-            this.pascodigoDataGridViewTextBoxColumn.Name = "pascodigoDataGridViewTextBoxColumn";
-            this.pascodigoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // butacaidDataGridViewTextBoxColumn
-            // 
-            this.butacaidDataGridViewTextBoxColumn.DataPropertyName = "butaca_id";
-            this.butacaidDataGridViewTextBoxColumn.HeaderText = "Butaca";
-            this.butacaidDataGridViewTextBoxColumn.Name = "butacaidDataGridViewTextBoxColumn";
-            this.butacaidDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // ventaidDataGridViewTextBoxColumn1
-            // 
-            this.ventaidDataGridViewTextBoxColumn1.DataPropertyName = "venta_id";
-            this.ventaidDataGridViewTextBoxColumn1.HeaderText = "Venta";
-            this.ventaidDataGridViewTextBoxColumn1.Name = "ventaidDataGridViewTextBoxColumn1";
-            this.ventaidDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // devolucionidDataGridViewTextBoxColumn1
-            // 
-            this.devolucionidDataGridViewTextBoxColumn1.DataPropertyName = "devolucion_id";
-            this.devolucionidDataGridViewTextBoxColumn1.HeaderText = "Devolucion";
-            this.devolucionidDataGridViewTextBoxColumn1.Name = "devolucionidDataGridViewTextBoxColumn1";
-            this.devolucionidDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // pasajeroidDataGridViewTextBoxColumn
-            // 
-            this.pasajeroidDataGridViewTextBoxColumn.DataPropertyName = "pasajero_id";
-            this.pasajeroidDataGridViewTextBoxColumn.HeaderText = "Pasajero";
-            this.pasajeroidDataGridViewTextBoxColumn.Name = "pasajeroidDataGridViewTextBoxColumn";
-            this.pasajeroidDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // pasidDataGridViewTextBoxColumn
-            // 
-            this.pasidDataGridViewTextBoxColumn.DataPropertyName = "pas_id";
-            this.pasidDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.pasidDataGridViewTextBoxColumn.Name = "pasidDataGridViewTextBoxColumn";
-            this.pasidDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // venidDataGridViewTextBoxColumn
-            // 
-            this.venidDataGridViewTextBoxColumn.DataPropertyName = "ven_id";
-            this.venidDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.venidDataGridViewTextBoxColumn.Name = "venidDataGridViewTextBoxColumn";
-            this.venidDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // compradoridDataGridViewTextBoxColumn
-            // 
-            this.compradoridDataGridViewTextBoxColumn.DataPropertyName = "comprador_id";
-            this.compradoridDataGridViewTextBoxColumn.HeaderText = "Comprador Id";
-            this.compradoridDataGridViewTextBoxColumn.Name = "compradoridDataGridViewTextBoxColumn";
-            this.compradoridDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // vueloidDataGridViewTextBoxColumn
-            // 
-            this.vueloidDataGridViewTextBoxColumn.DataPropertyName = "vuelo_id";
-            this.vueloidDataGridViewTextBoxColumn.HeaderText = "Vuelo ID";
-            this.vueloidDataGridViewTextBoxColumn.Name = "vueloidDataGridViewTextBoxColumn";
-            this.vueloidDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // venfechaDataGridViewTextBoxColumn
-            // 
-            this.venfechaDataGridViewTextBoxColumn.DataPropertyName = "ven_fecha";
-            this.venfechaDataGridViewTextBoxColumn.HeaderText = "Fecha de Venta";
-            this.venfechaDataGridViewTextBoxColumn.Name = "venfechaDataGridViewTextBoxColumn";
-            this.venfechaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // pagotarjetaidDataGridViewTextBoxColumn
-            // 
-            this.pagotarjetaidDataGridViewTextBoxColumn.DataPropertyName = "pago_tarjeta_id";
-            this.pagotarjetaidDataGridViewTextBoxColumn.HeaderText = "pago_tarjeta_id";
-            this.pagotarjetaidDataGridViewTextBoxColumn.Name = "pagotarjetaidDataGridViewTextBoxColumn";
-            this.pagotarjetaidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.pagotarjetaidDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // venactivoDataGridViewCheckBoxColumn
-            // 
-            this.venactivoDataGridViewCheckBoxColumn.DataPropertyName = "ven_activo";
-            this.venactivoDataGridViewCheckBoxColumn.HeaderText = "Activo";
-            this.venactivoDataGridViewCheckBoxColumn.Name = "venactivoDataGridViewCheckBoxColumn";
-            this.venactivoDataGridViewCheckBoxColumn.ReadOnly = true;
             // 
             // DevolucionForm
             // 
