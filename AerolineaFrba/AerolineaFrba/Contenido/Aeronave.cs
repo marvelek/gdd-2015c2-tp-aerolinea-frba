@@ -12,17 +12,12 @@ namespace AerolineaFrba.Contenido
     {
         private AeronavesTableAdapter aeronavesTableAdapter = new AeronavesTableAdapter();
         private VuelosTableAdapter vuelosTableAdapter = new VuelosTableAdapter();
-        private GD2C2015DataSet.VuelosRow vuelosRow;
         private GD2C2015DataSet dataSet = new GD2C2015DataSet();
         private GD2C2015DataSet.AeronavesRow aeronaveRow;
 
         private int id;
         private bool activo;
         private string fabricante;
-        private DateTime fecha_alta;
-        private DateTime fecha_baja_def;
-        private DateTime fecha_fs;
-        private DateTime fecha_reinicio;
         private decimal kg_disponibles;
 
         private string matricula;
@@ -54,13 +49,19 @@ namespace AerolineaFrba.Contenido
 
         }
 
+        public GD2C2015DataSet.AeronavesDataTable buscarAeronavesDeReemplazo(int aerId, DateTime fechaHasta)
+        {
+            return this.aeronavesTableAdapter.GetDataByReemplazo(aerId, fechaHasta);
+        }
+
+
         public Aeronave buscarByMatricula(String matricula)
         {
             try
             {
                 Aeronave aer;
                 this.aeronavesTableAdapter.Fill(this.dataSet.Aeronaves);
-                GD2C2015DataSet.AeronavesDataTable result = aeronavesTableAdapter.GetDataBy4(matricula);
+                GD2C2015DataSet.AeronavesDataTable result = aeronavesTableAdapter.GetDataBy41(matricula);
 
                 if (result.Count != 0)
                 {
@@ -170,6 +171,15 @@ namespace AerolineaFrba.Contenido
 
             this.vuelosTableAdapter.Fill(this.dataSet.Vuelos);
             return vuelosTableAdapter.GetDataByVuelosFuturosVyAer(aerId);
+        }
+
+        public void cancelarVuelosDef(int aerId) {
+            this.aeronavesTableAdapter.AeronavesCancelacionBajaDef(aerId);
+        }
+
+        public void cancelarVuelosFs(int aerId, String motivo, DateTime fechaHasta)
+        {
+            this.aeronavesTableAdapter.AeronavesCancelacionBajaFS(aerId, motivo, fechaHasta);
         }
 
         public GD2C2015DataSet.VuelosDataTable obtenerVuelosFuturosAerFs(int aerId, DateTime fechaHasta)

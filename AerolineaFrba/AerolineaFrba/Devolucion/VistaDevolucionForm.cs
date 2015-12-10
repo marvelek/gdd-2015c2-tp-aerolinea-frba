@@ -77,7 +77,7 @@ namespace AerolineaFrba.Devolucion
             this.compra.Text = this.venta.ToString();
             this.codigo.Text = this.pasaje.ToString();
             this.Id.Text = this.devolucion.ToString();
-            this.devolucionesTableAdapter.devolucionBusca(Convert.ToInt16(this.devolucion.ToString()));           
+            this.devolucionesTableAdapter.devolucionBusca(Convert.ToInt32(this.devolucion.ToString()));           
         }
     }
 }
