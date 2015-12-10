@@ -43,163 +43,146 @@ GO
 -- CREACION INICIAL -----------------------------------------------------
 
 
-IF NOT EXISTS (SELECT 1 FROM information_schema.schemata WHERE schema_name = 'MILANESA') 
-BEGIN
-	EXEC ('CREATE SCHEMA MILANESA')
-END
+EXEC ('CREATE SCHEMA MILANESA')
 
 /*Roles*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Roles' AND xtype='U')
-	CREATE TABLE MILANESA.Roles (
-		rol_id int identity(1,1) Primary Key,
-		rol_descripcion nvarchar(255)	NOT NULL,
-		rol_activo bit NOT NULL DEFAULT 1
-	)
+CREATE TABLE MILANESA.Roles (
+	rol_id int identity(1,1) Primary Key,
+	rol_descripcion nvarchar(255)	NOT NULL,
+	rol_activo bit NOT NULL DEFAULT 1
+)
 GO
 
 /*Funciones*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Funciones' AND xtype='U')
-	CREATE TABLE MILANESA.Funciones (
-		fun_id int identity(1,1) Primary Key,
-		fun_descripcion nvarchar(255)	NOT NULL,
-		fun_activo bit NOT NULL DEFAULT 1
-	)
+CREATE TABLE MILANESA.Funciones (
+	fun_id int identity(1,1) Primary Key,
+	fun_descripcion nvarchar(255)	NOT NULL,
+	fun_activo bit NOT NULL DEFAULT 1
+)
 GO
 
 /*Funciones_Roles*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Funciones_Roles' AND xtype='U')
-	CREATE TABLE MILANESA.Funciones_Roles (
-		funcion_id int REFERENCES MILANESA.Funciones,
-		rol_id int REFERENCES MILANESA.Roles,
-		Primary Key (funcion_id, rol_id)
-	)
+CREATE TABLE MILANESA.Funciones_Roles (
+	funcion_id int REFERENCES MILANESA.Funciones,
+	rol_id int REFERENCES MILANESA.Roles,
+	Primary Key (funcion_id, rol_id)
+)
 GO
 
 /*Usuarios*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Usuarios' AND xtype='U')
-	CREATE TABLE MILANESA.Usuarios (
-		usu_id int identity(1,1) Primary Key,
-		usu_nombre nvarchar(255) NOT NULL,
-		usu_password varbinary(1024) NOT NULL,
-		rol_id int REFERENCES MILANESA.Roles,	
-		usu_intentos_logueo_fallidos int NOT NULL DEFAULT 0,
-		usu_activo bit NOT NULL DEFAULT 1
-	)
+CREATE TABLE MILANESA.Usuarios (
+	usu_id int identity(1,1) Primary Key,
+	usu_nombre nvarchar(255) NOT NULL,
+	usu_password varbinary(1024) NOT NULL,
+	rol_id int REFERENCES MILANESA.Roles,	
+	usu_intentos_logueo_fallidos int NOT NULL DEFAULT 0,
+	usu_activo bit NOT NULL DEFAULT 1
+)
 GO
 
 /*Productos*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Productos' AND xtype='U')
-	CREATE TABLE MILANESA.Productos (
-		pro_id int identity(1,1) Primary Key,
-		pro_descripcion nvarchar(255) NOT NULL,
-		pro_cantidad_millas numeric(18,0) NOT NULL,
-		pro_stock numeric(18,0) NOT NULL,
-		pro_activo bit NOT NULL DEFAULT 1
-	)
+CREATE TABLE MILANESA.Productos (
+	pro_id int identity(1,1) Primary Key,
+	pro_descripcion nvarchar(255) NOT NULL,
+	pro_cantidad_millas numeric(18,0) NOT NULL,
+	pro_stock numeric(18,0) NOT NULL,
+	pro_activo bit NOT NULL DEFAULT 1
+)
 GO
 
 /*Clientes*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Clientes' AND xtype='U')
-	CREATE TABLE MILANESA.Clientes (
-		cli_id int identity(1,1) Primary Key,
-		cli_nombre nvarchar(255) NOT NULL,
-		cli_apellido nvarchar(255) NOT NULL,
-		cli_dni int NOT NULL,
-		cli_direccion nvarchar(255) NOT NULL,
-		cli_telefono int NOT NULL,
-		cli_mail nvarchar(255),
-		cli_fecha_nacimiento datetime NOT NULL,
-		cli_activo bit NOT NULL DEFAULT 1
-	)
+CREATE TABLE MILANESA.Clientes (
+	cli_id int identity(1,1) Primary Key,
+	cli_nombre nvarchar(255) NOT NULL,
+	cli_apellido nvarchar(255) NOT NULL,
+	cli_dni int NOT NULL,
+	cli_direccion nvarchar(255) NOT NULL,
+	cli_telefono int NOT NULL,
+	cli_mail nvarchar(255),
+	cli_fecha_nacimiento datetime NOT NULL,
+	cli_activo bit NOT NULL DEFAULT 1
+)
 GO
 
 /*Canjes*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Canjes' AND xtype='U')
-	CREATE TABLE MILANESA.Canjes (
-		can_id int identity(1,1) Primary Key,
-		cliente_id int REFERENCES MILANESA.Clientes NOT NULL,
-		producto_id int REFERENCES MILANESA.Productos,
-		can_cantidad numeric(18,0) NOT NULL,
-		can_fecha datetime
-	)
+CREATE TABLE MILANESA.Canjes (
+	can_id int identity(1,1) Primary Key,
+	cliente_id int REFERENCES MILANESA.Clientes NOT NULL,
+	producto_id int REFERENCES MILANESA.Productos,
+	can_cantidad numeric(18,0) NOT NULL,
+	can_fecha datetime
+)
 GO
 
 /*Millas*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Millas' AND xtype='U')
-	CREATE TABLE MILANESA.Millas (
-		mil_id int identity(1,1) Primary Key,
-		cliente_id int REFERENCES MILANESA.Clientes NOT NULL,
-		mil_cantidad numeric(18,0) NOT NULL,
-		mil_fecha_acreditacion datetime NOT NULL,
-		mil_canjeadas numeric(18,0) NOT NULL DEFAULT 0,
-	)
+CREATE TABLE MILANESA.Millas (
+	mil_id int identity(1,1) Primary Key,
+	cliente_id int REFERENCES MILANESA.Clientes NOT NULL,
+	mil_cantidad numeric(18,0) NOT NULL,
+	mil_fecha_acreditacion datetime NOT NULL,
+	mil_canjeadas numeric(18,0) NOT NULL DEFAULT 0,
+)
 GO
 	
 /*Devoluciones*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Devoluciones' AND xtype='U')
-	CREATE TABLE MILANESA.Devoluciones (
-		dev_id int identity(1,1) Primary Key,
-		dev_motivo nvarchar(255) NOT NULL,
-		dev_fecha datetime NOT NULL
-	)
+CREATE TABLE MILANESA.Devoluciones (
+	dev_id int identity(1,1) Primary Key,
+	dev_motivo nvarchar(255) NOT NULL,
+	dev_fecha datetime NOT NULL
+)
 GO
 
 /*Ciudades*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Ciudades' AND xtype='U')
-	CREATE TABLE MILANESA.Ciudades (
-		ciu_id int identity(1,1) Primary Key,
-		ciu_descripcion nvarchar(255) NOT NULL,
-		ciu_activo bit NOT NULL DEFAULT 1
-	)
+CREATE TABLE MILANESA.Ciudades (
+	ciu_id int identity(1,1) Primary Key,
+	ciu_descripcion nvarchar(255) NOT NULL,
+	ciu_activo bit NOT NULL DEFAULT 1
+)
 GO
 
 /*Tipos_Servicio*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Tipos_Servicio' AND xtype='U')
-	CREATE TABLE MILANESA.Tipos_Servicio (
-		tip_id int identity(1,1) Primary Key,
-		tip_descripcion nvarchar(255) NOT NULL,
-		tip_factor_precio numeric(18,2) DEFAULT 1,
-		tip_activo bit NOT NULL DEFAULT 1
-	)
+CREATE TABLE MILANESA.Tipos_Servicio (
+	tip_id int identity(1,1) Primary Key,
+	tip_descripcion nvarchar(255) NOT NULL,
+	tip_factor_precio numeric(18,2) DEFAULT 1,
+	tip_activo bit NOT NULL DEFAULT 1
+)
 GO
 
 /*Rutas*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Rutas' AND xtype='U')
-	CREATE TABLE MILANESA.Rutas (
-		rut_id int identity(1,1) Primary Key,
-		ciudad_origen_id int REFERENCES MILANESA.Ciudades NOT NULL,
-		ciudad_destino_id int REFERENCES MILANESA.Ciudades NOT NULL,
-		--tipo_servicio_id int REFERENCES MILANESA.Tipos_Servicio NOT NULL,
-		rut_codigo numeric(18,0) NOT NULL,
-		rut_precio_base_kg numeric(18,2) NOT NULL,
-		rut_precio_base_pasaje numeric(18,2) NOT NULL,
-		rut_activo bit NOT NULL DEFAULT 1
-	)
+CREATE TABLE MILANESA.Rutas (
+	rut_id int identity(1,1) Primary Key,
+	ciudad_origen_id int REFERENCES MILANESA.Ciudades NOT NULL,
+	ciudad_destino_id int REFERENCES MILANESA.Ciudades NOT NULL,
+	--tipo_servicio_id int REFERENCES MILANESA.Tipos_Servicio NOT NULL,
+	rut_codigo numeric(18,0) NOT NULL,
+	rut_precio_base_kg numeric(18,2) NOT NULL,
+	rut_precio_base_pasaje numeric(18,2) NOT NULL,
+	rut_activo bit NOT NULL DEFAULT 1
+)
 GO
 
 /*Aeronaves*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Aeronaves' AND xtype='U')
-	CREATE TABLE MILANESA.Aeronaves (
-		aer_id int identity(1,1) Primary Key,
-		tipo_servicio_id int REFERENCES MILANESA.Tipos_Servicio NOT NULL,
-		aer_matricula nvarchar(255) NOT NULL,
-		aer_modelo nvarchar(255) NOT NULL,
-		aer_kg_disponibles numeric(18,0) NOT NULL,
-		aer_fabricante nvarchar(255) NOT NULL,
-		aer_fecha_alta datetime,
-		aer_fecha_fuera_servicio datetime,
-		aer_fecha_reinicio_servicio datetime,
-		aer_fecha_baja_definitiva datetime,
-		aer_activo bit NOT NULL DEFAULT 1
-	)
+CREATE TABLE MILANESA.Aeronaves (
+	aer_id int identity(1,1) Primary Key,
+	tipo_servicio_id int REFERENCES MILANESA.Tipos_Servicio NOT NULL,
+	aer_matricula nvarchar(255) NOT NULL,
+	aer_modelo nvarchar(255) NOT NULL,
+	aer_kg_disponibles numeric(18,0) NOT NULL,
+	aer_fabricante nvarchar(255) NOT NULL,
+	aer_fecha_alta datetime,
+	aer_fecha_fuera_servicio datetime,
+	aer_fecha_reinicio_servicio datetime,
+	aer_fecha_baja_definitiva datetime,
+	aer_activo bit NOT NULL DEFAULT 1
+)
 GO
 
 /*Estados_Arribos*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Estados_Arribos' AND xtype='U')
-	CREATE TABLE MILANESA.Estados_Arribos (
-		ear_id int identity(1,1) Primary Key,
-		ear_descripcion nvarchar(255) NOT NULL,
-	)
+CREATE TABLE MILANESA.Estados_Arribos (
+	ear_id int identity(1,1) Primary Key,
+	ear_descripcion nvarchar(255) NOT NULL,
+)
 GO
 
 INSERT INTO MILANESA.Estados_Arribos (ear_descripcion) VALUES ('OK')
@@ -210,39 +193,36 @@ INSERT INTO MILANESA.Estados_Arribos (ear_descripcion) VALUES ('ERROR: No se enc
 GO
 
 /*Arribos*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Arribos' AND xtype='U')
-	CREATE TABLE MILANESA.Arribos (
-		arr_id int identity(1,1) Primary Key,
-		aeronave_id int REFERENCES MILANESA.Aeronaves NOT NULL,
-		ciudad_origen_id int REFERENCES MILANESA.Ciudades NOT NULL,
-		ciudad_destino_id int REFERENCES MILANESA.Ciudades NOT NULL,
-		arr_destino_correcto int REFERENCES MILANESA.Estados_Arribos NOT NULL,
-		arr_fecha datetime NOT NULL
-	)
+CREATE TABLE MILANESA.Arribos (
+	arr_id int identity(1,1) Primary Key,
+	aeronave_id int REFERENCES MILANESA.Aeronaves NOT NULL,
+	ciudad_origen_id int REFERENCES MILANESA.Ciudades NOT NULL,
+	ciudad_destino_id int REFERENCES MILANESA.Ciudades NOT NULL,
+	arr_destino_correcto int REFERENCES MILANESA.Estados_Arribos NOT NULL,
+	arr_fecha datetime NOT NULL
+)
 GO
 
 /*Vuelos*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Vuelos' AND xtype='U')
-	CREATE TABLE MILANESA.Vuelos (
-		vue_id int identity(1,1) Primary Key,
-		ruta_id int REFERENCES MILANESA.Rutas NOT NULL,
-		aeronave_id int REFERENCES MILANESA.Aeronaves NOT NULL,
-		arribo_id int REFERENCES MILANESA.Arribos,
-		vue_fecha_salida datetime NOT NULL,
-		vue_fecha_llegada_estimada datetime NOT NULL,
-		vue_fecha_llegada datetime,
-		vue_activo bit NOT NULL DEFAULT 1
-	)
+CREATE TABLE MILANESA.Vuelos (
+	vue_id int identity(1,1) Primary Key,
+	ruta_id int REFERENCES MILANESA.Rutas NOT NULL,
+	aeronave_id int REFERENCES MILANESA.Aeronaves NOT NULL,
+	arribo_id int REFERENCES MILANESA.Arribos,
+	vue_fecha_salida datetime NOT NULL,
+	vue_fecha_llegada_estimada datetime NOT NULL,
+	vue_fecha_llegada datetime,
+	vue_activo bit NOT NULL DEFAULT 1
+)
 GO
 
 /*Tarjetas_Credito*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Tarjetas_Credito' AND xtype='U')
-	CREATE TABLE MILANESA.Tarjetas_Credito (
-		tac_id int identity(1,1) Primary Key,
-		tac_descripcion nvarchar(255) NOT NULL,
-		tac_admite_cuotas BIT DEFAULT 1,
-		tac_activo BIT DEFAULT 1
-	)
+CREATE TABLE MILANESA.Tarjetas_Credito (
+	tac_id int identity(1,1) Primary Key,
+	tac_descripcion nvarchar(255) NOT NULL,
+	tac_admite_cuotas BIT DEFAULT 1,
+	tac_activo BIT DEFAULT 1
+)
 GO
 
 INSERT INTO MILANESA.Tarjetas_Credito (tac_descripcion) VALUES ('Visa')
@@ -253,84 +233,77 @@ INSERT INTO MILANESA.Tarjetas_Credito (tac_descripcion) VALUES ('American Expres
 GO
 
 /*Pagos_Tarjeta*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Pagos_Tarjeta' AND xtype='U')
-	CREATE TABLE MILANESA.Pagos_Tarjeta (
-		pat_id int identity(1,1) Primary Key,
-		pat_numero_tarjeta numeric(12,0),
-		tarjeta_credito_id int REFERENCES MILANESA.Tarjetas_Credito
-	)
+CREATE TABLE MILANESA.Pagos_Tarjeta (
+	pat_id int identity(1,1) Primary Key,
+	pat_numero_tarjeta numeric(12,0),
+	tarjeta_credito_id int REFERENCES MILANESA.Tarjetas_Credito
+)
 GO
 
 /*Ventas*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Ventas' AND xtype='U')
-	CREATE TABLE MILANESA.Ventas (
-		ven_id int identity(1,1) Primary Key,
-		comprador_id int REFERENCES MILANESA.Clientes NOT NULL,
-		vuelo_id int REFERENCES MILANESA.Vuelos NOT NULL,
-		pago_tarjeta_id int REFERENCES MILANESA.Pagos_Tarjeta,
-		ven_fecha datetime NOT NULL,
-		ven_activo bit NOT NULL DEFAULT 1
-	)
+CREATE TABLE MILANESA.Ventas (
+	ven_id int identity(1,1) Primary Key,
+	comprador_id int REFERENCES MILANESA.Clientes NOT NULL,
+	vuelo_id int REFERENCES MILANESA.Vuelos NOT NULL,
+	pago_tarjeta_id int REFERENCES MILANESA.Pagos_Tarjeta,
+	ven_fecha datetime NOT NULL,
+	ven_activo bit NOT NULL DEFAULT 1
+)
 GO
 
 /*Butacas*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Butacas' AND xtype='U')
-	CREATE TABLE MILANESA.Butacas (
-		but_id int identity(1,1) Primary Key,
-		aeronave_id int REFERENCES MILANESA.Aeronaves NOT NULL,
-		but_numero numeric(18,0) NOT NULL,
-		but_tipo nvarchar(255) NOT NULL,
-		but_piso numeric(18,0) NOT NULL,
-		but_activo bit NOT NULL DEFAULT 1
-	)
+CREATE TABLE MILANESA.Butacas (
+	but_id int identity(1,1) Primary Key,
+	aeronave_id int REFERENCES MILANESA.Aeronaves NOT NULL,
+	but_numero numeric(18,0) NOT NULL,
+	but_tipo nvarchar(255) NOT NULL,
+	but_piso numeric(18,0) NOT NULL,
+	but_activo bit NOT NULL DEFAULT 1
+)
 GO
 
 /*Pasajes*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Pasajes' AND xtype='U')
-	CREATE TABLE MILANESA.Pasajes (
-		pas_id int identity(1,1) Primary Key,
-		pasajero_id int REFERENCES MILANESA.Clientes NOT NULL,
-		devolucion_id int REFERENCES MILANESA.Devoluciones,
-		venta_id int REFERENCES MILANESA.Ventas NOT NULL,
-		butaca_id int REFERENCES MILANESA.Butacas,
-		pas_codigo numeric(18,0) NOT NULL,
-		pas_precio numeric(18,2) NOT NULL,
-		pas_activo bit NOT NULL DEFAULT 1
-	)
+CREATE TABLE MILANESA.Pasajes (
+	pas_id int identity(1,1) Primary Key,
+	pasajero_id int REFERENCES MILANESA.Clientes NOT NULL,
+	devolucion_id int REFERENCES MILANESA.Devoluciones,
+	venta_id int REFERENCES MILANESA.Ventas NOT NULL,
+	butaca_id int REFERENCES MILANESA.Butacas,
+	pas_codigo numeric(18,0) NOT NULL,
+	pas_precio numeric(18,2) NOT NULL,
+	pas_activo bit NOT NULL DEFAULT 1
+)
 GO
 
 /*Paquetes*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Paquetes' AND xtype='U')
-	CREATE TABLE MILANESA.Paquetes (
-		paq_id int identity(1,1) Primary Key,
-		devolucion_id int REFERENCES MILANESA.Devoluciones,
-		venta_id int REFERENCES MILANESA.Ventas NOT NULL,
-		cliente_id int REFERENCES MILANESA.Clientes NOT NULL,
-		paq_codigo numeric(18,0) NOT NULL,
-		paq_precio numeric(18,2) NOT NULL,
-		paq_kg numeric(18,0) NOT NULL,
-		paq_activo bit NOT NULL DEFAULT 1
-	)
+CREATE TABLE MILANESA.Paquetes (
+	paq_id int identity(1,1) Primary Key,
+	devolucion_id int REFERENCES MILANESA.Devoluciones,
+	venta_id int REFERENCES MILANESA.Ventas NOT NULL,
+	cliente_id int REFERENCES MILANESA.Clientes NOT NULL,
+	paq_codigo numeric(18,0) NOT NULL,
+	paq_precio numeric(18,2) NOT NULL,
+	paq_kg numeric(18,0) NOT NULL,
+	paq_activo bit NOT NULL DEFAULT 1
+)
 GO
 	
 /*Periodos_Fuera_Servicio*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Periodos_Fuera_Servicio' AND xtype='U')
-	CREATE TABLE MILANESA.Periodos_Fuera_Servicio (
-		pfs_id int identity(1,1) Primary Key,
-		aeronave_id int REFERENCES MILANESA.Aeronaves NOT NULL,
-		pfs_motivo nvarchar(255) NOT NULL,
-		pfs_fecha_inicio datetime NOT NULL,
-		pfs_fecha_fin datetime
-	)
+CREATE TABLE MILANESA.Periodos_Fuera_Servicio (
+	pfs_id int identity(1,1) Primary Key,
+	aeronave_id int REFERENCES MILANESA.Aeronaves NOT NULL,
+	pfs_motivo nvarchar(255) NOT NULL,
+	pfs_fecha_inicio datetime NOT NULL,
+	pfs_fecha_fin datetime
+)
 GO
 
 /*Tipos_Servicio_Rutas*/
-IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name='Tipos_Servicio_Rutas' AND xtype='U')
-	CREATE TABLE MILANESA.Tipos_Servicio_Rutas (
-		tipo_servicio_id int REFERENCES MILANESA.Tipos_Servicio,
-		rut_id int REFERENCES MILANESA.Rutas,
-		Primary Key (tipo_servicio_id, rut_id)
-	)
+CREATE TABLE MILANESA.Tipos_Servicio_Rutas (
+	tipo_servicio_id int REFERENCES MILANESA.Tipos_Servicio,
+	rut_id int REFERENCES MILANESA.Rutas,
+	Primary Key (tipo_servicio_id, rut_id)
+)
 GO
 
 
@@ -821,6 +794,54 @@ SET                pas_activo = 'false', devolucion_id = @devolucion_id
 WHERE        (venta_id = @venta_id) and pas_activo = 1
 GO
 
+CREATE PROCEDURE [MILANESA].[devolucionEfectivo]
+(
+	@devolucion int,
+	@mailCliente nvarchar(255)
+)
+AS
+	SET NOCOUNT OFF;
+
+	/* Acá se devolverá al cliente el dinero en efectivo y se le avisará por mail*/
+GO
+
+CREATE PROCEDURE [MILANESA].[devolucionTarjeta]
+(
+	@devolucion int,
+	@pago_tarjeta_id int
+)
+AS
+	SET NOCOUNT OFF;
+
+	/* Acá se devolverá al cliente el importe realizado con la tarjeta*/
+
+GO
+
+CREATE PROCEDURE [MILANESA].[devolucionPorVenta]
+(
+	@venta_id int,
+	@devolucion int
+)
+AS	
+	SET NOCOUNT OFF;
+	DECLARE @pago_tarjeta_id int, @mailCliente nvarchar(255)	
+
+	SELECT @pago_tarjeta_id	= ve.pago_tarjeta_id, @mailCliente = cl.cli_mail
+	FROM  MILANESA.Ventas ve
+	JOIN MILANESA.Clientes cl on cl.cli_id = comprador_id
+	WHERE (ven_id = @venta_id);
+
+	IF @pago_tarjeta_id is null
+	BEGIN
+		EXEC MILANESA.devolucionEfectivo @devolucion, @mailCliente;
+	END
+	ELSE
+	BEGIN
+		EXEC MILANESA.devolucionTarjeta @devolucion, @pago_tarjeta_id;
+	END
+GO
+
+
 CREATE PROCEDURE [MILANESA].[ventaBajaPorVuelo]
 (
 	@vuelo_id int,
@@ -1288,6 +1309,18 @@ GO
 
 -- AERONAVES --LUCAS
 
+CREATE PROCEDURE [MILANESA].[AeronavesBajaDefinitiva]
+(
+	@aer_id int
+)
+AS
+	SET NOCOUNT ON;
+update MILANESA.Aeronaves
+set aer_activo = 0, aer_fecha_baja_definitiva = SYSDATETIME()
+WHERE aer_id = @aer_id
+GO
+
+
 CREATE PROCEDURE [MILANESA].[AeronavesReemplazo](
 @aer_id int,
 @fechaHasta datetime
@@ -1336,6 +1369,24 @@ and not exists (
 )
 where a.AER_ID = @aer_id;
 GO
+
+CREATE PROCEDURE [MILANESA].[AeronavesIniciarFueraDeServicio]
+(
+	@aer_id int,
+	@motivo nvarchar(255),
+	@fechaHasta datetime
+
+)
+AS
+SET NOCOUNT ON;
+update MILANESA.Aeronaves
+set aer_fecha_fuera_servicio = SYSDATETIME(),
+aer_fecha_reinicio_servicio = @fechaHasta
+WHERE aer_id = @aer_id;
+Insert into MILANESA.Periodos_Fuera_Servicio (aeronave_id, pfs_motivo, pfs_fecha_inicio, pfs_fecha_fin) values (
+@aer_id, @motivo, SYSDATETIME(), @fechaHasta)
+GO
+
 
 CREATE PROCEDURE [MILANESA].[AeronavesCancelacionBajaFS]
 (
@@ -1564,34 +1615,6 @@ SET NOCOUNT ON;
 	where aer_id = @aer_id 
 	and aer_fecha_reinicio_servicio is not null 
 	and aer_fecha_reinicio_servicio > SYSDATETIME()
-GO
-
-CREATE PROCEDURE [MILANESA].[AeronavesIniciarFueraDeServicio]
-(
-	@aer_id int,
-	@motivo nvarchar(255),
-	@fechaHasta datetime
-
-)
-AS
-SET NOCOUNT ON;
-update MILANESA.Aeronaves
-set aer_fecha_fuera_servicio = SYSDATETIME(),
-aer_fecha_reinicio_servicio = @fechaHasta
-WHERE aer_id = @aer_id;
-Insert into MILANESA.Periodos_Fuera_Servicio (aeronave_id, pfs_motivo, pfs_fecha_inicio, pfs_fecha_fin) values (
-@aer_id, @motivo, SYSDATETIME(), @fechaHasta)
-GO
-
-CREATE PROCEDURE [MILANESA].[AeronavesBajaDefinitiva]
-(
-	@aer_id int
-)
-AS
-	SET NOCOUNT ON;
-update MILANESA.Aeronaves
-set aer_activo = 0, aer_fecha_baja_definitiva = SYSDATETIME()
-WHERE aer_id = @aer_id
 GO
 
 
@@ -2028,53 +2051,6 @@ AS
 SELECT ven_id, comprador_id, vuelo_id, pago_tarjeta_id, ven_fecha, ven_activo
 FROM            MILANESA.Ventas
 WHERE        (CAST(ven_id as varchar(18)) LIKE '%' + @codigo + '%')
-GO
-
-CREATE PROCEDURE [MILANESA].[devolucionEfectivo]
-(
-	@devolucion int,
-	@mailCliente nvarchar(255)
-)
-AS
-	SET NOCOUNT OFF;
-
-	/* Acá se devolverá al cliente el dinero en efectivo y se le avisará por mail*/
-GO
-
-CREATE PROCEDURE [MILANESA].[devolucionTarjeta]
-(
-	@devolucion int,
-	@pago_tarjeta_id int
-)
-AS
-	SET NOCOUNT OFF;
-
-	/* Acá se devolverá al cliente el importe realizado con la tarjeta*/
-
-GO
-
-CREATE PROCEDURE [MILANESA].[devolucionPorVenta]
-(
-	@venta_id int,
-	@devolucion int
-)
-AS	
-	SET NOCOUNT OFF;
-	DECLARE @pago_tarjeta_id int, @mailCliente nvarchar(255)	
-
-	SELECT @pago_tarjeta_id	= ve.pago_tarjeta_id, @mailCliente = cl.cli_mail
-	FROM  MILANESA.Ventas ve
-	JOIN MILANESA.Clientes cl on cl.cli_id = comprador_id
-	WHERE (ven_id = @venta_id);
-
-	IF @pago_tarjeta_id is null
-	BEGIN
-		EXEC MILANESA.devolucionEfectivo @devolucion, @mailCliente;
-	END
-	ELSE
-	BEGIN
-		EXEC MILANESA.devolucionTarjeta @devolucion, @pago_tarjeta_id;
-	END
 GO
 
 CREATE PROCEDURE [MILANESA].[ventaCancelacion]
