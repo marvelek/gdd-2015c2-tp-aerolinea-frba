@@ -20,7 +20,7 @@ namespace AerolineaFrba.Devolucion
 
         private void DevolucionForm_Load(object sender, EventArgs e)
         {
-            this.ventasTableAdapter.Fill(this.gD2C2015DataSet.Ventas);
+            //this.ventasTableAdapter.Fill(this.gD2C2015DataSet.Ventas);
         }
 
         private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
@@ -32,21 +32,21 @@ namespace AerolineaFrba.Devolucion
                     this.grillaVenta.Visible = true;
                     this.grillaPaquete.Visible = false;
                     this.grillaPasaje.Visible = false;
-                    this.ventasTableAdapter.Fill(this.gD2C2015DataSet.Ventas);
+                    //this.ventasTableAdapter.Fill(this.gD2C2015DataSet.Ventas);
                     break;
                 case "PAQUETES":
                     // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Paquetes' Puede moverla o quitarla según sea necesario.
                     this.grillaVenta.Visible = false;
                     this.grillaPaquete.Visible = true;
                     this.grillaPasaje.Visible = false;
-                    this.paquetesTableAdapter.Fill(this.gD2C2015DataSet.Paquetes);
+                    //this.paquetesTableAdapter.Fill(this.gD2C2015DataSet.Paquetes);
                     break;
                 case "PASAJES":
                     // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Pasajes' Puede moverla o quitarla según sea necesario.                                       
                     this.grillaVenta.Visible = false;
                     this.grillaPaquete.Visible = false;
                     this.grillaPasaje.Visible = true;
-                    this.pasajesTableAdapter.Fill(this.gD2C2015DataSet.Pasajes);
+                    //this.pasajesTableAdapter.Fill(this.gD2C2015DataSet.Pasajes);
                     break;
                 default:
                     this.grillaVenta.Visible = true;
@@ -65,26 +65,26 @@ namespace AerolineaFrba.Devolucion
             {
                 case "VENTAS":                                       
                     int idVenta = Convert.ToInt16(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value);                    
-                    this.ventasTableAdapter.ventaCancelacion(idVenta);                    
-                    this.ventasTableAdapter.Fill(this.gD2C2015DataSet.Ventas);
+                    this.ventasTableAdapter.ventaCancelacion(idVenta);
+                    this.ventasTableAdapter.FillBy(this.gD2C2015DataSet.Ventas, this.codigo.Text);
                     MessageBox.Show("La venta ha sido cancelada correctamente");                    
                     break;
                 case "PAQUETES":                    
                     int idPaquete = Convert.ToInt16(grillaPaquete.Rows[grillaPaquete.CurrentRow.Index].Cells[0].Value);                    
                     this.paquetesTableAdapter.paqueteCancelacion(idPaquete);
-                    this.paquetesTableAdapter.Fill(this.gD2C2015DataSet.Paquetes);
+                    this.paquetesTableAdapter.FillBy(this.gD2C2015DataSet.Paquetes, this.codigo.Text);
                     MessageBox.Show("El paquete ha sido cancelado correctamente");                     
                     break;
                 case "PASAJES":                                        
                     int idPasaje = Convert.ToInt16(grillaPasaje.Rows[grillaPasaje.CurrentRow.Index].Cells[0].Value);                   
                     this.pasajesTableAdapter.pasajeCancelacion(idPasaje);
-                    this.pasajesTableAdapter.Fill(this.gD2C2015DataSet.Pasajes);
+                    this.pasajesTableAdapter.FillBy(this.gD2C2015DataSet.Pasajes, this.codigo.Text);
                     MessageBox.Show("El pasaje ha sido cancelado correctamente");                     
                     break;                    
                 default:
                     int id = Convert.ToInt16(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value);                    
-                    this.ventasTableAdapter.ventaCancelacion(id);                    
-                    this.ventasTableAdapter.Fill(this.gD2C2015DataSet.Ventas);
+                    this.ventasTableAdapter.ventaCancelacion(id);
+                    this.ventasTableAdapter.FillBy(this.gD2C2015DataSet.Ventas, this.codigo.Text);
                     MessageBox.Show("La venta ha sido cancelada correctamente");                    
                     break;
 
@@ -121,7 +121,8 @@ namespace AerolineaFrba.Devolucion
             }
             else
             {
-                switch (Convert.ToString(comboBox1.SelectedItem))
+                MessageBox.Show("Debe seleccionar un código para mostrar."); 
+                /*switch (Convert.ToString(comboBox1.SelectedItem))
                 {
                     case "VENTAS":                    
                         // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Ventas' Puede moverla o quitarla según sea necesario.
@@ -138,14 +139,14 @@ namespace AerolineaFrba.Devolucion
                     default:
                         this.ventasTableAdapter.Fill(this.gD2C2015DataSet.Ventas);
                         break;
-                }
+                }*/
             }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            this.codigo.Clear();
-            switch (Convert.ToString(comboBox1.SelectedItem))
+            this.codigo.Clear();            
+            /*switch (Convert.ToString(comboBox1.SelectedItem))
             {
                 case "VENTAS":
                     // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Ventas' Puede moverla o quitarla según sea necesario.
@@ -162,7 +163,7 @@ namespace AerolineaFrba.Devolucion
                 default:
                     this.ventasTableAdapter.Fill(this.gD2C2015DataSet.Ventas);
                     break;
-            }
+            }*/
         }
 
         private void button1_Click(object sender, EventArgs e)

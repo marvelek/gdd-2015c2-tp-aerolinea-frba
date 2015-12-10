@@ -1762,7 +1762,7 @@ AS
 	SET NOCOUNT ON;
 SELECT pas_id, pasajero_id, devolucion_id, venta_id, butaca_id, pas_codigo, pas_precio, pas_activo
 FROM            MILANESA.Pasajes
-WHERE        (CAST(pas_codigo as varchar(18)) LIKE '%' + @codigo + '%')
+WHERE         (CAST(pas_codigo as varchar(18)) = @codigo )
 GO
 
 CREATE PROCEDURE [MILANESA].[paqueteBuscar]
@@ -1773,7 +1773,7 @@ AS
 	SET NOCOUNT ON;
 SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_activo
 FROM            MILANESA.Paquetes
-WHERE        (CAST(paq_codigo as varchar(18)) LIKE '%' + @codigo + '%')
+WHERE        (CAST(paq_codigo as varchar(18)) =  @codigo )
 GO
 
 CREATE PROCEDURE [MILANESA].[VentaBuscar]
@@ -1784,7 +1784,7 @@ AS
 	SET NOCOUNT ON;
 SELECT ven_id, comprador_id, vuelo_id, pago_tarjeta_id, ven_fecha, ven_activo
 FROM            MILANESA.Ventas
-WHERE        (CAST(ven_id as varchar(18)) LIKE '%' + @codigo + '%')
+WHERE (CAST(ven_id as varchar(18)) =  @codigo)
 GO
 
 CREATE PROCEDURE [MILANESA].[devolucionEfectivo]
