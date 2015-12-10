@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace AerolineaFrba
 {
@@ -53,5 +54,23 @@ namespace AerolineaFrba
             Regex objAlphaNumericPattern = new Regex("[^a-zA-Z0-9]");
             return !objAlphaNumericPattern.IsMatch(strToCheck);
         }
+
+        public static void onlyNumbers(KeyPressEventArgs e)
+        {
+            if (!((char.IsDigit(e.KeyChar)) || (e.KeyChar == (char)Keys.Back)))
+            {
+                e.Handled = true;
+            }
+        }
+
+        public static void numbersAndComa(TextBox text, KeyPressEventArgs e)
+        {
+
+            if (!((char.IsDigit(e.KeyChar)) || ((e.KeyChar == ',') && !text.Text.Contains(',')) || (e.KeyChar == (char)Keys.Back)))
+            {
+                e.Handled = true;
+            }
+        }
+
     }
 }

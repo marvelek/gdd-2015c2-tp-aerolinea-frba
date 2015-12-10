@@ -186,17 +186,17 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void ButacasPasilloText_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Funciones.onlyNumbers(e);
+            Utiles.onlyNumbers(e);
         }
 
         private void ButacasVentanillaText_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Funciones.onlyNumbers(e);
+            Utiles.onlyNumbers(e);
         }
 
         private void kgEncomientasText_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Funciones.numbersAndComa(kgEncomientasText, e);
+            Utiles.numbersAndComa(kgEncomientasText, e);
         }
 
         private void ButacasPasilloText_TextChanged(object sender, EventArgs e)

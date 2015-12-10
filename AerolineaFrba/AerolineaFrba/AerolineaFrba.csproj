@@ -158,7 +158,6 @@
     <Compile Include="Compra\ResumenForm.Designer.cs">
       <DependentUpon>ResumenForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConexionSQL.cs" />
     <Compile Include="Consulta Millas\BusquedaClienteForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,8 +190,6 @@
     <Compile Include="Devolucion\VistaDevolucionForm.Designer.cs">
       <DependentUpon>VistaDevolucionForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormsUtils.cs" />
-    <Compile Include="Funciones.cs" />
     <Compile Include="GD2C2015DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -338,9 +335,6 @@
       <Generator>MSDataSetGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>GD2C2015DataSet.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="GD2C2015DataSet.xss">
-      <DependentUpon>GD2C2015DataSet.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
