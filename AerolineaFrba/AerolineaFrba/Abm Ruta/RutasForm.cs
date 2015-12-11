@@ -8,14 +8,32 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Contenido;
+using AerolineaFrba.GD2C2015DataSetTableAdapters;
 
 namespace AerolineaFrba.Abm_Ruta
 {
     public partial class RutasForm : Form
     {
+        rutasRepetidasTableAdapter rutasRepetidasTableAdapter = new rutasRepetidasTableAdapter();
+
         public RutasForm()
         {
-            InitializeComponent();           
+            InitializeComponent();
+            bool pasa;
+            pasa = ControlarRepetidos();
+            if (pasa == true)
+            {
+                this.modificar.Enabled = false;
+                this.eliminar.Enabled = false;
+                this.carga.Enabled = false;
+            }
+            else
+            {
+                this.modificar.Enabled = true;
+                this.eliminar.Enabled = true;
+                this.carga.Enabled = true;
+            }
+
         }
 
         private void RutasForm_Load(object sender, EventArgs e)
@@ -283,6 +301,24 @@ namespace AerolineaFrba.Abm_Ruta
                 e.Handled = (IsDec) ? true : false;
             else
                 e.Handled = true;
+
+        }
+
+        private bool ControlarRepetidos()
+        {
+            if (this.rutasRepetidasTableAdapter.Fill(this.gD2C2015DataSet.rutasRepetidas).ToString() != "")
+            {
+                new RutasRepetidas().ShowDialog();
+                if (this.rutasRepetidasTableAdapter.Fill(this.gD2C2015DataSet.rutasRepetidas).ToString() != "")
+                {
+                    return true;
+                }
+                else { return false; }
+
+            }
+            else {
+                return false;
+            }
 
         }
     }

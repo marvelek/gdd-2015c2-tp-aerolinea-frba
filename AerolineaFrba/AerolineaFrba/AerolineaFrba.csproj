@@ -122,6 +122,12 @@
     <Compile Include="Abm Ruta\CargarRutaForm.Designer.cs">
       <DependentUpon>CargarRutaForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Ruta\RutasRepetidas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ruta\RutasRepetidas.Designer.cs">
+      <DependentUpon>RutasRepetidas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Ruta\RutasForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -270,6 +276,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Ruta\CargarRutaForm.resx">
       <DependentUpon>CargarRutaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\RutasRepetidas.resx">
+      <DependentUpon>RutasRepetidas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Ruta\RutasForm.resx">
       <DependentUpon>RutasForm.cs</DependentUpon>

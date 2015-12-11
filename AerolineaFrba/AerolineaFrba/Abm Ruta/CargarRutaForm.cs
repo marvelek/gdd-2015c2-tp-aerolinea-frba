@@ -18,11 +18,12 @@ namespace AerolineaFrba.Abm_Ruta
         Ruta ruta = null;
         RutasTableAdapter rutasTableAdapter = new RutasTableAdapter();
         Tipos_Servicio_RutasTableAdapter tipos_servicio_RutasTableAdapter = new Tipos_Servicio_RutasTableAdapter();
-        GD2C2015DataSet dataSet = new GD2C2015DataSet();
+        GD2C2015DataSet dataSet = new GD2C2015DataSet();        
+       
 
         public CargarRutaForm(Ruta ruta)
         {
-            InitializeComponent();
+            InitializeComponent();            
 
             // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Rutas' Puede moverla o quitarla según sea necesario.
             this.rutasTableAdapter1.Fill(this.gD2C2015DataSet.Rutas);
@@ -291,7 +292,7 @@ namespace AerolineaFrba.Abm_Ruta
                 e.Handled = (IsDec) ? true : false;
             else
                 e.Handled = true;
-        } 
+        }
 
     }
 }
