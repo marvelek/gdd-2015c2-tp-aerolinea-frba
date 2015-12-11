@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba.Contenido;
 using System.Data.SqlClient;
+using AerolineaFrba.GD2C2015DataSetTableAdapters;
 
 namespace AerolineaFrba.Compra
 {
@@ -24,6 +25,7 @@ namespace AerolineaFrba.Compra
         public decimal precioPasaje = 0;
         public decimal precioPaquete = 0;
         public Pasajero responsableEncomienda;
+        public PaquetesTableAdapter paquetesTableAdapter = new PaquetesTableAdapter();
 
         public CobroForm()
         {
@@ -324,10 +326,9 @@ namespace AerolineaFrba.Compra
                 pasajerosGrid.Rows.Add(pasajero.Nombre + ' ' + pasajero.Apellido, pasajero.ButacaString, precioPasaje);
             }
 
-            precioPaquete = (decimal) paquetesTableAdapter1.precioPaquete(vueloId, responsableEncomienda.PesoPaquete);
-
             if (responsableEncomienda != null)
             {
+                precioPaquete = (decimal)paquetesTableAdapter.precioPaquete(vueloId, responsableEncomienda.PesoPaquete);
                 responsableEncomienda.Precio = precioPaquete;
                 encomiendaGrid.Rows.Add(responsableEncomienda.Nombre + ' ' + responsableEncomienda.Apellido, responsableEncomienda.PesoPaquete, precioPaquete);
             }

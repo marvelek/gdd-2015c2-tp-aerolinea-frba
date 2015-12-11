@@ -22,6 +22,7 @@ namespace AerolineaFrba.Compra
         public List<Pasajero> pasajeros;
         public Pasajero responsableEncomienda;
         public bool administrador;
+        public clienteDisponibleParaVueloTableAdapter clienteDiponibleParaVueloTableAdapter = new clienteDisponibleParaVueloTableAdapter();
 
         private ClientesTableAdapter clientesTableAdapter = new ClientesTableAdapter();
 
@@ -157,12 +158,30 @@ namespace AerolineaFrba.Compra
             {
                 error = error + "Debe seleccionar una butaca\n";
             }
+            if (!this.clienteDisponible())
+            {
+                error = error + "El ya tiene un vuelo programado para las fechas del vuelo seleccionado\n";
+            }
             if (error != null)
             {
                 MessageBox.Show(error);
                 return false;
             }
             return true;
+        }
+
+        private bool clienteDisponible()
+        {
+
+            if (clienteId == 0 || responsableEncomienda == null && pesoEncomienda > 0)
+            {
+                return true;
+            }
+            else
+            {
+                GD2C2015DataSet.clienteDisponibleParaVueloDataTable clientes = clienteDiponibleParaVueloTableAdapter.GetData(clienteId, vueloId);
+                return clientes.Rows.Count == 1;
+            }
         }
 
         private void dni_TextChanged(object sender, EventArgs e)
