@@ -65,11 +65,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tiposServicioBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tipos_ServicioTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.Tipos_ServicioTableAdapter();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.limpiarButton = new System.Windows.Forms.Button();
+            this.modificarButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aeronavesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tiposServicioBindingSource)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -92,12 +96,12 @@
             this.aeractivoDataGridViewCheckBoxColumn,
             this.aerfechaaltaDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.aeronavesBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(45, 117);
+            this.dataGridView1.Location = new System.Drawing.Point(13, 147);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(517, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(595, 164);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -200,7 +204,7 @@
             // Matricula
             // 
             this.Matricula.AutoSize = true;
-            this.Matricula.Location = new System.Drawing.Point(42, 50);
+            this.Matricula.Location = new System.Drawing.Point(22, 39);
             this.Matricula.Name = "Matricula";
             this.Matricula.Size = new System.Drawing.Size(53, 13);
             this.Matricula.TabIndex = 1;
@@ -208,7 +212,7 @@
             // 
             // MatriculaBox
             // 
-            this.MatriculaBox.Location = new System.Drawing.Point(98, 43);
+            this.MatriculaBox.Location = new System.Drawing.Point(78, 32);
             this.MatriculaBox.Name = "MatriculaBox";
             this.MatriculaBox.Size = new System.Drawing.Size(100, 20);
             this.MatriculaBox.TabIndex = 1;
@@ -216,9 +220,9 @@
             // 
             // Buscar
             // 
-            this.Buscar.Location = new System.Drawing.Point(45, 286);
+            this.Buscar.Location = new System.Drawing.Point(507, 98);
             this.Buscar.Name = "Buscar";
-            this.Buscar.Size = new System.Drawing.Size(123, 45);
+            this.Buscar.Size = new System.Drawing.Size(82, 25);
             this.Buscar.TabIndex = 8;
             this.Buscar.Text = "Buscar";
             this.Buscar.UseVisualStyleBackColor = true;
@@ -226,9 +230,9 @@
             // 
             // Alta
             // 
-            this.Alta.Location = new System.Drawing.Point(174, 286);
+            this.Alta.Location = new System.Drawing.Point(480, 317);
             this.Alta.Name = "Alta";
-            this.Alta.Size = new System.Drawing.Size(117, 45);
+            this.Alta.Size = new System.Drawing.Size(128, 45);
             this.Alta.TabIndex = 9;
             this.Alta.Text = "Alta";
             this.Alta.UseVisualStyleBackColor = true;
@@ -236,7 +240,7 @@
             // 
             // FueraServicio
             // 
-            this.FueraServicio.Location = new System.Drawing.Point(297, 286);
+            this.FueraServicio.Location = new System.Drawing.Point(138, 317);
             this.FueraServicio.Name = "FueraServicio";
             this.FueraServicio.Size = new System.Drawing.Size(128, 45);
             this.FueraServicio.TabIndex = 9;
@@ -246,7 +250,7 @@
             // 
             // BajaDef
             // 
-            this.BajaDef.Location = new System.Drawing.Point(434, 286);
+            this.BajaDef.Location = new System.Drawing.Point(12, 317);
             this.BajaDef.Name = "BajaDef";
             this.BajaDef.Size = new System.Drawing.Size(120, 45);
             this.BajaDef.TabIndex = 10;
@@ -256,7 +260,7 @@
             // 
             // modeloBox
             // 
-            this.modeloBox.Location = new System.Drawing.Point(271, 43);
+            this.modeloBox.Location = new System.Drawing.Point(251, 32);
             this.modeloBox.Name = "modeloBox";
             this.modeloBox.Size = new System.Drawing.Size(100, 20);
             this.modeloBox.TabIndex = 2;
@@ -265,7 +269,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(215, 50);
+            this.label1.Location = new System.Drawing.Point(195, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 13);
             this.label1.TabIndex = 7;
@@ -273,7 +277,7 @@
             // 
             // fabricanteBox
             // 
-            this.fabricanteBox.Location = new System.Drawing.Point(450, 43);
+            this.fabricanteBox.Location = new System.Drawing.Point(430, 32);
             this.fabricanteBox.Name = "fabricanteBox";
             this.fabricanteBox.Size = new System.Drawing.Size(100, 20);
             this.fabricanteBox.TabIndex = 3;
@@ -283,7 +287,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(394, 50);
+            this.label2.Location = new System.Drawing.Point(374, 39);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 9;
@@ -292,7 +296,7 @@
             // 
             // precioKgHasta
             // 
-            this.precioKgHasta.Location = new System.Drawing.Point(159, 81);
+            this.precioKgHasta.Location = new System.Drawing.Point(139, 70);
             this.precioKgHasta.Name = "precioKgHasta";
             this.precioKgHasta.Size = new System.Drawing.Size(40, 20);
             this.precioKgHasta.TabIndex = 5;
@@ -302,7 +306,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(139, 84);
+            this.label6.Location = new System.Drawing.Point(119, 73);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(14, 13);
             this.label6.TabIndex = 18;
@@ -311,7 +315,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(42, 88);
+            this.label5.Location = new System.Drawing.Point(22, 77);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(51, 13);
             this.label5.TabIndex = 17;
@@ -320,7 +324,7 @@
             // 
             // precioKgDesde
             // 
-            this.precioKgDesde.Location = new System.Drawing.Point(98, 81);
+            this.precioKgDesde.Location = new System.Drawing.Point(78, 70);
             this.precioKgDesde.Name = "precioKgDesde";
             this.precioKgDesde.Size = new System.Drawing.Size(35, 20);
             this.precioKgDesde.TabIndex = 4;
@@ -334,7 +338,7 @@
             "TODOS",
             "ACTIVO",
             "INACTIVO"});
-            this.estadoCombo.Location = new System.Drawing.Point(450, 80);
+            this.estadoCombo.Location = new System.Drawing.Point(430, 69);
             this.estadoCombo.Name = "estadoCombo";
             this.estadoCombo.Size = new System.Drawing.Size(99, 21);
             this.estadoCombo.TabIndex = 7;
@@ -342,7 +346,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(217, 84);
+            this.label3.Location = new System.Drawing.Point(197, 73);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 14;
@@ -356,7 +360,7 @@
             this.servicioCombo.FormattingEnabled = true;
             this.servicioCombo.Items.AddRange(new object[] {
             "Todos"});
-            this.servicioCombo.Location = new System.Drawing.Point(272, 81);
+            this.servicioCombo.Location = new System.Drawing.Point(252, 70);
             this.servicioCombo.Name = "servicioCombo";
             this.servicioCombo.Size = new System.Drawing.Size(99, 21);
             this.servicioCombo.TabIndex = 6;
@@ -365,7 +369,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(396, 84);
+            this.label4.Location = new System.Drawing.Point(376, 73);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 13);
             this.label4.TabIndex = 20;
@@ -380,11 +384,43 @@
             // 
             this.tipos_ServicioTableAdapter.ClearBeforeFill = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.limpiarButton);
+            this.groupBox1.Controls.Add(this.Buscar);
+            this.groupBox1.Location = new System.Drawing.Point(13, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(595, 129);
+            this.groupBox1.TabIndex = 21;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Filtros";
+            // 
+            // limpiarButton
+            // 
+            this.limpiarButton.Location = new System.Drawing.Point(6, 98);
+            this.limpiarButton.Name = "limpiarButton";
+            this.limpiarButton.Size = new System.Drawing.Size(75, 23);
+            this.limpiarButton.TabIndex = 9;
+            this.limpiarButton.Text = "Limpiar";
+            this.limpiarButton.UseVisualStyleBackColor = true;
+            this.limpiarButton.Click += new System.EventHandler(this.limpiarButton_Click);
+            // 
+            // modificarButton
+            // 
+            this.modificarButton.Location = new System.Drawing.Point(369, 317);
+            this.modificarButton.Name = "modificarButton";
+            this.modificarButton.Size = new System.Drawing.Size(105, 45);
+            this.modificarButton.TabIndex = 22;
+            this.modificarButton.Text = "Modificar";
+            this.modificarButton.UseVisualStyleBackColor = true;
+            this.modificarButton.Click += new System.EventHandler(this.modificarButton_Click);
+            // 
             // AeronavesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(609, 365);
+            this.ClientSize = new System.Drawing.Size(621, 389);
+            this.Controls.Add(this.modificarButton);
             this.Controls.Add(this.servicioCombo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.precioKgHasta);
@@ -397,12 +433,12 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.modeloBox);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.MatriculaBox);
+            this.Controls.Add(this.Matricula);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.BajaDef);
             this.Controls.Add(this.FueraServicio);
             this.Controls.Add(this.Alta);
-            this.Controls.Add(this.Buscar);
-            this.Controls.Add(this.MatriculaBox);
-            this.Controls.Add(this.Matricula);
             this.Controls.Add(this.dataGridView1);
             this.Name = "AeronavesForm";
             this.Text = "Aeronaves";
@@ -412,6 +448,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gD2C2015DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tiposServicioBindingSource)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -455,5 +492,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.BindingSource tiposServicioBindingSource;
         private GD2C2015DataSetTableAdapters.Tipos_ServicioTableAdapter tipos_ServicioTableAdapter;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button limpiarButton;
+        private System.Windows.Forms.Button modificarButton;
     }
 }

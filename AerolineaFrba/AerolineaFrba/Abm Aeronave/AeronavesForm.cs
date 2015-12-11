@@ -217,5 +217,33 @@ namespace AerolineaFrba.Abm_Aeronave
         private void servicioCombo_KeyPress(object sender, KeyPressEventArgs e)
         {
         }
+
+        private void limpiarButton_Click(object sender, EventArgs e)
+        {
+            this.estadoCombo.SelectedIndex = 0;
+            this.servicioCombo.SelectedIndex = 3;
+            this.servicioCombo.Refresh();
+            this.MatriculaBox.Clear();
+            this.modeloBox.Clear();
+            this.fabricanteBox.Clear();
+            this.precioKgDesde.Clear();
+            this.precioKgHasta.Clear();
+            this.aeronavesTableAdapter.Fill(this.gD2C2015DataSet.Aeronaves);
+        }
+
+        private void modificarButton_Click(object sender, EventArgs e)
+        {
+            Aeronave aeronave = new Aeronave();
+            aeronave.Id = Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value);
+            aeronave.TipoServicio = Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[1].Value);
+            aeronave.Matricula = Convert.ToString(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[2].Value);
+            aeronave.Modelo = Convert.ToString(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[3].Value);
+            aeronave.Kg_disponibles = Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[4].Value);
+            aeronave.Fabricante = Convert.ToString(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[5].Value);
+            aeronave.Activo = Convert.ToBoolean(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[9].Value); ;
+            aeronave.FechaAlta = Convert.ToDateTime(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[10].Value);
+            new AltaAeronave(aeronave).ShowDialog();
+            this.Buscar_Click(this, null);
+        }
     }
 }

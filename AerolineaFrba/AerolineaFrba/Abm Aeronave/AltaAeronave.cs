@@ -16,6 +16,8 @@ namespace AerolineaFrba.Abm_Aeronave
     {
 
         GD2C2015DataSet dataSet = new GD2C2015DataSet();
+        private Aeronave aeronave = null;
+
         public AltaAeronave()
         {
             InitializeComponent();
@@ -28,6 +30,23 @@ namespace AerolineaFrba.Abm_Aeronave
             this.ComboTipoServicio.Refresh();
 
             }
+
+        public AltaAeronave(Aeronave aeronave)
+        {
+            this.aeronave = aeronave;
+            this.matriculaText.Text = aeronave.Matricula;
+            this.modeloText.Text = aeronave.Modelo;
+            this.FabricateTextBox.Text = aeronave.Fabricante;
+            this.ComboTipoServicio.SelectedIndex = aeronave.TipoServicio;
+            this.kgEncomientasText.Text = Convert.ToString(aeronave.Kg_disponibles);
+            this.dateTimePickerAlta.Value = aeronave.FechaAlta;
+
+            // ACA FALTA:
+            // conseguir las butacas pasillo y ventanilla para mostrar con un select
+            // inhabilitar los campos que no se modifican (Fecha alta, tipo de servicio)
+            // y cambiar al momento de guardar con un if, 
+            // despues de que si es valido, fijarse si this.aeronave != null (entonces es una modificacion y hacer lo que corresponda)
+        }
 
 
 

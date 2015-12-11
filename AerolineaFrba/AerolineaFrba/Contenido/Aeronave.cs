@@ -16,9 +16,74 @@ namespace AerolineaFrba.Contenido
         private GD2C2015DataSet.AeronavesRow aeronaveRow;
 
         private int id;
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+
+            set
+            {
+                id = value;
+            }
+        }
+
         private bool activo;
+        public bool Activo
+        {
+            get
+            {
+                return activo;
+            }
+
+            set
+            {
+                activo = value;
+            }
+        }
+
+        private int tipoServicio;
+        public int TipoServicio
+        {
+            get
+            {
+                return tipoServicio;
+            }
+
+            set
+            {
+                tipoServicio = value;
+            }
+        }
+
         private string fabricante;
+        public string Fabricante
+        {
+            get
+            {
+                return fabricante;
+            }
+            set
+            {
+                fabricante = value;
+            }
+
+        }
+
         private decimal kg_disponibles;
+        public decimal Kg_disponibles
+        {
+            get
+            {
+                return kg_disponibles;
+            }
+            set
+            {
+                kg_disponibles = value;
+            }
+
+        }
 
         private string matricula;
         public string Matricula
@@ -34,17 +99,30 @@ namespace AerolineaFrba.Contenido
 
         }
 
-
         private string modelo;
-        public int Id
+        public string Modelo
         {
             get
             {
-                return id;
+                return modelo;
             }
             set
             {
-                id = value;
+                modelo = value;
+            }
+
+        }
+
+        private DateTime fechaAlta;
+        public DateTime FechaAlta
+        {
+            get
+            {
+                return fechaAlta;
+            }
+            set
+            {
+                fechaAlta = value;
             }
 
         }
