@@ -2155,3 +2155,51 @@ UPDATE       MILANESA.Pasajes
 SET                pas_activo = 'false', devolucion_id = @devolucion
 WHERE        (pas_id = @pasaje_id) and pas_activo = 1
 GO
+
+CREATE PROCEDURE [MILANESA].[rutasRepetidas]
+AS
+	SET NOCOUNT ON;
+	select 
+	ru.rut_id,
+	ru.rut_codigo,
+	ru.ciudad_origen_id,
+	co.ciu_descripcion as ciudad_origen,
+	ru.ciudad_destino_id,
+	cd.ciu_descripcion as ciudad_destino,
+	((select max(rut_codigo) FROM MILANESA.Rutas rut)+ROW_NUMBER() OVER(ORDER BY ru.rut_codigo DESC)) as codigo_nuevo 
+	FROM MILANESA.Rutas ru
+	JOIN [MILANESA].[Ciudades] co on co.ciu_id = ciudad_origen_id
+	JOIN [MILANESA].[Ciudades] cd on cd.ciu_id = ciudad_destino_id
+	where ru.rut_id in(SELECT max(ru.rut_id)--ru.rut_codigo
+							FROM MILANESA.Rutas ru
+							group by 
+								ru.rut_codigo
+							having count(*) > 1)
+
+GO
+
+CREATE PROCEDURE [MILANESA].[rutasRepetidasUpdate]
+AS
+	SET NOCOUNT ON;
+	DECLARE @rutId int, @rutCodigo numeric(18,0)
+	DECLARE rutasRepetidas CURSOR 
+	FOR 
+	Select ru.rut_id,((select max(rut_codigo) FROM MILANESA.Rutas rut)+ROW_NUMBER() OVER(ORDER BY ru.rut_codigo DESC)) as codigo_nuevo 
+	FROM MILANESA.Rutas ru	
+	where ru.rut_id in(SELECT max(ru.rut_id)
+							FROM MILANESA.Rutas ru
+							group by 
+								ru.rut_codigo
+							having count(*) > 1)
+	OPEN rutasRepetidas
+	FETCH next from rutasRepetidas INTO @rutId, @rutCodigo;
+	WHILE (@@FETCH_STATUS = 0)
+		BEGIN	
+			UPDATE MILANESA.Rutas 
+			SET rut_codigo= @rutCodigo
+			WHERE rut_id= @rutId;
+			FETCH next from rutasRepetidas INTO @rutId, @rutCodigo;
+		END -- Fin del bucle WHILE	
+	CLOSE rutasRepetidas
+	DEALLOCATE rutasRepetidas
+	GO
