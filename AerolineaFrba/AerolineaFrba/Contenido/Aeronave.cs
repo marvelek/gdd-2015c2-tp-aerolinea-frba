@@ -127,6 +127,34 @@ namespace AerolineaFrba.Contenido
 
         }
 
+        private int butacasPasillo;
+        public int ButacasPasillo
+        {
+            get
+            {
+                return butacasPasillo;
+            }
+
+            set
+            {
+                butacasPasillo = value;
+            }
+        }
+
+        private int butacasVentanilla;
+        public int ButacasVentanilla
+        {
+            get
+            {
+                return butacasVentanilla;
+            }
+
+            set
+            {
+                butacasVentanilla = value;
+            }
+        }
+
         public GD2C2015DataSet.AeronavesDataTable buscarAeronavesDeReemplazo(int aerId, DateTime fechaHasta)
         {
             return this.aeronavesTableAdapter.GetDataByReemplazo(aerId, fechaHasta);
@@ -146,11 +174,11 @@ namespace AerolineaFrba.Contenido
                     aeronaveRow = result.First();
                     aer = new Aeronave();
                     aer.Id = aeronaveRow.aer_id;
-                    aer.activo = aeronaveRow.aer_activo;
-                    aer.fabricante = aeronaveRow.aer_fabricante;
-                    aer.kg_disponibles = aeronaveRow.aer_kg_disponibles;
-                    aer.matricula = aeronaveRow.aer_matricula;
-                    aer.modelo = aeronaveRow.aer_modelo;
+                    aer.Activo = aeronaveRow.aer_activo;
+                    aer.Fabricante = aeronaveRow.aer_fabricante;
+                    aer.Kg_disponibles = aeronaveRow.aer_kg_disponibles;
+                    aer.Matricula = aeronaveRow.aer_matricula;
+                    aer.Modelo = aeronaveRow.aer_modelo;
 
 
                     return aer;

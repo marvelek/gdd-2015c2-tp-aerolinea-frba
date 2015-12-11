@@ -29,23 +29,42 @@ namespace AerolineaFrba.Abm_Aeronave
             }
             this.ComboTipoServicio.Refresh();
 
-            }
+        }
 
         public AltaAeronave(Aeronave aeronave)
         {
+            InitializeComponent();
+            this.tipos_ServicioTableAdapter.Fill(this.gD2C2015DataSet.Tipos_Servicio);
+            List<Tipo_Servicio> tipos_servicios = Tipo_Servicio.getTipos_Servicio();
+            foreach (Tipo_Servicio f in tipos_servicios)
+            {
+                this.ComboTipoServicio.Items.Insert(f.Id - 1, f.Descripcion);
+            }
+            this.ComboTipoServicio.Refresh();
+
             this.aeronave = aeronave;
             this.matriculaText.Text = aeronave.Matricula;
             this.modeloText.Text = aeronave.Modelo;
             this.FabricateTextBox.Text = aeronave.Fabricante;
-            this.ComboTipoServicio.SelectedIndex = aeronave.TipoServicio;
+            this.ComboTipoServicio.SelectedIndex = aeronave.TipoServicio - 1;
             this.kgEncomientasText.Text = Convert.ToString(aeronave.Kg_disponibles);
             this.dateTimePickerAlta.Value = aeronave.FechaAlta;
 
-            // ACA FALTA:
-            // conseguir las butacas pasillo y ventanilla para mostrar con un select
-            // inhabilitar los campos que no se modifican (Fecha alta, tipo de servicio)
-            // y cambiar al momento de guardar con un if, 
-            // despues de que si es valido, fijarse si this.aeronave != null (entonces es una modificacion y hacer lo que corresponda)
+            // consigue las butacas pasillo y ventanilla para mostrar
+            this.butacasTableAdapter.Fill(this.dataSet.Butacas);
+            GD2C2015DataSet.ButacasRow[] dataPasillo = (GD2C2015DataSet.ButacasRow[])this.dataSet.Butacas.Select("aeronave_id='"+ this.aeronave.Id + "' AND but_tipo='Pasillo' AND but_activo=1");
+            int cantPasillo = dataPasillo.Length;
+            this.ButacasPasilloText.Text = Convert.ToString(cantPasillo);
+            this.aeronave.ButacasPasillo = cantPasillo;
+            GD2C2015DataSet.ButacasRow[] dataVentanilla = (GD2C2015DataSet.ButacasRow[])this.dataSet.Butacas.Select("aeronave_id='" + this.aeronave.Id + "' AND but_tipo='Ventanilla' AND but_activo=1");
+            int cantVentanilla = dataPasillo.Length;
+            this.ButacasVentanillaText.Text = Convert.ToString(cantVentanilla);
+            this.aeronave.ButacasVentanilla = cantVentanilla;
+            
+            // inhabilita los campos que no se modifican (Fecha alta y tipo de servicio)
+            this.dateTimePickerAlta.Enabled = false;
+            this.ComboTipoServicio.Enabled = false;
+
         }
 
 
@@ -63,91 +82,125 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void buttonGuardar_Click(object sender, EventArgs e)
         {
-            validarCamposYCrearAeronave();
-            String.Format("{0:yyyyMMdd HH:mm:ss}", this.dateTimePickerAlta.Value);
-        }
-
-        private void validarCamposYCrearAeronave()
-        {
-
-            Double kgEncomiendas = 0;
-            Int32 butacasVentanilla = 0;
-            Int32 butacasPasillo = 0;
-            Int32 tipoServicio = 0;
-            String errores = "";
-
-            if (this.kgEncomientasText.Text != "") {
-                kgEncomiendas = Double.Parse(this.kgEncomientasText.Text);
-            } else {
-                errores = "Kg Encomiendas. ";
-            }
-
-            if (this.ButacasPasilloText.Text != "") {
-                butacasPasillo = Int32.Parse(this.ButacasPasilloText.Text);
-            }
-            else { errores = errores + "Butacas Pasillo. "; }
-
-            if (this.ButacasVentanillaText.Text != "")
+            if (this.valido())
             {
-                butacasVentanilla = Int32.Parse(this.ButacasVentanillaText.Text);
-            }
-            else { errores = errores + "Butacas Ventanilla. "; }
-            
-            if (this.ComboTipoServicio.SelectedIndex == -1)
-            {
-                errores = errores + "Tipo de Servicio. ";
+                // despues de que si es valido, comprueba si this.aeronave != null (entonces es una modificacion y hacer lo que corresponda)
+                if (this.aeronave != null)
+                {
+                    Double kgEncomiendas = Double.Parse(this.kgEncomientasText.Text);
+                    Int32 butacasVentanilla = Int32.Parse(this.ButacasVentanillaText.Text);
+                    Int32 butacasPasillo = Int32.Parse(this.ButacasPasilloText.Text);
+                    if (Convert.ToDecimal(kgEncomiendas) < this.aeronave.Kg_disponibles || butacasVentanilla < this.aeronave.ButacasVentanilla || butacasPasillo < this.aeronave.ButacasPasillo)
+                    {
+                        MessageBox.Show("Solo es posible aumentar los Kg disponibles y las cantidades de las butacas.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    this.modificarAeronave();
+                }
+                else
+                {
+                    if (matriculaExistente(this.matriculaText.Text))
+                    {
+                        MessageBox.Show("La matricula ya existe o es inválida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    this.crearAeronave();
+                    String.Format("{0:yyyyMMdd HH:mm:ss}", this.dateTimePickerAlta.Value);
+                }
             }
             else
             {
-                tipoServicio = (Int32)this.ComboTipoServicio.SelectedIndex+1;
-                if (tipoServicio < 0)
-                {
-                    errores = errores + "Tipo de Servicio.2 ";
-                }
+                return;
             }
-            
+        }
+
+        private void modificarAeronave()
+        {
+            Double kgEncomiendas = Double.Parse(this.kgEncomientasText.Text);
+            Int32 butacasVentanilla = Int32.Parse(this.ButacasVentanillaText.Text);
+            Int32 butacasPasillo = Int32.Parse(this.ButacasPasilloText.Text);
+            Int32 tipoServicio = (Int32)this.ComboTipoServicio.SelectedIndex + 1;
             String matricula = this.matriculaText.Text;
-            if (matricula == "") {
+            String modelo = this.modeloText.Text;
+            String fabricante = this.FabricateTextBox.Text;
+
+            // ACA FALTA el UPDATE de las aeronaves y las butacas
+
+
+        }
+
+        private void crearAeronave()
+        {
+            Double kgEncomiendas = Double.Parse(this.kgEncomientasText.Text);
+            Int32 butacasVentanilla = Int32.Parse(this.ButacasVentanillaText.Text);
+            Int32 butacasPasillo = Int32.Parse(this.ButacasPasilloText.Text);
+            Int32 tipoServicio = (Int32)this.ComboTipoServicio.SelectedIndex + 1;
+            String matricula = this.matriculaText.Text;
+            String modelo = this.modeloText.Text;
+            String fabricante = this.FabricateTextBox.Text;
+
+            aeronavesTableAdapter.AeronavesInsert(tipoServicio, matricula, modelo, Convert.ToDecimal(kgEncomiendas), fabricante);
+
+            Aeronave aer = new Aeronave();
+            aer = aer.buscarByMatricula(matricula);
+            if (aer != null)
+            {
+
+                crearButacas(aer.Id, butacasPasillo, butacasVentanilla);
+                MessageBox.Show("La Aeronave se guardo exitosamente");
+                limpiarCampos();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Error al guardar la Aeronave.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool valido()
+        {
+            String errores = "";
+
+            if (this.kgEncomientasText.Text == "")
+            {
+                errores = "Kg Encomiendas. ";
+            }
+
+            if (this.ButacasPasilloText.Text == "")
+            { 
+                errores = errores + "Butacas Pasillo. "; 
+            }
+
+            if (this.ButacasVentanillaText.Text == "")
+            { 
+                errores = errores + "Butacas Ventanilla. "; 
+            }
+
+            if (this.ComboTipoServicio.SelectedIndex < 0)
+            {
+                errores = errores + "Tipo de Servicio. ";
+            }
+
+            if (this.matriculaText.Text == "")
+            {
                 errores = errores + "Matricula. ";
             }
-            String modelo = this.modeloText.Text;
-            if (modelo == "")
+            
+            if (this.modeloText.Text == "")
             {
                 errores = errores + "Modelo. ";
             }
-            String fabricante = this.FabricateTextBox.Text;
-            if (fabricante == "")
+            
+            if (this.FabricateTextBox.Text == "")
             {
                 errores = errores + "Fabricante. ";
             }
             if (errores != "")
             {
-                MessageBox.Show("Debe completar los siguientes campos: "+errores, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe completar los siguientes campos: " + errores, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
-            else if (matriculaExistente(matricula))
-            {
-                MessageBox.Show("La matricula ya existe o es inválida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else {
-
-                aeronavesTableAdapter.AeronavesInsert(tipoServicio, matricula, modelo, Convert.ToDecimal(kgEncomiendas), fabricante);
-
-                Aeronave aer = new Aeronave();
-                aer = aer.buscarByMatricula(matricula);
-                if (aer != null)
-                {
-                   
-                   crearButacas(aer.Id, butacasPasillo, butacasVentanilla);
-                   MessageBox.Show("La Aeronave se guardo exitosamente");
-                   limpiarCampos();
-                   this.Close();
-                }
-                else {
-                    MessageBox.Show("Error al guardar la Aeronave.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-             }
-
+            return true;
         }
 
         private void crearButacas(Int32 idAeronave, Int32 butacasPasillo, Int32 butacasVentana) {
