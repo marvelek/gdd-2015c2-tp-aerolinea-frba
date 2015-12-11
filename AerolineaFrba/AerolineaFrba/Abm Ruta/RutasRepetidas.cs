@@ -26,7 +26,18 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.rutasRepetidasTableAdapter.rutasRepetidasUpdate();
+            try
+            {
+                this.rutasRepetidasTableAdapter.rutasRepetidasUpdate();
+                MessageBox.Show("Los códigos de ruta fueron actualizados correctamente\n");
+                this.Close();
+            }
+            catch (System.Exception)
+            {
+                MessageBox.Show("Los códigos de ruta no pudieron ser actualizados correctamente.\nSi el error persiste póngase en contacto con el administrador\n");
+                return;
+            }
+                
             return;
         }
 

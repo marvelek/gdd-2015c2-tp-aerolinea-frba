@@ -45,8 +45,7 @@ namespace AerolineaFrba.Abm_Ruta
             if (ruta != null)
             {
                 this.ruta = ruta;
-                this.activo.Checked = ruta.Activo;
-                this.codigo.Text = ruta.Codigo.ToString();                              
+                this.activo.Checked = ruta.Activo;                        
                 this.precioKg.Text = ruta.PrecioKg.ToString();
                 this.precioBase.Text = ruta.PrecioBase.ToString();                            
                 this.ciudadOrigen.SelectedValue = ruta.CiudadOrigen;
@@ -100,14 +99,23 @@ namespace AerolineaFrba.Abm_Ruta
                     if (ruta != null)
                     {
                         // update
-                        this.rutasTableAdapter.rutaModificar(Convert.ToInt32(this.ciudadDestino.SelectedValue), Convert.ToInt32(this.ciudadOrigen.SelectedValue), Convert.ToDecimal(this.codigo.Text), Convert.ToDecimal(this.precioKg.Text), Convert.ToDecimal(this.precioBase.Text), Convert.ToBoolean(this.activo.Checked), this.ruta.Id);
+                        this.rutasTableAdapter.rutaModificar(Convert.ToInt32(this.ciudadDestino.SelectedValue), Convert.ToInt32(this.ciudadOrigen.SelectedValue), Convert.ToDecimal(this.precioKg.Text), Convert.ToDecimal(this.precioBase.Text), Convert.ToBoolean(this.activo.Checked), this.ruta.Id);
                         this.tipos_servicio_RutasTableAdapter.tipos_Servicio_RutasBorrar(this.ruta.Id);
                     }
                     else
                     {
                         // insert
+                        rutasTableAdapter.Fill(gD2C2015DataSet.Rutas);
+                        GD2C2015DataSet.RutasRow[] rows = (GD2C2015DataSet.RutasRow[]) gD2C2015DataSet.Rutas.Select("ciudad_origen_id='" + this.ciudadOrigen.SelectedValue + "' AND ciudad_destino_id='" + this.ciudadDestino.SelectedValue + "'");
+
+                        if (rows.Length > 0)
+                        {
+                            MessageBox.Show("Ya exista una ruta con esa ciudad de origen y destino\n");
+                            return;
+                        }
+
                         this.ruta = new Ruta();
-                        this.ruta.Id = Convert.ToInt32(this.rutasTableAdapter.rutaInsertar(Convert.ToInt32(this.ciudadOrigen.SelectedValue), Convert.ToInt32(this.ciudadDestino.SelectedValue), Convert.ToDecimal(this.codigo.Text), Convert.ToDecimal(this.precioKg.Text), Convert.ToDecimal(this.precioBase.Text)));
+                        this.ruta.Id = Convert.ToInt32(this.rutasTableAdapter.rutaInsertar(Convert.ToInt32(this.ciudadOrigen.SelectedValue), Convert.ToInt32(this.ciudadDestino.SelectedValue), Convert.ToDecimal(this.precioKg.Text), Convert.ToDecimal(this.precioBase.Text)));
                     }
 
                     foreach (object itemChecked in this.checkedListBox1.CheckedItems)
@@ -122,10 +130,12 @@ namespace AerolineaFrba.Abm_Ruta
                     this.tipos_servicio_RutasTableAdapter.Fill(this.dataSet.Tipos_Servicio_Rutas);
                     transaccion.Commit();
                 }
-                catch (System.Exception)
+                catch (System.Exception ex)
                 {
                     transaccion.Rollback();
+                    MessageBox.Show(ex.Message);
                     MessageBox.Show("Ha ocurrido un error al intentar guardar la ruta.\nSi el problema persiste póngase en contacto con el administrador.");
+                    ruta = null;
                     return;
                 }
                 finally
@@ -142,10 +152,6 @@ namespace AerolineaFrba.Abm_Ruta
             Utiles validador = new Utiles();
             string error = null;
 
-            if (this.codigo.Text == "")
-            {
-                error = "El código de ruta no pueder ser nulo.\n";
-            }
             if (this.checkedListBox1.CheckedItems.Count < 1)
             {
                 error = error + "Debe seleccionar por lo menos un tipo de servicio.\n";
@@ -159,6 +165,11 @@ namespace AerolineaFrba.Abm_Ruta
             if (this.ciudadDestino.SelectedValue.ToString() == "")
             {
                 error = error + "Debe seleccionar una ciudad de destino.\n";
+            }
+
+            if (this.ciudadDestino.SelectedValue.Equals(this.ciudadOrigen.SelectedValue))
+            {
+                error = error + "La ciudad de destino debe ser diferente a la de origen.\n";
             }
 
             if (this.precioKg.Text == "")

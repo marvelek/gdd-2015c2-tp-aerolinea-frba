@@ -116,6 +116,9 @@ BEGIN
 	DROP PROCEDURE MILANESA.paqueteCancelacion
 	DROP PROCEDURE MILANESA.pasajeCancelacion
 	DROP PROCEDURE [MILANESA].[aeronavesDisponiblesEnFechas]
+	DROP PROCEDURE MILANESA.clienteDisponibleParaVuelo
+	DROP PROCEDURE MILANESA.rutasRepetidas
+	DROP PROCEDURE MILANESA.rutasRepetidasUpdate
 END
 
 /* Drop Schema*/

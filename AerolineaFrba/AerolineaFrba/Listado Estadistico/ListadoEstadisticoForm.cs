@@ -32,8 +32,6 @@ namespace AerolineaFrba.Listado_Estadistico
                         this.dataGridView3.Visible = false;
                         this.dataGridView2.Visible = false;
                         this.dataGridView1.Visible = true;
-                        this.año.Enabled = true;
-                        this.groupBox2.Enabled = true;
                         break;                    
                 case "Top 5 de los destinos con aeronaves más vacías.":                    
                         this.dataGridView5.Visible = false;
@@ -41,8 +39,6 @@ namespace AerolineaFrba.Listado_Estadistico
                         this.dataGridView3.Visible = true;
                         this.dataGridView2.Visible = false;
                         this.dataGridView1.Visible = false;
-                        this.año.Enabled = true;
-                        this.groupBox2.Enabled = true;
                         break;
                 case "Top 5 de los Clientes con más puntos acumulados a la fecha.":                    
                         this.dataGridView5.Visible = false;
@@ -50,8 +46,6 @@ namespace AerolineaFrba.Listado_Estadistico
                         this.dataGridView3.Visible = false;
                         this.dataGridView2.Visible = false;
                         this.dataGridView1.Visible = false;
-                        this.año.Enabled = false;
-                        this.groupBox2.Enabled = false;
                         break;
                 case "Top 5 de los destinos con pasajes cancelados.":                    
                         this.dataGridView5.Visible = false;
@@ -59,8 +53,6 @@ namespace AerolineaFrba.Listado_Estadistico
                         this.dataGridView3.Visible = false;
                         this.dataGridView2.Visible = true;
                         this.dataGridView1.Visible = false;
-                        this.año.Enabled = true;
-                        this.groupBox2.Enabled = true;
                         break;
                 case "Top 5 de las aeronaves con mayor cantidad de días fuera de servicio.":                    
                       this.dataGridView5.Visible = true;
@@ -68,8 +60,6 @@ namespace AerolineaFrba.Listado_Estadistico
                       this.dataGridView3.Visible = false;
                       this.dataGridView2.Visible = false;
                       this.dataGridView1.Visible = false;
-                      this.año.Enabled = true;
-                      this.groupBox2.Enabled = true;    
                       break;
                 default:                    
                         this.dataGridView5.Visible = false;
@@ -77,8 +67,6 @@ namespace AerolineaFrba.Listado_Estadistico
                         this.dataGridView3.Visible = false;
                         this.dataGridView2.Visible = false;
                         this.dataGridView1.Visible = true;
-                        this.año.Enabled = true;
-                        this.groupBox2.Enabled = true;
                         break;
 
             }
@@ -123,7 +111,7 @@ namespace AerolineaFrba.Listado_Estadistico
                         this.estadisticaDestinosButacasTableAdapter.Fill(this.gD2C2015DataSet.estadisticaDestinosButacas, Convert.ToInt32(this.año.Text), this.mes1, this.mes2);                        
                         break;
                     case "Top 5 de los Clientes con más puntos acumulados a la fecha.":
-                        this.estadisticaClientesMillasTableAdapter.Fill(this.gD2C2015DataSet.estadisticaClientesMillas);                        
+                        this.estadisticaClientesMillasTableAdapter.Fill(this.gD2C2015DataSet.estadisticaClientesMillas, Convert.ToInt32(this.año.Text), this.mes1, this.mes2);                        
                         break;
                     case "Top 5 de los destinos con pasajes cancelados.":
                         this.estadisticaDestinosCanceladosTableAdapter.Fill(this.gD2C2015DataSet.estadisticaDestinosCancelados, Convert.ToInt32(this.año.Text), this.mes1, this.mes2);                        
@@ -150,21 +138,10 @@ namespace AerolineaFrba.Listado_Estadistico
             {
                 error = "Debe seleccionar un listado para consultar.\n";
             }            
-            //if (Convert.ToInt32(this.año.Text) > Convert.ToInt32(DateTime.Today.Year))
-            //{
-             //   error = error + "El año no puede ser mayor al día de la fecha.\n";
-            //}
-
-            if (Convert.ToInt32(this.año.Text) < (Convert.ToInt32(DateTime.Today.Year) - 10))
+            if (!validador.IsNumber(this.año.Text) || Convert.ToInt32(this.año.Text) < (Convert.ToInt32(DateTime.Today.Year) - 10))
             {
-                error = error + "El año ingresado es inválido, no puede ser mayor a 10 años.\n";
-            }
-
-            if ((Convert.ToInt32(this.año.Text) == Convert.ToInt32(DateTime.Today.Year)) && (Convert.ToInt32(this.mes1) > DateTime.Today.Month))
-            {
-                error = error + "El semestre no puede ser mayor al día de la fecha.\n";
-            }
-      
+                error = error + "El año ingresado es inválido, debe tener sólo números y no puede ser mayor a 10 años.\n";
+            }      
             if (error != null)
             {
                 MessageBox.Show(error);
@@ -175,8 +152,7 @@ namespace AerolineaFrba.Listado_Estadistico
 
         private void ListadoEstadisticoForm_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.estadisticaClientesMillas' Puede moverla o quitarla según sea necesario.
-            this.estadisticaClientesMillasTableAdapter.Fill(this.gD2C2015DataSet.estadisticaClientesMillas);
+                       
 
         }
     }

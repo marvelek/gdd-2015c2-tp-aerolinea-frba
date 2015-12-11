@@ -947,12 +947,16 @@ CREATE PROCEDURE [MILANESA].[rutaInsertar]
 (
 	@ciudad_origen_id int,
 	@ciudad_destino_id int,
-	@rut_codigo numeric(18, 0),
 	@rut_precio_base_kg numeric(18, 2),
 	@rut_precio_base_pasaje numeric(18, 2)
 )
 AS
 	SET NOCOUNT OFF;
+
+DECLARE 	@rut_codigo numeric(18, 0)
+
+SELECT @rut_codigo = max(rut_codigo) + 1 FROM MILANESA.Rutas
+
 INSERT INTO [MILANESA].[Rutas] (ciudad_origen_id, ciudad_destino_id, rut_codigo, rut_precio_base_kg, rut_precio_base_pasaje, rut_activo) 
 VALUES (@ciudad_origen_id, @ciudad_destino_id, @rut_codigo, @rut_precio_base_kg, @rut_precio_base_pasaje, 'true')
 
@@ -963,7 +967,6 @@ CREATE PROCEDURE [MILANESA].[rutaModificar]
 (
 	@ciudad_destino_id int,
 	@ciudad_origen_id int,	
-	@rut_codigo numeric(18, 0),
 	@rut_precio_base_kg numeric(18, 2),
 	@rut_precio_base_pasaje numeric(18, 2),
 	@rut_activo bit,
@@ -971,7 +974,7 @@ CREATE PROCEDURE [MILANESA].[rutaModificar]
 )
 AS
 	SET NOCOUNT OFF;
-UPDATE [MILANESA].[Rutas] SET [ciudad_origen_id] = @ciudad_origen_id, [ciudad_destino_id] = @ciudad_destino_id, [rut_codigo] = @rut_codigo, [rut_precio_base_kg] = @rut_precio_base_kg, [rut_precio_base_pasaje] = @rut_precio_base_pasaje, [rut_activo] = @rut_activo WHERE (([rut_id] = @Original_rut_id))
+UPDATE [MILANESA].[Rutas] SET [ciudad_origen_id] = @ciudad_origen_id, [ciudad_destino_id] = @ciudad_destino_id, [rut_precio_base_kg] = @rut_precio_base_kg, [rut_precio_base_pasaje] = @rut_precio_base_pasaje, [rut_activo] = @rut_activo WHERE (([rut_id] = @Original_rut_id))
 GO
 
 CREATE PROCEDURE [MILANESA].[tipo_Servicio_RutaInsertar]
@@ -996,6 +999,36 @@ GO
 
 
 -- PROCEDURES DE VUELOS --
+
+CREATE PROCEDURE [MILANESA].[clienteDisponibleParaVuelo]
+(
+	@clienteId int,
+	@vueloId int
+)
+AS
+	SET NOCOUNT OFF;
+
+SELECT
+	c.cli_id
+FROM
+	MILANESA.Clientes c
+WHERE
+	c.cli_activo = 1 AND
+	c.cli_id = @clienteId AND
+	NOT EXISTS (
+				SELECT 1 
+				FROM 
+					MILANESA.Pasajes p
+					join MILANESA.Ventas v on p.venta_id = v.ven_id AND v.ven_activo = 1
+					join MILANESA.Vuelos vu on v.vuelo_id = vu.vue_id AND vu.vue_activo = 1,
+					MILANESA.Vuelos vu2
+				WHERE p.pasajero_id = c.cli_id AND
+				(vu2.vue_fecha_salida BETWEEN vu.vue_fecha_salida and vu.vue_fecha_llegada_estimada OR
+				vu2.vue_fecha_llegada_estimada BETWEEN vu.vue_fecha_salida and vu.vue_fecha_llegada_estimada) AND
+				vu2.vue_activo = 1 AND
+				vu2.vue_id = @vueloId)
+
+GO
 
 CREATE PROCEDURE [MILANESA].[vuelos_disponibles]
 (
@@ -1293,6 +1326,11 @@ AS
 GO
 
 CREATE PROCEDURE [MILANESA].[estadisticaClientesMillas]
+(
+	@año int,
+	@mes1 int,
+	@mes2 int
+)
 AS
 	SET NOCOUNT ON;
 	SELECT TOP 5
@@ -1306,7 +1344,8 @@ AS
 		isnull(sum(mi.mil_cantidad-mi.mil_canjeadas),0) as Puntos
 	FROM MILANESA.Clientes cl
 	JOIN MILANESA.Millas mi on  mi.cliente_id = cl.cli_id
-	WHERE DATEDIFF(day, SYSDATETIME(), mi.mil_fecha_acreditacion) < 365
+	WHERE YEAR(mi.mil_fecha_acreditacion) = @año and MONTH(mi.mil_fecha_acreditacion) between @mes1 and @mes2 AND
+	DATEDIFF(day, SYSDATETIME(), mi.mil_fecha_acreditacion) < 365
 	group by 
 		cl.cli_id,
 		cl.cli_nombre,

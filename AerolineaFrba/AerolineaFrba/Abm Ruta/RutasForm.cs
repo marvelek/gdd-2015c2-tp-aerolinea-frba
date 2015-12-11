@@ -19,21 +19,21 @@ namespace AerolineaFrba.Abm_Ruta
         public RutasForm()
         {
             InitializeComponent();
-            bool pasa;
-            pasa = ControlarRepetidos();
-            if (pasa == true)
+           
+            if (hayRepetidos())
             {
-                this.modificar.Enabled = false;
-                this.eliminar.Enabled = false;
-                this.carga.Enabled = false;
-            }
-            else
-            {
-                this.modificar.Enabled = true;
-                this.eliminar.Enabled = true;
-                this.carga.Enabled = true;
-            }
+                new RutasRepetidas().ShowDialog();
 
+                GD2C2015DataSet.rutasRepetidasDataTable rutasAfter = rutasRepetidasTableAdapter.GetData();
+
+                if (rutasAfter.Count != 0)
+                {
+                    this.modificar.Enabled = false;
+                    this.eliminar.Enabled = false;
+                    this.carga.Enabled = false;
+                }
+
+            }
         }
 
         private void RutasForm_Load(object sender, EventArgs e)
@@ -54,7 +54,6 @@ namespace AerolineaFrba.Abm_Ruta
         {
             Ruta ruta = new Ruta();
             ruta.Id = Convert.ToInt32(data.Rows[data.CurrentRow.Index].Cells[0].Value);
-            ruta.Codigo = Convert.ToDecimal(data.Rows[data.CurrentRow.Index].Cells[1].Value);
             ruta.CiudadOrigen = Convert.ToInt32(data.Rows[data.CurrentRow.Index].Cells[2].Value);
             ruta.CiudadDestino = Convert.ToInt32(data.Rows[data.CurrentRow.Index].Cells[4].Value);
             ruta.PrecioKg = Convert.ToDecimal(data.Rows[data.CurrentRow.Index].Cells[6].Value);
@@ -303,22 +302,11 @@ namespace AerolineaFrba.Abm_Ruta
 
         }
 
-        private bool ControlarRepetidos()
+        private bool hayRepetidos()
         {
-            if (this.rutasRepetidasTableAdapter.Fill(this.gD2C2015DataSet.rutasRepetidas).ToString() != "")
-            {
-                new RutasRepetidas().ShowDialog();
-                if (this.rutasRepetidasTableAdapter.Fill(this.gD2C2015DataSet.rutasRepetidas).ToString() != "")
-                {
-                    return true;
-                }
-                else { return false; }
+            GD2C2015DataSet.rutasRepetidasDataTable rutasBefore = rutasRepetidasTableAdapter.GetData();
 
-            }
-            else {
-                return false;
-            }
-
+            return rutasBefore.Count != 0;
         }
     }
 }
