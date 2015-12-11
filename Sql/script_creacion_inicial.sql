@@ -996,6 +996,7 @@ GO
 
 
 -- PROCEDURES DE VUELOS --
+
 CREATE PROCEDURE [MILANESA].[vuelos_disponibles]
 (
 	@fecha_salida datetime,
@@ -1319,6 +1320,31 @@ GO
 
 
 -- AERONAVES --LUCAS
+
+CREATE PROCEDURE [MILANESA].[AeronavesDisponiblesEnFechas]
+(
+	@fechaSalida datetime,
+	@fechaLlegada datetime,
+	@aeronaveId int
+)
+AS
+	SET NOCOUNT OFF;
+SELECT
+	a.aer_matricula
+FROM
+	MILANESA.Aeronaves a
+WHERE
+	a.aer_activo = 1 AND
+	a.aer_id = @aeronaveId AND
+	(a.aer_fecha_fuera_servicio IS NULL OR a.aer_fecha_reinicio_servicio < @fechaSalida)  AND
+	NOT EXISTS (SELECT 1 FROM MILANESA.Vuelos v 
+				WHERE a.aer_id = v.aeronave_id AND
+				(@fechaSalida BETWEEN v.vue_fecha_salida and v.vue_fecha_llegada_estimada OR
+				@fechaLlegada BETWEEN v.vue_fecha_salida and v.vue_fecha_llegada_estimada) AND
+				v.vue_activo = 1)
+GROUP by a.aer_matricula
+
+GO
 
 CREATE PROCEDURE [MILANESA].[AeronavesBajaDefinitiva]
 (

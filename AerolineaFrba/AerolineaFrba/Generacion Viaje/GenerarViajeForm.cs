@@ -14,6 +14,7 @@ namespace AerolineaFrba.Generacion_Viaje
     public partial class GenerarViajeForm : Form
     {
         private AeronavesTableAdapter aeronavesTableAdapter = new AeronavesTableAdapter();
+        private AeronavesDisponiblesEnFechasTableAdapter aeronavesDisponiblesEnFechas = new AeronavesDisponiblesEnFechasTableAdapter();
         private CiudadesTableAdapter ciudadesTableAdapter = new CiudadesTableAdapter();
         private RutasTableAdapter rutasTableAdapter = new RutasTableAdapter();
         private Tipos_ServicioTableAdapter tipos_ServicioTableAdapter = new Tipos_ServicioTableAdapter();
@@ -153,15 +154,10 @@ namespace AerolineaFrba.Generacion_Viaje
 
         private bool aeronaveNoDisponible(int aeronaveId)
         {
-            bool result = false;
             DateTime fecha = this.fechaSalida.Value;
             this.vuelosTableAdapter.Fill(this.dataSet.Vuelos);
-            GD2C2015DataSet.VuelosRow[] row = (GD2C2015DataSet.VuelosRow[])this.dataSet.Vuelos.Select("aeronave_id='" + aeronaveId + "' AND vue_fecha_salida='" + fecha + "'");
-            if (row.Length > 0)
-            {
-                result = true;
-            }
-            return result;
+            GD2C2015DataSet.AeronavesDisponiblesEnFechasDataTable aeronaves =  aeronavesDisponiblesEnFechas.GetData(fechaSalida.Value, fechaLlegadaEstimada.Value, aeronaveId);
+            return aeronaves.Rows.Count == 0;
         }
 
         private bool serviciosNoConcuerdan(int aeronaveId,int rutaId)

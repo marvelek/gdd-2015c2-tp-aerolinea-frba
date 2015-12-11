@@ -51,14 +51,32 @@ namespace AerolineaFrba.Abm_Rol
         {
             if (this.valido())
             {
+
                 if (rol != null)
                 {
                     // update
+
+                    this.rolesTableAdapter.Fill(this.dataSet.Roles);
+                    GD2C2015DataSet.RolesRow[] result = (GD2C2015DataSet.RolesRow[])this.dataSet.Roles.Select("rol_descripcion='" + this.descripcion.Text + "' AND rol_id <> " + rol.Id);
+                    if (result.Length > 0)
+                    {
+                        MessageBox.Show("Ya existe otro rol con esa descripción\n");
+                        return;
+                    }
+
                     this.rolesTableAdapter.rolModificar(this.descripcion.Text, this.checkBox1.Checked, this.rol.Id);
                     this.funcionesRolesTableAdapter.funcionesRolesBorrar(this.rol.Id);
                 }
                 else
                 {
+                    this.rolesTableAdapter.Fill(this.dataSet.Roles);
+                    GD2C2015DataSet.RolesRow[] result = (GD2C2015DataSet.RolesRow[])this.dataSet.Roles.Select("rol_descripcion='" + this.descripcion.Text + "'");
+                    if (result.Length > 0)
+                    {
+                        MessageBox.Show("Ya existe el rol con esa descripción\n");
+                        return;
+                    }
+
                     // insert
                     this.rol = new Rol();
                     this.rol.Id = Convert.ToInt32(this.rolesTableAdapter.rolInsertar(this.descripcion.Text));
@@ -91,12 +109,6 @@ namespace AerolineaFrba.Abm_Rol
             if (this.descripcion.Text == "")
             {
                 error = "El nombre del Rol no puede ser nulo\n";
-            }
-            this.rolesTableAdapter.Fill(this.dataSet.Roles);
-            GD2C2015DataSet.RolesRow[] result = (GD2C2015DataSet.RolesRow[])this.dataSet.Roles.Select("rol_descripcion='" + this.descripcion.Text + "'");
-            if (result.Length > 0)
-            {
-                error = error + "Ya existe el rol con esa descripción\n";
             }
             if (this.checkedListBox1.CheckedItems.Count < 1)
             {

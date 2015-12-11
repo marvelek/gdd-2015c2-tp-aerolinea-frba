@@ -115,6 +115,7 @@ BEGIN
 	DROP PROCEDURE MILANESA.devolucionBusca
 	DROP PROCEDURE MILANESA.paqueteCancelacion
 	DROP PROCEDURE MILANESA.pasajeCancelacion
+	DROP PROCEDURE [MILANESA].[aeronavesDisponiblesEnFechas]
 END
 
 /* Drop Schema*/

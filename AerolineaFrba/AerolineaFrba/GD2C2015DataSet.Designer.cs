@@ -88,6 +88,8 @@ namespace AerolineaFrba {
         
         private ButacasDisponiblesDataTable tableButacasDisponibles;
         
+        private AeronavesDisponiblesEnFechasDataTable tableAeronavesDisponiblesEnFechas;
+        
         private global::System.Data.DataRelation relationFK__Aeronaves__tipo___7132C993;
         
         private global::System.Data.DataRelation relationFK__Arribos__aeronav__0DCF0841;
@@ -153,6 +155,10 @@ namespace AerolineaFrba {
         private global::System.Data.DataRelation relationFK__Pasajes__butaca___7584DF69;
         
         private global::System.Data.DataRelation relationButacas_ButacasDisponibles;
+        
+        private global::System.Data.DataRelation relationFK__Paquetes__client__101A70C2;
+        
+        private global::System.Data.DataRelation relationAeronaves_AeronavesDisponiblesEnFechas;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -277,6 +283,9 @@ namespace AerolineaFrba {
                 }
                 if ((ds.Tables["ButacasDisponibles"] != null)) {
                     base.Tables.Add(new ButacasDisponiblesDataTable(ds.Tables["ButacasDisponibles"]));
+                }
+                if ((ds.Tables["AeronavesDisponiblesEnFechas"] != null)) {
+                    base.Tables.Add(new AeronavesDisponiblesEnFechasDataTable(ds.Tables["AeronavesDisponiblesEnFechas"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -618,6 +627,16 @@ namespace AerolineaFrba {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public AeronavesDisponiblesEnFechasDataTable AeronavesDisponiblesEnFechas {
+            get {
+                return this.tableAeronavesDisponiblesEnFechas;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -778,6 +797,9 @@ namespace AerolineaFrba {
                 }
                 if ((ds.Tables["ButacasDisponibles"] != null)) {
                     base.Tables.Add(new ButacasDisponiblesDataTable(ds.Tables["ButacasDisponibles"]));
+                }
+                if ((ds.Tables["AeronavesDisponiblesEnFechas"] != null)) {
+                    base.Tables.Add(new AeronavesDisponiblesEnFechasDataTable(ds.Tables["AeronavesDisponiblesEnFechas"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -1004,6 +1026,12 @@ namespace AerolineaFrba {
                     this.tableButacasDisponibles.InitVars();
                 }
             }
+            this.tableAeronavesDisponiblesEnFechas = ((AeronavesDisponiblesEnFechasDataTable)(base.Tables["AeronavesDisponiblesEnFechas"]));
+            if ((initTable == true)) {
+                if ((this.tableAeronavesDisponiblesEnFechas != null)) {
+                    this.tableAeronavesDisponiblesEnFechas.InitVars();
+                }
+            }
             this.relationFK__Aeronaves__tipo___7132C993 = this.Relations["FK__Aeronaves__tipo___7132C993"];
             this.relationFK__Arribos__aeronav__0DCF0841 = this.Relations["FK__Arribos__aeronav__0DCF0841"];
             this.relationFK__Arribos__ciudad___0EC32C7A = this.Relations["FK__Arribos__ciudad___0EC32C7A"];
@@ -1037,6 +1065,8 @@ namespace AerolineaFrba {
             this.relationFK__Pagos_Tar__tarje__639B3958 = this.Relations["FK__Pagos_Tar__tarje__639B3958"];
             this.relationFK__Pasajes__butaca___7584DF69 = this.Relations["FK__Pasajes__butaca___7584DF69"];
             this.relationButacas_ButacasDisponibles = this.Relations["Butacas_ButacasDisponibles"];
+            this.relationFK__Paquetes__client__101A70C2 = this.Relations["FK__Paquetes__client__101A70C2"];
+            this.relationAeronaves_AeronavesDisponiblesEnFechas = this.Relations["Aeronaves_AeronavesDisponiblesEnFechas"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1111,6 +1141,8 @@ namespace AerolineaFrba {
             base.Tables.Add(this.tableTarjetas_Credito);
             this.tableButacasDisponibles = new ButacasDisponiblesDataTable();
             base.Tables.Add(this.tableButacasDisponibles);
+            this.tableAeronavesDisponiblesEnFechas = new AeronavesDisponiblesEnFechasDataTable();
+            base.Tables.Add(this.tableAeronavesDisponiblesEnFechas);
             this.relationFK__Aeronaves__tipo___7132C993 = new global::System.Data.DataRelation("FK__Aeronaves__tipo___7132C993", new global::System.Data.DataColumn[] {
                         this.tableTipos_Servicio.tip_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableAeronaves.tipo_servicio_idColumn}, false);
@@ -1243,6 +1275,14 @@ namespace AerolineaFrba {
                         this.tableButacas.but_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableButacasDisponibles.but_idColumn}, false);
             this.Relations.Add(this.relationButacas_ButacasDisponibles);
+            this.relationFK__Paquetes__client__101A70C2 = new global::System.Data.DataRelation("FK__Paquetes__client__101A70C2", new global::System.Data.DataColumn[] {
+                        this.tableClientes.cli_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePaquetes.cliente_idColumn}, false);
+            this.Relations.Add(this.relationFK__Paquetes__client__101A70C2);
+            this.relationAeronaves_AeronavesDisponiblesEnFechas = new global::System.Data.DataRelation("Aeronaves_AeronavesDisponiblesEnFechas", new global::System.Data.DataColumn[] {
+                        this.tableAeronaves.aer_matriculaColumn}, new global::System.Data.DataColumn[] {
+                        this.tableAeronavesDisponiblesEnFechas.aer_matriculaColumn}, false);
+            this.Relations.Add(this.relationAeronaves_AeronavesDisponiblesEnFechas);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1439,6 +1479,12 @@ namespace AerolineaFrba {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeAeronavesDisponiblesEnFechas() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -1587,6 +1633,9 @@ namespace AerolineaFrba {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void ButacasDisponiblesRowChangeEventHandler(object sender, ButacasDisponiblesRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void AeronavesDisponiblesEnFechasRowChangeEventHandler(object sender, AeronavesDisponiblesEnFechasRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -4909,6 +4958,8 @@ namespace AerolineaFrba {
             
             private global::System.Data.DataColumn columnpaq_activo;
             
+            private global::System.Data.DataColumn columncliente_id;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public PaquetesDataTable() {
@@ -5000,6 +5051,14 @@ namespace AerolineaFrba {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn cliente_idColumn {
+                get {
+                    return this.columncliente_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -5035,7 +5094,7 @@ namespace AerolineaFrba {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public PaquetesRow AddPaquetesRow(DevolucionesRow parentDevolucionesRowByFK__Paquetes__devolu__07220AB2, VentasRow parentVentasRowByFK__Paquetes__venta___08162EEB, decimal paq_codigo, decimal paq_precio, decimal paq_kg, bool paq_activo) {
+            public PaquetesRow AddPaquetesRow(DevolucionesRow parentDevolucionesRowByFK__Paquetes__devolu__07220AB2, VentasRow parentVentasRowByFK__Paquetes__venta___08162EEB, decimal paq_codigo, decimal paq_precio, decimal paq_kg, bool paq_activo, ClientesRow parentClientesRowByFK__Paquetes__client__101A70C2) {
                 PaquetesRow rowPaquetesRow = ((PaquetesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -5044,12 +5103,16 @@ namespace AerolineaFrba {
                         paq_codigo,
                         paq_precio,
                         paq_kg,
-                        paq_activo};
+                        paq_activo,
+                        null};
                 if ((parentDevolucionesRowByFK__Paquetes__devolu__07220AB2 != null)) {
                     columnValuesArray[1] = parentDevolucionesRowByFK__Paquetes__devolu__07220AB2[0];
                 }
                 if ((parentVentasRowByFK__Paquetes__venta___08162EEB != null)) {
                     columnValuesArray[2] = parentVentasRowByFK__Paquetes__venta___08162EEB[0];
+                }
+                if ((parentClientesRowByFK__Paquetes__client__101A70C2 != null)) {
+                    columnValuesArray[7] = parentClientesRowByFK__Paquetes__client__101A70C2[0];
                 }
                 rowPaquetesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPaquetesRow);
@@ -5087,6 +5150,7 @@ namespace AerolineaFrba {
                 this.columnpaq_precio = base.Columns["paq_precio"];
                 this.columnpaq_kg = base.Columns["paq_kg"];
                 this.columnpaq_activo = base.Columns["paq_activo"];
+                this.columncliente_id = base.Columns["cliente_id"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5106,6 +5170,8 @@ namespace AerolineaFrba {
                 base.Columns.Add(this.columnpaq_kg);
                 this.columnpaq_activo = new global::System.Data.DataColumn("paq_activo", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnpaq_activo);
+                this.columncliente_id = new global::System.Data.DataColumn("cliente_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncliente_id);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnpaq_id}, true));
                 this.columnpaq_id.AutoIncrement = true;
@@ -5119,6 +5185,7 @@ namespace AerolineaFrba {
                 this.columnpaq_precio.AllowDBNull = false;
                 this.columnpaq_kg.AllowDBNull = false;
                 this.columnpaq_activo.AllowDBNull = false;
+                this.columncliente_id.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11948,6 +12015,261 @@ namespace AerolineaFrba {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class AeronavesDisponiblesEnFechasDataTable : global::System.Data.TypedTableBase<AeronavesDisponiblesEnFechasRow> {
+            
+            private global::System.Data.DataColumn columnaer_matricula;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public AeronavesDisponiblesEnFechasDataTable() {
+                this.TableName = "AeronavesDisponiblesEnFechas";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal AeronavesDisponiblesEnFechasDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected AeronavesDisponiblesEnFechasDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn aer_matriculaColumn {
+                get {
+                    return this.columnaer_matricula;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public AeronavesDisponiblesEnFechasRow this[int index] {
+                get {
+                    return ((AeronavesDisponiblesEnFechasRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event AeronavesDisponiblesEnFechasRowChangeEventHandler AeronavesDisponiblesEnFechasRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event AeronavesDisponiblesEnFechasRowChangeEventHandler AeronavesDisponiblesEnFechasRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event AeronavesDisponiblesEnFechasRowChangeEventHandler AeronavesDisponiblesEnFechasRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event AeronavesDisponiblesEnFechasRowChangeEventHandler AeronavesDisponiblesEnFechasRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddAeronavesDisponiblesEnFechasRow(AeronavesDisponiblesEnFechasRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public AeronavesDisponiblesEnFechasRow AddAeronavesDisponiblesEnFechasRow(AeronavesRow parentAeronavesRowByAeronaves_AeronavesDisponiblesEnFechas) {
+                AeronavesDisponiblesEnFechasRow rowAeronavesDisponiblesEnFechasRow = ((AeronavesDisponiblesEnFechasRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null};
+                if ((parentAeronavesRowByAeronaves_AeronavesDisponiblesEnFechas != null)) {
+                    columnValuesArray[0] = parentAeronavesRowByAeronaves_AeronavesDisponiblesEnFechas[2];
+                }
+                rowAeronavesDisponiblesEnFechasRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowAeronavesDisponiblesEnFechasRow);
+                return rowAeronavesDisponiblesEnFechasRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                AeronavesDisponiblesEnFechasDataTable cln = ((AeronavesDisponiblesEnFechasDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new AeronavesDisponiblesEnFechasDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnaer_matricula = base.Columns["aer_matricula"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnaer_matricula = new global::System.Data.DataColumn("aer_matricula", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnaer_matricula);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("AeronavesDisponiblesEnFechasKey1", new global::System.Data.DataColumn[] {
+                                this.columnaer_matricula}, false));
+                this.columnaer_matricula.AllowDBNull = false;
+                this.columnaer_matricula.Unique = true;
+                this.columnaer_matricula.MaxLength = 255;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public AeronavesDisponiblesEnFechasRow NewAeronavesDisponiblesEnFechasRow() {
+                return ((AeronavesDisponiblesEnFechasRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new AeronavesDisponiblesEnFechasRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(AeronavesDisponiblesEnFechasRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.AeronavesDisponiblesEnFechasRowChanged != null)) {
+                    this.AeronavesDisponiblesEnFechasRowChanged(this, new AeronavesDisponiblesEnFechasRowChangeEvent(((AeronavesDisponiblesEnFechasRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.AeronavesDisponiblesEnFechasRowChanging != null)) {
+                    this.AeronavesDisponiblesEnFechasRowChanging(this, new AeronavesDisponiblesEnFechasRowChangeEvent(((AeronavesDisponiblesEnFechasRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.AeronavesDisponiblesEnFechasRowDeleted != null)) {
+                    this.AeronavesDisponiblesEnFechasRowDeleted(this, new AeronavesDisponiblesEnFechasRowChangeEvent(((AeronavesDisponiblesEnFechasRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.AeronavesDisponiblesEnFechasRowDeleting != null)) {
+                    this.AeronavesDisponiblesEnFechasRowDeleting(this, new AeronavesDisponiblesEnFechasRowChangeEvent(((AeronavesDisponiblesEnFechasRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveAeronavesDisponiblesEnFechasRow(AeronavesDisponiblesEnFechasRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                GD2C2015DataSet ds = new GD2C2015DataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "AeronavesDisponiblesEnFechasDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class AeronavesRow : global::System.Data.DataRow {
@@ -12205,6 +12527,17 @@ namespace AerolineaFrba {
                 }
                 else {
                     return ((VuelosRow[])(base.GetChildRows(this.Table.ChildRelations["FK__Vuelos__aeronave__75F77EB0"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public AeronavesDisponiblesEnFechasRow[] GetAeronavesDisponiblesEnFechasRows() {
+                if ((this.Table.ChildRelations["Aeronaves_AeronavesDisponiblesEnFechas"] == null)) {
+                    return new AeronavesDisponiblesEnFechasRow[0];
+                }
+                else {
+                    return ((AeronavesDisponiblesEnFechasRow[])(base.GetChildRows(this.Table.ChildRelations["Aeronaves_AeronavesDisponiblesEnFechas"])));
                 }
             }
         }
@@ -12850,6 +13183,17 @@ namespace AerolineaFrba {
                     return ((CanjesRow[])(base.GetChildRows(this.Table.ChildRelations["FK__Canjes__cliente___45B5D0B6"])));
                 }
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public PaquetesRow[] GetPaquetesRows() {
+                if ((this.Table.ChildRelations["FK__Paquetes__client__101A70C2"] == null)) {
+                    return new PaquetesRow[0];
+                }
+                else {
+                    return ((PaquetesRow[])(base.GetChildRows(this.Table.ChildRelations["FK__Paquetes__client__101A70C2"])));
+                }
+            }
         }
         
         /// <summary>
@@ -13253,6 +13597,17 @@ namespace AerolineaFrba {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int cliente_id {
+                get {
+                    return ((int)(this[this.tablePaquetes.cliente_idColumn]));
+                }
+                set {
+                    this[this.tablePaquetes.cliente_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DevolucionesRow DevolucionesRow {
                 get {
                     return ((DevolucionesRow)(this.GetParentRow(this.Table.ParentRelations["FK__Paquetes__devolu__07220AB2"])));
@@ -13270,6 +13625,17 @@ namespace AerolineaFrba {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK__Paquetes__venta___08162EEB"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ClientesRow ClientesRow {
+                get {
+                    return ((ClientesRow)(this.GetParentRow(this.Table.ParentRelations["FK__Paquetes__client__101A70C2"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK__Paquetes__client__101A70C2"]);
                 }
             }
             
@@ -15533,6 +15899,43 @@ namespace AerolineaFrba {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class AeronavesDisponiblesEnFechasRow : global::System.Data.DataRow {
+            
+            private AeronavesDisponiblesEnFechasDataTable tableAeronavesDisponiblesEnFechas;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal AeronavesDisponiblesEnFechasRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableAeronavesDisponiblesEnFechas = ((AeronavesDisponiblesEnFechasDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string aer_matricula {
+                get {
+                    return ((string)(this[this.tableAeronavesDisponiblesEnFechas.aer_matriculaColumn]));
+                }
+                set {
+                    this[this.tableAeronavesDisponiblesEnFechas.aer_matriculaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public AeronavesRow AeronavesRow {
+                get {
+                    return ((AeronavesRow)(this.GetParentRow(this.Table.ParentRelations["Aeronaves_AeronavesDisponiblesEnFechas"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["Aeronaves_AeronavesDisponiblesEnFechas"]);
+                }
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -16606,6 +17009,40 @@ namespace AerolineaFrba {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public ButacasDisponiblesRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class AeronavesDisponiblesEnFechasRowChangeEvent : global::System.EventArgs {
+            
+            private AeronavesDisponiblesEnFechasRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public AeronavesDisponiblesEnFechasRowChangeEvent(AeronavesDisponiblesEnFechasRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public AeronavesDisponiblesEnFechasRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -17765,7 +18202,7 @@ SELECT aer_id, tipo_servicio_id, aer_matricula, aer_modelo, aer_kg_disponibles, 
             }
             if ((fechaHasta.HasValue == true)) {
                 command.Parameters[4].Value = ((System.DateTime)(fechaHasta.Value));
-    }
+            }
             else {
                 command.Parameters[4].Value = global::System.DBNull.Value;
             }
@@ -21485,10 +21922,11 @@ SELECT mil_id, cliente_id, mil_cantidad, mil_canjeadas, mil_fecha_acreditacion F
             tableMapping.ColumnMappings.Add("paq_precio", "paq_precio");
             tableMapping.ColumnMappings.Add("paq_kg", "paq_kg");
             tableMapping.ColumnMappings.Add("paq_activo", "paq_activo");
+            tableMapping.ColumnMappings.Add("cliente_id", "cliente_id");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [MILANESA].[Paquetes] WHERE (([paq_id] = @Original_paq_id) AND ((@IsNull_devolucion_id = 1 AND [devolucion_id] IS NULL) OR ([devolucion_id] = @Original_devolucion_id)) AND ([venta_id] = @Original_venta_id) AND ([paq_codigo] = @Original_paq_codigo) AND ([paq_precio] = @Original_paq_precio) AND ([paq_kg] = @Original_paq_kg) AND ([paq_activo] = @Original_paq_activo))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [MILANESA].[Paquetes] WHERE (([paq_id] = @Original_paq_id) AND ((@IsNull_devolucion_id = 1 AND [devolucion_id] IS NULL) OR ([devolucion_id] = @Original_devolucion_id)) AND ([venta_id] = @Original_venta_id) AND ([paq_codigo] = @Original_paq_codigo) AND ([paq_precio] = @Original_paq_precio) AND ([paq_kg] = @Original_paq_kg) AND ([paq_activo] = @Original_paq_activo) AND ([cliente_id] = @Original_cliente_id))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_paq_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "paq_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_devolucion_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "devolucion_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -21498,10 +21936,11 @@ SELECT mil_id, cliente_id, mil_cantidad, mil_canjeadas, mil_fecha_acreditacion F
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_paq_precio", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 2, "paq_precio", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_paq_kg", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "paq_kg", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_paq_activo", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "paq_activo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_cliente_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "cliente_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [MILANESA].[Paquetes] ([devolucion_id], [venta_id], [paq_codigo], [paq_precio], [paq_kg], [paq_activo]) VALUES (@devolucion_id, @venta_id, @paq_codigo, @paq_precio, @paq_kg, @paq_activo);
-SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_activo FROM MILANESA.Paquetes WHERE (paq_id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [MILANESA].[Paquetes] ([devolucion_id], [venta_id], [paq_codigo], [paq_precio], [paq_kg], [paq_activo], [cliente_id]) VALUES (@devolucion_id, @venta_id, @paq_codigo, @paq_precio, @paq_kg, @paq_activo, @cliente_id);
+SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_activo, cliente_id FROM MILANESA.Paquetes WHERE (paq_id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@devolucion_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "devolucion_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@venta_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "venta_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -21509,10 +21948,11 @@ SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_acti
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@paq_precio", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 2, "paq_precio", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@paq_kg", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "paq_kg", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@paq_activo", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "paq_activo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@cliente_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "cliente_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [MILANESA].[Paquetes] SET [devolucion_id] = @devolucion_id, [venta_id] = @venta_id, [paq_codigo] = @paq_codigo, [paq_precio] = @paq_precio, [paq_kg] = @paq_kg, [paq_activo] = @paq_activo WHERE (([paq_id] = @Original_paq_id) AND ((@IsNull_devolucion_id = 1 AND [devolucion_id] IS NULL) OR ([devolucion_id] = @Original_devolucion_id)) AND ([venta_id] = @Original_venta_id) AND ([paq_codigo] = @Original_paq_codigo) AND ([paq_precio] = @Original_paq_precio) AND ([paq_kg] = @Original_paq_kg) AND ([paq_activo] = @Original_paq_activo));
-SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_activo FROM MILANESA.Paquetes WHERE (paq_id = @paq_id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [MILANESA].[Paquetes] SET [devolucion_id] = @devolucion_id, [venta_id] = @venta_id, [paq_codigo] = @paq_codigo, [paq_precio] = @paq_precio, [paq_kg] = @paq_kg, [paq_activo] = @paq_activo, [cliente_id] = @cliente_id WHERE (([paq_id] = @Original_paq_id) AND ((@IsNull_devolucion_id = 1 AND [devolucion_id] IS NULL) OR ([devolucion_id] = @Original_devolucion_id)) AND ([venta_id] = @Original_venta_id) AND ([paq_codigo] = @Original_paq_codigo) AND ([paq_precio] = @Original_paq_precio) AND ([paq_kg] = @Original_paq_kg) AND ([paq_activo] = @Original_paq_activo) AND ([cliente_id] = @Original_cliente_id));
+SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_activo, cliente_id FROM MILANESA.Paquetes WHERE (paq_id = @paq_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@devolucion_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "devolucion_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@venta_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "venta_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -21520,6 +21960,7 @@ SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_acti
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@paq_precio", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 2, "paq_precio", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@paq_kg", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "paq_kg", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@paq_activo", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "paq_activo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@cliente_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "cliente_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_paq_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "paq_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_devolucion_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "devolucion_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_devolucion_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "devolucion_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -21528,6 +21969,7 @@ SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_acti
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_paq_precio", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 2, "paq_precio", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_paq_kg", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 18, 0, "paq_kg", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_paq_activo", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "paq_activo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_cliente_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "cliente_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@paq_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "paq_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -21545,7 +21987,7 @@ SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_acti
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_activ" +
-                "o FROM MILANESA.Paquetes";
+                "o, cliente_id FROM MILANESA.Paquetes";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
@@ -21670,7 +22112,7 @@ SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_acti
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_paq_id, global::System.Nullable<int> Original_devolucion_id, int Original_venta_id, decimal Original_paq_codigo, decimal Original_paq_precio, decimal Original_paq_kg, bool Original_paq_activo) {
+        public virtual int Delete(int Original_paq_id, global::System.Nullable<int> Original_devolucion_id, int Original_venta_id, decimal Original_paq_codigo, decimal Original_paq_precio, decimal Original_paq_kg, bool Original_paq_activo, int Original_cliente_id) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_paq_id));
             if ((Original_devolucion_id.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
@@ -21685,6 +22127,7 @@ SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_acti
             this.Adapter.DeleteCommand.Parameters[5].Value = ((decimal)(Original_paq_precio));
             this.Adapter.DeleteCommand.Parameters[6].Value = ((decimal)(Original_paq_kg));
             this.Adapter.DeleteCommand.Parameters[7].Value = ((bool)(Original_paq_activo));
+            this.Adapter.DeleteCommand.Parameters[8].Value = ((int)(Original_cliente_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -21705,7 +22148,7 @@ SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_acti
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> devolucion_id, int venta_id, decimal paq_codigo, decimal paq_precio, decimal paq_kg, bool paq_activo) {
+        public virtual int Insert(global::System.Nullable<int> devolucion_id, int venta_id, decimal paq_codigo, decimal paq_precio, decimal paq_kg, bool paq_activo, int cliente_id) {
             if ((devolucion_id.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = ((int)(devolucion_id.Value));
             }
@@ -21717,6 +22160,7 @@ SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_acti
             this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(paq_precio));
             this.Adapter.InsertCommand.Parameters[4].Value = ((decimal)(paq_kg));
             this.Adapter.InsertCommand.Parameters[5].Value = ((bool)(paq_activo));
+            this.Adapter.InsertCommand.Parameters[6].Value = ((int)(cliente_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -21737,7 +22181,23 @@ SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_acti
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> devolucion_id, int venta_id, decimal paq_codigo, decimal paq_precio, decimal paq_kg, bool paq_activo, int Original_paq_id, global::System.Nullable<int> Original_devolucion_id, int Original_venta_id, decimal Original_paq_codigo, decimal Original_paq_precio, decimal Original_paq_kg, bool Original_paq_activo, int paq_id) {
+        public virtual int Update(
+                    global::System.Nullable<int> devolucion_id, 
+                    int venta_id, 
+                    decimal paq_codigo, 
+                    decimal paq_precio, 
+                    decimal paq_kg, 
+                    bool paq_activo, 
+                    int cliente_id, 
+                    int Original_paq_id, 
+                    global::System.Nullable<int> Original_devolucion_id, 
+                    int Original_venta_id, 
+                    decimal Original_paq_codigo, 
+                    decimal Original_paq_precio, 
+                    decimal Original_paq_kg, 
+                    bool Original_paq_activo, 
+                    int Original_cliente_id, 
+                    int paq_id) {
             if ((devolucion_id.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(devolucion_id.Value));
             }
@@ -21749,21 +22209,23 @@ SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_acti
             this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(paq_precio));
             this.Adapter.UpdateCommand.Parameters[4].Value = ((decimal)(paq_kg));
             this.Adapter.UpdateCommand.Parameters[5].Value = ((bool)(paq_activo));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_paq_id));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(cliente_id));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_paq_id));
             if ((Original_devolucion_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_devolucion_id.Value));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_devolucion_id.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_venta_id));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((decimal)(Original_paq_codigo));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_paq_precio));
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(Original_paq_kg));
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((bool)(Original_paq_activo));
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(paq_id));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_venta_id));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((decimal)(Original_paq_codigo));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(Original_paq_precio));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_paq_kg));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((bool)(Original_paq_activo));
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_cliente_id));
+            this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(paq_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -21784,8 +22246,8 @@ SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_acti
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> devolucion_id, int venta_id, decimal paq_codigo, decimal paq_precio, decimal paq_kg, bool paq_activo, int Original_paq_id, global::System.Nullable<int> Original_devolucion_id, int Original_venta_id, decimal Original_paq_codigo, decimal Original_paq_precio, decimal Original_paq_kg, bool Original_paq_activo) {
-            return this.Update(devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_activo, Original_paq_id, Original_devolucion_id, Original_venta_id, Original_paq_codigo, Original_paq_precio, Original_paq_kg, Original_paq_activo, Original_paq_id);
+        public virtual int Update(global::System.Nullable<int> devolucion_id, int venta_id, decimal paq_codigo, decimal paq_precio, decimal paq_kg, bool paq_activo, int cliente_id, int Original_paq_id, global::System.Nullable<int> Original_devolucion_id, int Original_venta_id, decimal Original_paq_codigo, decimal Original_paq_precio, decimal Original_paq_kg, bool Original_paq_activo, int Original_cliente_id) {
+            return this.Update(devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_activo, cliente_id, Original_paq_id, Original_devolucion_id, Original_venta_id, Original_paq_codigo, Original_paq_precio, Original_paq_kg, Original_paq_activo, Original_cliente_id, Original_paq_id);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -29700,6 +30162,213 @@ order by but_numero";
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class AeronavesDisponiblesEnFechasTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public AeronavesDisponiblesEnFechasTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "AeronavesDisponiblesEnFechas";
+            tableMapping.ColumnMappings.Add("aer_matricula", "aer_matricula");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::AerolineaFrba.Properties.Settings.Default.DBurl;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "MILANESA.AeronavesDisponiblesEnFechas";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fechaSalida", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 23, 3, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fechaLlegada", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 23, 3, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@aeronaveId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(GD2C2015DataSet.AeronavesDisponiblesEnFechasDataTable dataTable, global::System.Nullable<global::System.DateTime> fechaSalida, global::System.Nullable<global::System.DateTime> fechaLlegada, global::System.Nullable<int> aeronaveId) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((fechaSalida.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(fechaSalida.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((fechaLlegada.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((System.DateTime)(fechaLlegada.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((aeronaveId.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[3].Value = ((int)(aeronaveId.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual GD2C2015DataSet.AeronavesDisponiblesEnFechasDataTable GetData(global::System.Nullable<global::System.DateTime> fechaSalida, global::System.Nullable<global::System.DateTime> fechaLlegada, global::System.Nullable<int> aeronaveId) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((fechaSalida.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(fechaSalida.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((fechaLlegada.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((System.DateTime)(fechaLlegada.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((aeronaveId.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[3].Value = ((int)(aeronaveId.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            GD2C2015DataSet.AeronavesDisponiblesEnFechasDataTable dataTable = new GD2C2015DataSet.AeronavesDisponiblesEnFechasDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class QueriesTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.IDbCommand[] _commandCollection;
@@ -30544,15 +31213,6 @@ order by but_numero";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._aeronavesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Aeronaves.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._aeronavesTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._estados_ArribosTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Estados_Arribos.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -30568,6 +31228,15 @@ order by but_numero";
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._ciudadesTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._aeronavesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Aeronaves.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._aeronavesTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -30598,21 +31267,12 @@ order by but_numero";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._pagos_TarjetaTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Pagos_Tarjeta.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._butacasTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Butacas.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._pagos_TarjetaTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._vuelosTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Vuelos.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._vuelosTableAdapter.Update(updatedRows));
+                    result = (result + this._butacasTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -30625,21 +31285,21 @@ order by but_numero";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._butacasTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Butacas.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._vuelosTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Vuelos.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._butacasTableAdapter.Update(updatedRows));
+                    result = (result + this._vuelosTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._devolucionesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Devoluciones.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._pagos_TarjetaTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Pagos_Tarjeta.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._devolucionesTableAdapter.Update(updatedRows));
+                    result = (result + this._pagos_TarjetaTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -30661,15 +31321,6 @@ order by but_numero";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._funcionesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Funciones.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._funcionesTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._productosTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Productos.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -30679,48 +31330,39 @@ order by but_numero";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._funcionesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Funciones.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._funcionesTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._devolucionesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Devoluciones.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._devolucionesTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._usuariosTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Usuarios.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._usuariosTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._canjesTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Canjes.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._canjesTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._funciones_RolesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Funciones_Roles.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._funciones_RolesTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._millasTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Millas.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._millasTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._paquetesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Paquetes.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._paquetesTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._pasajesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Pasajes.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._pasajesTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -30742,12 +31384,39 @@ order by but_numero";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._usuariosTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Usuarios.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._pasajesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Pasajes.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._usuariosTableAdapter.Update(updatedRows));
+                    result = (result + this._pasajesTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._paquetesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Paquetes.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._paquetesTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._millasTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Millas.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._millasTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._funciones_RolesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Funciones_Roles.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._funciones_RolesTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -30769,14 +31438,6 @@ order by but_numero";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._aeronavesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Aeronaves.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._aeronavesTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._estados_ArribosTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Estados_Arribos.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -30790,6 +31451,14 @@ order by but_numero";
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._ciudadesTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._aeronavesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Aeronaves.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._aeronavesTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -30817,19 +31486,11 @@ order by but_numero";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._pagos_TarjetaTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Pagos_Tarjeta.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._butacasTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Butacas.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._pagos_TarjetaTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._vuelosTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Vuelos.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._vuelosTableAdapter.Update(addedRows));
+                    result = (result + this._butacasTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -30841,19 +31502,19 @@ order by but_numero";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._butacasTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Butacas.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._vuelosTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Vuelos.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._butacasTableAdapter.Update(addedRows));
+                    result = (result + this._vuelosTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._devolucionesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Devoluciones.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._pagos_TarjetaTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Pagos_Tarjeta.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._devolucionesTableAdapter.Update(addedRows));
+                    result = (result + this._pagos_TarjetaTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -30873,14 +31534,6 @@ order by but_numero";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._funcionesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Funciones.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._funcionesTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._productosTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Productos.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -30889,43 +31542,35 @@ order by but_numero";
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._funcionesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Funciones.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._funcionesTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._devolucionesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Devoluciones.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._devolucionesTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._usuariosTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Usuarios.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._usuariosTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._canjesTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Canjes.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._canjesTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._funciones_RolesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Funciones_Roles.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._funciones_RolesTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._millasTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Millas.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._millasTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._paquetesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Paquetes.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._paquetesTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._pasajesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Pasajes.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._pasajesTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -30945,11 +31590,35 @@ order by but_numero";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._usuariosTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Usuarios.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._pasajesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Pasajes.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._usuariosTableAdapter.Update(addedRows));
+                    result = (result + this._pasajesTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._paquetesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Paquetes.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._paquetesTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._millasTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Millas.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._millasTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._funciones_RolesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Funciones_Roles.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._funciones_RolesTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -30963,11 +31632,35 @@ order by but_numero";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateDeletedRows(GD2C2015DataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._usuariosTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Usuarios.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._funciones_RolesTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Funciones_Roles.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._usuariosTableAdapter.Update(deletedRows));
+                    result = (result + this._funciones_RolesTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._millasTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Millas.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._millasTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._paquetesTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Paquetes.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._paquetesTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._pasajesTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Pasajes.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._pasajesTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -30987,38 +31680,6 @@ order by but_numero";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._pasajesTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Pasajes.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._pasajesTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._paquetesTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Paquetes.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._paquetesTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._millasTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Millas.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._millasTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._funciones_RolesTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Funciones_Roles.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._funciones_RolesTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._canjesTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Canjes.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -31027,11 +31688,19 @@ order by but_numero";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._productosTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Productos.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._usuariosTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Usuarios.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._productosTableAdapter.Update(deletedRows));
+                    result = (result + this._usuariosTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._devolucionesTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Devoluciones.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._devolucionesTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -31040,6 +31709,14 @@ order by but_numero";
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._funcionesTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._productosTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Productos.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._productosTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -31059,27 +31736,11 @@ order by but_numero";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._devolucionesTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Devoluciones.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._pagos_TarjetaTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Pagos_Tarjeta.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._devolucionesTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._butacasTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Butacas.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._butacasTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._clientesTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Clientes.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._clientesTableAdapter.Update(deletedRows));
+                    result = (result + this._pagos_TarjetaTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -31091,11 +31752,19 @@ order by but_numero";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._pagos_TarjetaTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Pagos_Tarjeta.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._clientesTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Clientes.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._pagos_TarjetaTableAdapter.Update(deletedRows));
+                    result = (result + this._clientesTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._butacasTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Butacas.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._butacasTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -31123,6 +31792,14 @@ order by but_numero";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._aeronavesTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Aeronaves.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._aeronavesTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._ciudadesTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Ciudades.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -31136,14 +31813,6 @@ order by but_numero";
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._estados_ArribosTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._aeronavesTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Aeronaves.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._aeronavesTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
