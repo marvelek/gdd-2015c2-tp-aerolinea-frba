@@ -241,7 +241,11 @@ namespace AerolineaFrba.Abm_Aeronave
             aeronave.Kg_disponibles = Convert.ToInt32(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[4].Value);
             aeronave.Fabricante = Convert.ToString(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[5].Value);
             aeronave.Activo = Convert.ToBoolean(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[9].Value); ;
-            aeronave.FechaAlta = Convert.ToDateTime(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[10].Value);
+            try
+            {
+                aeronave.FechaAlta = Convert.ToDateTime(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[10].Value);
+            }
+            catch { }
             new AltaAeronave(aeronave).ShowDialog();
             this.Buscar_Click(this, null);
         }

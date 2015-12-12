@@ -14,9 +14,10 @@ namespace AerolineaFrba.Abm_Aeronave
 {
     public partial class AltaAeronave : Form
     {
-
+        private VuelosTableAdapter vuelosTableAdapter = new VuelosTableAdapter();
         GD2C2015DataSet dataSet = new GD2C2015DataSet();
         private Aeronave aeronave = null;
+        private bool tieneVuelosVendidos = false;
 
         public AltaAeronave()
         {
@@ -48,7 +49,11 @@ namespace AerolineaFrba.Abm_Aeronave
             this.FabricateTextBox.Text = aeronave.Fabricante;
             this.ComboTipoServicio.SelectedIndex = aeronave.TipoServicio - 1;
             this.kgEncomientasText.Text = Convert.ToString(aeronave.Kg_disponibles);
-            this.dateTimePickerAlta.Value = aeronave.FechaAlta;
+            try
+            {
+                this.dateTimePickerAlta.Value = aeronave.FechaAlta;
+            }
+            catch { }
 
             // consigue las butacas pasillo y ventanilla para mostrar
             this.butacasTableAdapter.Fill(this.dataSet.Butacas);
@@ -60,11 +65,22 @@ namespace AerolineaFrba.Abm_Aeronave
             int cantVentanilla = dataPasillo.Length;
             this.ButacasVentanillaText.Text = Convert.ToString(cantVentanilla);
             this.aeronave.ButacasVentanilla = cantVentanilla;
-            
+
+            // verifica si tiene vuelos asignados
+            this.vuelosTableAdapter.Fill(this.dataSet.Vuelos);
+            GD2C2015DataSet.VuelosRow[] rows = (GD2C2015DataSet.VuelosRow[])this.dataSet.Vuelos.Select("aeronave_id='" + this.aeronave.Id + "' AND vue_activo=1");
+            if (rows.Length > 0)
+            {
+                this.tieneVuelosVendidos = true;
+            }
+
             // inhabilita los campos que no se modifican (Fecha alta y tipo de servicio)
             this.dateTimePickerAlta.Enabled = false;
-            this.ComboTipoServicio.Enabled = false;
-
+            if (this.tieneVuelosVendidos)
+            {
+                this.ComboTipoServicio.Enabled = false;
+            }
+            this.ComboTipoServicio.Refresh();
         }
 
 
@@ -90,9 +106,9 @@ namespace AerolineaFrba.Abm_Aeronave
                     Double kgEncomiendas = Double.Parse(this.kgEncomientasText.Text);
                     Int32 butacasVentanilla = Int32.Parse(this.ButacasVentanillaText.Text);
                     Int32 butacasPasillo = Int32.Parse(this.ButacasPasilloText.Text);
-                    if (Convert.ToDecimal(kgEncomiendas) < this.aeronave.Kg_disponibles || butacasVentanilla < this.aeronave.ButacasVentanilla || butacasPasillo < this.aeronave.ButacasPasillo)
+                    if ((this.tieneVuelosVendidos) && (Convert.ToDecimal(kgEncomiendas) < this.aeronave.Kg_disponibles || butacasVentanilla < this.aeronave.ButacasVentanilla || butacasPasillo < this.aeronave.ButacasPasillo))
                     {
-                        MessageBox.Show("Solo es posible aumentar los Kg disponibles y las cantidades de las butacas.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Solo es posible aumentar los Kg disponibles y las cantidades de las butacas porque tiene vuelos asignados.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     if (this.verificarMatriculaNoDuplicada(this.aeronave.Id, this.matriculaText.Text))
@@ -128,22 +144,44 @@ namespace AerolineaFrba.Abm_Aeronave
             String matricula = this.matriculaText.Text;
             String modelo = this.modeloText.Text;
             String fabricante = this.FabricateTextBox.Text;
+            int butVentAgregar = 0;
+            int butPasAgregar = 0;
 
-            int butVentAgregar = butacasVentanilla - this.aeronave.ButacasVentanilla;
-            int butPasAgregar = butacasPasillo - this.aeronave.ButacasPasillo;
+            if (this.tieneVuelosVendidos)
+            {
+                butVentAgregar = butacasVentanilla - this.aeronave.ButacasVentanilla;
+                butPasAgregar = butacasPasillo - this.aeronave.ButacasPasillo;
+            }
+            else
+            {
+                butVentAgregar = butacasVentanilla;
+                butPasAgregar = butacasPasillo;
+            }
 
             this.aeronavesTableAdapter.Fill(this.dataSet.Aeronaves);
             GD2C2015DataSet.AeronavesRow row = (GD2C2015DataSet.AeronavesRow)this.dataSet.Aeronaves.Select("aer_id='"+ this.aeronave.Id + "'").First();
-            this.aeronavesTableAdapter.Update(row.tipo_servicio_id, matricula, modelo, Convert.ToDecimal(kgEncomiendas), fabricante, row.aer_fecha_fuera_servicio, row.aer_fecha_reinicio_servicio, row.aer_fecha_baja_definitiva, row.aer_activo, row.aer_id, row.tipo_servicio_id, row.aer_matricula, row.aer_modelo, row.aer_kg_disponibles, row.aer_fabricante, row.aer_fecha_fuera_servicio, row.aer_fecha_reinicio_servicio, row.aer_fecha_baja_definitiva, row.aer_activo);
+            
+            this.aeronavesTableAdapter.Update(tipoServicio, matricula, modelo, Convert.ToDecimal(kgEncomiendas), fabricante, row.aer_fecha_fuera_servicio, row.aer_fecha_reinicio_servicio, row.aer_fecha_baja_definitiva, row.aer_activo, row.aer_id, row.tipo_servicio_id, row.aer_matricula, row.aer_modelo, row.aer_kg_disponibles, row.aer_fabricante, row.aer_fecha_fuera_servicio, row.aer_fecha_reinicio_servicio, row.aer_fecha_baja_definitiva, row.aer_activo);
+            
             this.aeronavesTableAdapter.Fill(this.dataSet.Aeronaves);
             if (butVentAgregar > 0 || butPasAgregar > 0)
             {
+                if (!this.tieneVuelosVendidos)
+                {
+                    // Aca se eliminan todas las butacas existentes relacionadas a la aeronave
+                    this.butacasTableAdapter.Fill(this.dataSet.Butacas);
+                    GD2C2015DataSet.ButacasRow[] rows = (GD2C2015DataSet.ButacasRow[])this.dataSet.Butacas.Select("aeronave_id='"+ this.aeronave.Id +"'");
+                    foreach (GD2C2015DataSet.ButacasRow but in rows)
+                    {
+                        this.butacasTableAdapter.Delete(but.but_id, but.aeronave_id, but.but_numero, but.but_tipo, but.but_piso, but.but_activo);
+                    }
+                    this.butacasTableAdapter.Fill(this.dataSet.Butacas);
+                }
                 crearButacas(this.aeronave.Id, butPasAgregar, butVentAgregar);
             }
             MessageBox.Show("La Aeronave se guardo exitosamente");
             limpiarCampos();
             this.Close();
-
         }
 
         private void crearAeronave()
@@ -257,13 +295,13 @@ namespace AerolineaFrba.Abm_Aeronave
 
             if (aer == null)
             {
-                return true;
+                return false;
             }
             if (aer.Id.Equals(id))
             {
-                return true;
+                return false;
             }
-            return false;
+            return true;
         }
         private void buttonVolver_Click(object sender, EventArgs e)
         {
