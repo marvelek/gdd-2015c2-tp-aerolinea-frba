@@ -150,6 +150,10 @@ namespace AerolineaFrba.Compra
             {
                 error = error + "La direccion no puede ser nula\n";
             }
+            if (this.fechaNacimiento.Value > DateTime.Today)
+            {
+                error = error + "La fecha de nacimiento no puede ser mayor al día de hoy\n";
+            }
             if (this.telefono.Text == "" || !validador.IsNumber(this.telefono.Text))
             {
                 error = error + "El telefono no puede ser nulo y solo debe contener numeros\n";
@@ -161,7 +165,7 @@ namespace AerolineaFrba.Compra
             if (!this.clienteDisponible())
             {
                 error = error + "El ya tiene un vuelo programado para las fechas del vuelo seleccionado\n";
-            }
+            }            
             if (error != null)
             {
                 MessageBox.Show(error);

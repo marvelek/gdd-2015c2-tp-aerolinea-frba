@@ -29,26 +29,26 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.grupoEncomienda = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.codigo = new System.Windows.Forms.Label();
             this.montoAbonado = new System.Windows.Forms.Label();
+            this.codigo = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pasajesGrid = new System.Windows.Forms.DataGridView();
+            this.pasajero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codigoPasaje = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tipoServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grupoEncomienda = new System.Windows.Forms.GroupBox();
             this.paqueteGrid = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pasajero = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codigoPasaje = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tipoServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.grupoEncomienda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pasajesGrid)).BeginInit();
+            this.grupoEncomienda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paqueteGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,34 +65,21 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Compra";
             // 
-            // groupBox2
+            // montoAbonado
             // 
-            this.groupBox2.Controls.Add(this.pasajesGrid);
-            this.groupBox2.Location = new System.Drawing.Point(12, 102);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(455, 124);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Pasajes";
+            this.montoAbonado.AutoSize = true;
+            this.montoAbonado.Location = new System.Drawing.Point(132, 52);
+            this.montoAbonado.Name = "montoAbonado";
+            this.montoAbonado.Size = new System.Drawing.Size(0, 13);
+            this.montoAbonado.TabIndex = 3;
             // 
-            // grupoEncomienda
+            // codigo
             // 
-            this.grupoEncomienda.Controls.Add(this.paqueteGrid);
-            this.grupoEncomienda.Location = new System.Drawing.Point(12, 232);
-            this.grupoEncomienda.Name = "grupoEncomienda";
-            this.grupoEncomienda.Size = new System.Drawing.Size(455, 100);
-            this.grupoEncomienda.TabIndex = 2;
-            this.grupoEncomienda.TabStop = false;
-            this.grupoEncomienda.Text = "Encomienda";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Código ";
+            this.codigo.AutoSize = true;
+            this.codigo.Location = new System.Drawing.Point(132, 26);
+            this.codigo.Name = "codigo";
+            this.codigo.Size = new System.Drawing.Size(0, 13);
+            this.codigo.TabIndex = 2;
             // 
             // label2
             // 
@@ -103,21 +90,24 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Monto abonado";
             // 
-            // codigo
+            // label1
             // 
-            this.codigo.AutoSize = true;
-            this.codigo.Location = new System.Drawing.Point(132, 26);
-            this.codigo.Name = "codigo";
-            this.codigo.Size = new System.Drawing.Size(0, 13);
-            this.codigo.TabIndex = 2;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(27, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Código ";
             // 
-            // montoAbonado
+            // groupBox2
             // 
-            this.montoAbonado.AutoSize = true;
-            this.montoAbonado.Location = new System.Drawing.Point(132, 52);
-            this.montoAbonado.Name = "montoAbonado";
-            this.montoAbonado.Size = new System.Drawing.Size(0, 13);
-            this.montoAbonado.TabIndex = 3;
+            this.groupBox2.Controls.Add(this.pasajesGrid);
+            this.groupBox2.Location = new System.Drawing.Point(12, 102);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(455, 124);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Pasajes";
             // 
             // pasajesGrid
             // 
@@ -134,6 +124,40 @@
             this.pasajesGrid.ReadOnly = true;
             this.pasajesGrid.Size = new System.Drawing.Size(443, 99);
             this.pasajesGrid.TabIndex = 0;
+            // 
+            // pasajero
+            // 
+            this.pasajero.HeaderText = "Pasajero";
+            this.pasajero.Name = "pasajero";
+            this.pasajero.ReadOnly = true;
+            // 
+            // codigoPasaje
+            // 
+            this.codigoPasaje.HeaderText = "Código de Pasaje";
+            this.codigoPasaje.Name = "codigoPasaje";
+            this.codigoPasaje.ReadOnly = true;
+            // 
+            // tipoServicio
+            // 
+            this.tipoServicio.HeaderText = "Butaca";
+            this.tipoServicio.Name = "tipoServicio";
+            this.tipoServicio.ReadOnly = true;
+            // 
+            // precio
+            // 
+            this.precio.HeaderText = "Precio";
+            this.precio.Name = "precio";
+            this.precio.ReadOnly = true;
+            // 
+            // grupoEncomienda
+            // 
+            this.grupoEncomienda.Controls.Add(this.paqueteGrid);
+            this.grupoEncomienda.Location = new System.Drawing.Point(12, 232);
+            this.grupoEncomienda.Name = "grupoEncomienda";
+            this.grupoEncomienda.Size = new System.Drawing.Size(455, 100);
+            this.grupoEncomienda.TabIndex = 2;
+            this.grupoEncomienda.TabStop = false;
+            this.grupoEncomienda.Text = "Encomienda";
             // 
             // paqueteGrid
             // 
@@ -175,30 +199,6 @@
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
-            // pasajero
-            // 
-            this.pasajero.HeaderText = "Pasajero";
-            this.pasajero.Name = "pasajero";
-            this.pasajero.ReadOnly = true;
-            // 
-            // codigoPasaje
-            // 
-            this.codigoPasaje.HeaderText = "Código de Pasaje";
-            this.codigoPasaje.Name = "codigoPasaje";
-            this.codigoPasaje.ReadOnly = true;
-            // 
-            // tipoServicio
-            // 
-            this.tipoServicio.HeaderText = "Butaca";
-            this.tipoServicio.Name = "tipoServicio";
-            this.tipoServicio.ReadOnly = true;
-            // 
-            // precio
-            // 
-            this.precio.HeaderText = "Precio";
-            this.precio.Name = "precio";
-            this.precio.ReadOnly = true;
-            // 
             // ResumenForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -208,12 +208,12 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "ResumenForm";
-            this.Text = "ResumenForm";
+            this.Text = "Resumen";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.grupoEncomienda.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pasajesGrid)).EndInit();
+            this.grupoEncomienda.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.paqueteGrid)).EndInit();
             this.ResumeLayout(false);
 

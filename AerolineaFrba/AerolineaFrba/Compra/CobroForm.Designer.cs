@@ -67,6 +67,9 @@
             this.medioPago = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.encomiendaGrid = new System.Windows.Forms.DataGridView();
+            this.responsable = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.peso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioEncomienda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comprar = new System.Windows.Forms.Button();
             this.totalAPagar = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -80,9 +83,6 @@
             this.paquetesTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.PaquetesTableAdapter();
             this.pagos_TarjetaTableAdapter1 = new AerolineaFrba.GD2C2015DataSetTableAdapters.Pagos_TarjetaTableAdapter();
             this.tarjetas_CreditoTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.Tarjetas_CreditoTableAdapter();
-            this.responsable = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.peso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precioEncomienda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tarjetasCreditoBindingSource)).BeginInit();
@@ -275,6 +275,7 @@
             // 
             // pasajerosCombo
             // 
+            this.pasajerosCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.pasajerosCombo.FormattingEnabled = true;
             this.pasajerosCombo.Location = new System.Drawing.Point(79, 19);
             this.pasajerosCombo.Name = "pasajerosCombo";
@@ -308,6 +309,7 @@
             // 
             this.tipoTarjeta.DataSource = this.tarjetasCreditoBindingSource;
             this.tipoTarjeta.DisplayMember = "tac_descripcion";
+            this.tipoTarjeta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tipoTarjeta.FormattingEnabled = true;
             this.tipoTarjeta.Location = new System.Drawing.Point(320, 22);
             this.tipoTarjeta.Name = "tipoTarjeta";
@@ -328,6 +330,7 @@
             // 
             // anioVencimiento
             // 
+            this.anioVencimiento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.anioVencimiento.FormattingEnabled = true;
             this.anioVencimiento.Items.AddRange(new object[] {
             "2016",
@@ -349,6 +352,7 @@
             // 
             // mesVenciemiento
             // 
+            this.mesVenciemiento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mesVenciemiento.FormattingEnabled = true;
             this.mesVenciemiento.Items.AddRange(new object[] {
             "1",
@@ -379,6 +383,7 @@
             // 
             // cuotas
             // 
+            this.cuotas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cuotas.FormattingEnabled = true;
             this.cuotas.Items.AddRange(new object[] {
             "1",
@@ -453,6 +458,7 @@
             // 
             // medioPago
             // 
+            this.medioPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.medioPago.FormattingEnabled = true;
             this.medioPago.Items.AddRange(new object[] {
             "Tarjeta de Crédito",
@@ -491,6 +497,24 @@
             this.encomiendaGrid.ReadOnly = true;
             this.encomiendaGrid.Size = new System.Drawing.Size(345, 72);
             this.encomiendaGrid.TabIndex = 4;
+            // 
+            // responsable
+            // 
+            this.responsable.HeaderText = "Responsable";
+            this.responsable.Name = "responsable";
+            this.responsable.ReadOnly = true;
+            // 
+            // peso
+            // 
+            this.peso.HeaderText = "Peso";
+            this.peso.Name = "peso";
+            this.peso.ReadOnly = true;
+            // 
+            // precioEncomienda
+            // 
+            this.precioEncomienda.HeaderText = "Precio";
+            this.precioEncomienda.Name = "precioEncomienda";
+            this.precioEncomienda.ReadOnly = true;
             // 
             // comprar
             // 
@@ -575,24 +599,6 @@
             // tarjetas_CreditoTableAdapter
             // 
             this.tarjetas_CreditoTableAdapter.ClearBeforeFill = true;
-            // 
-            // responsable
-            // 
-            this.responsable.HeaderText = "Responsable";
-            this.responsable.Name = "responsable";
-            this.responsable.ReadOnly = true;
-            // 
-            // peso
-            // 
-            this.peso.HeaderText = "Peso";
-            this.peso.Name = "peso";
-            this.peso.ReadOnly = true;
-            // 
-            // precioEncomienda
-            // 
-            this.precioEncomienda.HeaderText = "Precio";
-            this.precioEncomienda.Name = "precioEncomienda";
-            this.precioEncomienda.ReadOnly = true;
             // 
             // CobroForm
             // 

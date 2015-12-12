@@ -55,6 +55,8 @@ namespace AerolineaFrba.Canje_Millas
                         {
                             productosTableAdapter.canjearProducto(clienteId, productoId, cantidadACanjear);
                             MessageBox.Show("El canje se realizó correctamente.");
+                            millasAcumuladas = Convert.ToInt32(this.historialMillasTableAdapter1.millasDisponibles(clienteId));
+                            millasLabel.Text = millasAcumuladas.ToString();
                         }
                         catch (System.Exception)
                         {

@@ -198,6 +198,7 @@
             // 
             this.butacas.DataSource = this.butacasDisponiblesBindingSource;
             this.butacas.DisplayMember = "butaca";
+            this.butacas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.butacas.FormattingEnabled = true;
             this.butacas.Location = new System.Drawing.Point(174, 129);
             this.butacas.Name = "butacas";
