@@ -1631,7 +1631,7 @@ SELECT SCOPE_IDENTITY()
 GO
 
 -- PROCEDURES PARA MILLAS --
-
+	
 CREATE PROCEDURE MILANESA.acreditarMillasCliente 
 (
 	@cliente_id int,
@@ -2020,10 +2020,7 @@ AS
 	FOR 
 --FUTUROS VUELOS ENTRE FECHAS DE FS CON VENTAS
 select v.vue_id from MILANESA.VUELOS v where VUE_ACTIVO = 1 AND vue_fecha_salida BETWEEN GETDATE() AND @fechaHasta
-AND v.AERONAVE_id = @aer_id
-AND EXISTS (
-select 1 from MILANESA.Ventas where vuelo_id = v.vue_id
-);
+AND v.AERONAVE_id = @aer_id;
 	OPEN vuelos
 	FETCH vuelos INTO @vuelo 
 
@@ -2054,10 +2051,7 @@ AS
 	FOR 
 	--FUTUROS VUELOS DE UNA AERONAVE CON VENTAS
 	select v.vue_id from MILANESA.VUELOS v where v.VUE_ACTIVO = 1 AND v.vue_fecha_salida >= GETDATE()
-	AND v.AERONAVE_id = @aer_id
-	AND EXISTS (
-	select 1 from MILANESA.Ventas where vuelo_id = v.vue_id
-	);
+	AND v.AERONAVE_id = @aer_id;
 	OPEN vuelos
 	FETCH vuelos INTO @vuelo 
 
@@ -2200,9 +2194,6 @@ SET NOCOUNT ON;
 --FUTUROS VUELOS DE UNA AERONAVE CON VENTAS
 select * from MILANESA.VUELOS v where v.VUE_ACTIVO = 1 AND v.vue_fecha_salida >= GETDATE()
 AND v.AERONAVE_id = @aer_id
-AND EXISTS (
-select 1 from MILANESA.Ventas where vuelo_id = v.vue_id
-)
 
 GO
 
@@ -2215,9 +2206,6 @@ SET NOCOUNT ON;
 --FUTUROS VUELOS ENTRE FECHAS DE FS CON VENTAS
 select * from MILANESA.VUELOS v where VUE_ACTIVO = 1 AND vue_fecha_salida BETWEEN GETDATE() AND @fechaHasta
 AND v.AERONAVE_id = @aer_id
-AND EXISTS (
-select 1 from MILANESA.Ventas where vuelo_id = v.vue_id
-)
 GO
 
 
