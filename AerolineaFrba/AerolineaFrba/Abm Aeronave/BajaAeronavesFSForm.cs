@@ -54,7 +54,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void CancelarBut_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void fechaHastaPicker_Validating(object sender, CancelEventArgs e)

@@ -68,7 +68,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
             // verifica si tiene vuelos asignados
             this.vuelosTableAdapter.Fill(this.dataSet.Vuelos);
-            GD2C2015DataSet.VuelosRow[] rows = (GD2C2015DataSet.VuelosRow[])this.dataSet.Vuelos.Select("aeronave_id='" + this.aeronave.Id + "' AND vue_activo=1");
+            GD2C2015DataSet.VuelosRow[] rows = (GD2C2015DataSet.VuelosRow[])this.dataSet.Vuelos.Select("aeronave_id='" + this.aeronave.Id + "'");
             if (rows.Length > 0)
             {
                 this.tieneVuelosVendidos = true;
