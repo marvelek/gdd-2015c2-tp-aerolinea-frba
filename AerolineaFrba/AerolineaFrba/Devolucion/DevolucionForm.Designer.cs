@@ -47,13 +47,6 @@
             this.gD2C2015DataSet = new AerolineaFrba.GD2C2015DataSet();
             this.ventasTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.VentasTableAdapter();
             this.grillaPaquete = new System.Windows.Forms.DataGridView();
-            this.paqidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.devolucionidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ventaidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.paqcodigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.paqprecioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.paqkgDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.paqactivoDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.paquetesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.paquetesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.PaquetesTableAdapter();
             this.grillaPasaje = new System.Windows.Forms.DataGridView();
@@ -69,6 +62,14 @@
             this.pasajesTableAdapter = new AerolineaFrba.GD2C2015DataSetTableAdapters.PasajesTableAdapter();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.paqidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.devolucionidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ventaidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.paqcodigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.paqprecioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.paqkgDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.paqactivoDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grillaVenta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ventasBindingSource)).BeginInit();
@@ -238,6 +239,7 @@
             this.grillaPaquete.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grillaPaquete.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.paqidDataGridViewTextBoxColumn,
+            this.Cliente,
             this.devolucionidDataGridViewTextBoxColumn,
             this.ventaidDataGridViewTextBoxColumn,
             this.paqcodigoDataGridViewTextBoxColumn,
@@ -250,55 +252,6 @@
             this.grillaPaquete.ReadOnly = true;
             this.grillaPaquete.Size = new System.Drawing.Size(586, 150);
             this.grillaPaquete.TabIndex = 5;
-            // 
-            // paqidDataGridViewTextBoxColumn
-            // 
-            this.paqidDataGridViewTextBoxColumn.DataPropertyName = "paq_id";
-            this.paqidDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.paqidDataGridViewTextBoxColumn.Name = "paqidDataGridViewTextBoxColumn";
-            this.paqidDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // devolucionidDataGridViewTextBoxColumn
-            // 
-            this.devolucionidDataGridViewTextBoxColumn.DataPropertyName = "devolucion_id";
-            this.devolucionidDataGridViewTextBoxColumn.HeaderText = "Devolucion";
-            this.devolucionidDataGridViewTextBoxColumn.Name = "devolucionidDataGridViewTextBoxColumn";
-            this.devolucionidDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // ventaidDataGridViewTextBoxColumn
-            // 
-            this.ventaidDataGridViewTextBoxColumn.DataPropertyName = "venta_id";
-            this.ventaidDataGridViewTextBoxColumn.HeaderText = "Id Venta";
-            this.ventaidDataGridViewTextBoxColumn.Name = "ventaidDataGridViewTextBoxColumn";
-            this.ventaidDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // paqcodigoDataGridViewTextBoxColumn
-            // 
-            this.paqcodigoDataGridViewTextBoxColumn.DataPropertyName = "paq_codigo";
-            this.paqcodigoDataGridViewTextBoxColumn.HeaderText = "Código";
-            this.paqcodigoDataGridViewTextBoxColumn.Name = "paqcodigoDataGridViewTextBoxColumn";
-            this.paqcodigoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // paqprecioDataGridViewTextBoxColumn
-            // 
-            this.paqprecioDataGridViewTextBoxColumn.DataPropertyName = "paq_precio";
-            this.paqprecioDataGridViewTextBoxColumn.HeaderText = "Precio";
-            this.paqprecioDataGridViewTextBoxColumn.Name = "paqprecioDataGridViewTextBoxColumn";
-            this.paqprecioDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // paqkgDataGridViewTextBoxColumn
-            // 
-            this.paqkgDataGridViewTextBoxColumn.DataPropertyName = "paq_kg";
-            this.paqkgDataGridViewTextBoxColumn.HeaderText = "Kg";
-            this.paqkgDataGridViewTextBoxColumn.Name = "paqkgDataGridViewTextBoxColumn";
-            this.paqkgDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // paqactivoDataGridViewCheckBoxColumn
-            // 
-            this.paqactivoDataGridViewCheckBoxColumn.DataPropertyName = "paq_activo";
-            this.paqactivoDataGridViewCheckBoxColumn.HeaderText = "Activo";
-            this.paqactivoDataGridViewCheckBoxColumn.Name = "paqactivoDataGridViewCheckBoxColumn";
-            this.paqactivoDataGridViewCheckBoxColumn.ReadOnly = true;
             // 
             // paquetesBindingSource
             // 
@@ -325,7 +278,7 @@
             this.pasprecioDataGridViewTextBoxColumn,
             this.pasactivoDataGridViewCheckBoxColumn});
             this.grillaPasaje.DataSource = this.pasajesBindingSource;
-            this.grillaPasaje.Location = new System.Drawing.Point(12, 180);
+            this.grillaPasaje.Location = new System.Drawing.Point(8, 180);
             this.grillaPasaje.Name = "grillaPasaje";
             this.grillaPasaje.ReadOnly = true;
             this.grillaPasaje.Size = new System.Drawing.Size(590, 150);
@@ -417,6 +370,62 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // paqidDataGridViewTextBoxColumn
+            // 
+            this.paqidDataGridViewTextBoxColumn.DataPropertyName = "paq_id";
+            this.paqidDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.paqidDataGridViewTextBoxColumn.Name = "paqidDataGridViewTextBoxColumn";
+            this.paqidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // Cliente
+            // 
+            this.Cliente.DataPropertyName = "cliente_id";
+            this.Cliente.HeaderText = "Cliente";
+            this.Cliente.Name = "Cliente";
+            this.Cliente.ReadOnly = true;
+            // 
+            // devolucionidDataGridViewTextBoxColumn
+            // 
+            this.devolucionidDataGridViewTextBoxColumn.DataPropertyName = "devolucion_id";
+            this.devolucionidDataGridViewTextBoxColumn.HeaderText = "Devolucion";
+            this.devolucionidDataGridViewTextBoxColumn.Name = "devolucionidDataGridViewTextBoxColumn";
+            this.devolucionidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // ventaidDataGridViewTextBoxColumn
+            // 
+            this.ventaidDataGridViewTextBoxColumn.DataPropertyName = "venta_id";
+            this.ventaidDataGridViewTextBoxColumn.HeaderText = "Id Venta";
+            this.ventaidDataGridViewTextBoxColumn.Name = "ventaidDataGridViewTextBoxColumn";
+            this.ventaidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // paqcodigoDataGridViewTextBoxColumn
+            // 
+            this.paqcodigoDataGridViewTextBoxColumn.DataPropertyName = "paq_codigo";
+            this.paqcodigoDataGridViewTextBoxColumn.HeaderText = "Código";
+            this.paqcodigoDataGridViewTextBoxColumn.Name = "paqcodigoDataGridViewTextBoxColumn";
+            this.paqcodigoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // paqprecioDataGridViewTextBoxColumn
+            // 
+            this.paqprecioDataGridViewTextBoxColumn.DataPropertyName = "paq_precio";
+            this.paqprecioDataGridViewTextBoxColumn.HeaderText = "Precio";
+            this.paqprecioDataGridViewTextBoxColumn.Name = "paqprecioDataGridViewTextBoxColumn";
+            this.paqprecioDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // paqkgDataGridViewTextBoxColumn
+            // 
+            this.paqkgDataGridViewTextBoxColumn.DataPropertyName = "paq_kg";
+            this.paqkgDataGridViewTextBoxColumn.HeaderText = "Kg";
+            this.paqkgDataGridViewTextBoxColumn.Name = "paqkgDataGridViewTextBoxColumn";
+            this.paqkgDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // paqactivoDataGridViewCheckBoxColumn
+            // 
+            this.paqactivoDataGridViewCheckBoxColumn.DataPropertyName = "paq_activo";
+            this.paqactivoDataGridViewCheckBoxColumn.HeaderText = "Activo";
+            this.paqactivoDataGridViewCheckBoxColumn.Name = "paqactivoDataGridViewCheckBoxColumn";
+            this.paqactivoDataGridViewCheckBoxColumn.ReadOnly = true;
+            // 
             // DevolucionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -458,13 +467,6 @@
         private System.Windows.Forms.DataGridView grillaPaquete;
         private System.Windows.Forms.BindingSource paquetesBindingSource;
         private GD2C2015DataSetTableAdapters.PaquetesTableAdapter paquetesTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn paqidDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn devolucionidDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ventaidDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn paqcodigoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn paqprecioDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn paqkgDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn paqactivoDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridView grillaPasaje;
         private System.Windows.Forms.BindingSource pasajesBindingSource;
         private GD2C2015DataSetTableAdapters.PasajesTableAdapter pasajesTableAdapter;
@@ -486,5 +488,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn venfechaDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn pagotarjetaidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn venactivoDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn paqidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn devolucionidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ventaidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn paqcodigoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn paqprecioDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn paqkgDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn paqactivoDataGridViewCheckBoxColumn;
     }
 }
