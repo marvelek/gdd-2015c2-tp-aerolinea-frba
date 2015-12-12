@@ -77,7 +77,8 @@ namespace AerolineaFrba.Registro_Llegada_Destino
                         destino_correcto = 2;
                     }
 
-                    int arribo_id = (int)arribosTableAdapter.arribosInsertar(aeronave_id, ciudad_origen_id, ciudad_destino_id, fechaLlegada, destino_correcto);
+                    //int arribo_id = (int)arribosTableAdapter.arribosInsertar(aeronave_id, ciudad_origen_id, ciudad_destino_id, fechaLlegada, destino_correcto);
+                    int arribo_id = Convert.ToInt32(arribosTableAdapter.arribosInsertar(aeronave_id, ciudad_origen_id, ciudad_destino_id, fechaLlegada, destino_correcto));
                     vuelo.vue_fecha_llegada = fechaLlegada;
                     vuelo.arribo_id = arribo_id;
                     vuelosTableAdapter.Update(vuelo);
