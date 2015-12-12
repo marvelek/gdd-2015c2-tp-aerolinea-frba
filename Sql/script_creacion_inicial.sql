@@ -2113,7 +2113,7 @@ CREATE PROCEDURE [MILANESA].[paqueteBuscar]
 )
 AS
 	SET NOCOUNT ON;
-SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_activo
+SELECT paq_id, devolucion_id, venta_id, paq_codigo, paq_precio, paq_kg, paq_activo, cliente_id
 FROM            MILANESA.Paquetes
 WHERE        (CAST(paq_codigo as varchar(18)) =  @codigo )
 GO
