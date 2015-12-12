@@ -95,6 +95,11 @@ namespace AerolineaFrba.Abm_Aeronave
                         MessageBox.Show("Solo es posible aumentar los Kg disponibles y las cantidades de las butacas.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
+                    if (this.verificarMatriculaNoDuplicada(this.aeronave.Id, this.matriculaText.Text))
+                    {
+                        MessageBox.Show("La matricula ingresada ya existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                     this.modificarAeronave();
                 }
                 else
@@ -124,8 +129,20 @@ namespace AerolineaFrba.Abm_Aeronave
             String modelo = this.modeloText.Text;
             String fabricante = this.FabricateTextBox.Text;
 
-            // ACA FALTA el UPDATE de las aeronaves y las butacas
+            int butVentAgregar = butacasVentanilla - this.aeronave.ButacasVentanilla;
+            int butPasAgregar = butacasPasillo - this.aeronave.ButacasPasillo;
 
+            this.aeronavesTableAdapter.Fill(this.dataSet.Aeronaves);
+            GD2C2015DataSet.AeronavesRow row = (GD2C2015DataSet.AeronavesRow)this.dataSet.Aeronaves.Select("aer_id='"+ this.aeronave.Id + "'").First();
+            this.aeronavesTableAdapter.Update(row.tipo_servicio_id, matricula, modelo, Convert.ToDecimal(kgEncomiendas), fabricante, row.aer_fecha_fuera_servicio, row.aer_fecha_reinicio_servicio, row.aer_fecha_baja_definitiva, row.aer_activo, row.aer_id, row.tipo_servicio_id, row.aer_matricula, row.aer_modelo, row.aer_kg_disponibles, row.aer_fabricante, row.aer_fecha_fuera_servicio, row.aer_fecha_reinicio_servicio, row.aer_fecha_baja_definitiva, row.aer_activo);
+            this.aeronavesTableAdapter.Fill(this.dataSet.Aeronaves);
+            if (butVentAgregar > 0 || butPasAgregar > 0)
+            {
+                crearButacas(this.aeronave.Id, butPasAgregar, butVentAgregar);
+            }
+            MessageBox.Show("La Aeronave se guardo exitosamente");
+            limpiarCampos();
+            this.Close();
 
         }
 
@@ -232,6 +249,21 @@ namespace AerolineaFrba.Abm_Aeronave
                 return false;
             }
             return true;
+        }
+        private bool verificarMatriculaNoDuplicada(int id, string matricula)
+        {
+            Aeronave aer = new Aeronave();
+            aer = aer.buscarByMatricula(matricula);
+
+            if (aer == null)
+            {
+                return true;
+            }
+            if (aer.Id.Equals(id))
+            {
+                return true;
+            }
+            return false;
         }
         private void buttonVolver_Click(object sender, EventArgs e)
         {
