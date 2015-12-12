@@ -1,6 +1,34 @@
 USE [GD2C2015]
 GO
 
+/* Drop Indices de Maestra */
+IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('gd_esquema.Maestra') AND NAME ='ix_maestra_ruta')
+	DROP INDEX ix_maestra_ruta ON gd_esquema.Maestra
+GO
+
+IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('gd_esquema.Maestra') AND NAME ='ix_maestra_venta')
+	DROP INDEX ix_maestra_venta ON gd_esquema.Maestra
+GO
+
+IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('gd_esquema.Maestra') AND NAME ='ix_maestra_pasaje_codigo')
+	DROP INDEX ix_maestra_pasaje_codigo ON gd_esquema.Maestra
+GO
+
+IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('gd_esquema.Maestra') AND NAME ='ix_maestra_pasaje_fecha')
+	DROP INDEX ix_maestra_pasaje_fecha ON gd_esquema.Maestra
+GO
+
+IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('gd_esquema.Maestra') AND NAME ='ix_maestra_pasaje_butacas')
+	DROP INDEX ix_maestra_pasaje_butacas ON gd_esquema.Maestra
+GO
+
+IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('gd_esquema.Maestra') AND NAME ='ix_maestra_paquete')
+	DROP INDEX ix_maestra_paquete ON gd_esquema.Maestra
+GO
+
+IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('gd_esquema.Maestra') AND NAME ='ix_maestra_paquete_fecha')
+	DROP INDEX ix_maestra_paquete_fecha ON gd_esquema.Maestra
+GO
 
 -- INDICES PARA MIGRACION ---------------------------------------------------------
 
@@ -33,17 +61,530 @@ ON [gd_esquema].[Maestra] ([Paquete_Codigo])
 INCLUDE ([Cli_Nombre],[Cli_Apellido],[Cli_Dni],[Cli_Fecha_Nac],[Paquete_Precio],[Paquete_KG],[Paquete_FechaCompra],[FechaSalida],[Fecha_LLegada_Estimada],[FechaLLegada],[Ruta_Codigo],[Ruta_Ciudad_Origen],[Ruta_Ciudad_Destino],[Aeronave_Matricula],[Tipo_Servicio])
 GO
 
-GO
 CREATE NONCLUSTERED INDEX [ix_maestra_paquete_fecha]
 ON [gd_esquema].[Maestra] ([FechaSalida],[Fecha_LLegada_Estimada],[FechaLLegada])
 INCLUDE ([Cli_Nombre],[Cli_Apellido],[Cli_Dni],[Cli_Fecha_Nac],[Paquete_Codigo],[Paquete_Precio],[Paquete_KG],[Paquete_FechaCompra],[Ruta_Codigo],[Ruta_Ciudad_Origen],[Ruta_Ciudad_Destino],[Aeronave_Matricula],[Tipo_Servicio])
 GO
 
 
--- CREACION INICIAL -----------------------------------------------------
+-- CREACION SCHEMA -----------------------------------------------------
 
+IF NOT EXISTS (
+    SELECT schema_name 
+    FROM information_schema.schemata 
+    WHERE schema_name = 'MILANESA' 
+    )
 
-EXEC ('CREATE SCHEMA MILANESA')
+BEGIN
+    EXEC ('CREATE SCHEMA MILANESA');
+END
+
+/*Drop Tables*/
+IF OBJECT_ID('MILANESA.Funciones_Roles') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Funciones_Roles
+END;
+
+IF OBJECT_ID('MILANESA.Funciones') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Funciones
+END;
+
+IF OBJECT_ID('MILANESA.Millas') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Millas
+END;
+
+IF OBJECT_ID('MILANESA.Paquetes') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Paquetes
+END;
+
+IF OBJECT_ID('MILANESA.Pasajes') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Pasajes
+END;
+
+IF OBJECT_ID('MILANESA.Ventas') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Ventas
+END;
+
+IF OBJECT_ID('MILANESA.Pagos_Tarjeta') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Pagos_Tarjeta
+END;
+
+IF OBJECT_ID('MILANESA.Tarjetas_Credito') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Tarjetas_Credito
+END;
+
+IF OBJECT_ID('MILANESA.Canjes') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Canjes
+END;
+
+IF OBJECT_ID('MILANESA.Productos') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Productos
+END;
+
+IF OBJECT_ID('MILANESA.Usuarios') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Usuarios
+END;
+
+IF OBJECT_ID('MILANESA.Roles') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Roles
+END;
+
+IF OBJECT_ID('MILANESA.Devoluciones') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Devoluciones
+END;
+
+IF OBJECT_ID('MILANESA.Clientes') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Clientes
+END;
+
+IF OBJECT_ID('MILANESA.Tipos_Servicio_Rutas') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Tipos_Servicio_Rutas
+END;
+
+IF OBJECT_ID('MILANESA.Vuelos') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Vuelos
+END;
+
+IF OBJECT_ID('MILANESA.Rutas') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Rutas
+END;
+
+IF OBJECT_ID('MILANESA.Arribos') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Arribos
+END;
+
+IF OBJECT_ID('MILANESA.Ciudades') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Ciudades
+END;
+
+IF OBJECT_ID('MILANESA.Periodos_Fuera_Servicio') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Periodos_Fuera_Servicio
+END;
+
+IF OBJECT_ID('MILANESA.Butacas') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Butacas
+END;
+
+IF OBJECT_ID('MILANESA.Aeronaves') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Aeronaves
+END;
+
+IF OBJECT_ID('MILANESA.Tipos_Servicio') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Tipos_Servicio
+END;
+
+IF OBJECT_ID('MILANESA.Estados_Arribos') IS NOT NULL
+BEGIN
+	DROP TABLE MILANESA.Estados_Arribos
+END;
+
+/*Drop Stored Procedures*/
+IF OBJECT_ID('MILANESA.sp_migracion_datos') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.sp_migracion_datos
+END;
+
+IF OBJECT_ID('MILANESA.sp_migracion_clientes') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.sp_migracion_clientes
+END;
+
+IF OBJECT_ID('MILANESA.sp_migracion_ciudades') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.sp_migracion_ciudades
+END;
+
+IF OBJECT_ID('MILANESA.sp_migracion_tipos_servicio') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.sp_migracion_tipos_servicio
+END;
+
+IF OBJECT_ID('MILANESA.sp_migracion_aeronaves') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.sp_migracion_aeronaves
+END;
+
+IF OBJECT_ID('MILANESA.sp_migracion_butacas') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.sp_migracion_butacas
+END;
+
+IF OBJECT_ID('MILANESA.sp_migracion_rutas') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.sp_migracion_rutas
+END;
+
+IF OBJECT_ID('MILANESA.sp_migracion_vuelos') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.sp_migracion_vuelos
+END;
+
+IF OBJECT_ID('MILANESA.sp_migracion_ventas') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.sp_migracion_ventas
+END;
+
+IF OBJECT_ID('MILANESA.sp_migracion_pasajes') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.sp_migracion_pasajes
+END;
+
+IF OBJECT_ID('MILANESA.sp_migracion_paquetes') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.sp_migracion_paquetes
+END;
+
+IF OBJECT_ID('MILANESA.rolBajaLogica') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.rolBajaLogica
+END;
+
+IF OBJECT_ID('MILANESA.funcionesRolesBorrar') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.funcionesRolesBorrar
+END;
+
+IF OBJECT_ID('MILANESA.rolBuscar') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.rolBuscar
+END;
+
+IF OBJECT_ID('MILANESA.rolInsertar') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.rolInsertar
+END;
+
+IF OBJECT_ID('MILANESA.funcionesRolesInsertar') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.funcionesRolesInsertar
+END;
+
+IF OBJECT_ID('MILANESA.rolModificar') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.rolModificar
+END;
+
+IF OBJECT_ID('MILANESA.paqueteBajaPorVenta') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.paqueteBajaPorVenta
+END;
+
+IF OBJECT_ID('MILANESA.pasajeBajaPorVenta') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.pasajeBajaPorVenta
+END;
+
+IF OBJECT_ID('MILANESA.ventaBajaPorVuelo') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.ventaBajaPorVuelo
+END;
+
+IF OBJECT_ID('MILANESA.vueloBajaPorRuta') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.vueloBajaPorRuta
+END;
+
+IF OBJECT_ID('MILANESA.rutaBajaLogica') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.rutaBajaLogica
+END;
+
+IF OBJECT_ID('MILANESA.rutaBuscar') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.rutaBuscar
+END;
+
+IF OBJECT_ID('MILANESA.rutaInsertar') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.rutaInsertar
+END;
+
+IF OBJECT_ID('MILANESA.rutaModificar') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.rutaModificar
+END;
+
+IF OBJECT_ID('MILANESA.tipo_Servicio_RutaInsertar') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.tipo_Servicio_RutaInsertar
+END;
+
+IF OBJECT_ID('MILANESA.tipos_Servicio_RutasBorrar') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.tipos_Servicio_RutasBorrar
+END;
+
+IF OBJECT_ID('MILANESA.vuelos_disponibles') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.vuelos_disponibles
+END;
+
+IF OBJECT_ID('MILANESA.arribosInsertar') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.arribosInsertar
+END;
+
+IF OBJECT_ID('MILANESA.acreditarMillas') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.acreditarMillas
+END;
+
+IF OBJECT_ID('MILANESA.acreditarMillasCliente') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.acreditarMillasCliente
+END;
+
+IF OBJECT_ID('MILANESA.historialMillas') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.historialMillas
+END;
+
+IF OBJECT_ID('MILANESA.devolucionInsertar') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.devolucionInsertar
+END;
+
+IF OBJECT_ID('MILANESA.millasDisponibles') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.millasDisponibles
+END;
+
+IF OBJECT_ID('MILANESA.debitoMillas') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.debitoMillas
+END;
+
+IF OBJECT_ID('MILANESA.canjearProducto') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.canjearProducto
+END;
+
+IF OBJECT_ID('MILANESA.estadisticaDestinosPasajes') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.estadisticaDestinosPasajes
+END;
+
+IF OBJECT_ID('MILANESA.estadisticaDestinosButacas') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.estadisticaDestinosButacas
+END;
+
+IF OBJECT_ID('MILANESA.estadisticaDestinosCancelados') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.estadisticaDestinosCancelados
+END;
+
+IF OBJECT_ID('MILANESA.estadisticaAeronavesFueraDeServicio') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.estadisticaAeronavesFueraDeServicio
+END;
+
+IF OBJECT_ID('MILANESA.estadisticaClientesMillas') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.estadisticaClientesMillas
+END;
+
+IF OBJECT_ID('MILANESA.ButacasInsert') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.ButacasInsert
+END;
+
+IF OBJECT_ID('MILANESA.AeronavesBuscar') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.AeronavesBuscar
+END;
+
+IF OBJECT_ID('MILANESA.AeronavesInsert') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.AeronavesInsert
+END;
+
+IF OBJECT_ID('MILANESA.precioPasaje') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.precioPasaje
+END;
+
+IF OBJECT_ID('MILANESA.precioPaquete') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.precioPaquete
+END;
+
+IF OBJECT_ID('MILANESA.generarVenta ') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.generarVenta 
+END;
+
+IF OBJECT_ID('MILANESA.generarPasaje') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.generarPasaje
+END;
+
+IF OBJECT_ID('MILANESA.generarPaquete') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.generarPaquete
+END;
+
+IF OBJECT_ID('MILANESA.pagoTarjeta') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.pagoTarjeta
+END;
+
+IF OBJECT_ID('MILANESA.AeronavesBajaDefinitiva') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.AeronavesBajaDefinitiva
+END;
+
+IF OBJECT_ID('MILANESA.AeronavesIniciarFueraDeServicio') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.AeronavesIniciarFueraDeServicio
+END;
+
+IF OBJECT_ID('MILANESA.AeronavesFueraServicioActualmente') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.AeronavesFueraServicioActualmente
+END;
+
+IF OBJECT_ID('MILANESA.VuelossFuturosByAer') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.VuelossFuturosByAer
+END;
+
+IF OBJECT_ID('MILANESA.VuelossFuturosByAerFS') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.VuelossFuturosByAerFS
+END;
+
+IF OBJECT_ID('MILANESA.AeronavesBuscarMany') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.AeronavesBuscarMany
+END;
+
+IF OBJECT_ID('MILANESA.AeronavesCancelacionBajaFS') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.AeronavesCancelacionBajaFS
+END;
+
+IF OBJECT_ID('MILANESA.AeronavesCancelacionBajaDef') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.AeronavesCancelacionBajaDef
+END;
+
+IF OBJECT_ID('MILANESA.AeronavesReemplazo') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.AeronavesReemplazo
+END;
+
+IF OBJECT_ID('MILANESA.AeronavesReemplazoDef') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.AeronavesReemplazoDef
+END;
+
+IF OBJECT_ID('MILANESA.AeronavesReemplazoFS') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.AeronavesReemplazoFS
+END;
+
+IF OBJECT_ID('MILANESA.AeronavesReemplazoVueloYButacas') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.AeronavesReemplazoVueloYButacas
+END;
+
+IF OBJECT_ID('MILANESA.pasajesReemplazoButaca') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.pasajesReemplazoButaca
+END;
+
+IF OBJECT_ID('MILANESA.pasajeBuscar') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.pasajeBuscar
+END;
+
+IF OBJECT_ID('MILANESA.paqueteBuscar') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.paqueteBuscar
+END;
+
+IF OBJECT_ID('MILANESA.VentaBuscar') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.VentaBuscar
+END;
+
+IF OBJECT_ID('MILANESA.devolucionEfectivo') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.devolucionEfectivo
+END;
+
+IF OBJECT_ID('MILANESA.devolucionTarjeta') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.devolucionTarjeta
+END;
+
+IF OBJECT_ID('MILANESA.devolucionPorVenta') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.devolucionPorVenta
+END;
+
+IF OBJECT_ID('MILANESA.ventaCancelacion') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.ventaCancelacion
+END;
+
+IF OBJECT_ID('MILANESA.devolucionBusca') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.devolucionBusca
+END;
+
+IF OBJECT_ID('MILANESA.paqueteCancelacion') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.paqueteCancelacion
+END;
+
+IF OBJECT_ID('MILANESA.pasajeCancelacion') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.pasajeCancelacion
+END;
+
+IF OBJECT_ID('MILANESA.aeronavesDisponiblesEnFechas') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.aeronavesDisponiblesEnFechas
+END;
+
+IF OBJECT_ID('MILANESA.clienteDisponibleParaVuelo') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.clienteDisponibleParaVuelo
+END;
+
+IF OBJECT_ID('MILANESA.rutasRepetidas') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.rutasRepetidas
+END;
+
+IF OBJECT_ID('MILANESA.rutasRepetidasUpdate') IS NOT NULL
+BEGIN
+	DROP PROCEDURE MILANESA.rutasRepetidasUpdate
+END;
 
 /*Roles*/
 CREATE TABLE MILANESA.Roles (
@@ -2241,4 +2782,33 @@ AS
 		END -- Fin del bucle WHILE	
 	CLOSE rutasRepetidas
 	DEALLOCATE rutasRepetidas
-	GO
+GO
+
+	/* Drop Indices de Maestra */
+IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('gd_esquema.Maestra') AND NAME ='ix_maestra_ruta')
+	DROP INDEX ix_maestra_ruta ON gd_esquema.Maestra
+GO
+
+IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('gd_esquema.Maestra') AND NAME ='ix_maestra_venta')
+	DROP INDEX ix_maestra_venta ON gd_esquema.Maestra
+GO
+
+IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('gd_esquema.Maestra') AND NAME ='ix_maestra_pasaje_codigo')
+	DROP INDEX ix_maestra_pasaje_codigo ON gd_esquema.Maestra
+GO
+
+IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('gd_esquema.Maestra') AND NAME ='ix_maestra_pasaje_fecha')
+	DROP INDEX ix_maestra_pasaje_fecha ON gd_esquema.Maestra
+GO
+
+IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('gd_esquema.Maestra') AND NAME ='ix_maestra_pasaje_butacas')
+	DROP INDEX ix_maestra_pasaje_butacas ON gd_esquema.Maestra
+GO
+
+IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('gd_esquema.Maestra') AND NAME ='ix_maestra_paquete')
+	DROP INDEX ix_maestra_paquete ON gd_esquema.Maestra
+GO
+
+IF EXISTS(SELECT * FROM sys.indexes WHERE object_id = object_id('gd_esquema.Maestra') AND NAME ='ix_maestra_paquete_fecha')
+	DROP INDEX ix_maestra_paquete_fecha ON gd_esquema.Maestra
+GO
