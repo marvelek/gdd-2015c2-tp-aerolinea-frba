@@ -64,7 +64,7 @@ namespace AerolineaFrba.Devolucion
             switch (Convert.ToString(comboBox1.SelectedItem))
             {
                 case "VENTAS":
-                    int ventaActivo = Convert.ToInt16(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[5].Value);
+                    int ventaActivo = Convert.ToInt32(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[5].Value);
                     if (ventaActivo == 1)
                     {
                         int idVenta = Convert.ToInt32(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value);
@@ -75,7 +75,7 @@ namespace AerolineaFrba.Devolucion
                     else { MessageBox.Show("La venta ha sido cancelada previamente."); }
                     break;
                 case "PAQUETES":
-                    int paqActivo = Convert.ToInt16(grillaPaquete.Rows[grillaPaquete.CurrentRow.Index].Cells[7].Value);
+                    int paqActivo = Convert.ToInt32(grillaPaquete.Rows[grillaPaquete.CurrentRow.Index].Cells[7].Value);
                     if (paqActivo == 1)
                     {
                         int idPaquete = Convert.ToInt32(grillaPaquete.Rows[grillaPaquete.CurrentRow.Index].Cells[0].Value);
@@ -86,7 +86,7 @@ namespace AerolineaFrba.Devolucion
                     else { MessageBox.Show("El paquete ha sido cancelado previamente."); }
                     break;
                 case "PASAJES":
-                    int pasActivo = Convert.ToInt16(grillaPasaje.Rows[grillaPasaje.CurrentRow.Index].Cells[7].Value);
+                    int pasActivo = Convert.ToInt32(grillaPasaje.Rows[grillaPasaje.CurrentRow.Index].Cells[7].Value);
                     if (pasActivo == 1)
                     {                   
                         int idPasaje = Convert.ToInt32(grillaPasaje.Rows[grillaPasaje.CurrentRow.Index].Cells[0].Value);                   
@@ -97,7 +97,7 @@ namespace AerolineaFrba.Devolucion
                     else { MessageBox.Show("El pasaje ha sido cancelado previamente."); }
                     break;                    
                 default:
-                    int venActivo = Convert.ToInt16(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[5].Value);
+                    int venActivo = Convert.ToInt32(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[5].Value);
                     if (venActivo == 1)
                     {
                         int id = Convert.ToInt32(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value);
@@ -200,8 +200,8 @@ namespace AerolineaFrba.Devolucion
             switch (Convert.ToString(comboBox1.SelectedItem))
             {
                 case "VENTAS":                                       
-                    //idVenta = Convert.ToInt16(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value);
-                    //devolucion = Convert.ToInt16(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value);                  
+                    //idVenta = Convert.ToInt32(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value);
+                    //devolucion = Convert.ToInt32(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value);                  
                     MessageBox.Show("Para ver una cancelación debe seleccionar un paquete o un pasaje.");  
                     break;
                 case "PAQUETES":
