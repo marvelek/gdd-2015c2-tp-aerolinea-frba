@@ -1584,7 +1584,7 @@ AS
 	SELECT v.vue_id,
 	t.tip_descripcion,
 	(select aer_kg_disponibles -
-	(select sum(p.paq_kg) from MILANESA.Ventas v1 
+	(select isnull(sum(p.paq_kg),0) from MILANESA.Ventas v1 
 	join MILANESA.Paquetes p ON p.venta_id = v1.ven_id
 	where v1.vuelo_id = v.vue_id
 	and v1.ven_activo = 1
