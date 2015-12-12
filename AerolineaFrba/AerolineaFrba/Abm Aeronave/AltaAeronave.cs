@@ -160,9 +160,12 @@ namespace AerolineaFrba.Abm_Aeronave
 
             this.aeronavesTableAdapter.Fill(this.dataSet.Aeronaves);
             GD2C2015DataSet.AeronavesRow row = (GD2C2015DataSet.AeronavesRow)this.dataSet.Aeronaves.Select("aer_id='"+ this.aeronave.Id + "'").First();
-            
-            this.aeronavesTableAdapter.Update(tipoServicio, matricula, modelo, Convert.ToDecimal(kgEncomiendas), fabricante, row.aer_fecha_fuera_servicio, row.aer_fecha_reinicio_servicio, row.aer_fecha_baja_definitiva, row.aer_activo, row.aer_id, row.tipo_servicio_id, row.aer_matricula, row.aer_modelo, row.aer_kg_disponibles, row.aer_fabricante, row.aer_fecha_fuera_servicio, row.aer_fecha_reinicio_servicio, row.aer_fecha_baja_definitiva, row.aer_activo);
-            
+            row.tipo_servicio_id = tipoServicio;
+            row.aer_matricula = matricula;
+            row.aer_modelo = modelo;
+            row.aer_kg_disponibles = Convert.ToDecimal(kgEncomiendas);
+            row.aer_fabricante = fabricante;
+            this.aeronavesTableAdapter.Update(row);
             this.aeronavesTableAdapter.Fill(this.dataSet.Aeronaves);
             if (butVentAgregar > 0 || butPasAgregar > 0)
             {
@@ -214,19 +217,20 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private bool valido()
         {
+            Utiles validador = new Utiles();
             String errores = "";
 
-            if (this.kgEncomientasText.Text == "")
+            if ((this.kgEncomientasText.Text == "") || (!validador.IsNumber(this.kgEncomientasText.Text)))
             {
                 errores = "Kg Encomiendas. ";
             }
 
-            if (this.ButacasPasilloText.Text == "")
+            if ((this.ButacasPasilloText.Text == "") || (!validador.IsNumber(this.ButacasPasilloText.Text)))
             { 
                 errores = errores + "Butacas Pasillo. "; 
             }
 
-            if (this.ButacasVentanillaText.Text == "")
+            if ((this.ButacasVentanillaText.Text == "") || (!validador.IsNumber(this.ButacasVentanillaText.Text)))
             { 
                 errores = errores + "Butacas Ventanilla. "; 
             }
@@ -252,7 +256,7 @@ namespace AerolineaFrba.Abm_Aeronave
             }
             if (errores != "")
             {
-                MessageBox.Show("Debe completar los siguientes campos: " + errores, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe completar los siguientes campos(o completarlos con valores validos): " + errores, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             return true;
