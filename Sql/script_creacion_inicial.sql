@@ -1584,7 +1584,7 @@ AS
 	SELECT v.vue_id,
 	t.tip_descripcion,
 	(select aer_kg_disponibles -
-	(select sum(p.paq_kg) from MILANESA.Ventas v1 
+	(select isnull(sum(p.paq_kg),0) from MILANESA.Ventas v1 
 	join MILANESA.Paquetes p ON p.venta_id = v1.ven_id
 	where v1.vuelo_id = v.vue_id
 	and v1.ven_activo = 1
@@ -1660,11 +1660,11 @@ AS
 
 	DECLARE cr_cliente_gastado CURSOR
 	FOR
-		SELECT QUERY.cli_id, SUM(QUERY.pesos_gastados) 
+		SELECT QUERY.cli_id, ISNULL(SUM(QUERY.pesos_gastados),0)
 		FROM
 			(SELECT
 				C.cli_id,
-				SUM(P.pas_precio) as pesos_gastados
+				ISNULL(SUM(P.pas_precio),0) as pesos_gastados
 			FROM
 				MILANESA.Ventas VE,
 				MILANESA.Vuelos VU,
@@ -1681,7 +1681,7 @@ AS
 			UNION
 			SELECT
 				C.cli_id,
-				SUM(P.paq_precio) as pesos_gastados
+				ISNULL(SUM(P.paq_precio), 0) as pesos_gastados
 			FROM
 				MILANESA.Ventas VE,
 				MILANESA.Vuelos VU,
