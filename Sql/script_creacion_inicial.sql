@@ -1800,7 +1800,7 @@ AS
 		FROM MILANESA.Rutas ru
 		JOIN MILANESA.Ciudades cd on cd.ciu_id = ru.ciudad_destino_id
 		JOIN MILANESA.Vuelos vu on vu.ruta_id = ru.rut_id		
-		where YEAR(vu.vue_fecha_llegada) = 2016 and MONTH(vu.vue_fecha_llegada) between 1 and 6) as tablaAux
+		where YEAR(vu.vue_fecha_llegada) = @año and MONTH(vu.vue_fecha_llegada) between @mes1 and @mes2) as tablaAux
 		group by 
 			ciu_id,
 			ciu_descripcion
