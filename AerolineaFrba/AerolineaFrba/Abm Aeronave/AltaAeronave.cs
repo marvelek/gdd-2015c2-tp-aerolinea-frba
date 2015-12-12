@@ -62,7 +62,7 @@ namespace AerolineaFrba.Abm_Aeronave
             this.ButacasPasilloText.Text = Convert.ToString(cantPasillo);
             this.aeronave.ButacasPasillo = cantPasillo;
             GD2C2015DataSet.ButacasRow[] dataVentanilla = (GD2C2015DataSet.ButacasRow[])this.dataSet.Butacas.Select("aeronave_id='" + this.aeronave.Id + "' AND but_tipo='Ventanilla' AND but_activo=1");
-            int cantVentanilla = dataPasillo.Length;
+            int cantVentanilla = dataVentanilla.Length;
             this.ButacasVentanillaText.Text = Convert.ToString(cantVentanilla);
             this.aeronave.ButacasVentanilla = cantVentanilla;
 
@@ -78,6 +78,8 @@ namespace AerolineaFrba.Abm_Aeronave
             this.dateTimePickerAlta.Enabled = false;
             if (this.tieneVuelosVendidos)
             {
+                this.modeloText.Enabled = false;
+                this.FabricateTextBox.Enabled = false;
                 this.ComboTipoServicio.Enabled = false;
             }
             this.ComboTipoServicio.Refresh();
@@ -169,18 +171,23 @@ namespace AerolineaFrba.Abm_Aeronave
             this.aeronavesTableAdapter.Fill(this.dataSet.Aeronaves);
             if (butVentAgregar > 0 || butPasAgregar > 0)
             {
+                this.butacasTableAdapter.Fill(this.dataSet.Butacas);
+                GD2C2015DataSet.ButacasRow[] rows = (GD2C2015DataSet.ButacasRow[])this.dataSet.Butacas.Select("aeronave_id='" + this.aeronave.Id + "'");
                 if (!this.tieneVuelosVendidos)
                 {
                     // Aca se eliminan todas las butacas existentes relacionadas a la aeronave
-                    this.butacasTableAdapter.Fill(this.dataSet.Butacas);
-                    GD2C2015DataSet.ButacasRow[] rows = (GD2C2015DataSet.ButacasRow[])this.dataSet.Butacas.Select("aeronave_id='"+ this.aeronave.Id +"'");
+
                     foreach (GD2C2015DataSet.ButacasRow but in rows)
                     {
                         this.butacasTableAdapter.Delete(but.but_id, but.aeronave_id, but.but_numero, but.but_tipo, but.but_piso, but.but_activo);
                     }
                     this.butacasTableAdapter.Fill(this.dataSet.Butacas);
+                    crearButacas(1, this.aeronave.Id, butPasAgregar, butVentAgregar);
                 }
-                crearButacas(this.aeronave.Id, butPasAgregar, butVentAgregar);
+                else
+                {
+                    crearButacas(rows.Length + 1, this.aeronave.Id, butPasAgregar, butVentAgregar);
+                }
             }
             MessageBox.Show("La Aeronave se guardo exitosamente");
             limpiarCampos();
@@ -204,7 +211,7 @@ namespace AerolineaFrba.Abm_Aeronave
             if (aer != null)
             {
 
-                crearButacas(aer.Id, butacasPasillo, butacasVentanilla);
+                crearButacas(1, aer.Id, butacasPasillo, butacasVentanilla);
                 MessageBox.Show("La Aeronave se guardo exitosamente");
                 limpiarCampos();
                 this.Close();
@@ -262,9 +269,8 @@ namespace AerolineaFrba.Abm_Aeronave
             return true;
         }
 
-        private void crearButacas(Int32 idAeronave, Int32 butacasPasillo, Int32 butacasVentana) {
-
-            Int32 butacaNumero = 1;
+        private void crearButacas(Int32 butacaNumero, Int32 idAeronave, Int32 butacasPasillo, Int32 butacasVentana)
+        {
 
             for (Int32 i = 1; i <= butacasPasillo; i++)
             {
