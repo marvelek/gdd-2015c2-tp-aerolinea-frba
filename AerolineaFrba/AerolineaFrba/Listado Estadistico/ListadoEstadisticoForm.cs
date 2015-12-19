@@ -79,7 +79,6 @@ namespace AerolineaFrba.Listado_Estadistico
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            //this.radioButton2 = !(this.radioButton1);
             if (radioButton1.Checked)
             {
             this.mes1 = 1;
@@ -89,7 +88,6 @@ namespace AerolineaFrba.Listado_Estadistico
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)        
         {
-            //this.radioButton1 = this.radioButton2;
             if (radioButton2.Checked)
             {
                 this.mes1 = 7;

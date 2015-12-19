@@ -20,7 +20,6 @@ namespace AerolineaFrba.Devolucion
 
         private void DevolucionForm_Load(object sender, EventArgs e)
         {
-            //this.ventasTableAdapter.Fill(this.gD2C2015DataSet.Ventas);
         }
 
         private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
@@ -28,25 +27,19 @@ namespace AerolineaFrba.Devolucion
             switch (Convert.ToString(comboBox1.SelectedItem))
             {
                 case "VENTAS":
-                    // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Ventas' Puede moverla o quitarla según sea necesario.
                     this.grillaVenta.Visible = true;
                     this.grillaPaquete.Visible = false;
                     this.grillaPasaje.Visible = false;
-                    //this.ventasTableAdapter.Fill(this.gD2C2015DataSet.Ventas);
                     break;
                 case "PAQUETES":
-                    // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Paquetes' Puede moverla o quitarla según sea necesario.
                     this.grillaVenta.Visible = false;
                     this.grillaPaquete.Visible = true;
                     this.grillaPasaje.Visible = false;
-                    //this.paquetesTableAdapter.Fill(this.gD2C2015DataSet.Paquetes);
                     break;
                 case "PASAJES":
-                    // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Pasajes' Puede moverla o quitarla según sea necesario.                                       
                     this.grillaVenta.Visible = false;
                     this.grillaPaquete.Visible = false;
                     this.grillaPasaje.Visible = true;
-                    //this.pasajesTableAdapter.Fill(this.gD2C2015DataSet.Pasajes);
                     break;
                 default:
                     this.grillaVenta.Visible = true;
@@ -129,15 +122,12 @@ namespace AerolineaFrba.Devolucion
                 switch (Convert.ToString(comboBox1.SelectedItem))
                {
                   case "VENTAS":                    
-                       // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Ventas' Puede moverla o quitarla según sea necesario.
                        this.ventasTableAdapter.FillBy(this.gD2C2015DataSet.Ventas, this.codigo.Text);
                        break;
                    case "PAQUETES":
-                       // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Paquetes' Puede moverla o quitarla según sea necesario.
                        this.paquetesTableAdapter.FillBy(this.gD2C2015DataSet.Paquetes, this.codigo.Text);
                        break;
                    case "PASAJES":
-                       // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Pasajes' Puede moverla o quitarla según sea necesario.                   
                        this.pasajesTableAdapter.FillBy(this.gD2C2015DataSet.Pasajes, this.codigo.Text);
                        break;
                    default:
@@ -148,48 +138,14 @@ namespace AerolineaFrba.Devolucion
             else
             {
                 MessageBox.Show("Debe seleccionar un código para mostrar."); 
-                /*switch (Convert.ToString(comboBox1.SelectedItem))
-                {
-                    case "VENTAS":                    
-                        // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Ventas' Puede moverla o quitarla según sea necesario.
-                        this.ventasTableAdapter.Fill(this.gD2C2015DataSet.Ventas);
-                        break;
-                    case "PAQUETES":
-                        // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Paquetes' Puede moverla o quitarla según sea necesario.
-                        this.paquetesTableAdapter.Fill(this.gD2C2015DataSet.Paquetes);
-                        break;
-                    case "PASAJES":
-                        // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Pasajes' Puede moverla o quitarla según sea necesario.                   
-                        this.pasajesTableAdapter.Fill(this.gD2C2015DataSet.Pasajes);
-                        break;
-                    default:
-                        this.ventasTableAdapter.Fill(this.gD2C2015DataSet.Ventas);
-                        break;
-                }*/
+                
             }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             this.codigo.Clear();
-            /*switch (Convert.ToString(comboBox1.SelectedItem))
-            {
-                case "VENTAS":
-                    // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Ventas' Puede moverla o quitarla según sea necesario.
-                    this.ventasTableAdapter.Fill(this.gD2C2015DataSet.Ventas);
-                    break;
-                case "PAQUETES":
-                    // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Paquetes' Puede moverla o quitarla según sea necesario.
-                    this.paquetesTableAdapter.Fill(this.gD2C2015DataSet.Paquetes);
-                    break;
-                case "PASAJES":
-                    // TODO: esta línea de código carga datos en la tabla 'gD2C2015DataSet.Pasajes' Puede moverla o quitarla según sea necesario.                   
-                    this.pasajesTableAdapter.Fill(this.gD2C2015DataSet.Pasajes);
-                    break;
-                default:
-                    this.ventasTableAdapter.Fill(this.gD2C2015DataSet.Ventas);
-                    break;
-            }*/
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -200,8 +156,6 @@ namespace AerolineaFrba.Devolucion
             switch (Convert.ToString(comboBox1.SelectedItem))
             {
                 case "VENTAS":                                       
-                    //idVenta = Convert.ToInt32(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value);
-                    //devolucion = Convert.ToInt32(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value);                  
                     MessageBox.Show("Para ver una cancelación debe seleccionar un paquete o un pasaje.");  
                     break;
                 case "PAQUETES":
@@ -227,7 +181,6 @@ namespace AerolineaFrba.Devolucion
                     new VistaDevolucionForm(Convert.ToString(comboBox1.SelectedItem), idVenta, codigo, devolucion).ShowDialog();
                     break;                    
                 default:
-                    //idVenta = Convert.ToInt32(grillaVenta.Rows[grillaVenta.CurrentRow.Index].Cells[0].Value); 
                     MessageBox.Show("Para ver una cancelación debe seleccionar un paquete o un pasaje."); 
                     break;
 

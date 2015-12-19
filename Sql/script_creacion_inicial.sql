@@ -1851,7 +1851,7 @@ AS
 		aer_fabricante,	
 		aer_fecha_fuera_servicio,
 		aer_fecha_reinicio_servicio,
-		SUM(DATEDIFF(MINUTE, fs.pfs_fecha_inicio, fs.pfs_fecha_fin)) as días
+		SUM(DATEDIFF(DAY, fs.pfs_fecha_inicio, fs.pfs_fecha_fin)) as días
 	FROM [MILANESA].[Aeronaves]
 	JOIN [MILANESA].[Periodos_Fuera_Servicio] fs on fs.aeronave_id = aer_id and YEAR(fs.pfs_fecha_inicio) = @año and MONTH(fs.pfs_fecha_inicio) between @mes1 and @mes2
 	--where YEAR(aer_fecha_fuera_servicio) = @año and MONTH(aer_fecha_fuera_servicio) between @mes1 and @mes2
